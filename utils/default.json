@@ -1,0 +1,169 @@
+{
+  "mine" : {
+    "stone": "0",
+    "coal" : "0",
+    "copper": "0",
+    "iron": "0",
+    "gold": "0",
+    "malachite": "0",
+
+    "orichalque": "0",
+    "cobalt": "0",
+    "argent": "0",
+    "fer_nain": "0",
+    "argent_lycanthrope": "0",
+    "or_elfe": "0",
+    "emeraude": "0",
+    "saphir": "0",
+    "rubis": "0",
+    "diamant": "0",
+    "joyau_pur": "0",
+    "ebonite": "0",
+    "ecaille_de_dragon_ancien": "0",
+    "adamantium": "0",
+    "xp" : "0",
+    "level" : "1"
+  },
+  "emotes" : {
+    "energy" : "⚡",
+    "cash" : "<:cash:776115188498956329>",
+    "locked_chest" : "<:chest_d:772164634266042438>",
+    "open_chest" : "<:openchest:772164633774653461>",
+    "torch" : "<a:torch:772164100011982849>",
+    "chest" : "<:chest:772190352165306428>",
+    "tools" : "<:tools:756140391186694184>",
+    "weapons" : "<:weapons:756140391228637224>",
+    "armors" : "<:armors:756140390796492903>",
+    "ressource" : "<:ressource:748972784427991200>",
+    "rune" : "<:rune:748972784410951721>",
+    "rune_sword" : "<:sword:771095091216515123>",
+    "rune_shield" : "<:shield:771113421202391051>",   
+    "rune_wand" : "<:wand:748960787946537030>",
+    "rune_bow" : "<:bow:771331757399212053>",
+    "rune_pickaxe" : "<:pickaxe:748973331642056764>",
+    "rune_tete" : "<:tete:748959964663382106>",
+    "rune_epaule" : "<:epaule:748959724170379324>",
+    "rune_torse" : "<:torse:748960199389479053>",
+    "rune_poignets" : "<:poignets:748960470479798324>",
+    "rune_mains" : "<:mains:748960653930135613>",
+    "rune_taille" : "<:taille:748961288960606300>",
+    "rune_jambes" : "<:jambes:748961288968994888>",
+    "rune_pieds" : "<:pieds:748961289145155684>",
+    "bag" : "<:bag:748972784432185384>",
+    "dungeon_stone" : "<:dungeon_stone:748972507427635230>",
+    
+    "idk" : "<:Unknown:691648979641040907>",
+    "loading" : "<a:loading:738518308655202407>",
+    "stone" : "<:caillou:694148961023426611>",
+    "coal" : "<:coal:748949603000385566>",
+    "copper" : "<:cuivre:694148961270890546>",
+    "iron" : "<:fer:694148960977158205>",
+    "gold" : "<:gold:694148961300119553>",
+    "malachite" : "<:malachite:694148961015169026>",
+
+    "Argent" : "<:argent:694148960645808170>",
+    "Fer_nain" : "<:fer_nain:694148961224884234>",
+    "Argent_lycanthrope" : "<:argent_lycanthrope:694148961090535454>",
+    "Or_elfe" : "<:or_elfe:691992623384231976>",
+    "Orichalque" : "<:orichalque:694148961325285386>",
+    "Cobalt" : "<:cobalt:694148961220427826>",
+    "Emeraude" : "<:emeraude:694148961245855755>",
+    "Saphir" : "<:saphir:694148961627275284>",
+    "Rubis" : "<:rubis:694148961359102032>",
+    "Diamant" : "<:diamant:694148961132478535>",
+    "Joyau_pur" : "<:joyau_pur:694148961409433680>",
+    "Ebonite" : "<:ebonite:694148961207844874>",
+    "Ecaille_de_dragon_ancien" : "<:ecaille_de_dragon_ancien:694148961266565140>",
+    "Adamantium" : "<:adamantium:693907353166282772>",
+    "CFish" : "<:fish_commun:692006073980157962>",
+    "RFish" : "<:fish_rare:692006073426640998>",
+    "EFish" : "<:fish_epic:692006073300811777>",
+    "LFish" : "pas d'assets encore",
+    "Meat" : "<:meat:691992731421245500>"
+  },
+  "player" : {
+    "sword" : "0",
+    "shield" : "0",
+    "wand" : "0",
+    "bow" : "0",
+    "money" : "0",
+    "hr" : "0",
+    "classe": "null",
+    "PV" : "50",
+    "mana" : "50",
+    "ATK" : "1",
+    "DEF" : "1",
+    "LastActivity" : "0",
+    "LastDaily" : "0",
+    "energy" : "100",
+    "rep" : "0",
+    "LastRep" : "0",
+    "lang" : "en",
+    "tete" : "0",
+    "epaule" : "0",
+    "torse" : "0",
+    "poignets" : "0",
+    "mains" : "0",
+    "taille" : "0",
+    "jambes" : "0",
+    "pieds" : "0"
+  },
+  "pickaxe" : {
+    "R1" : {
+      "stone" : "stone",
+      "copper" : "copper",
+      "coal" : "coal"
+    },
+    "R2" : {
+      "iron" : "iron",
+      "gold" : "gold",
+      "malachite" : "malachite"
+    }
+  },
+  "runes" : {
+    "Guerrier" : {
+      "rune_sword" : "rune_sword",
+      "rune_shield" : "rune_shield"
+    },
+    "Mage" : {
+      "rune_wand" : "rune_wand"
+    },
+    "Chasseur" : {
+      "rune_bow" : "rune_bow"
+    },
+    "other" : {
+    "rune_pickaxe" : "rune_pickaxe",
+    "rune_tete" : "rune_tete",
+    "rune_epaule" : "rune_epaule",
+    "rune_torse" : "rune_torse",
+    "rune_poignets" : "rune_poignets",
+    "rune_mains" : "rune_mains",
+    "rune_taille" : "rune_taille",
+    "rune_jambes" : "rune_jambes",
+    "rune_pieds" : "rune_pieds"
+    }
+  },
+  "ench" : {
+    "Guerrier" : {
+      "ench_sword" : "ench_sword",
+      "ench_shield" : "ench_shield"
+    },
+    "Mage" : {
+      "ench_wand" : "ench_wand"
+    },
+    "Chasseur" : {
+      "ench_bow" : "ench_bow"
+    },
+    "other" : {
+      "ench_pickaxe" : "ench_pickaxe",
+      "ench_tete" : "ench_tete",
+      "ench_epaule" : "ench_epaule",
+      "ench_torse" : "ench_torse",
+      "ench_poignets" : "ench_poignets",
+      "ench_mains" : "ench_mains",
+      "ench_taille" : "ench_taille",
+      "ench_jambes" : "ench_jambes",
+      "ench_pieds" : "ench_pieds"
+    }
+  }
+}

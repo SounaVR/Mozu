@@ -1,0 +1,20 @@
+const Discord = require('discord.js');
+const Default = require('../../utils/default.json');
+
+module.exports.run = async (client, message, args, getPlayer) => {
+  var con = client.connection
+  var player = await getPlayer(con, message.author.id);
+  if (!player) return message.channel.send("You are not registered, please do the `m!village` command to remedy this.")
+  const lang = require(`../../utils/text/${player.data.lang}.json`);
+  const userid = message.author.id;
+};
+
+module.exports.help = {
+  name: "",
+  description_fr: "",
+  description_en: "",
+  usage_fr: "",
+  usage_en: "",
+  category: "",
+  aliases: [""]
+};
