@@ -108,9 +108,9 @@ client.on('ready', async () => {
 	setInterval(function () {
     con.query('SELECT 1');
 	}, 2,52e+7);
-
-	client.user.setStatus("idle");
-	client.user.setActivity(`Rework soon`, { type: "WATCHING" })
+	
+	await client.user.setActivity(`Rework soon`, { type: "WATCHING" });
+	await client.user.setStatus("idle");
 
 	console.log(`${client.user.username} is ready !`);
 	rdy.send(`✅ Bot connecté et prêt !`);
