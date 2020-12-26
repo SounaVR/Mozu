@@ -206,6 +206,7 @@ client.on('messageDelete', message => {
 	if (!message.guild) return;
     if (!message.partial) {
 		if (message.guild.id === "689471316570406914") {
+			if (message.author.bot) return;
 			const channel = client.channels.cache.get('744949137560174702');
 			if (channel) {
 			const embed = new Discord.MessageEmbed()
