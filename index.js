@@ -199,9 +199,7 @@ client.on('messageDelete', message => {
 				embed.setImage(result[0].proxyURL)
 			 }
 			channel.send(embed);
-		} else {
-			return message.channel.send("Deleted message log channel not found.");
-		}
+		} else return;
 	}
 	if (!message.guild) return;
     if (!message.partial) {
@@ -221,11 +219,32 @@ client.on('messageDelete', message => {
 				embed.setImage(result[0].proxyURL)
 			}
 			channel.send(embed);
-		} else {
-		return message.channel.send("Deleted message log channel not found.");
-		}
+		} else return;
 	  } else return;
 	}
+});
+
+client.on('messageUpdate', (message, newMessage) => {
+    if (!message.guild || message.channel.type == "dm") return;
+    if (message.guild.id === "689471316570406914") {
+        if (message.author.bot) return;
+        const channel = client.channels.cache.get('744949137560174702');
+        if (channel) {
+        const embed = new Discord.MessageEmbed()
+            .setTitle('Edited Message')
+            .setColor("#0183c2")
+            .addField('Old message', message)
+            .addField('New message', newMessage)
+            .addField('Author', `${message.author.tag} (${message.author.id})`, true)
+            .addField('Channel', `${message.channel.name} (${message.channel.id})`, true)
+            .setTimestamp();
+        if (message.attachments.array().length > 0) {
+            const result = message.attachments.array()
+            embed.setImage(result[0].proxyURL)
+        }
+        channel.send(embed);
+    } else return;
+  } else return;
 });
 
 client.login(process.env.BOT_TOKEN);

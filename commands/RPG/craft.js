@@ -377,7 +377,7 @@ module.exports.run = async (client, message, args, getPlayer) => {
               manageCraftArmor(client, con, args, player, message, 'pieds');
               a.delete();
             }
-          }).catch(collected => {
+          }).catch(err => {
             a.reactions.removeAll();
           })
         })
