@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
     let server = message.guild.id;
 
     if (server === "689471316570406914") {
@@ -29,7 +29,7 @@ module.exports.run = async (client, message, args) => {
         message.reply("vous devez être dans le serveur de support pour proposer votre idée (m!server).");
     }
 };
-  
+
 module.exports.help = {
     name: "suggestion",
     description_fr: "Propose une idée au développeur",

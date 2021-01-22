@@ -1,19 +1,11 @@
-const Discord = require("discord.js");
-const moment = require('moment');
+const { checkDays } = require('../../utils/u.js');
+const Discord       = require('discord.js'),
+      moment        = require('moment');
 
-module.exports.run = async (client, message, args) => {
-  function checkDays(date) {
-    let now = new Date();
-    let diff = now.getTime() - date.getTime();
-    let days = Math.floor(diff / 86400000);
-    return days + (days == 1 ? " day" : " days") + " ago";
-};
-  let user = message.mentions.users.first() || message.author;
-  let member = message.mentions.members.first() || message.member;
+exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
+  const user = message.mentions.users.first() || message.author;
+  const member = message.mentions.members.first() || message.member;
   if (user) {
-    if (!user.roles){
-      user.roles = [];
-    }
     const embed = new Discord.MessageEmbed()
       .setAuthor(`${user.tag} (${user.id})`, user.displayAvatarURL())
       .setColor(message.member.displayColor)
@@ -23,10 +15,9 @@ module.exports.run = async (client, message, args) => {
       .addField("Nickname", `${member.nickname !== null ? `${member.nickname}` : 'None'}`)
     message.channel.send(embed);
   }
-};
-
+}
 // Help Object
-module.exports.help = {
+exports.help = {
   name: "userinfo",
   description_fr: "Affiche des informations sur l'utilisateur",
   description_en: "Displays user information",

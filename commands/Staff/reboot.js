@@ -1,22 +1,17 @@
-module.exports.run = async (client, message, args) => {
-  if (!client.config.owners.includes(message.author.id)) return;
+const moment = require("moment");
+moment.locale('fr');
 
-  var d = new Date();
-  var curr_date = `0${d.getDate()}`.slice(-2)
-  var curr_month = `0${d.getMonth() + 1}`.slice(-2)
-  var curr_year = d.getFullYear()
+exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
+  if (!client.config.owners.includes(message.author.id)) return message.react("❌");
 
-  var curr_hour = `0${d.getHours()}`.slice(-2)
-  var curr_min = `0${d.getMinutes()}`.slice(-2)
-  var curr_sec = `0${d.getSeconds()}`.slice(-2)
-
-    client.channels.cache.get("714076184262082580").send(`:red_circle: **[SYSTEM RESTART] Log du ${curr_date}/${curr_month}/${curr_year} | ${curr_hour}:${curr_min}:${curr_sec}\n> Redémarrage lancé par ${message.author.tag}.**`)
-        message.channel.send("⚙️ Redémarrage en cours...").then(() => {
-            process.exit();
-      })
+  client.channels.cache.get("714076184262082580").send(`:red_circle: **[SYSTEM RESTART] Log du ${moment().format('DD/M/YYYY | HH:mm:ss')}\n> Redémarrage lancé par ${message.author.tag}.**`)
+  await client.user.setActivity(`processing reboot...`, { type: "WATCHING" });
+  message.channel.send("⚙️ Redémarrage en cours...").then(() => {
+    process.exit();
+  })
 };
 
-module.exports.help = {
+exports.help = {
   name: "reboot",
   description_fr: "Redémarre le bot",
   description_en: "Restart the bot",

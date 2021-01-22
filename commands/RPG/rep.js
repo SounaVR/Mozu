@@ -1,39 +1,20 @@
-const Discord = require("discord.js");
-const Default = require("../../utils/default.json");
-const ms = require("parse-ms");
-
-module.exports.run = async (client, message, args, getPlayer, getUser) => {
+module.exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
   var con = client.connection
-  var player = await getPlayer(con, message.author.id);
+  const player = await getPlayer(con, message.author.id);
   if (!player) return message.channel.send("You are not registered, please do the `m!village` command to remedy this.");
   const lang = require(`../../utils/text/${player.data.lang}.json`);
+  const user = message.mentions.users.first() || message.author;
   const userid = message.author.id;
 
-  function getUserFromMention(mention) {
-    if (!mention) return;
+  if (!args[0]) return message.channel.send(`${lang.rep.correctUsage}`)
 
-    if (mention.startsWith('<@') && mention.endsWith('>')) {
-      mention = mention.slice(2, -1);
-
-      if (mention.startsWith('!')) {
-        mention = mention.slice(1);
-      }
-
-      return client.users.cache.get(mention);
-    }
-  }
-  const user = getUserFromMention(args[0]);
-  if (!args[0] || !user) return message.channel.send(`${lang.rep.correctUsage}`)
-
-  if (user.id === userid) return message.reply(`${lang.rep.self}`)
-  if (user.id === client.user.id) return message.reply(`${lang.rep.me}`)
-  if (user.bot) return message.reply(`${lang.rep.other}`)
-  var member = await getUser(con, user.id);
-
-  if (!member) return message.reply("cet utilisateur n'est pas inscrit.");
+  if (user.id === userid) return message.reply(`${lang.rep.giveToSelf}`)
+  if (user.id === client.user.id) return message.reply(`${lang.rep.giveToMozu}`)
+  if (user.bot) return message.reply(`${lang.rep.giveToOtherBots}`)
+  const member = await getUser(con, user.id);
 
   if (player.data.LastRep === 1) {
-    return message.reply(`${lang.rep.notnow}`)
+    return message.reply(`${lang.rep.notNow}`)
   } else if (player.data.LastRep === 0) {
     con.query(`UPDATE data SET LastRep = 1 WHERE userid = ${userid}`)
     con.query(`UPDATE data SET rep = ${member.data.LastRep + Number(1)} WHERE userid = ${user.id}`)

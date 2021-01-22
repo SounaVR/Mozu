@@ -1,31 +1,17 @@
 const Discord = require('discord.js');
-const Default = require('../../utils/default.json');
+const Emotes  = require('../../utils/default.json');
 
 function manageGive(client, con, args, player, member, message, objectName, objectAliases) {
-  var con = client.connection
-  const lang = require(`../../utils/text/${player.data.lang}.json`)
-  const userid = message.author.id;
+    var con = client.connection
+    const lang = require(`../../utils/text/${player.data.lang}.json`)
+    const user = message.mentions.users.first();
+    const userid = message.author.id;
 
-  function getUserFromMention(mention) {
-    if (!mention) return;
-
-    if (mention.startsWith('<@') && mention.endsWith('>')) {
-      mention = mention.slice(2, -1);
-
-      if (mention.startsWith('!')) {
-        mention = mention.slice(1);
-      }
-
-      return client.users.cache.get(mention);
-    }
-  }
-  const user = getUserFromMention(args[0]);
-
-  if (args[1] && objectAliases.includes(args[1].toLowerCase()) || objectName.includes(args[1].toLowerCase())) { // Regarde le premier argument pour savoir ce que le mec il veut faire comme action
+  if (args[1] && objectAliases.includes(args[1].toLowerCase()) || objectName.includes(args[1].toLowerCase())) {
     args[2] = Math.floor(args[2])
 
     if (args[2] > 0) {
-      message.channel.send(`${lang.give.confirm} **${args[2]} ${lang.inventory[objectName]}**${Default.emotes[objectName]} ${lang.give.confirm2} **${user}** ?`).then(async e => { // et la on envoie le message
+      message.channel.send(`${lang.give.wantGive} **${args[2]} ${lang.inventory[objectName]}**${Emotes[objectName]} ${lang.give.wantGiveTo} **${user}** ?`).then(async e => {
         await e.react("✅");
         await e.react("❌");
 
@@ -40,13 +26,13 @@ function manageGive(client, con, args, player, member, message, objectName, obje
         if (reaction.emoji.name === '✅') {
           if (player.data[objectName] < args[2]) {
             e.reactions.removeAll();
-            return e.edit(`${lang.give.failed}`)
+            return e.edit(`${lang.give.notEnoughRess}`)
           }
           con.query(`UPDATE data SET ${objectName} = ${player.data[objectName] - args[2]} WHERE userid = ${userid}`)
           con.query(`UPDATE data SET ${objectName} = ${member.data[objectName] + Number(args[2])} WHERE userid = ${user.id}`)
-          e.edit(`${lang.give.done} **${args[2]} ${lang.inventory[objectName]}**${Default.emotes[objectName]} ${lang.give.done2} **${user}** !`)
+          e.edit(`${lang.give.giveSuccess} **${args[2]} ${lang.inventory[objectName]}**${Emotes[objectName]} ${lang.give.giveSuccessTo} **${user}** !`)
           } else if (reaction.emoji.name === '❌') {
-            e.edit(`${lang.give.cancel}`);
+            e.edit(`${lang.give.canceled}`);
           }
           e.reactions.removeAll();
         }).catch(collected => {
@@ -54,48 +40,33 @@ function manageGive(client, con, args, player, member, message, objectName, obje
         })
       });
     } else {
-      return message.channel.send(`${lang.give.error}`)
+      return message.channel.send(`${lang.give.needSpecifyAmount}`)
     }
   }
 }
 
-module.exports.run = async (client, message, args, getPlayer, getUser) => {
-  var con = client.connection
-  var player = await getPlayer(con, message.author.id);
-  if (!player) return message.channel.send("You are not registered, please do the `m!village` command to remedy this.")
-  const lang = require(`../../utils/text/${player.data.lang}.json`);
-  const userid = message.author.id;
+module.exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
+    var con = client.connection
+    var player = await getPlayer(con, message.author.id);
+    if (!player) return message.channel.send("You are not registered, please do the `m!profile` command to remedy this.")
+    const lang = require(`../../utils/text/${player.data.lang}.json`);
+    const user = message.mentions.users.first();
+    const userid = message.author.id;
 
-  function getUserFromMention(mention) {
-    if (!mention) return;
+    if (!args[0]) return message.channel.send(`${lang.give.correctUsage}`)
+    if (!args[1]) return message.channel.send(`${lang.give.correctUsage}`)
+    if (!args[2]) return message.channel.send(`${lang.give.specifyAmount}`)
+    if (user.id === userid) return message.channel.send(`${lang.give.giveToSelf}`)
+    if (user.id === client.user.id) return message.channel.send(`${lang.give.giveToMozu}`)
+    if (user.bot) return message.channel.send(`${lang.give.giveToOtherBots}`)
+    var member = await getUser(con, user.id);
 
-    if (mention.startsWith('<@') && mention.endsWith('>')) {
-      mention = mention.slice(2, -1);
-
-      if (mention.startsWith('!')) {
-        mention = mention.slice(1);
-      }
-
-      return client.users.cache.get(mention);
-    }
-  }
-  const user = getUserFromMention(args[0]);
-  if (user) {
-  if (!args[1]) return message.channel.send(`${lang.give.correctU}`)
-  if (!args[2]) return message.channel.send(`${lang.give.correctU}`)
-  if (user.id === userid) return message.channel.send(`${lang.give.self}`)
-  if (user.id === client.user.id) return message.channel.send(`${lang.give.me}`)
-  if (user.bot) return message.channel.send(`${lang.give.other}`)
-} else return message.channel.send(`${lang.give.correctU}`)
-  var member = await getUser(con, user.id);
-
-  manageGive(client, con, args, player, member, message, 'stone', ['caillou', 'cailloux', 'stones']);
-  manageGive(client, con, args, player, member, message, 'coal', ['charbon']);
-  manageGive(client, con, args, player, member, message, 'copper', ['cuivre', 'cuivres', 'coppers']);
-  manageGive(client, con, args, player, member, message, 'iron', ['fer', 'fers', 'irons']);
-  manageGive(client, con, args, player, member, message, 'gold', ['or', 'ors', 'golds']);
-  manageGive(client, con, args, player, member, message, 'malachite', ['malachites']);
-
+    manageGive(client, con, args, player, member, message, 'stone', ['caillou', 'cailloux', 'stones']);
+    manageGive(client, con, args, player, member, message, 'coal', ['charbon']);
+    manageGive(client, con, args, player, member, message, 'copper', ['cuivre', 'cuivres', 'coppers']);
+    manageGive(client, con, args, player, member, message, 'iron', ['fer', 'fers', 'irons']);
+    manageGive(client, con, args, player, member, message, 'gold', ['or', 'ors', 'golds']);
+    manageGive(client, con, args, player, member, message, 'malachite', ['malachites']);
 };
 
 module.exports.help = {

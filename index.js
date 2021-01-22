@@ -1,62 +1,61 @@
 require('dotenv').config();
-const fs = require('fs')
-const cron = require('cron');
-const Discord = require("discord.js");
-const { sep } = require("path");
+const { getUser, getPlayer, getUserFromMention } = require("./utils/u");
+const { sep } 					  			  = require("path");
 const { success, error, warning } = require("log-symbols");
-const { version } = require('./package');
+const fs	= require('fs'),
+	moment  = require('moment'),
+	cron    = require('cron'),
+	Discord = require("discord.js"),
+	config  = require("./utils/config"),
+  sql     = fs.readFileSync('./sql/schema.sql').toString(),
+  mysql   = require('mysql');
+
 const client = new Discord.Client({
 	disableMentions: "everyone",
-	restTimeOffset: 25
+	restTimeOffset: 1
 });
-const config = require("./utils/config");
+
+moment.locale('fr');
+
 client.config = config;
 ["commands", "aliases"].forEach(x => client[x] = new Discord.Collection());
 
-const getPlayer = require("./functions/getPlayer.js");
-const getUser = require("./functions/getUser.js");
-
-var d = new Date();
-var curr_date = `0${d.getDate() + 1}`.slice(-2)
-var curr_month = `0${d.getMonth() + 1}`.slice(-2)
-var curr_year = d.getFullYear()
-var curr_hour = `0${d.getHours()}`.slice(-2)
-var curr_min = `0${d.getMinutes()}`.slice(-2)
-var curr_sec = `0${d.getSeconds()}`.slice(-2)
+const con = mysql.createConnection({
+	encoding: 'utf8',
+	charset: 'utf8mb4',
+	host: "localhost",
+	user: "ReallyMozu",
+	password: process.env.DB_PASS,
+	database: "Mozu",
+	multipleStatements: true
+});
 
 client.on('ready', async () => {
-	var systemlogs = client.channels.cache.find(channel => channel.id === "698861927652261988");
-	var rdy = client.channels.cache.find(channel => channel.id === "689876186599653512");
+	client.connection = con;
 
-	// A function to load all the commands.
+	con.query(sql, function (err) {
+		if (err) throw err;
+	});
+
+	const systemlogs = client.channels.cache.find(ch => ch.id === "698861927652261988");
+	const rdy = client.channels.cache.find(ch => ch.id === "689876186599653512");
+
 	const load = (dir = "./commands/") => {
-
 		fs.readdirSync(dir).forEach(dirs => {
-		// we read the commands directory for sub folders and filter the files with name with extension .js
 			const commands = fs.readdirSync(`${dir}${sep}${dirs}${sep}`).filter(files => files.endsWith(".js"));
 
-			// we use for loop in order to get all the commands in sub directory
 			for (const file of commands) {
-			// We make a pull to that file so we can add it the bot.commands collection
 				const pull = require(`${dir}/${dirs}/${file}`);
-				// we check here if the command name or command category is a string or not or check if they exist
 				if (pull.help && typeof (pull.help.name) === "string" && typeof (pull.help.category) === "string") {
 					if (client.commands.get(pull.help.name)) return console.warn(`${warning} Two or more commands have the same name ${pull.help.name}.`);
-					// we add the the comamnd to the collection, Map.prototype.set() for more info
 					client.commands.set(pull.help.name, pull);
-					// we log if the command was loaded.
 					console.log(`${success} Loaded command ${pull.help.name} in ${dirs}.`);
-				}
-				else {
-				// we check if the command is loaded else throw a error saying there was command it didn't load
+				} else {
 					console.log(`${error} Error loading command in ${dir}${dirs}. you have a missing help.name or help.name is not a string. or you have a missing help.category or help.category is not a string`);
-					// we use continue to load other commands or else it will stop here
 					continue;
 				}
-				// we check if the command has aliases, is so we add it to the collection
 				if (pull.help.aliases && typeof (pull.help.aliases) === "object") {
 					pull.help.aliases.forEach(alias => {
-						// we check if there is a conflict with any other aliases which have same name
 						if (client.aliases.get(alias)) return console.warn(`${warning} Two commands or more commands have the same aliases ${alias}`);
 						client.aliases.set(alias, pull.help.name);
 					});
@@ -64,63 +63,36 @@ client.on('ready', async () => {
 			}
 		});
 	};
-	// we call the function to all the commands.
 	load();
 
-	const mysql = require('mysql');
-	const con = mysql.createConnection({
-		encoding: 'utf8',
-    charset: 'utf8mb4',
-		host: "localhost",
-		user: "ReallyMozu",
-		password: process.env.DB_PASS,
-		database: "Mozu",
-		multipleStatements: true
-	})
+	const embed = new Discord.MessageEmbed()
+		.setTitle(`[SYSTEM START] Log du ${moment().format('DD/MM/YYYY | HH:mm:ss')}`)
+		.setDescription(`${client.user.username} just started !\n${client.user.username} vient de démarrer !`)
+		.setColor("#1DCC8F")
+	systemlogs.send(embed);
 
-	client.connection = con
-
-	let embed = new Discord.MessageEmbed()
-	.setTitle(`[SYSTEM START] Log du ${curr_date}/${curr_month}/${curr_year} | ${curr_hour}:${curr_min}:${curr_sec}`)
-	.setDescription(`${client.user.username} vient de démarrer !`)
-	.setColor("#1DCC8F")
-	.addField("État de la Database:", "Connectée.");
-	const sql = `CREATE TABLE IF NOT EXISTS data (username text, userid bigint, lang text, money bigint, LastDaily bigint, daily bigint, LastHR bigint,
-	LastActivity bigint, LastRep bigint, rep bigint, classe text, pickaxe bigint, rune_pickaxe bigint, energy bigint, XP bigint, level bigint,
-	dungeon_stone bigint, stone bigint, coal bigint, copper bigint, iron bigint, gold bigint, malachite bigint, sword bigint, rune_sword bigint,
-	shield bigint, rune_shield bigint, wand bigint, rune_wand bigint, bow bigint, rune_bow bigint, PV bigint, mana bigint, ATK bigint, DEF bigint,
-	chest_d bigint, chest_c bigint, chest_b bigint, chest_a bigint, chest_s bigint, tete bigint, rune_tete bigint, epaule bigint, rune_epaule bigint,
-	torse bigint, rune_torse bigint, poignets bigint, rune_poignets bigint, mains bigint, rune_mains bigint, taille bigint, rune_taille bigint,
-	jambes bigint, rune_jambes bigint, pieds bigint, rune_pieds bigint, ench_pickaxe bigint, ench_sword bigint, ench_shield bigint, ench_wand bigint,
-	ench_bow bigint, ench_tete bigint, ench_epaule bigint, ench_torse bigint, ench_poignets bigint, ench_mains bigint, ench_taille bigint, ench_jambes bigint,
-	ench_pieds bigint)`;
-
-	con.query(sql, function (err) {
-		if (err) throw err;
-		systemlogs.send(embed);
-	});
-
-	let scheduledMessage = new cron.CronJob('00 00 00 * * *', () => {
+	let scheduledMessage = new cron.CronJob('00 00 00 * * *', async () => {
+	      const { exec } = require ('child_process');
+	      exec(`mysqldump --all-databases --single-transaction --quick --lock-tables=false > ./backups/full-backup-$(date +%F).sql -u ReallySouna -p ${process.env.BACKUP_PASSWORD}`)
+	      .then(() => {
+	          exec(`git add .`).then(() => {
+	              exec(`git commit -m "a"`);
+	          }).then(() => {
+	              exec(`git push`);
+	          })
+	      })
 		return con.query(`UPDATE data SET LastRep = 0, daily = 0`)
 	});
-	scheduledMessage.start()
+	scheduledMessage.start();
 
 	setInterval(function () {
-    con.query('SELECT 1');
-	}, 2,52e+7);
-	
-	await client.user.setActivity(`Rework soon`, { type: "WATCHING" });
-	await client.user.setStatus("idle");
+		con.query('SELECT 1');
+	}, 2, 52e+7);
+
+	await client.user.setActivity(`m!profile`, { type: "PLAYING" });
 
 	console.log(`${client.user.username} is ready !`);
 	rdy.send(`✅ Bot connecté et prêt !`);
-});
-
-//console chatter
-let y = process.openStdin()
-y.addListener("data", res => {
-	let x = res.toString().trim().split(/ +/g)
-	client.channels.cache.find(channel => channel.id === "689876186599653512").send(x.join(" "));
 });
 
 client.on("message", async message => {
@@ -152,23 +124,27 @@ client.on("message", async message => {
 	if (!message.member) message.member = await message.guild.fetchMember(message.author);
 
 	if (!message.content.toLowerCase().startsWith(prefix)) return;
-	//if (message.author.id !== "436310611748454401") return message.channel.send("Une réécriture va avoir lieu prochainement.\nLa database est bien enregistrée donc vous ne perdrez pas vos données, merci de votre compréhension.");
-// 	if (!client.config.owners.includes(message.author.id)) {
-// 		message.delete();
-// 		return message.channel.send("⚙️ Maintenance en cours.")
-// 	.then(msg => {
-// 		msg.delete({ timeout: 8000 })
-// 	});
-// }
 
-	if (client.commands.has(cmd)) command = client.commands.get(cmd);
-	else if (client.aliases.has(cmd)) command = client.commands.get(client.aliases.get(cmd));
+	const player = await getPlayer(con, message.author.id);
+	const blacklist = new Discord.MessageEmbed()
+        .setColor("#e31212")
+        .setDescription("ERROR: You are banned from the bot by the owner.\nFor more information, please contact **ReallySouna#2424**.")
 
-  if (command) command.run(client, message, args, getPlayer, getUser);
+    if (!player || player.data.ban == "0") {
+		if (client.commands.has(cmd)) command = client.commands.get(cmd);
+		else if (client.aliases.has(cmd)) command = client.commands.get(client.aliases.get(cmd));
+
+        if (command) command.run(client, message, args, getPlayer, getUser, getUserFromMention);
+        if (player) con.query(`UPDATE data SET cmd = ${player.data.cmd + Number(1)} WHERE userid = ${message.author.id}`);
+    } else if (player.data.ban == "1") {
+        return message.channel.send(blacklist);
+    }
 });
+
 client.on('guildMemberAdd', member => {
 	const guild = member.guild;
 	if (guild.id === "689471316570406914") {
+		client.channels.cache.get("785207465784115239").setName(`Discord > ${member.guild.members.cache.filter(m => !m.user.bot).size} Members`);
 		const channel = client.channels.cache.find(channel => channel.id === "689471317203877893");
 		channel.send(`Bienvenue ${member} ! N'hésite pas à lire <#774318768833953812> pour bien débuter !`)
 		member.roles.set(['691678064282697788'])
@@ -178,6 +154,7 @@ client.on('guildMemberAdd', member => {
 client.on('guildMemberRemove', member => {
 	const guild = member.guild;
 	if (guild.id === "689471316570406914") {
+		client.channels.cache.get(stats.member).setName(`Discord > ${member.guild.members.cache.filter(m => !m.user.bot).size} Members`);
 		const channel = client.channels.cache.find(channel => channel.id === "689471317203877893");
 		channel.send(`L'utilisateur ${member}/${member.user.username} est parti.`)
 	}

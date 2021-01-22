@@ -1,29 +1,26 @@
 const { MessageEmbed } = require("discord.js");
-const { readdirSync } = require("fs");
+const { readdirSync }  = require("fs");
+const Default 				 = require('../../utils/default.json');
 
-module.exports.run = async (client, message, args, getPlayer) => {
-	var con = client.connection;
-  	var player = await getPlayer(con, message.author.id);
-	if (!player) return message.channel.send("You are not registered, please do the `m!village` command to remedy this.");
+exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
+	const con = client.connection;
+	const player = await getPlayer(con, message.author.id);
+	if (!player) return message.channel.send(`${Default.notRegistered}`);
 	const lang = require(`../../utils/text/${player.data.lang}.json`);
-  	const uname = message.author.tag;
-  	const userid = message.author.id;
 
 	const embed = new MessageEmbed()
 		.setColor(message.member.displayColor)
-		.setAuthor(`${lang.help2.author} ${client.user.username}`, client.user.displayAvatarURL())
-		.setFooter(`${lang.help2.askby} ${message.author.tag}`, message.author.displayAvatarURL())
+		.setAuthor(`${lang.help.commandsOf} ${client.user.username}`, client.user.displayAvatarURL())
 		.setTimestamp();
 	if (args[0]) {
 		let command = args[0];
 		let cmd;
 		if (client.commands.has(command)) {
 			cmd = client.commands.get(command);
-		}
-		else if (client.aliases.has(command)) {
+		} else if (client.aliases.has(command)) {
 			cmd = client.commands.get(client.aliases.get(command));
 		}
-		if (!cmd) return message.channel.send(embed.setTitle(`${lang.help2.error}`).setDescription(`\`${client.config.prefix}help\` ${lang.help2.do}`));
+		if (!cmd) return message.channel.send(embed.setTitle(`${lang.help.invalidCommand}`).setDescription(`\`${client.config.prefix}help\` ${lang.help.doForList}`));
 		command = cmd.help;
 		var description;
 		var usage;
@@ -34,22 +31,21 @@ module.exports.run = async (client, message, args, getPlayer) => {
 			description = command.description_en
 			usage = command.usage_en
 		}
-			embed.setDescription([
-			`${lang.help2.info}`,
+		embed.setDescription([
+			`${lang.help.infos}`,
 			`❯ **Command:** ${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}`,
-			`❯ **Description:** ${description || lang.help2.utilisation}`,
-			`❯ **${lang.help2.usage}:** ${usage ? `\`${client.config.prefix}${command.name} ${usage}\`` : lang.help2.noUsage} `,
-			`❯ **Alias:** ${command.aliases ? command.aliases.join(", ") : lang.help2.nothing}`,
-			`❯ **${lang.help2.category}:** ${command.category ? command.category : "General" || "Misc"}`,
+			`❯ **Description:** ${description || lang.help.infos}`,
+			`❯ **${lang.help.usage}:** ${usage ? `\`${client.config.prefix}${command.name} ${usage}\`` : lang.help.noUsage} `,
+			`❯ **Alias:** ${command.aliases ? command.aliases.join(", ") : lang.help.nothing}`,
+			`❯ **${lang.help.category}:** ${command.category ? command.category : "General" || "Misc"}`,
 		].join("\n"));
 
 		return message.channel.send(embed);
 	}
 	const categories = readdirSync("./commands/");
 	embed.setDescription([
-		`${lang.help2.available} ${client.user.username}.`,
-		`${lang.help2.prefix} **${client.config.prefix}**`,
-		`${lang.help2.helpMore}`
+		`${lang.help.prefix} **${client.config.prefix}**`,
+		`${lang.help.helpMore}`
 	].join("\n"));
 	categories.forEach(category => {
 		const dir = client.commands.filter(c => c.help.category.toLowerCase() === category.toLowerCase());
@@ -57,8 +53,8 @@ module.exports.run = async (client, message, args, getPlayer) => {
 
 		try {
 			if (dir.size === 0) return;
-			if (client.config.owners.includes(message.author.id)) embed.addField(`❯ ${capitalise}`, dir.map(c => `\`${c.help.name}\``).join(", "));
-			else if (category !== "Staff") embed.addField(`❯ ${capitalise}`, dir.map(c => `\`${c.help.name}\``).join(", "));
+			//if (client.config.owners.includes(message.author.id)) embed.addField(`❯ ${capitalise}`, dir.map(c => `\`${c.help.name}\``).join(", "));
+			if (category !== "Staff") embed.addField(`❯ ${capitalise}`, dir.map(c => `\`${c.help.name}\``).join(", "));
 		}
 		catch (e) {
 			return catchErr(err, message)
@@ -67,12 +63,12 @@ module.exports.run = async (client, message, args, getPlayer) => {
 	return message.channel.send(embed);
 };
 
-module.exports.help = {
+exports.help = {
 	name: "help",
 	description_fr: "Commande help pour voir les commandes",
 	description_en: "Command help to see the commands",
 	usage_fr: "(nom de la commande)",
 	usage_en: "(command name)",
 	category: "Infos",
-	aliases: ["h"]
+	aliases: ["h", "aide"]
 };

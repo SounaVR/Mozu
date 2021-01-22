@@ -1,13 +1,13 @@
-module.exports.run = async (client, message, args, getPlayer) => {
+exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
   const clean = text => {
-    if (typeof(text) === "string")
+    if (typeof (text) === "string")
       return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
     else
       return text;
   }
 
   if (message.content.startsWith(client.config.prefix + "eval")) {
-    if (!client.config.owners.includes(message.author.id)) return;
+    if (!client.config.owners.includes(message.author.id)) return message.react("❌");
     try {
       const code = args.join(" ");
       let evaled = eval(code);
@@ -15,16 +15,16 @@ module.exports.run = async (client, message, args, getPlayer) => {
       if (typeof evaled !== "string")
         evaled = require("util").inspect(evaled);
 
-      message.channel.send(clean(evaled), {code:"xl"});
+      message.channel.send(clean(evaled), { code: "xl" });
     } catch (err) {
       message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
     }
   }
 };
 
-module.exports.help = {
-    name: "eval",
-    description_fr: "Commande Admin",
-    description_en: "Admin Command",
-    category: "Staff"
+exports.help = {
+  name: "eval",
+  description_fr: "Commande Admin",
+  description_en: "Admin Command",
+  category: "Staff"
 };

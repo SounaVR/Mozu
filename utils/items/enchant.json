@@ -1,0 +1,84 @@
+{
+    "tools" : {
+        "pickaxe" : [
+        {
+            "ATK" : 0,
+            "DEF" : 0
+        }
+        ],
+        "sword" : [
+        {
+            "ATK" : 1,
+            "DEF" : 0
+        }
+        ],
+        "shield" : [
+        {
+            "ATK" : 0,
+            "DEF" : 0
+        }
+        ],
+        "wand" : [
+        {
+            "ATK" : 0,
+            "DEF" : 0
+        }
+        ],
+        "bow" : [
+        {
+            "ATK" : 0,
+            "DEF" : 0
+        }
+        ]
+    },
+    "armors" : {
+        "tete" : [
+        {
+            "ATK" : 0,
+            "DEF" : 1
+        }
+        ],
+        "epaule" : [
+        {
+            "ATK" : 0,
+            "DEF" : 1
+        }
+        ],
+        "torse" : [
+            {
+                "ATK" : 0,
+                "DEF" : 1
+            }
+        ],
+        "poignets" : [
+            {
+                "ATK" : 0,
+                "DEF" : 1
+            }
+        ],
+        "mains" : [
+            {
+                "ATK" : 0,
+                "DEF" : 1
+            }
+        ],
+        "taille" : [
+            {
+                "ATK" : 0,
+                "DEF" : 1
+            }
+        ],
+        "jambes" : [
+            {
+                "ATK" : 0,
+                "DEF" : 1
+            }
+        ],
+        "pieds" : [
+            {
+                "ATK" : 0,
+                "DEF" : 1
+            }
+        ]
+    }
+}

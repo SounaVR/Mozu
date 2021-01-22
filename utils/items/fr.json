@@ -1,0 +1,1266 @@
+{
+  "objects" : {
+    "dungeon_stone" : [
+      {
+        "name" : "Pierre de Donjon",
+        "level" : 1,
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 2,
+          "coal" : 3000
+        }
+      }
+    ],
+    "dungeon_amulet" : [
+      {
+        "name" : "Aucun"
+      },
+      {
+        "name" : "Amulette de donjon Normale",
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 100,
+          "stone" : "1000000000",
+          "coal" : "1000000000",
+          "copper" : "1000000000",
+          "gold" : "1000000000",
+          "iron" : "1000000000",
+          "malachite" : "1000000000000"
+        }
+      },
+      {
+        "name" : "Amulette de donjon Rare",
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 100,
+          "stone" : "1000000000",
+          "coal" : "1000000000",
+          "copper" : "1000000000",
+          "gold" : "1000000000",
+          "iron" : "1000000000",
+          "malachite" : "1000000000000"
+        }
+      },
+      {
+        "name" : "Amulette de donjon Épique",
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 100,
+          "stone" : "1000000000",
+          "coal" : "1000000000",
+          "copper" : "1000000000",
+          "gold" : "1000000000",
+          "iron" : "1000000000",
+          "malachite" : "1000000000000"
+        }
+      },
+      {
+        "name" : "Amulette de donjon Légendaire",
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 100,
+          "stone" : "1000000000",
+          "coal" : "1000000000",
+          "copper" : "1000000000",
+          "gold" : "1000000000",
+          "iron" : "1000000000",
+          "malachite" : "1000000000000"
+        }
+      },
+      {
+        "name" : "Amulette de donjon **ULTIME**",
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 100,
+          "stone" : "1000000000",
+          "coal" : "1000000000",
+          "copper" : "1000000000",
+          "gold" : "1000000000",
+          "iron" : "1000000000",
+          "malachite" : "1000000000000"
+        }
+      }
+    ]
+  },
+  "tools" : {
+    "pickaxe" : [
+      {
+        "name" : "Mains nues"
+      },
+      {
+        "name" : "Pioche en Pierre",
+        "level" : 1,
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 10,
+          "stone" : 10000
+        }
+      },
+      {
+        "name" : "Pioche Cuivrée",
+        "level" : 5,
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 20,
+          "stone" : 10000,
+          "coal" : 9850
+        }
+      },
+      {
+        "name" : "Belle pioche de Fer",
+        "level" : 10,
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 30,
+          "stone" : 10000,
+          "coal" : 9850,
+          "copper" : 7580
+        }
+      },
+      {
+        "name" : "Pioche Ostentatoire",
+        "level" : 15,
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 40,
+          "stone" : 10000,
+          "coal" : 9850,
+          "copper" : 7580,
+          "iron" : 4860
+        }
+      },
+      {
+        "name" : "Pioche en Malachite de haute qualité",
+        "level" : 20,
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 50,
+          "stone" : 10000,
+          "coal" : 9850,
+          "copper" : 7580,
+          "iron" : 4860,
+          "malachite" : 2450
+        }
+      }
+    ],
+    "sword" : [
+      {
+        "name" : "Épée en Mousse"
+      },
+      {
+        "name" : "Épée en Pierre",
+        "level" : "1",
+        "ATK" : "2",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "10",
+          "stone" : 10000
+        }
+      },
+      {
+        "name" : "Épée en Cuivre",
+        "level" : "5",
+        "ATK" : "3",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "20",
+          "stone" : 10000,
+          "copper" : 9850
+        }
+      },
+      {
+        "name" : "Épée en Fer",
+        "level" : "10",
+        "ATK" : "4",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "30",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580
+        }
+      },
+      {
+        "name" : "Épée en Or",
+        "level" : "15",
+        "ATK" : "5",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "40",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580,
+          "gold" : 4850
+        }
+      },
+      {
+        "name" : "Épée en Malachite",
+        "level" : "20",
+        "ATK" : "6",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "50",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580,
+          "gold" : 4850,
+          "malachite" : 2450
+        }
+      }
+    ],
+    "shield" : [
+      {
+        "name" : "Bouclier en Mousse"
+      },
+      {
+        "name" : "Bouclier en Pierre",
+        "level" : "1",
+        "ATK" : "0",
+        "DEF" : "2",
+        "ressource" : {
+          "energy" : "10",
+          "stone" : 10000
+        }
+      },
+      {
+        "name" : "Bouclier en Cuivre",
+        "level" : "5",
+        "ATK" : "0",
+        "DEF" : "3",
+        "ressource" : {
+          "energy" : "20",
+          "stone" : 10000,
+          "copper" : 9850
+        }
+      },
+      {
+        "name" : "Bouclier en Fer",
+        "level" : "10",
+        "ATK" : "0",
+        "DEF" : "4",
+        "ressource" : {
+          "energy" : "30",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580
+        }
+      },
+      {
+        "name" : "Bouclier en Or",
+        "level" : "15",
+        "ATK" : "0",
+        "DEF" : "5",
+        "ressource" : {
+          "energy" : "40",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580,
+          "gold" : 48500
+        }
+      },
+      {
+        "name" : "Bouclier en Malachite",
+        "level" : "20",
+        "ATK" : "0",
+        "DEF" : "6",
+        "ressource" : {
+          "energy" : "50",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580,
+          "gold" : 4850,
+          "malachite" : 2450
+        }
+      }
+    ],
+    "wand" : [
+      {
+        "name" : "Baguette en Mousse"
+      },
+      {
+        "name" : "Baguette en Pierre",
+        "level" : "1",
+        "ATK" : "2",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "10",
+          "stone" : 10000
+        }
+      },
+      {
+        "name" : "Baguette en Cuivre",
+        "level" : "5",
+        "ATK" : "3",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "20",
+          "stone" : 10000,
+          "copper" : 9850
+        }
+      },
+      {
+        "name" : "Baguette en Fer",
+        "level" : "10",
+        "ATK" : "4",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "30",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580
+        }
+      },
+      {
+        "name" : "Baguette en Or",
+        "level" : "15",
+        "ATK" : "5",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "40",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580,
+          "gold" : 4850
+        }
+      },
+      {
+        "name" : "Baguette en Malachite",
+        "level" : "20",
+        "ATK" : "6",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "50",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580,
+          "gold" : 4850,
+          "malachite" : 2450
+        }
+      }
+    ],
+    "bow" : [
+      {
+        "name" : "Arc en Mousse"
+      },
+      {
+        "name" : "Arc en Pierre",
+        "level" : "1",
+        "ATK" : "2",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "10",
+          "stone" : 10000
+        }
+      },
+      {
+        "name" : "Arc en Cuivre",
+        "level" : "5",
+        "ATK" : "3",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "20",
+          "stone" : 10000,
+          "copper" : 9850
+        }
+      },
+      {
+        "name" : "Arc en Fer",
+        "level" : "10",
+        "ATK" : "4",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "30",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580
+        }
+      },
+      {
+        "name" : "Arc en Or",
+        "level" : "15",
+        "ATK" : "5",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "40",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580,
+          "gold" : 4850
+        }
+      },
+      {
+        "name" : "Arc en Malachite",
+        "level" : "20",
+        "ATK" : "6",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "50",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580,
+          "gold" : 4850,
+          "malachite" : 2450
+        }
+      }
+    ]
+  },
+  "armors" : {
+    "Guerrier" : {
+      "tete" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Heaume de puissance",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Heaume de courroux",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Casque de cuirassier",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "epaule" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Espauliers de puissance",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Espauliers de courroux",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Espauliers de cuirassier",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "torse" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Cuirasse de puissance",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Cuirasse de courroux",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Cuirasse de cuirassier",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "poignets" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Brassards de puissance",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Bracelets de courroux",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Brassards de cuirassier",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "mains" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Gantelets de puissance",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Gantelets de courroux",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Gantelets de cuirassier",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "taille" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Ceinture de puissance",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Baudrier de courroux",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Sangle de cuirassier",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "jambes" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Cuissards de puissance",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Cuissards de courroux",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Cuissards de cuirassier",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "pieds" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Solerets de puissance",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Solerets de courroux",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Solerets de cuirassier",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ]
+    },
+    "Mage" : {
+      "tete" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Couronne d'arcaniste",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Couronne de vent du Néant",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Diadème de givrefeu",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "epaule" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Mantelet d'arcaniste",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Mantelet de vent du Néant",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Protège-épaules de givrefeu",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "torse" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Robe d'arcaniste",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Robe de vent du Néant",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Robe de givrefeu",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "poignets" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Manchettes d'arcaniste",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Manchettes de vent du Néant",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Manchettes de givrefeu",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "mains" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Gants d'arcaniste",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Gants de vent du Néant",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Gants de givrefeu",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "taille" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Ceinture d'arcaniste",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Ceinture de vent du Néant",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Ceinture de givrefeu",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "jambes" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Jambières d'arcaniste",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Pantalon de vent du Néant",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Jambières de givrefeu",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "pieds" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Bottes d'arcaniste",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Bottes de vent du Néant",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Sandales de givrefeu",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ]
+    },
+    "Chasseur" : {
+      "tete" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Casque de traqueur de géant",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Heaume de traqueur de dragon",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Chapel de traqueur des cryptes",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "epaule" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Epaulettes de traqueur de géant",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Spallières de traqueur de dragon",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Spallières de traqueur des cryptes",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "torse" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Cuirasse de traqueur de géant",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Cuirasse de traqueur de dragon",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Tunique de traqueur des cryptes",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "poignets" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Brassards de traqueur de géant",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Brassards de traqueur de dragon",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Garde-poignets de traqueur des cryptes",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "mains" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Gants de traqueur de géant",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Gantelets de traqueur de dragon",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Garde-mains de traqueur des cryptes",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "taille" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Ceinture de traqueur de géant",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Ceinture de traqueur de dragon",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Ceinturon de traqueur des cryptes",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "jambes" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Jambières de traqueur de géant",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Garde-jambes de traqueur de dragon",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Garde-jambes de traqueur des cryptes",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "pieds" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Bottes de traqueur de géant",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Grèves de traqueur de dragon",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Bottes de traqueur des cryptes",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,8 +1,8 @@
 const { readdirSync } = require("fs");
 const { join } = require("path");
 
-module.exports.run = (client, message, args) => {
-	if (!client.config.owners.includes(message.author.id)) return;
+exports.run = (client, message, args, getPlayer, getUser, getUserFromMention) => {
+	if (!client.config.owners.includes(message.author.id)) return message.react("❌");
 
 	if (!args[0]) return message.channel.send("Veuillez indiquer une commande !");
 	const commandName = args[0].toLowerCase();
@@ -28,7 +28,7 @@ module.exports.run = (client, message, args) => {
 	});
 };
 
-module.exports.help = {
+exports.help = {
 	name: "reload",
 	description_fr: "Redémarre une commande",
 	description_en: "Restarts a command",

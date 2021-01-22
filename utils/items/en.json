@@ -1,0 +1,1277 @@
+{
+  "objects" : {
+    "dungeon_stone" : [
+      {
+        "name" : "Pierre de Donjon",
+        "level" : 1,
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 2,
+          "coal" : 3000
+        }
+      }
+    ],
+    "dungeon_amulet" : [
+      {
+        "name" : "Dungeon Amulet",
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 100,
+          "stone" : "1000000000",
+          "coal" : "1000000000",
+          "copper" : "1000000000",
+          "gold" : "1000000000",
+          "iron" : "1000000000",
+          "malachite" : "1000000000000"
+        }
+      },
+      {
+        "name" : "Normal Dungeon Amulet",
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 100,
+          "stone" : "1000000000",
+          "coal" : "1000000000",
+          "copper" : "1000000000",
+          "gold" : "1000000000",
+          "iron" : "1000000000",
+          "malachite" : "1000000000000"
+        }
+      },
+      {
+        "name" : "Rare Dungeon Amulet",
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 100,
+          "stone" : "1000000000",
+          "coal" : "1000000000",
+          "copper" : "1000000000",
+          "gold" : "1000000000",
+          "iron" : "1000000000",
+          "malachite" : "1000000000000"
+        }
+      },
+      {
+        "name" : "Epic Dungeon Amulet",
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 100,
+          "stone" : "1000000000",
+          "coal" : "1000000000",
+          "copper" : "1000000000",
+          "gold" : "1000000000",
+          "iron" : "1000000000",
+          "malachite" : "1000000000000"
+        }
+      },
+      {
+        "name" : "Legendary Dungeon Amulet",
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 100,
+          "stone" : "1000000000",
+          "coal" : "1000000000",
+          "copper" : "1000000000",
+          "gold" : "1000000000",
+          "iron" : "1000000000",
+          "malachite" : "1000000000000"
+        }
+      },
+      {
+        "name" : "**ULTIMATE** Dungeon Amulet",
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 100,
+          "stone" : "1000000000",
+          "coal" : "1000000000",
+          "copper" : "1000000000",
+          "gold" : "1000000000",
+          "iron" : "1000000000",
+          "malachite" : "1000000000000"
+        }
+      }
+    ]
+  },
+  "tools" : {
+    "pickaxe" : [
+      {
+        "name" : "Mains nues"
+      },
+      {
+        "name" : "Pioche en Pierre",
+        "level" : 1,
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 10,
+          "stone" : 10000
+        }
+      },
+      {
+        "name" : "Pioche Cuivrée",
+        "level" : 5,
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 20,
+          "stone" : 10000,
+          "coal" : 9850
+        }
+      },
+      {
+        "name" : "Belle pioche de Fer",
+        "level" : 10,
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 30,
+          "stone" : 10000,
+          "coal" : 9850,
+          "copper" : 7580
+        }
+      },
+      {
+        "name" : "Pioche Ostentatoire",
+        "level" : 15,
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 40,
+          "stone" : 10000,
+          "coal" : 9850,
+          "copper" : 7580,
+          "iron" : 4860
+        }
+      },
+      {
+        "name" : "Pioche en Malachite de haute qualité",
+        "level" : 20,
+        "ATK" : "0",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : 50,
+          "stone" : 10000,
+          "coal" : 9850,
+          "copper" : 7580,
+          "iron" : 4860,
+          "malachite" : 2450
+        }
+      }
+    ],
+    "sword" : [
+      {
+        "name" : "Épée en Mousse"
+      },
+      {
+        "name" : "Épée en Pierre",
+        "level" : "1",
+        "ATK" : "2",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "10",
+          "stone" : 10000
+        }
+      },
+      {
+        "name" : "Épée en Cuivre",
+        "level" : "5",
+        "ATK" : "3",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "20",
+          "stone" : 10000,
+          "copper" : 9850
+        }
+      },
+      {
+        "name" : "Épée en Fer",
+        "level" : "10",
+        "ATK" : "4",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "30",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580
+        }
+      },
+      {
+        "name" : "Épée en Or",
+        "level" : "15",
+        "ATK" : "5",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "40",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580,
+          "gold" : 4850
+        }
+      },
+      {
+        "name" : "Épée en Malachite",
+        "level" : "20",
+        "ATK" : "6",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "50",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580,
+          "gold" : 4850,
+          "malachite" : 2450
+        }
+      }
+    ],
+    "shield" : [
+      {
+        "name" : "Bouclier en Mousse"
+      },
+      {
+        "name" : "Bouclier en Pierre",
+        "level" : "1",
+        "ATK" : "0",
+        "DEF" : "2",
+        "ressource" : {
+          "energy" : "10",
+          "stone" : 10000
+        }
+      },
+      {
+        "name" : "Bouclier en Cuivre",
+        "level" : "5",
+        "ATK" : "0",
+        "DEF" : "3",
+        "ressource" : {
+          "energy" : "20",
+          "stone" : 10000,
+          "copper" : 9850
+        }
+      },
+      {
+        "name" : "Bouclier en Fer",
+        "level" : "10",
+        "ATK" : "0",
+        "DEF" : "4",
+        "ressource" : {
+          "energy" : "30",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580
+        }
+      },
+      {
+        "name" : "Bouclier en Or",
+        "level" : "15",
+        "ATK" : "0",
+        "DEF" : "5",
+        "ressource" : {
+          "energy" : "40",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580,
+          "gold" : 48500
+        }
+      },
+      {
+        "name" : "Bouclier en Malachite",
+        "level" : "20",
+        "ATK" : "0",
+        "DEF" : "6",
+        "ressource" : {
+          "energy" : "50",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580,
+          "gold" : 4850,
+          "malachite" : 2450
+        }
+      }
+    ],
+    "wand" : [
+      {
+        "name" : "Baguette en Mousse"
+      },
+      {
+        "name" : "Baguette en Pierre",
+        "level" : "1",
+        "ATK" : "2",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "10",
+          "stone" : 10000
+        }
+      },
+      {
+        "name" : "Baguette en Cuivre",
+        "level" : "5",
+        "ATK" : "3",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "20",
+          "stone" : 10000,
+          "copper" : 9850
+        }
+      },
+      {
+        "name" : "Baguette en Fer",
+        "level" : "10",
+        "ATK" : "4",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "30",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580
+        }
+      },
+      {
+        "name" : "Baguette en Or",
+        "level" : "15",
+        "ATK" : "5",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "40",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580,
+          "gold" : 4850
+        }
+      },
+      {
+        "name" : "Baguette en Malachite",
+        "level" : "20",
+        "ATK" : "6",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "50",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580,
+          "gold" : 4850,
+          "malachite" : 2450
+        }
+      }
+    ],
+    "bow" : [
+      {
+        "name" : "Noob bow"
+      },
+      {
+        "name" : "Strong bow in stone",
+        "level" : "1",
+        "ATK" : "2",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "10",
+          "stone" : 10000
+        }
+      },
+      {
+        "name" : "Arc en Cuivre",
+        "level" : "5",
+        "ATK" : "3",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "20",
+          "stone" : 10000,
+          "copper" : 9850
+        }
+      },
+      {
+        "name" : "Arc en Fer",
+        "level" : "10",
+        "ATK" : "4",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "30",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580
+        }
+      },
+      {
+        "name" : "Arc en Or",
+        "level" : "15",
+        "ATK" : "5",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "40",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580,
+          "gold" : 4850
+        }
+      },
+      {
+        "name" : "Arc en Malachite",
+        "level" : "20",
+        "ATK" : "6",
+        "DEF" : "0",
+        "ressource" : {
+          "energy" : "50",
+          "stone" : 10000,
+          "copper" : 9850,
+          "iron" : 7580,
+          "gold" : 4850,
+          "malachite" : 2450
+        }
+      }
+    ]
+  },
+  "armors" : {
+    "Guerrier" : {
+      "tete" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Helm of Might",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Helm of Wrath",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Dreadnaught Helmet",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "epaule" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Pauldrons of Might",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Pauldrons of Might",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Dreadnaught Pauldrons",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "torse" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Breastplate of Might",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Breastplate of Might",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Dreadnaught Breastplate",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "poignets" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Bracers of Might",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Bracelets of Wrath",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Dreadnaught Bracers",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "mains" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Gauntlets of Might",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Gauntlets of Wrath",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Dreadnaught Gauntlets",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "taille" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Belt of Might",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Waistband of Wrath",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Dreadnaught Waistguard",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "jambes" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Legplates of Might",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Legplates of Wrath",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Dreadnaught Legplates",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "pieds" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Sabatons of Might",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Sabatons of Wrath",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Dreadnaught Sabatons",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ]
+    },
+    "Mage" : {
+      "tete" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Arcanist Crown",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Netherwind Crown",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Frostfire Circlet",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "epaule" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Arcanist Mantle",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Netherwind Mantle",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Frostfire Shoulderpads",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "torse" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Arcanist Robes",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Netherwind Robes",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Frostfire Robe",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "poignets" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Arcanist Bindings",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Netherwind Bindings",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Frostfire Bindings",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "mains" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Arcanist Gloves",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Netherwind Gloves",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Frostfire Gloves",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "taille" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Arcanist Belt",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Netherwind Belt",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Frostfire Belt",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "jambes" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Arcanist Leggings",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Netherwind Pants",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Frostfire Leggings",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "pieds" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Arcanist Boots",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Netherwind Boots",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Frostfire Sandals",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ]
+    },
+    "Chasseur" : {
+      "tete" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Giantstalker's Helmet",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Dragonstalker's Helm",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Cryptstalker Headpiece",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "epaule" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Giantstalker's Epaulets",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Dragonstalker's Spaulders",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Cryptstalker Spaulders",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "torse" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Giantstalker's Breastplate",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Dragonstalker's Breastplate",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Cryptstalker Tunic",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "poignets" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Giantstalker's Bracers",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Dragonstalker's Bracers",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Cryptstalker Wristguards",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "mains" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Giantstalker's Gloves",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Dragonstalker's Gauntlets",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Cryptstalker Handguards",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "taille" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Giantstalker's Belt",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Dragonstalker's Belt",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Cryptstalker Girdle",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "jambes" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Giantstalker's Leggings",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Dragonstalker's Legguards",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Cryptstalker Legguards",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ],
+      "pieds" : [
+        {
+          "name" : "Nothing"
+        },
+        {
+          "name" : "[T1] Giantstalker's Boots",
+          "level" : "1",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Dragonstalker's Greaves",
+          "level" : "5",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Cryptstalker Boots",
+          "level" : "10",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
+        }
+      ]
+    }
+  }
+}
