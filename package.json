@@ -21,6 +21,7 @@
     "moment": "^2.24.0",
     "moment-duration-format": "^2.3.2",
     "mysql": "^2.18.1",
-    "parse-ms": "^2.1.0"
+    "parse-ms": "^2.1.0",
+    "path": "^0.12.7"
   }
 }

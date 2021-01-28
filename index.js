@@ -1,14 +1,15 @@
 require('dotenv').config();
 const { getUser, getPlayer, getUserFromMention } = require("./utils/u");
-const { sep } 					  			  = require("path");
+const { sep } 					  			     = require("path");
 const { success, error, warning } = require("log-symbols");
 const fs	= require('fs'),
+	path	= require('path'),
 	moment  = require('moment'),
 	cron    = require('cron'),
 	Discord = require("discord.js"),
 	config  = require("./utils/config"),
-  sql     = fs.readFileSync('./sql/schema.sql').toString(),
-  mysql   = require('mysql');
+  	sql     = fs.readFileSync('./sql/schema.sql').toString(),
+  	mysql   = require('mysql');
 
 const client = new Discord.Client({
 	disableMentions: "everyone",
@@ -71,19 +72,45 @@ client.on('ready', async () => {
 		.setColor("#1DCC8F")
 	systemlogs.send(embed);
 
-	let scheduledMessage = new cron.CronJob('00 00 00 * * *', async () => {
-	      const { exec } = require ('child_process');
-	      exec(`mysqldump --all-databases --single-transaction --quick --lock-tables=false > ./backups/full-backup-$(date +%F).sql -u ReallySouna -p ${process.env.BACKUP_PASSWORD}`)
-	      .then(() => {
-	          exec(`git add .`).then(() => {
-	              exec(`git commit -m "a"`);
-	          }).then(() => {
-	              exec(`git push`);
-	          })
-	      })
-		return con.query(`UPDATE data SET LastRep = 0, daily = 0`)
+	const { exec } = require ('child_process');
+	const backupsChannel = client.channels.cache.find(ch => ch.id === "804174293453766679");
+	// -----------------
+	// CRON MEMO
+	// *  *  *  *  *  *
+	// |  |  |  |  |  |
+	// |  |  |  |  |  jour de la semaine
+	// |  |  |  |  mois
+	// |  |  |  jour du mois
+	// |  |  heures
+	// |  minutes
+	// secondes (optionnelles)
+
+	let dailyReset = new cron.CronJob('00 00 * * *', async () => {
+		try {
+			exec(`mysqldump --all-databases --single-transaction --quick --lock-tables=false > ./backups/full-backup-$(date +%F).sql -u ReallySouna -p ${process.env.BACKUP_PASSWORD}`)
+			con.query(`UPDATE data SET LastRep = 0, daily = 0`)
+			backupsChannel.send(`🟢 Daily backup done.`)
+		} catch (error) {
+			backupsChannel.send(`🔴 An error occurred. Check the console.`)
+			if (error) throw error;
+		}
 	});
-	scheduledMessage.start();
+	
+	let weekReset = new cron.CronJob('00 00 * * 1', async () => {
+		if (fs.existsSync('./backups')) {
+			exec("rm -r backups/");
+			exec("mkdir backups");
+			exec(`mysqldump --all-databases --single-transaction --quick --lock-tables=false > ./backups/full-backup-$(date +%F).sql -u ReallySouna -p ${process.env.BACKUP_PASSWORD}`)
+			backupsChannel.send(`🟢 Weekly backup done.`);
+		} else {
+			exec("mkdir backups");
+			exec(`mysqldump --all-databases --single-transaction --quick --lock-tables=false > ./backups/full-backup-$(date +%F).sql -u ReallySouna -p ${process.env.BACKUP_PASSWORD}`)
+			backupsChannel.send(`🟢 Weekly backup done.`);
+		}
+	});
+
+	dailyReset.start();
+	weekReset.start();
 
 	setInterval(function () {
 		con.query('SELECT 1');
@@ -154,7 +181,7 @@ client.on('guildMemberAdd', member => {
 client.on('guildMemberRemove', member => {
 	const guild = member.guild;
 	if (guild.id === "689471316570406914") {
-		client.channels.cache.get(stats.member).setName(`Discord > ${member.guild.members.cache.filter(m => !m.user.bot).size} Members`);
+		client.channels.cache.get("785207465784115239").setName(`Discord > ${member.guild.members.cache.filter(m => !m.user.bot).size} Members`);
 		const channel = client.channels.cache.find(channel => channel.id === "689471317203877893");
 		channel.send(`L'utilisateur ${member}/${member.user.username} est parti.`)
 	}
