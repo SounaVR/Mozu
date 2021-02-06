@@ -3,7 +3,7 @@ const Discord        = require('discord.js'),
 Emotes               = require('../../utils/emotes.json'),
 Default              = require('../../utils/default.json');
 
-async function manageCraft(client, con, player, message, category, objectName) {
+async function manageCraft(con, player, message, category, objectName) {
     const Craft = require(`../../utils/items/${player.data.lang}.json`);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
     const react = ["780222056007991347", "780222833808506920"];
@@ -150,12 +150,15 @@ exports.run = async (client, message, args, getPlayer, getUser, getUserFromMenti
     }
 
     var playerClasse;
-    if (player.data.classe === "Guerrier") {
-        playerClasse = `${Emotes.chests.Guerrier.rune_sword} = ${lang.inventory.sword} ]\n\n- [ ${Emotes.chests.Guerrier.rune_shield} = ${lang.inventory.shield} ]`;
-    } else if (player.data.classe === "Mage") {
-        playerClasse = `${Emotes.chests.Mage.rune_wand} = ${lang.inventory.wand} ]`;
-    } else if (player.data.classe === "Chasseur") {
-        playerClasse = `${Emotes.chests.Chasseur.rune_bow} = ${lang.inventory.bow} ]`;
+    switch (player.data.classe) {
+        case "Guerrier":
+            playerClasse = `${lang.inventory.sword} / ${lang.inventory.shield}`;
+            break;
+        case "Mage":
+            playerClasse = `${lang.inventory.wand}`;
+            break;
+        case "Chasseur":
+            playerClasse = ` ${lang.inventory.bow}`;
     }
 
     const craftEmbed = new Discord.MessageEmbed()
@@ -163,228 +166,31 @@ exports.run = async (client, message, args, getPlayer, getUser, getUserFromMenti
         .setTitle("CRAFT")
         .setThumbnail("https://media.discordapp.net/attachments/695902978858680390/715976650197827594/unnamed.png")
         .addField("Description", `${lang.craft.description}`)
-        .addField("Documentation", `${lang.craft.doc} :\n\n- [ ${Emotes.tools} = ${lang.inventory.tools} ]\n\n- [ ${Emotes.weapons} = ${lang.inventory.weapons} ]\n\n- [ ${Emotes.armors} = ${lang.inventory.armors} ]\n\n- [ ${Emotes.bag} = ${lang.inventory.objects} ]`)
+        .addField("Documentation", `${lang.craft.doc} [${lang.inventory.pickaxe} / ${playerClasse} / ${lang.inventory.tete} / ${lang.inventory.epaule} / ${lang.inventory.torse} / ${lang.inventory.poignets} / ${lang.inventory.mains} / ${lang.inventory.taille} / ${lang.inventory.jambes} / ${lang.inventory.pieds} / ${lang.inventory.dungeon_amulet} / ${lang.inventory.dungeon_stone}]`)
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL());
 
-    const toolsEmbed = new Discord.MessageEmbed()
-        .setColor(message.member.displayColor)
-        .setTitle("CRAFT")
-        .setThumbnail("https://media.discordapp.net/attachments/695902978858680390/715976650197827594/unnamed.png")
-        .addField("Description", `${lang.craft.description}`)
-        .addField("Documentation", `${lang.craft.doc2} :\n\n- [ ${Emotes.chests.Tools.rune_pickaxe} = ${lang.inventory.pickaxe} ]`)
-        .setTimestamp()
-        .setFooter(`${client.user.username}`, client.user.avatarURL());
-
-    const weaponsEmbed = new Discord.MessageEmbed()
-        .setColor(message.member.displayColor)
-        .setTitle("CRAFT")
-        .setThumbnail("https://media.discordapp.net/attachments/695902978858680390/715976650197827594/unnamed.png")
-        .addField("Description", `${lang.craft.description}`)
-        .addField("Documentation", `${lang.craft.doc2} :\n\n- [ ${playerClasse}`)
-        .setTimestamp()
-        .setFooter(`${client.user.username}`, client.user.avatarURL());
-
-    const armorsEmbed = new Discord.MessageEmbed()
-        .setColor(message.member.displayColor)
-        .setTitle("CRAFT")
-        .setThumbnail("https://media.discordapp.net/attachments/695902978858680390/715976650197827594/unnamed.png")
-        .addField("Description", `${lang.craft.description}`)
-        .addField("Documentation", `${lang.craft.doc2} :
-
-- [ ${Emotes.chests.Gear.P1.rune_tete} = ${lang.inventory.Gear.P1.rune_tete} ]
-- [ ${Emotes.chests.Gear.P1.rune_epaule} = ${lang.inventory.Gear.P1.rune_epaule} ]
-- [ ${Emotes.chests.Gear.P1.rune_torse} = ${lang.inventory.Gear.P1.rune_torse} ]
-- [ ${Emotes.chests.Gear.P1.rune_poignets} = ${lang.inventory.Gear.P1.rune_poignets} ]
-- [ ${Emotes.chests.Gear.P2.rune_mains} = ${lang.inventory.Gear.P2.rune_mains} ]
-- [ ${Emotes.chests.Gear.P2.rune_taille} = ${lang.inventory.Gear.P2.rune_taille} ]
-- [ ${Emotes.chests.Gear.P2.rune_jambes} = ${lang.inventory.Gear.P2.rune_jambes} ]
-- [ ${Emotes.chests.Gear.P2.rune_pieds} = ${lang.inventory.Gear.P2.rune_pieds} ]`)
-        .setTimestamp()
-        .setFooter(`${client.user.username}`, client.user.avatarURL());
-
-    const objectsEmbed = new Discord.MessageEmbed()
-        .setColor(message.member.displayColor)
-        .setTitle("CRAFT")
-        .setThumbnail("https://media.discordapp.net/attachments/695902978858680390/715976650197827594/unnamed.png")
-        .addField("Description", `${lang.craft.description}`)
-        .addField("Documentation", `${lang.craft.doc2} :\n\n- [ ${Emotes.dungeon_amulet} = ${lang.inventory.dungeon_amulet}]\n\n- [ ${Emotes.dungeon_stone} = ${lang.inventory.dungeon_stone} ]`)
-        .setTimestamp()
-        .setFooter(`${client.user.username}`, client.user.avatarURL());
-
-    const msg = await message.channel.send(craftEmbed);
-
-    let reactMsg = ['756140391186694184', '756140391228637224', '756140390796492903', '748972784432185384'];
-
-    await msg.react(reactMsg[0]);
-    await msg.react(reactMsg[1]);
-    await msg.react(reactMsg[2]);
-    await msg.react(reactMsg[3]);
-
-    const filterMsg = (reaction, user) => reactMsg.includes(reaction.emoji.id) && user.id === message.author.id;
-
-    const collectorMsg = msg.createReactionCollector(filterMsg, { time: 60000 });
-
-    collectorMsg.on('collect', async r => {
-        msg.delete();
-        switch (r.emoji.id) {
-            case reactMsg[0]:
-                const tools = await message.channel.send(toolsEmbed);
-                let reactTools = ['748973331642056764'];
-
-                await tools.react(reactTools[0])
-
-                const filterTools = (reaction, user) => reactTools.includes(reaction.emoji.id) && user.id === message.author.id;
-
-                const collectorTools = tools.createReactionCollector(filterTools, { time: 60000 });
-
-                collectorTools.on('collect', r => {
-                    tools.delete();
-                    switch (r.emoji.id) {
-                        case reactTools[0]:
-                            manageCraft(client, con, player, message, 'tools', 'pickaxe');
-                            break;
-                    }
-                    collectorTools.stop();
-                })
-                break;
-
-            case reactMsg[1]:
-                const weapons = await message.channel.send(weaponsEmbed);
-
-                const reactClasse = [
-                    "771095091216515123", //sword
-                    "771113421202391051", //shield
-                    "748960787946537030", //wand
-                    "771331757399212053"  //bow
-                ];
-
-                switch(player.data.classe) {
-                    case "Guerrier":
-                        await weapons.react(reactClasse[0]);
-                        await weapons.react(reactClasse[1]);
-                        break;
-                    case "Mage":
-                        await weapons.react(reactClasse[2]);
-                        break;
-                    case "Chasseur":
-                        await weapons.react(reactClasse[3]);
-                        break;
-                }
-
-                const filterWeapons = (reaction, user) => reactClasse.includes(reaction.emoji.id) && user.id === message.author.id;
-
-                const collectorWeapons = weapons.createReactionCollector(filterWeapons, { time: 60000 });
-
-                collectorWeapons.on('collect', r => {
-                    weapons.delete();
-                    switch (r.emoji.id) {
-                        case reactClasse[0]:
-                            manageCraft(client, con, player, message, 'tools', 'sword');
-                            break;
-                        case reactClasse[1]:
-                            manageCraft(client, con, player, message, 'tools', 'shield');
-                            break;
-                        case reactClasse[2]:
-                            manageCraft(client, con, player, message, 'tools', 'wand');
-                            break;
-                        case reactClasse[3]:
-                            manageCraft(client, con, player, message, 'tools', 'bow');
-                            break;
-                    }
-                    collectorWeapons.stop();
-                })
-                break;
-
-            case reactMsg[2]:
-                const armors = await message.channel.send(armorsEmbed);
-
-                let reactArmors = [
-                    '748959964663382106', //tete
-                    '748959724170379324', //epaule
-                    '748960199389479053', //torse
-                    '748960470479798324', //poignets
-                    '748960653930135613', //mains
-                    '748961288960606300', //taille
-                    '748961288968994888', //jambes
-                    '748961289145155684'  //pieds
-                ];
-
-                await armors.react(reactArmors[0]);
-                await armors.react(reactArmors[1]);
-                await armors.react(reactArmors[2]);
-                await armors.react(reactArmors[3]);
-                await armors.react(reactArmors[4]);
-                await armors.react(reactArmors[5]);
-                await armors.react(reactArmors[6]);
-                await armors.react(reactArmors[7]);
-
-                const filterArmors = (reaction, user) => reactArmors.includes(reaction.emoji.id) && user.id === message.author.id;
-
-                const collectorArmors = armors.createReactionCollector(filterArmors, { time: 60000 });
-
-                collectorArmors.on('collect', r => {
-                    armors.delete();
-                    switch (r.emoji.id) {
-                        case reactArmors[0]:
-                            manageCraft(client, con, args, player, message, 'armors', 'tete');
-                            break;
-                        case reactArmors[1]:
-                            manageCraft(client, con, args, player, message, 'armors', 'epaule');
-                            break;
-                        case reactArmors[2]:
-                            manageCraft(client, con, args, player, message, 'armors', 'torse');
-                            break;
-                        case reactArmors[3]:
-                            manageCraft(client, con, args, player, message, 'armors', 'poignets');
-                            break;
-                        case reactArmors[4]:
-                            manageCraft(client, con, args, player, message, 'armors', 'mains');
-                            break;
-                        case reactArmors[5]:
-                            manageCraft(client, con, args, player, message, 'armors', 'taille');
-                            break;
-                        case reactArmors[6]:
-                            manageCraft(client, con, args, player, message, 'armors', 'jambes');
-                            break;
-                        case reactArmors[7]:
-                            manageCraft(client, con, args, player, message, 'armors', 'pieds');
-                            break;
-
-                    }
-                    collectorArmors.stop();
-                })
-                break;
-
-            case reactMsg[3]:
-                const objects = await message.channel.send(objectsEmbed);
-
-                let reactObjects = ['780383216334667787', '748972507427635230'];
-
-                await objects.react(reactObjects[0]);
-                await objects.react(reactObjects[1]);
-
-                const filterObjects = (reaction, user) => reactObjects.includes(reaction.emoji.id) && user.id === message.author.id;
-
-                const collectorObjects = objects.createReactionCollector(filterObjects, { time: 60000 });
-
-                collectorObjects.on('collect', r => {
-                    objects.delete();
-                    switch (r.emoji.id) {
-                        case reactObjects[0]:
-                            manageCraft(client, con, player, message, 'objects', 'dungeon_amulet');
-                            break;
-                        case reactObjects[1]:
-                            manageCraft(client, con, player, message, 'objects', 'dungeon_stone');
-                            break;
-                    }
-
-                    collectorObjects.stop();
-                })
-                break;
-        }
-        collectorMsg.stop();
-    });
+    switch (args[0]) {
+        case "p" || "pickaxe" || "pioche" || "pick":
+            manageCraft(con, player, message, "tools", "pickaxe");
+            break;
+        case "w" || "weapon" || "arme":
+            switch (playerClasse) {
+                case "Guerrier":
+                    manageCraft(con, player, message, "tools", "pickaxe");
+                    break;
+            
+                case "Mage":
+                    manageCraft(con, player, message, "tools", "pickaxe");
+                    break;
+                case "Chasseur":
+                    manageCraft(con, player, message, "tools", "pickaxe");
+                    break;
+            }
+    
+        default:
+            return message.channel.send(craftEmbed);
+    }
 };
 
 exports.help = {

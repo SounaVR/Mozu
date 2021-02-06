@@ -1,9 +1,10 @@
-const ms = require("parse-ms");
+const ms      = require("parse-ms"),
+      Default = require('../../utils/default.json');
 
 exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
     var con = client.connection
     var player = await getPlayer(con, message.author.id);
-    if (!player) return message.channel.send("You are not registered, please do the `m!profile` command to remedy this.")
+    if (!player) return message.channel.send(`${Default.notRegistered}`);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
     let userid = message.author.id;
     let cooldown = 3600000;

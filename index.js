@@ -13,7 +13,7 @@ const fs	= require('fs'),
 
 const client = new Discord.Client({
 	disableMentions: "everyone",
-	restTimeOffset: 1
+	restTimeOffset: 0
 });
 
 moment.locale('fr');
@@ -167,6 +167,8 @@ client.on("message", async message => {
         return message.channel.send(blacklist);
     }
 });
+
+// all guilds event need edit for guild handler with mysql
 
 client.on('guildMemberAdd', member => {
 	const guild = member.guild;

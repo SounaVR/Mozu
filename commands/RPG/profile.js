@@ -14,7 +14,7 @@ exports.run = async (client, message, args, getPlayer, getUser, getUserFromMenti
     if (!player) {
     con.query(`INSERT INTO data (
         uuid, username, userid,
-        lang, classe, ban, cmd,
+        lang, ban, cmd,
         money, energy, LastActivity,
         PV, MANA, ATK, DEF,
         xp, level,
@@ -38,7 +38,7 @@ exports.run = async (client, message, args, getPlayer, getUser, getUserFromMenti
         dungeon_amulet
         ) VALUES (
         '${Default.player.uuid}', '${message.author.tag}', '${message.author.id}',
-        '${Default.player.lang}', '${Default.player.classe}', '${Default.player.ban}', '${Default.player.cmd}',
+        '${Default.player.lang}', '${Default.player.ban}', '${Default.player.cmd}',
         '${Default.player.money}', '${Default.player.energy}', '${Default.player.LastActivity}',
         '${Default.player.PV}', '${Default.player.MANA}', '${Default.player.ATK}', '${Default.player.DEF}',
         '${Default.player.xp}', '${Default.player.level}',
@@ -82,44 +82,17 @@ exports.run = async (client, message, args, getPlayer, getUser, getUserFromMenti
                     const LangFR = require('../../utils/text/fr.json');
                     const LangEN = require('../../utils/text/en.json')
                     const reaction = collected.first();
-                    var classe;
+                    var welcome;
 
                     if (reaction.emoji.name === '🇺🇸') {
                         con.query(`UPDATE data SET lang = "en" WHERE userid = ${userid}`)
-                        classe = LangEN.welcome + ` **${message.author.username}** !\n` + LangEN.welcome2;
+                        welcome = LangEN.welcome + ` **${message.author.username}** !\n` + LangEN.welcome2;
                     } else if (reaction.emoji.name === '🇫🇷') {
                         con.query(`UPDATE data SET lang = "fr" WHERE userid = ${userid}`)
-                        classe = LangFR.welcome + ` **${message.author.username}** !\n` + LangFR.welcome2;
+                        welcome = LangFR.welcome + ` **${message.author.username}** !\n` + LangFR.welcome2;
                     }
                     a.reactions.removeAll();
-                    a.edit(classe).then(async e => {
-                        await e.react('⚔️');
-                        await e.react('☄️');
-                        await e.react('🏹');
-
-                        const filter = (reaction, user) => {
-                        return ['⚔️', '☄️', '🏹'].includes(reaction.emoji.name) && user.id === message.author.id;
-                        };
-
-                        e.awaitReactions(filter, { max: 1 })
-                        .then(async collected => {
-                            var player = await getPlayer(con, message.author.id);
-                            const lang = require(`../../utils/text/${player.data.lang}.json`);
-                            const reaction = collected.first();
-
-                            if (reaction.emoji.name === '⚔️') {
-                                e.edit(`${lang.warrior}`);
-                                con.query(`UPDATE data SET classe = "Guerrier", sword = 0, rune_sword = 0, ench_sword = 0, shield = 0, rune_shield = 0, ench_shield = 0 WHERE userid = ${userid}`)
-                            } else if (reaction.emoji.name === '☄️') {
-                                e.edit(`${lang.mage}`);
-                                con.query(`UPDATE data SET classe = "Mage", wand = 0, rune_wand = 0, ench_wand = 0 WHERE userid = ${userid}`)
-                            } else if (reaction.emoji.name === '🏹') {
-                                e.edit(`${lang.hunter}`);
-                                con.query(`UPDATE data SET classe = "Chasseur", bow = 0, rune_bow = 0, ench_bow = 0 WHERE userid = ${userid}`)
-                            }
-                            a.reactions.removeAll();
-                        }) // end collected
-                    }) // end choose class
+                    a.edit(welcome);
                 }) // end collected
             });
         }); //end query data

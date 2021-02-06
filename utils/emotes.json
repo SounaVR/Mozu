@@ -5,12 +5,6 @@
       "rune_sword" : "<:sword:771095091216515123>",
       "rune_shield" : "<:shield:771113421202391051>"
     },
-    "Mage" : {
-      "rune_wand" : "<:wand:748960787946537030>"
-    },
-    "Chasseur" : {
-      "rune_bow" : "<:bow:771331757399212053>"
-    },
     "Tools" : {
       "rune_pickaxe" : "<:pickaxe:748973331642056764>"
     },

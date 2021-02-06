@@ -1,10 +1,11 @@
 const Discord = require('discord.js');
+const Default = require('../../utils/default.json');
 const Emotes  = require('../../utils/emotes.json');
 
 exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
     const con = client.connection;
     const player = await getPlayer(con, message.author.id);
-    if (!player) return message.channel.send("You are not registered, please do the `m!profile` command to remedy this.")
+    if (!player) return message.channel.send(`${Default.notRegistered}`);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
     const userid = message.author.id;
     const user = getUserFromMention(args[0]);
