@@ -46,7 +46,7 @@ function manageGive(client, con, args, player, member, message, objectName, obje
   }
 }
 
-module.exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
+module.exports.run = async (client, message, args, getPlayer, getUser) => {
     var con = client.connection
     var player = await getPlayer(con, message.author.id);
     if (!player) return message.channel.send(`${Default.notRegistered}`)

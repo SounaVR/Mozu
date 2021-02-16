@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const Default = require('../../utils/default.json');
 const Emotes  = require('../../utils/emotes.json');
 
-exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
+exports.run = async (client, message, args, getPlayer, getUser) => {
     const databaselogs = client.channels.cache.find(channel => channel.id === "714080913583243275");
 
     const user = message.mentions.users.first() || message.author;
@@ -25,8 +25,6 @@ exports.run = async (client, message, args, getPlayer, getUser, getUserFromMenti
         pickaxe, rune_pickaxe, ench_pickaxe,
         sword, rune_sword, ench_sword,
         shield, rune_shield, ench_shield,
-        wand, rune_wand, ench_wand,
-        bow, rune_bow, ench_bow,
         tete, rune_tete, ench_tete,
         epaule, rune_epaule, ench_epaule,
         torse, rune_torse, ench_torse,
@@ -49,8 +47,6 @@ exports.run = async (client, message, args, getPlayer, getUser, getUserFromMenti
         '${Default.player.pickaxe}', '${Default.player.rune_pickaxe}', '${Default.player.ench_pickaxe}',
         '${Default.player.sword}', '${Default.player.rune_sword}', '${Default.player.ench_sword}',
         '${Default.player.shield}', '${Default.player.rune_shield}', '${Default.player.ench_shield}',
-        '${Default.player.wand}', '${Default.player.rune_wand}', '${Default.player.ench_wand}',
-        '${Default.player.bow}', '${Default.player.rune_bow}', '${Default.player.ench_bow}',
         '${Default.player.tete}', '${Default.player.rune_tete}', '${Default.player.ench_tete}',
         '${Default.player.epaule}', '${Default.player.rune_epaule}', '${Default.player.ench_epaule}',
         '${Default.player.torse}', '${Default.player.rune_torse}', '${Default.player.ench_torse}',

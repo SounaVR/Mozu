@@ -1,6 +1,6 @@
 require('dotenv').config();
-const { getUser, getPlayer, getUserFromMention } = require("./utils/u");
-const { sep } 					  			     = require("path");
+const { getUser, getPlayer }      = require("./utils/u");
+const { sep } 					  = require("path");
 const { success, error, warning } = require("log-symbols");
 const fs	= require('fs'),
 	path	= require('path'),
@@ -161,7 +161,7 @@ client.on("message", async message => {
 		if (client.commands.has(cmd)) command = client.commands.get(cmd);
 		else if (client.aliases.has(cmd)) command = client.commands.get(client.aliases.get(cmd));
 
-        if (command) command.run(client, message, args, getPlayer, getUser, getUserFromMention);
+        if (command) command.run(client, message, args, getPlayer, getUser);
         if (player) con.query(`UPDATE data SET cmd = ${player.data.cmd + Number(1)} WHERE userid = ${message.author.id}`);
     } else if (player.data.ban == "1") {
         return message.channel.send(blacklist);

@@ -27,24 +27,27 @@
     "correctUsage": ":x: Usage correct : `m!rep [utilisateur]`"
   },
   "hr": {
-    "notNow": ":x: Vous avez déjà collecté votre hourly, veuillez attendre encore",
+    "notNow": "vous avez déjà collecté votre hourly, veuillez attendre encore",
     "done": "vous avez récupéré **30** Pièces De Phénix<:Unknown:691648979641040907>, à dans 1 heure !"
   },
   "daily": {
-    "notNow": "vous avez déjà collecté votre daily, veuillez attendre jusqu'à 00h00",
-    "done": "vous avez récupéré **300** Pièces De Phénix<:Unknown:691648979641040907>, à demain !"
+    "notNow": "vous avez déjà collecté votre daily, veuillez attendre jusqu'à 00h00.",
+    "done": "vous avez récupéré **300** trucs, à demain !"
   },
   "bal": {
     "actualBal": "Vous avez actuellement",
     "actualBal2": "en votre possession."
   },
   "gift": {
+    "giveToOtherBots": ":x: Vous ne pouvez pas donner de l'argent à un bot.",
+    "giveToSelf": ":x: Vous ne pouvez pas vous donner de l'argent !",
     "invalidAmount": ":x: Ce montant est invalide.",
     "confirmTransfer": "Voulez-vous transférer",
     "confirmTransferTo": "à",
     "notEnoughMoney": ":x: Vous n'avez pas assez d'argent. Il vous manque",
     "canceled": "**[Transfert]**\nStatut : **Annulé** :x:",
-    "unknownUser": ":x: Cet utilisateur n'est pas inscrit (`m!profile`)."
+    "unknownUser": ":x: Cet utilisateur n'est pas inscrit (`m!profile`).",
+    "correctUsage":":x: Usage correct : `m!gift [@quelqu'un] [nombre]`"
   },
   "mine": {
     "title": "Minage",
@@ -55,18 +58,6 @@
     "usedEnergy": "Énergie utilisée",
     "remainingEnergy": "Énergie restante",
     "winnedXP": "Exp gagnée"
-  },
-  "craft": {
-    "notEnoughRess": ":x: Vous n'avez pas assez de ressources pour faire cette amélioration.",
-    "maxLevel": ":x: Vous avez déjà le niveau maximum de cet objet.",
-    "level": "de niveau",
-    "done": "Vous venez d'obtenir :",
-    "canceled": "Craft annulé.",
-    "description": "Améliorez votre matériel.",
-    "doc": "Ajoutez comme argument le nom de l'élément que vous souhaitez améliorer, les éléments disponibles sont les suivants:\n",
-    "doc2": "Cliquez juste sur la réaction correspondante à ce que vous voulez.\nLes objets améliorables sont les suivants",
-    "validNumber": ":x: Veuillez recommencer et entrer un nombre valide.",
-    "typingNumber": "Combien en voulez-vous ? Écrivez un nombre valide."
   },
   "inventory": {
     "dungeon_amulet": "Amulette de Donjon",
@@ -169,9 +160,20 @@
     "correctUsage": "usage correct : `m!chest open [D/C/B/A/S] [quantité]`",
     "notEnoughChests": "vous avez pas assez de coffres. (Essayez `m!explore` pour en avoir plus)"
   },
+  "craft": {
+    "notEnoughRess": ":x: Vous n'avez pas assez de ressources pour faire cette amélioration.",
+    "maxLevel": ":x: Vous avez déjà le niveau maximum de cet objet.",
+    "level": "de niveau",
+    "done": "Vous venez d'obtenir :",
+    "canceled": "Craft annulé.",
+    "description": "Améliorez votre matériel.",
+    "doc": "Ajoutez comme argument le nom de l'élément que vous souhaitez améliorer, les éléments disponibles sont les suivants:\n",
+    "validNumber": ":x: Veuillez recommencer et entrer un nombre valide.",
+    "typingNumber": "Combien en voulez-vous ? Écrivez un nombre valide."
+  },
   "enchant" : {
     "description" : "Enchantez votre matériel.",
-    "doc" : "Cliquez juste sur la réaction correspondante à ce que vous voulez.\nLes items enchantables disponibles sont les suivants",
+    "doc" : "Ajoutez comme argument le nom de l'élément que vous souhaitez enchanter, les éléments disponibles sont les suivants:\n",
     "maxLevel" : ":x: Vous avez déjà l'enchantement maximum de cet objet.",
     "notEnoughRess" : ":x: Vous n'avez pas assez de ressources pour faire cet enchantement.",
     "enchantSuccess" : ":white_check_mark: Enchantement réussi au niveau",

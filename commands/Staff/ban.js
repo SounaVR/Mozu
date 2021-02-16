@@ -1,4 +1,4 @@
-exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
+exports.run = async (client, message, args, getPlayer, getUser) => {
   if (!client.config.owners.includes(message.author.id)) return message.react("❌");
     var con = client.connection
 

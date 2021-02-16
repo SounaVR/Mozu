@@ -1,4 +1,4 @@
-exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
+exports.run = async (client, message, args, getPlayer, getUser) => {
   if (message.author.id !== "436310611748454401") return message.react("❌");
 
   var con = client.connection

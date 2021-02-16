@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const Default = require('../../utils/default.json');
 const Emotes  = require('../../utils/emotes.json');
 
-exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
+exports.run = async (client, message, args, getPlayer, getUser) => {
     var con = client.connection
     var player = await getPlayer(con, message.author.id);
     if (!player) return message.channel.send("You are not registered, please do the `m!profile` command to remedy this.")

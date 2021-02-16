@@ -2,10 +2,10 @@ const Discord = require("discord.js");
 
 exports.run = async (client, message, args, getPlayer, getUser) => {
 
-    if (!args[0]) return message.channel.send("Correct usage : `m!suggestion [your idea]`");
+    if (!args[0]) return message.channel.send("Correct usage : `m!report [error/problem]`")
     const text = args.join(" ");
     message.delete();
-    const chann = client.channels.cache.find(channel => channel.id === "771360941341671444");
+    const chann = client.channels.cache.find(channel => channel.id === "808240888353390592");
     const sicon = message.author.displayAvatarURL();
 
     const embed = new Discord.MessageEmbed()
@@ -15,11 +15,8 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         .setFooter(`ID : ${message.author.id}`)
         .setTimestamp(message.createdAt);
 
-    chann.send("<@&689881923912335406>");
-    chann.send(embed).then(async e => {
-        await e.react("✅");
-        await e.react("❌");
-    });
+    chann.send("<@436310611748454401>");
+    chann.send(embed);
 
     message.reply("\n:warning: :flag_fr: Tout abus sera sévèrement puni !\n:warning: :flag_gb: Any abuse will be severely punished !")
     .then(e => {
@@ -28,11 +25,10 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 };
 
 exports.help = {
-    name: "suggestion",
-    description_fr: "Propose une idée au développeur",
-    description_en: "Suggest an idea to the developer",
-    usage_fr: "(votre_suggestion)",
-    usage_en: "(your_suggestion)",
+    name: "report",
+    description_fr: "Pour signaler un bug/une erreur ou autre sur le bot au développeur",
+    description_en: "To report a bug/error or other on the bot to the developer",
     category: "Utils",
-    aliases: ["sugg", "sug"]
+    usage_fr: "(votre_bug)",
+    usage_en: "(your_problem)"
 };

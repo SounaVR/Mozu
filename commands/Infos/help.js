@@ -1,8 +1,8 @@
 const { MessageEmbed } = require("discord.js");
 const { readdirSync }  = require("fs");
-const Default 				 = require('../../utils/default.json');
+const Default 		   = require('../../utils/default.json');
 
-exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
+exports.run = async (client, message, args, getPlayer, getUser) => {
 	const con = client.connection;
 	const player = await getPlayer(con, message.author.id);
 	if (!player) return message.channel.send(`${Default.notRegistered}`);
@@ -12,6 +12,7 @@ exports.run = async (client, message, args, getPlayer, getUser, getUserFromMenti
 		.setColor(message.member.displayColor)
 		.setAuthor(`${lang.help.commandsOf} ${client.user.username}`, client.user.displayAvatarURL())
 		.setTimestamp();
+
 	if (args[0]) {
 		let command = args[0];
 		let cmd;
@@ -20,17 +21,25 @@ exports.run = async (client, message, args, getPlayer, getUser, getUserFromMenti
 		} else if (client.aliases.has(command)) {
 			cmd = client.commands.get(client.aliases.get(command));
 		}
+
 		if (!cmd) return message.channel.send(embed.setTitle(`${lang.help.invalidCommand}`).setDescription(`\`${client.config.prefix}help\` ${lang.help.doForList}`));
+
 		command = cmd.help;
 		var description;
 		var usage;
-		if (player.data.lang === "fr") {
-			description = command.description_fr
-			usage = command.usage_fr
-		} else {
-			description = command.description_en
-			usage = command.usage_en
+
+		switch (player.data.lang) {
+			case "fr":
+				description = command.description_fr
+				usage = command.usage_fr
+				break;
+		
+			default:
+				description = command.description_en
+				usage = command.usage_en
+				break;
 		}
+
 		embed.setDescription([
 			`${lang.help.infos}`,
 			`❯ **Command:** ${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}`,
@@ -42,11 +51,14 @@ exports.run = async (client, message, args, getPlayer, getUser, getUserFromMenti
 
 		return message.channel.send(embed);
 	}
+
 	const categories = readdirSync("./commands/");
+
 	embed.setDescription([
 		`${lang.help.prefix} **${client.config.prefix}**`,
 		`${lang.help.helpMore}`
 	].join("\n"));
+	
 	categories.forEach(category => {
 		const dir = client.commands.filter(c => c.help.category.toLowerCase() === category.toLowerCase());
 		const capitalise = category.slice(0, 1).toUpperCase() + category.slice(1);

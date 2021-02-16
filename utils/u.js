@@ -31,17 +31,10 @@ module.exports = {
         return (num / format[formatIndex === -1? 6: formatIndex].value).toFixed() + format[formatIndex === -1?6: formatIndex].symbol;
     },
 
-    getUserFromMention: function(client, mention) {
-      if (!mention) return;
-
-      if (mention.startsWith('<@') && mention.endsWith('>')) {
-        mention = mention.slice(2, -1);
-
-        if (mention.startsWith('!')) {
-          mention = mention.slice(1);
-        }
-
-        return client.users.cache.get(mention);
-      }
+    checkDays: function(date) {
+        let now = new Date();
+        let diff = now.getTime() - date.getTime();
+        let days = Math.floor(diff / 86400000);
+        return days + (days == 1 ? " day" : " days") + " ago";
     }
 }

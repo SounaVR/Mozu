@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
+exports.run = async (client, message, args, getPlayer, getUser) => {
 	const user = getUserFromMention(client, args[0]) || message.author;
 	const ppEmbed = new Discord.MessageEmbed()
     .setColor(message.member.displayColor)

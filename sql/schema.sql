@@ -6,7 +6,6 @@ CREATE TABLE IF NOT EXISTS data (
 	lang text,
 	ban bigint,
     cmd bigint,
-	classe text,
 
 	money bigint,
 	energy bigint,
@@ -54,14 +53,6 @@ CREATE TABLE IF NOT EXISTS data (
 	shield bigint,
 	rune_shield bigint,
 	ench_shield bigint,
-
-	wand bigint,
-	rune_wand bigint,
-	ench_wand bigint,
-
-	bow bigint,
-	rune_bow bigint,
-	ench_bow bigint,
 
 	tete bigint,
 	rune_tete bigint,

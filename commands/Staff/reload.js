@@ -1,7 +1,7 @@
 const { readdirSync } = require("fs");
 const { join } = require("path");
 
-exports.run = (client, message, args, getPlayer, getUser, getUserFromMention) => {
+exports.run = (client, message, args, getPlayer, getUser) => {
 	if (!client.config.owners.includes(message.author.id)) return message.react("❌");
 
 	if (!args[0]) return message.channel.send("Veuillez indiquer une commande !");

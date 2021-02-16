@@ -2,25 +2,26 @@ const Discord = require('discord.js');
 const Default = require('../../utils/default.json');
 const Emotes  = require('../../utils/emotes.json');
 
-exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
+exports.run = async (client, message, args, getPlayer, getUser) => {
     const con = client.connection;
     const player = await getPlayer(con, message.author.id);
     if (!player) return message.channel.send(`${Default.notRegistered}`);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
     const userid = message.author.id;
-    const user = getUserFromMention(args[0]);
+    const user = message.mentions.users.first() || message.author;
 
+    if (!user) return message.channel.send(`${lang.gift.correctUsage}`);
     if (!args[1]) return message.channel.send(`💳 ► ${lang.bal.actualBal} **${player.data.money}**${Emotes.cash} ${lang.bal.actualBal2}`)
     if (args[1] > 0) {
-      if (user.id === userid) return message.channel.send(`${lang.give.giveToSelf}`)
-      if (user.bot) return message.channel.send(`${lang.give.giveToOtherBots}`)
+      if (user.id === userid) return message.channel.send(`${lang.gift.giveToSelf}`)
+      if (user.bot) return message.channel.send(`${lang.gift.giveToOtherBots}`)
       const embed = new Discord.MessageEmbed()
-      .setColor(message.member.displayColor)
-      .setTitle("**[TRANSFERT]**")
-      .setDescription(`Statut : **En attente** ${Emotes.loading}`)
-      .addField(`Par:`, `${message.author.username}`, true)
-      .addField(`Vers:`, `${user.username}`, true)
-      .addField(`Montant:`, `**${Math.floor(args[1])}**${Emotes.cash}`, true)
+        .setColor(message.member.displayColor)
+        .setTitle("**[TRANSFERT]**")
+        .setDescription(`Statut : **En attente** ${Emotes.loading}`)
+        .addField(`Par:`, `${message.author}`, true)
+        .addField(`Vers:`, `${user}`, true)
+        .addField(`Montant:`, `**${Math.floor(args[1])}**${Emotes.cash}`, true)
       message.channel.send(embed).then(async e => {
         await e.react("✅");
         await e.react("❌");
@@ -37,14 +38,15 @@ exports.run = async (client, message, args, getPlayer, getUser, getUserFromMenti
           var player = await getPlayer(con, message.author.id);
           if (player.data.money < args[1]) {
             e.reactions.removeAll();
-            return e.edit(`${lang.gift.notEnoughMoney} **${Math.abs(args[1] - player.data.money)}**${Emotes.cash}`)
+            e.delete();
+            return message.channel.send(`${lang.gift.notEnoughMoney} **${Math.abs(args[1] - player.data.money)}**${Emotes.cash}`)
           }
           con.query(`UPDATE data SET money = ? WHERE userid = ?`, [player.data.money - Number(args[1]), userid])
           con.query(`SELECT * FROM data WHERE userid = ?`, [user.id], function(err, rows) {
             if (err) throw err;
             money = rows[0];
             if (money === undefined) {
-              return e.edit(`${lang.gift.unknown}`)
+              return e.edit(`${lang.gift.unknownUser}`)
             } else {
               con.query('UPDATE data SET money = ? WHERE userid = ?', [money.money + Number(args[1]), user.id])
             }
@@ -56,8 +58,8 @@ exports.run = async (client, message, args, getPlayer, getUser, getUserFromMenti
             .setColor(message.member.displayColor)
             .setTitle("**[TRANSFERT]**")
             .setDescription(`Statut : **En cours** ${Emotes.loading}`)
-            .addField(`Par:`, `${message.author.username}`, true)
-            .addField(`Vers:`, `${user.username}`, true)
+            .addField(`Par:`, `${message.author}`, true)
+            .addField(`Vers:`, `${user}`, true)
             .addField(`Montant:`, `**${Math.floor(args[1])}**${Emotes.cash}`, true)
             .addField(`Avancée:`, `**${width}% effectués** ${Emotes.loading}`, true)
             setTimeout(() => {
@@ -70,15 +72,22 @@ exports.run = async (client, message, args, getPlayer, getUser, getUserFromMenti
           const embedProcessing = new Discord.MessageEmbed()
             .setColor(message.member.displayColor)
             .setTitle("**[TRANSFERT TERMINÉ]**")
-            .addField(`Par:`, `${message.author.username}`, true)
-            .addField(`Vers:`, `${user.username}`, true)
+            .addField(`Par:`, `${message.author}`, true)
+            .addField(`Vers:`, `${user}`, true)
             .addField(`Montant:`, `**${args[1]}**${Emotes.cash}`, true)
             .addField(`Avancée:`, `**100% effectués**`, true)
             e.edit(embedProcessing)
           }, 1000 * 7)
         } else if (reaction.emoji.name === '❌') {
           e.delete();
-          message.channel.send(`${lang.gift.cancel}`);
+          const embedCanceled = new Discord.MessageEmbed()
+            .setColor(message.member.displayColor)
+            .setTitle("**[TRANSFERT]**")
+            .setDescription(`Statut : **Annulé** ${Emotes.cancel}`)
+            .addField(`Par:`, `${message.author}`, true)
+            .addField(`Vers:`, `${user}`, true)
+            .addField(`Montant:`, `**${Math.floor(args[1])}**${Emotes.cash}`, true)
+          return message.channel.send(embedCanceled);
         }
         e.reactions.removeAll();
       }).catch(collected => {

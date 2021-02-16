@@ -1,4 +1,4 @@
-exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
+exports.run = async (client, message, args, getPlayer, getUser) => {
   const m = await message.channel.send("Ping ?");
   const ping = Math.round(m.createdTimestamp - message.createdTimestamp);
   m.edit(`

@@ -1,7 +1,7 @@
 const ms      = require("parse-ms"),
       Default = require('../../utils/default.json');
 
-exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
+exports.run = async (client, message, args, getPlayer, getUser) => {
     var con = client.connection
     var player = await getPlayer(con, message.author.id);
     if (!player) return message.channel.send(`${Default.notRegistered}`);

@@ -1,9 +1,6 @@
 {
     "welcome": "Bienvenue à toi",
-    "welcome2": "Es-tu prêt à vivre en ma compagnie une incroyable aventure :sunglasses: ?\nContenant, entre autres, des pets trop choupis et utiles, des tas de ressources, de stuff, d'enchantements ! Mais aussi des succès et des badges, que tu pourras farmer si t'as rien d'autre à faire de ta vie, ainsi qu'un premium payant pour que ton évolution soit plus rapide (et que tu supportes le dev par la même occasion, bg).\nSi tu te sens partant pour ça, commence par choisir ta classe ! Tu peux actuellement prendre **Guerrier** :crossed_swords: , **Mage** :comet:, ou **Chasseur** :bow_and_arrow:.",
-    "warrior": "Vous êtes maintenant un `Guerrier` habillé d'une épée et d'un bouclier.",
-    "mage": "Vous êtes maintenant un `Mage` habillé d'une baguette et dôté d'une capacité de transmuter des minerais.",
-    "hunter": "Vous êtes maintenant un `Chasseur` habillé d'un arc.",
+    "welcome2": "Es-tu prêt à vivre en ma compagnie une incroyable aventure :sunglasses: ?\nContenant, entre autres, des pets trop choupis et utiles, des tas de ressources, de stuff, d'enchantements ! Mais aussi des succès et des badges, que tu pourras farmer si t'as rien d'autre à faire de ta vie, ainsi qu'un premium payant pour que ton évolution soit plus rapide (et que tu supportes le dev par la même occasion, bg).\nSi tu te sens partant pour ça, commence par voir la liste des commandes en tapant `m!help` !",
     "confirmLanguage": "La langue a bien été définie sur `FR`.",
     "globalHelpFooter": "Si besoin : m!help pour la liste des commandes.",
     "help": {
@@ -30,24 +27,27 @@
       "correctUsage": ":x: Usage correct : `m!rep [utilisateur]`"
     },
     "hr": {
-      "notNow": ":x: Vous avez déjà collecté votre hourly, veuillez attendre encore",
+      "notNow": "vous avez déjà collecté votre hourly, veuillez attendre encore",
       "done": "vous avez récupéré **30** Pièces De Phénix<:Unknown:691648979641040907>, à dans 1 heure !"
     },
     "daily": {
-      "notNow": "vous avez déjà collecté votre daily, veuillez attendre jusqu'à 00h00",
-      "done": "vous avez récupéré **300** Pièces De Phénix<:Unknown:691648979641040907>, à demain !"
+      "notNow": "vous avez déjà collecté votre daily, veuillez attendre jusqu'à 00h00.",
+      "done": "vous avez récupéré **300** trucs, à demain !"
     },
     "bal": {
       "actualBal": "Vous avez actuellement",
       "actualBal2": "en votre possession."
     },
     "gift": {
+      "giveToOtherBots": ":x: Vous ne pouvez pas donner de l'argent à un bot.",
+      "giveToSelf": ":x: Vous ne pouvez pas vous donner de l'argent !",
       "invalidAmount": ":x: Ce montant est invalide.",
       "confirmTransfer": "Voulez-vous transférer",
       "confirmTransferTo": "à",
       "notEnoughMoney": ":x: Vous n'avez pas assez d'argent. Il vous manque",
       "canceled": "**[Transfert]**\nStatut : **Annulé** :x:",
-      "unknownUser": ":x: Cet utilisateur n'est pas inscrit (`m!profile`)."
+      "unknownUser": ":x: Cet utilisateur n'est pas inscrit (`m!profile`).",
+      "correctUsage":":x: Usage correct : `m!gift [@quelqu'un] [nombre]`"
     },
     "mine": {
       "title": "Minage",
@@ -59,41 +59,17 @@
       "remainingEnergy": "Énergie restante",
       "winnedXP": "Exp gagnée"
     },
-    "craft": {
-      "notEnoughRess": ":x: Vous n'avez pas assez de ressources pour faire cette amélioration.",
-      "maxLevel": ":x: Vous avez déjà le niveau maximum de cet objet.",
-      "level": "de niveau",
-      "done": "Vous venez d'obtenir :",
-      "canceled": "Craft annulé.",
-      "description": "Améliorez votre matériel.",
-      "doc": "Cliquez juste sur la réaction correspondante à ce que vous voulez.\nLes catégories disponibles sont les suivantes",
-      "doc2": "Cliquez juste sur la réaction correspondante à ce que vous voulez.\nLes objets améliorables sont les suivants",
-      "validNumber": ":x: Veuillez recommencer et entrer un nombre valide.",
-      "typingNumber": "Combien en voulez-vous ? Écrivez un nombre valide."
-    },
     "inventory": {
       "dungeon_amulet": "Amulette de Donjon",
       "yourObjects": "Vos objets",
-      "Gear" : {
-          "P1" : {
-              "rune_tete": "Tete",
-              "rune_epaule": "Epaules",
-              "rune_torse": "Torse",
-              "rune_poignets": "Poignets"
-          },
-          "P2" : {
-              "rune_mains": "Mains",
-              "rune_taille": "Taille",
-              "rune_jambes": "Jambes",
-              "rune_pieds": "Pieds"
-          }
-      },
-      "classes" : {
-          "Guerrier": "Guerrier",
-          "Mage": "Mage",
-          "Chasseur": "Chasseur"
-      },
-      "class": "Classe",
+      "tete": "Tete",
+      "epaule": "Epaules",
+      "torse": "Torse",
+      "poignets": "Poignets",
+      "mains": "Mains",
+      "taille": "Taille",
+      "jambes": "Jambes",
+      "pieds": "Pieds",
       "level": "Niveau",
       "energy": "Énergie",
       "combat": "Combat",
@@ -112,8 +88,6 @@
       "malachite": "Malachite",
       "sword": "Épée",
       "shield": "Bouclier",
-      "wand": "Baguette",
-      "bow": "Arc",
       "pickaxe": "Pioche",
       "inventoryOf": "Inventaire de",
       "dungeon_stone": "Pierre de Donjon",
@@ -174,7 +148,7 @@
       "switch": "`m!explore switch` pour changer de zone"
     },
     "chest": {
-      "dontHaveAmulet": "vous n'avez pas l'Amulette de Donjon, pour s'y faire, tapez `m!craft` => `Objets` => `Amulette de Donjon` !",
+      "dontHaveAmulet": "vous n'avez pas l'Amulette de Donjon, pour s'y faire, tapez `m!craft dungeon_amulet` !",
       "chests": "coffre(s)",
       "openingOf": "Ouverture de",
       "rarity": "Rareté",
@@ -186,9 +160,20 @@
       "correctUsage": "usage correct : `m!chest open [D/C/B/A/S] [quantité]`",
       "notEnoughChests": "vous avez pas assez de coffres. (Essayez `m!explore` pour en avoir plus)"
     },
+    "craft": {
+      "notEnoughRess": ":x: Vous n'avez pas assez de ressources pour faire cette amélioration.",
+      "maxLevel": ":x: Vous avez déjà le niveau maximum de cet objet.",
+      "level": "de niveau",
+      "done": "Vous venez d'obtenir :",
+      "canceled": "Craft annulé.",
+      "description": "Améliorez votre matériel.",
+      "doc": "Ajoutez comme argument le nom de l'élément que vous souhaitez améliorer, les éléments disponibles sont les suivants:\n",
+      "validNumber": ":x: Veuillez recommencer et entrer un nombre valide.",
+      "typingNumber": "Combien en voulez-vous ? Écrivez un nombre valide."
+    },
     "enchant" : {
       "description" : "Enchantez votre matériel.",
-      "doc" : "Cliquez juste sur la réaction correspondante à ce que vous voulez.\nLes items enchantables disponibles sont les suivants",
+      "doc" : "Ajoutez comme argument le nom de l'élément que vous souhaitez enchanter, les éléments disponibles sont les suivants:\n",
       "maxLevel" : ":x: Vous avez déjà l'enchantement maximum de cet objet.",
       "notEnoughRess" : ":x: Vous n'avez pas assez de ressources pour faire cet enchantement.",
       "enchantSuccess" : ":white_check_mark: Enchantement réussi au niveau",

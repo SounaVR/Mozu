@@ -1,7 +1,7 @@
 const { nFormatter } = require('../../utils/u.js');
 const Discord        = require('discord.js'),
-      Default        = require('../../utils/default.json'),
-      Emotes         = require('../../utils/emotes.json');
+Default              = require('../../utils/default.json'),
+Emotes               = require('../../utils/emotes.json');
 
 function manageChest(client, con, player, message, args, objectName, rarityName, min, max) {
     const lang = require(`../../utils/text/${player.data.lang}.json`);
@@ -11,7 +11,7 @@ function manageChest(client, con, player, message, args, objectName, rarityName,
     if (player.data[objectName] < args[2]) return message.reply(`${lang.chest.notEnoughChests}`);
 
     const embed = new Discord.MessageEmbed()
-    .setTitle(`${Emotes.chest} ${lang.chest.openingOf} ${args[2]} ${lang.chest.chests} (${lang.chest.rarity} : ${rarityName})`);
+    .setTitle(`${Emotes.chest} ${lang.chest.openingOf} ${args[2]} ${lang.chest.chests} | ${lang.chest.rarity} : ${rarityName}`);
 
     Danny = {};
     Danny.random = () => min + Math.ceil(Math.random() * (max - min) * args[2]);
@@ -51,7 +51,7 @@ function manageChest(client, con, player, message, args, objectName, rarityName,
     return message.channel.send(embed);
 }
 
-exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
+exports.run = async (client, message, args, getPlayer, getUser) => {
     const con = client.connection
     const player = await getPlayer(con, message.author.id);
     if (!player) return message.channel.send(`${Default.notRegistered}`);

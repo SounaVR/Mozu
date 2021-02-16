@@ -4,7 +4,7 @@ const Pagination     = require('discord-paginationembed');
 const Default        = require('../../utils/default.json');
 const Emotes         = require('../../utils/emotes.json');
 
-exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
+exports.run = async (client, message, args, getPlayer, getUser) => {
     var con = client.connection
     var player = await getPlayer(con, message.author.id);
     if (!player) return message.channel.send("You are not registered, please do the `m!profile` command to remedy this.")
@@ -75,14 +75,14 @@ exports.run = async (client, message, args, getPlayer, getUser, getUserFromMenti
     let sword = Items.tools.sword[player.data.sword];
     let shield = Items.tools.shield[player.data.shield];
 
-    let tete = Items.armors[player.data.classe].tete[player.data.tete]
-    let epaule = Items.armors[player.data.classe].epaule[player.data.epaule]
-    let torse = Items.armors[player.data.classe].torse[player.data.torse]
-    let poignets = Items.armors[player.data.classe].poignets[player.data.poignets]
-    let mains = Items.armors[player.data.classe].mains[player.data.mains]
-    let taille = Items.armors[player.data.classe].taille[player.data.taille]
-    let jambes = Items.armors[player.data.classe].jambes[player.data.jambes]
-    let pieds = Items.armors[player.data.classe].pieds[player.data.pieds]
+    let tete = Items.armors.tete[player.data.tete]
+    let epaule = Items.armors.epaule[player.data.epaule]
+    let torse = Items.armors.torse[player.data.torse]
+    let poignets = Items.armors.poignets[player.data.poignets]
+    let mains = Items.armors.mains[player.data.mains]
+    let taille = Items.armors.taille[player.data.taille]
+    let jambes = Items.armors.jambes[player.data.jambes]
+    let pieds = Items.armors.pieds[player.data.pieds]
 
     let dungeon_amulet = Items.objects.dungeon_amulet[player.data.dungeon_amulet]
 
@@ -95,14 +95,14 @@ exports.run = async (client, message, args, getPlayer, getUser, getUserFromMenti
     
         .addField(`${Emotes.chests.Tools.rune_pickaxe} ${lang.inventory.pickaxe}:`, `${pickaxe.name}\n${lang.inventory.level}: ${player.data.pickaxe}\n[${lang.inventory.enchant}: ${player.data.ench_pickaxe}]`, true)
         
-        .addField(`${Emotes.chests.Gear.P1.rune_tete} ${lang.inventory.Gear.P1.rune_tete}:`, `${tete.name}\n${lang.inventory.level}: ${player.data.tete}\n[${lang.inventory.enchant}: ${player.data.ench_tete}]`, true)
-        .addField(`${Emotes.chests.Gear.P1.rune_epaule} ${lang.inventory.Gear.P1.rune_epaule}:`, `${epaule.name}\n${lang.inventory.level}: ${player.data.epaule}\n[${lang.inventory.enchant}: ${player.data.ench_epaule}]`, true)
-        .addField(`${Emotes.chests.Gear.P1.rune_torse} ${lang.inventory.Gear.P1.rune_torse}:`, `${torse.name}\n${lang.inventory.level}: ${player.data.torse}\n[${lang.inventory.enchant}: ${player.data.ench_torse}]`, true)
-        .addField(`${Emotes.chests.Gear.P1.rune_poignets} ${lang.inventory.Gear.P1.rune_poignets}:`, `${poignets.name}\n${lang.inventory.level}: ${player.data.poignets}\n[${lang.inventory.enchant}: ${player.data.ench_poignets}]`, true)
-        .addField(`${Emotes.chests.Gear.P2.rune_mains} ${lang.inventory.Gear.P2.rune_mains}:`, `${mains.name}\n${lang.inventory.level}: ${player.data.mains}\n[${lang.inventory.enchant}: ${player.data.ench_mains}]`, true)
-        .addField(`${Emotes.chests.Gear.P2.rune_taille} ${lang.inventory.Gear.P2.rune_taille}:`, `${taille.name}\n${lang.inventory.level}: ${player.data.taille}\n[${lang.inventory.enchant}: ${player.data.ench_taille}]`, true)
-        .addField(`${Emotes.chests.Gear.P2.rune_jambes} ${lang.inventory.Gear.P2.rune_jambes}:`, `${jambes.name}\n${lang.inventory.level}: ${player.data.jambes}\n[${lang.inventory.enchant}: ${player.data.ench_jambes}]`, true)
-        .addField(`${Emotes.chests.Gear.P2.rune_pieds} ${lang.inventory.Gear.P2.rune_pieds}:`, `${pieds.name}\n${lang.inventory.level}: ${player.data.pieds}\n[${lang.inventory.enchant}: ${player.data.ench_pieds}]`, true)
+        .addField(`${Emotes.chests.Gear.P1.rune_tete} ${lang.inventory.tete}:`, `${tete.name}\n${lang.inventory.level}: ${player.data.tete}\n[${lang.inventory.enchant}: ${player.data.ench_tete}]`, true)
+        .addField(`${Emotes.chests.Gear.P1.rune_epaule} ${lang.inventory.epaule}:`, `${epaule.name}\n${lang.inventory.level}: ${player.data.epaule}\n[${lang.inventory.enchant}: ${player.data.ench_epaule}]`, true)
+        .addField(`${Emotes.chests.Gear.P1.rune_torse} ${lang.inventory.torse}:`, `${torse.name}\n${lang.inventory.level}: ${player.data.torse}\n[${lang.inventory.enchant}: ${player.data.ench_torse}]`, true)
+        .addField(`${Emotes.chests.Gear.P1.rune_poignets} ${lang.inventory.poignets}:`, `${poignets.name}\n${lang.inventory.level}: ${player.data.poignets}\n[${lang.inventory.enchant}: ${player.data.ench_poignets}]`, true)
+        .addField(`${Emotes.chests.Gear.P2.rune_mains} ${lang.inventory.mains}:`, `${mains.name}\n${lang.inventory.level}: ${player.data.mains}\n[${lang.inventory.enchant}: ${player.data.ench_mains}]`, true)
+        .addField(`${Emotes.chests.Gear.P2.rune_taille} ${lang.inventory.taille}:`, `${taille.name}\n${lang.inventory.level}: ${player.data.taille}\n[${lang.inventory.enchant}: ${player.data.ench_taille}]`, true)
+        .addField(`${Emotes.chests.Gear.P2.rune_jambes} ${lang.inventory.jambes}:`, `${jambes.name}\n${lang.inventory.level}: ${player.data.jambes}\n[${lang.inventory.enchant}: ${player.data.ench_jambes}]`, true)
+        .addField(`${Emotes.chests.Gear.P2.rune_pieds} ${lang.inventory.pieds}:`, `${pieds.name}\n${lang.inventory.level}: ${player.data.pieds}\n[${lang.inventory.enchant}: ${player.data.ench_pieds}]`, true)
 
     const embed4 = new Discord.MessageEmbed()
     .setAuthor(`${lang.inventory.inventoryOf} ${message.author.tag}`, message.author.displayAvatarURL())

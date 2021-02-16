@@ -58,10 +58,10 @@ function manageTrade(client, con, args, player, member, message, objectName, obj
     }
 }
 
-module.exports.run = async (client, message, args, getPlayer, getUser, getUserFromMention) => {
+module.exports.run = async (client, message, args, getPlayer, getUser) => {
     var con = client.connection
     var player = await getPlayer(con, message.author.id);
-    if (!player) return message.channel.send("You are not registered, please do the `m!profile` command to remedy this.")
+    if (!player) return message.channel.send(`${Default.notRegistered}`)
     const lang = require(`../../utils/text/${player.data.lang}.json`);
     const someone = message.mentions.users.first();
     const userid = message.author.id;
