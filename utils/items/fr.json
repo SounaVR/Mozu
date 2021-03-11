@@ -100,7 +100,7 @@
         "DEF" : "0",
         "ressource" : {
           "energy" : 10,
-          "stone" : 10000
+          "stone" : 5000
         }
       },
       {
@@ -110,8 +110,8 @@
         "DEF" : "0",
         "ressource" : {
           "energy" : 20,
-          "stone" : 10000,
-          "coal" : 9850
+          "stone" : 5000,
+          "coal" : 4000
         }
       },
       {
@@ -121,9 +121,9 @@
         "DEF" : "0",
         "ressource" : {
           "energy" : 30,
-          "stone" : 10000,
-          "coal" : 9850,
-          "copper" : 7580
+          "stone" : 5000,
+          "coal" : 4000,
+          "copper" : 3000
         }
       },
       {
@@ -133,10 +133,10 @@
         "DEF" : "0",
         "ressource" : {
           "energy" : 40,
-          "stone" : 10000,
-          "coal" : 9850,
-          "copper" : 7580,
-          "iron" : 4860
+          "stone" : 5000,
+          "coal" : 4000,
+          "copper" : 3000,
+          "iron" : 2000
         }
       },
       {
@@ -146,11 +146,11 @@
         "DEF" : "0",
         "ressource" : {
           "energy" : 50,
-          "stone" : 10000,
-          "coal" : 9850,
-          "copper" : 7580,
-          "iron" : 4860,
-          "malachite" : 2450
+          "stone" : 5000,
+          "coal" : 4000,
+          "copper" : 3000,
+          "iron" : 2000,
+          "malachite" : 1000
         }
       }
     ],

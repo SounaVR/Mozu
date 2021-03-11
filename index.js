@@ -168,6 +168,10 @@ client.on("message", async message => {
     }
 });
 
+// client.on("userUpdate", function(oldUser, newUser){
+//     console.log(`${oldUser}/${newUser}`);
+// });
+
 // all guilds event need edit for guild handler with mysql
 
 client.on('guildMemberAdd', member => {
@@ -239,7 +243,7 @@ client.on('messageUpdate', (message, newMessage) => {
         const embed = new Discord.MessageEmbed()
             .setTitle('Edited Message')
             .setColor("#0183c2")
-            .addField('Old message', message)
+            .addField('Old message', `${message}`)
             .addField('New message', newMessage)
             .addField('Author', `${message.author.tag} (${message.author.id})`, true)
             .addField('Channel', `${message.channel.name} (${message.channel.id})`, true)

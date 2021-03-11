@@ -12,7 +12,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
       .setColor(message.member.displayColor)
       .setThumbnail(user.displayAvatarURL())
       .addField('Created On', `${moment.utc(user.createdAt).format("DD/MM/YYYY")} (${checkDays(user.createdAt)})`, true)
-      .addField('Joined On', `${moment.utc(user.joinedAt).format("DD/MM/YYYY")}`, true)
+      .addField('Joined On', `${moment.utc(user.joinedAt || member.joinedAt).format("DD/MM/YYYY")} (${checkDays(user.joinedAt || member.joinedAt)})`, true)
       .addField("Nickname", `${member.nickname !== null ? `${member.nickname}` : 'None'}`)
     message.channel.send(embed);
     }

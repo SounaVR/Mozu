@@ -88,7 +88,7 @@ async function manageCraft(con, player, message, category, objectName) {
     embed.setTitle(`Upgrade "${currentObjectTitle.name}" to "${currentObject.name}" ?`)
     let txt = [];
     for (const ressource in currentObject.ressource) {
-        if (player.data[ressource.toLowerCase()] <= currentObject.ressource[ressource]) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource])} (${Emotes.cancel} - Missing ${nFormatter(Math.floor(currentObject.ressource[ressource]-player.data[ressource.toLowerCase()]))})`);
+        if (player.data[ressource.toLowerCase()] < currentObject.ressource[ressource]) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource])} (${Emotes.cancel} - Missing ${nFormatter(Math.floor(currentObject.ressource[ressource]-player.data[ressource.toLowerCase()]))})`);
         if (player.data[ressource.toLowerCase()] >= currentObject.ressource[ressource]) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource])} (${Emotes.checked})`);
     }
     embed.addField("**Cost**", txt);

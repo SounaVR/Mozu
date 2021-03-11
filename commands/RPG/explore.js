@@ -1,3 +1,4 @@
+const Discord = require("discord.js");
 const Default = require("../../utils/default.json"),
 Emotes        = require("../../utils/emotes.json");
 
@@ -15,11 +16,11 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     if (args[0] == "switch") {
         const zones = await message.channel.send(`${lang.explore.selectZone}`);
 
-        await zones.react(reactZones[0])
-        await zones.react(reactZones[1])
-        await zones.react(reactZones[2])
-        await zones.react(reactZones[3])
-        await zones.react(reactZones[4])
+        await zones.react(reactZones[0]);
+        await zones.react(reactZones[1]);
+        await zones.react(reactZones[2]);
+        await zones.react(reactZones[3]);
+        await zones.react(reactZones[4]);
 
         const filterZones = (reaction, user) => reactZones.includes(reaction.emoji.name) && user.id === message.author.id;
 
@@ -29,27 +30,26 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
             zones.delete();
             switch (r.emoji.name) {
                 case "0️⃣":
-                    if (!player.data.dungeon_amulet >= 1) return message.reply(`${lang.explore.switchError}`);
                     con.query(`UPDATE data SET zone = 0 WHERE userid = ${userid}`);
                     message.reply(" vous entrez dans ► **Mine Abandonnée**.");
                     break;
                 case "1️⃣":
-                    if (!player.data.dungeon_amulet >= 2) return message.reply(`${lang.explore.switchError}`);
+                    if (player.data.dungeon_amulet <= 0) return message.reply(`${lang.explore.switchError}`);
                     con.query(`UPDATE data SET zone = 1 WHERE userid = ${userid}`);
                     message.reply("vous entrez dans ► **Ruines Antiques**.");
                     break;
                 case "2️⃣":
-                    if (!player.data.dungeon_amulet >= 3) return message.reply(`${lang.explore.switchError}`);
+                    if (player.data.dungeon_amulet <= 1) return message.reply(`${lang.explore.switchError}`);
                     con.query(`UPDATE data SET zone = 2 WHERE userid = ${userid}`);
                     message.reply("vous entrez dans ► **Village Souterrain**.");
                     break;
                 case "3️⃣":
-                    if (!player.data.dungeon_amulet >= 4) return message.reply(`${lang.explore.switchError}`);
+                    if (player.data.dungeon_amulet <= 2) return message.reply(`${lang.explore.switchError}`);
                     con.query(`UPDATE data SET zone = 3 WHERE userid = ${userid}`);
                     message.reply("vous entrez dans ► **Catacombes**.");
                     break;
                 case "4️⃣":
-                    if (!player.data.dungeon_amulet >= 5) return message.reply(`${lang.explore.switchError}`);
+                    if (player.data.dungeon_amulet <= 3) return message.reply(`${lang.explore.switchError}`);
                     con.query(`UPDATE data SET zone = 4 WHERE userid = ${userid}`);
                     message.reply("vous entrez dans ► **Salle aux trésors**.");
                     break;
@@ -58,12 +58,23 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
             collectorZones.stop();
         })
     } else if (args[0] > 0) {
-        if (player.data.dungeon_stone < args[0]) return message.channel.send(`❌ ${lang.explore.notEnoughDungeonStone} (${player.data.dungeon_stone}/${args[0]} ${Emotes.dungeon_stone})`);
+        if (player.data.dungeon_stone < args[0]) return message.channel.send(`${lang.explore.notEnoughDungeonStone} (${player.data.dungeon_stone}/${args[0]} ${Emotes.dungeon_stone})`);
+        if (player.data.dungeon_amulet <= 0) return message.channel.send(`pas le niveau requis d'amulette`)
         con.query(`UPDATE data SET ${chest[player.data.zone]} = ${player.data[chest[player.data.zone]] + Number(args[0])}, dungeon_stone = ${player.data.dungeon_stone - (args[0])} WHERE userid = ${userid}`)
 
         return message.reply(`${Emotes.torch} ${lang.explore.explored} **${array[player.data.zone]}** ${lang.explore.haveGot} **${args[0]}** ${lang.explore.chestRarity} **${rarity[player.data.zone]}**.\n*${lang.explore.switch}*.`)
     } else if (!args[0]) {
-        return message.reply(`${lang.explore.correctUsage}`)
+        //return message.reply(`${lang.explore.correctUsage}`)
+        const embed = new Discord.MessageEmbed()
+        .setColor(message.member.displayColor)
+        .setTitle("EXPLORE")
+        .setDescription("*`m!explore switch` pour changer de zone*\n*`m!explore [quantité]` pour obtenir des coffres*")
+        .addField("Current location :", `${array[player.data.zone]}/${reactZones[player.data.zone]}`)
+        .addField("Dungeon stone :", `${player.data.dungeon_stone}`)
+        .setTimestamp()
+        .setFooter(`${client.user.username}`, client.user.avatarURL());
+
+        return message.channel.send(embed);
     }
 };
 
