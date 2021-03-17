@@ -38,9 +38,6 @@
     "ATK" : "1",
     "DEF" : "1",
 
-    "xp" : "0",
-    "level" : "1",
-
     "HR" : "0",
     "LastHR" : "0",
     "daily" : "0",
@@ -105,8 +102,8 @@
   "pickaxe" : {
     "R1" : {
       "stone" : "stone",
-      "copper" : "copper",
-      "coal" : "coal"
+      "coal" : "coal",
+      "copper" : "copper"
     },
     "R2" : {
       "iron" : "iron",

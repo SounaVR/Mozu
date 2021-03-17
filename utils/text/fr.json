@@ -17,8 +17,7 @@
     "helpMore": "Si vous voulez en savoir plus sur une commande : `m!help [commande]`"
   },
   "rep": {
-    "notNow": "votre point de réputation n'est pas encore disponible ! Revenez à 00h00 (GMT+1) pour récompenser une bonne personne !",
-    "now": "Votre point de réputation peut être donné maintenant !",
+    "notNow": "votre point de réputation n'est pas encore disponible ! Revenez à 00h00 (UTC+1) pour récompenser une bonne personne !",
     "giveToSelf": "vous ne pouvez pas vous donner un point de réputation !",
     "giveToMozu": "je suis assez connu comme ça, merci.",
     "giveToOtherBots": "ce bot n'a pas besoin d'être connu.",
@@ -31,8 +30,8 @@
     "done": "vous avez récupéré **30** <:cash:776115188498956329>, à dans 1 heure !"
   },
   "daily": {
-    "notNow": "vous avez déjà collecté votre daily, veuillez attendre jusqu'à 00h00.",
-    "done": "vous avez récupéré **300** trucs, à demain !"
+    "notNow": "vous avez déjà collecté votre daily, veuillez attendre jusqu'à 00h00 (UTC+1).",
+    "done": "vous avez récupéré **300** <:cash:776115188498956329>, à demain !"
   },
   "bal": {
     "actualBal": "Vous avez actuellement",
@@ -50,11 +49,11 @@
     "correctUsage":":x: Usage correct : `m!gift [@quelqu'un] [nombre]`"
   },
   "mine": {
-    "title": "Minage",
+    "title": "Ressources minées",
     "level": "Niveau",
     "notEnoughEnergy": ":x: Vous n'avez pas assez d'énergie.",
     "ressGained": "Ressources minées",
-    "infos": "Informations",
+    "infos": "Énergie",
     "usedEnergy": "Énergie utilisée",
     "remainingEnergy": "Énergie restante",
     "winnedXP": "Exp gagnée"
@@ -178,5 +177,13 @@
     "notEnoughRess" : ":x: Vous n'avez pas assez de ressources pour faire cet enchantement.",
     "enchantSuccess" : ":white_check_mark: Enchantement réussi au niveau",
     "canceled" : ":x: Enchantement annulé."
+  },
+  "prospect" : {
+    "title" : "",
+    "description" : "Prospectez vos minerais pour obtenir des gemmes.",
+    "doc" : "Ajoutez comme argument le nom de l'élément que vous souhaitez prospecter, les éléments disponibles sont les suivants:\n",
+    "notEnoughRess": ":x: Vous n'avez pas assez de ressources pour faire cette prospection.",
+    "success" : ":white_check_mark: Prospection réussie ! Vous avez récupérer ",
+    "canceled" : ":x: Prospection annulée."
   }
 }

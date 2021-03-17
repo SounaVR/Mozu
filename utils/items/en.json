@@ -3,7 +3,6 @@
     "dungeon_stone" : [
       {
         "name" : "Pierre de Donjon",
-        "level" : 1,
         "ATK" : "0",
         "DEF" : "0",
         "ressource" : {
@@ -95,7 +94,6 @@
       },
       {
         "name" : "Pioche en Pierre",
-        "level" : 1,
         "ATK" : "0",
         "DEF" : "0",
         "ressource" : {
@@ -105,7 +103,6 @@
       },
       {
         "name" : "Pioche Cuivrée",
-        "level" : 5,
         "ATK" : "0",
         "DEF" : "0",
         "ressource" : {
@@ -116,7 +113,6 @@
       },
       {
         "name" : "Belle pioche de Fer",
-        "level" : 10,
         "ATK" : "0",
         "DEF" : "0",
         "ressource" : {
@@ -128,7 +124,6 @@
       },
       {
         "name" : "Pioche Ostentatoire",
-        "level" : 15,
         "ATK" : "0",
         "DEF" : "0",
         "ressource" : {
@@ -141,7 +136,6 @@
       },
       {
         "name" : "Pioche en Malachite de haute qualité",
-        "level" : 20,
         "ATK" : "0",
         "DEF" : "0",
         "ressource" : {
@@ -160,7 +154,6 @@
       },
       {
         "name" : "Épée en Pierre",
-        "level" : "1",
         "ATK" : "2",
         "DEF" : "0",
         "ressource" : {
@@ -170,7 +163,6 @@
       },
       {
         "name" : "Épée en Cuivre",
-        "level" : "5",
         "ATK" : "3",
         "DEF" : "0",
         "ressource" : {
@@ -181,7 +173,6 @@
       },
       {
         "name" : "Épée en Fer",
-        "level" : "10",
         "ATK" : "4",
         "DEF" : "0",
         "ressource" : {
@@ -193,7 +184,6 @@
       },
       {
         "name" : "Épée en Or",
-        "level" : "15",
         "ATK" : "5",
         "DEF" : "0",
         "ressource" : {
@@ -206,7 +196,6 @@
       },
       {
         "name" : "Épée en Malachite",
-        "level" : "20",
         "ATK" : "6",
         "DEF" : "0",
         "ressource" : {
@@ -225,7 +214,6 @@
       },
       {
         "name" : "Bouclier en Pierre",
-        "level" : "1",
         "ATK" : "0",
         "DEF" : "2",
         "ressource" : {
@@ -235,7 +223,6 @@
       },
       {
         "name" : "Bouclier en Cuivre",
-        "level" : "5",
         "ATK" : "0",
         "DEF" : "3",
         "ressource" : {
@@ -246,7 +233,6 @@
       },
       {
         "name" : "Bouclier en Fer",
-        "level" : "10",
         "ATK" : "0",
         "DEF" : "4",
         "ressource" : {
@@ -258,7 +244,6 @@
       },
       {
         "name" : "Bouclier en Or",
-        "level" : "15",
         "ATK" : "0",
         "DEF" : "5",
         "ressource" : {
@@ -271,7 +256,6 @@
       },
       {
         "name" : "Bouclier en Malachite",
-        "level" : "20",
         "ATK" : "0",
         "DEF" : "6",
         "ressource" : {
@@ -292,7 +276,6 @@
       },
       {
         "name" : "[T1] Heaume de puissance",
-        "level" : "1",
         "DEF" : "1",
         "ressource" : {
           "energy" : "10",
@@ -301,7 +284,6 @@
       },
       {
         "name" : "[T2] Heaume de courroux",
-        "level" : "5",
         "DEF" : "2",
         "ressource" : {
           "energy" : "20",
@@ -311,7 +293,6 @@
       },
       {
         "name" : "[T3] Casque de cuirassier",
-        "level" : "10",
         "DEF" : "3",
         "ressource" : {
           "energy" : "30",
@@ -327,7 +308,6 @@
       },
       {
         "name" : "[T1] Espauliers de puissance",
-        "level" : "1",
         "DEF" : "1",
         "ressource" : {
           "energy" : "10",
@@ -336,7 +316,6 @@
       },
       {
         "name" : "[T2] Espauliers de courroux",
-        "level" : "5",
         "DEF" : "2",
         "ressource" : {
           "energy" : "20",
@@ -346,7 +325,6 @@
       },
       {
         "name" : "[T3] Espauliers de cuirassier",
-        "level" : "10",
         "DEF" : "3",
         "ressource" : {
           "energy" : "30",
@@ -362,7 +340,6 @@
       },
       {
         "name" : "[T1] Cuirasse de puissance",
-        "level" : "1",
         "DEF" : "1",
         "ressource" : {
           "energy" : "10",
@@ -371,7 +348,6 @@
       },
       {
         "name" : "[T2] Cuirasse de courroux",
-        "level" : "5",
         "DEF" : "2",
         "ressource" : {
           "energy" : "20",
@@ -381,7 +357,6 @@
       },
       {
         "name" : "[T3] Cuirasse de cuirassier",
-        "level" : "10",
         "DEF" : "3",
         "ressource" : {
           "energy" : "30",
@@ -397,7 +372,6 @@
       },
       {
         "name" : "[T1] Brassards de puissance",
-        "level" : "1",
         "DEF" : "1",
         "ressource" : {
           "energy" : "10",
@@ -406,7 +380,6 @@
       },
       {
         "name" : "[T2] Bracelets de courroux",
-        "level" : "5",
         "DEF" : "2",
         "ressource" : {
           "energy" : "20",
@@ -416,7 +389,6 @@
       },
       {
         "name" : "[T3] Brassards de cuirassier",
-        "level" : "10",
         "DEF" : "3",
         "ressource" : {
           "energy" : "30",
@@ -432,7 +404,6 @@
       },
       {
         "name" : "[T1] Gantelets de puissance",
-        "level" : "1",
         "DEF" : "1",
         "ressource" : {
           "energy" : "10",
@@ -441,7 +412,6 @@
       },
       {
         "name" : "[T2] Gantelets de courroux",
-        "level" : "5",
         "DEF" : "2",
         "ressource" : {
           "energy" : "20",
@@ -451,7 +421,6 @@
       },
       {
         "name" : "[T3] Gantelets de cuirassier",
-        "level" : "10",
         "DEF" : "3",
         "ressource" : {
           "energy" : "30",
@@ -467,7 +436,6 @@
       },
       {
         "name" : "[T1] Ceinture de puissance",
-        "level" : "1",
         "DEF" : "1",
         "ressource" : {
           "energy" : "10",
@@ -476,7 +444,6 @@
       },
       {
         "name" : "[T2] Baudrier de courroux",
-        "level" : "5",
         "DEF" : "2",
         "ressource" : {
           "energy" : "20",
@@ -486,7 +453,6 @@
       },
       {
         "name" : "[T3] Sangle de cuirassier",
-        "level" : "10",
         "DEF" : "3",
         "ressource" : {
           "energy" : "30",
@@ -502,7 +468,6 @@
       },
       {
         "name" : "[T1] Cuissards de puissance",
-        "level" : "1",
         "DEF" : "1",
         "ressource" : {
           "energy" : "10",
@@ -511,7 +476,6 @@
       },
       {
         "name" : "[T2] Cuissards de courroux",
-        "level" : "5",
         "DEF" : "2",
         "ressource" : {
           "energy" : "20",
@@ -521,7 +485,6 @@
       },
       {
         "name" : "[T3] Cuissards de cuirassier",
-        "level" : "10",
         "DEF" : "3",
         "ressource" : {
           "energy" : "30",
@@ -537,7 +500,6 @@
       },
       {
         "name" : "[T1] Solerets de puissance",
-        "level" : "1",
         "DEF" : "1",
         "ressource" : {
           "energy" : "10",
@@ -546,7 +508,6 @@
       },
       {
         "name" : "[T2] Solerets de courroux",
-        "level" : "5",
         "DEF" : "2",
         "ressource" : {
           "energy" : "20",
@@ -556,7 +517,6 @@
       },
       {
         "name" : "[T3] Solerets de cuirassier",
-        "level" : "10",
         "DEF" : "3",
         "ressource" : {
           "energy" : "30",

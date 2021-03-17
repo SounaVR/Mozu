@@ -7,7 +7,7 @@ exports.run = (client, message, args, getPlayer, getUser) => {
 	if (!args[0]) return message.channel.send("Veuillez indiquer une commande !");
 	const commandName = args[0].toLowerCase();
 	const command = client.commands.get(commandName) || client.commands.get(client.aliases.get(commandName));
-	if (!command) return message.channel.send("Cette commande n'existe pas.");
+	if (!command) return message.react("❌");
 	readdirSync(join(__dirname, "..")).forEach(f => {
 		const files = readdirSync(join(__dirname, "..", f));
 		if (files.includes(`${commandName}.js`)) {

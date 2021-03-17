@@ -16,9 +16,6 @@ CREATE TABLE IF NOT EXISTS data (
 	ATK bigint,
 	DEF bigint,
 
-	xp bigint,
-	level bigint,
-
 	HR bigint,
 	LastHR bigint,
 	daily bigint,

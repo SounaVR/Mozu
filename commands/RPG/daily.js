@@ -7,7 +7,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     const lang = require(`../../utils/text/${player.data.lang}.json`);
 
     if (player.data.LastDaily == "0") {
-        con.query(`UPDATE data SET daily = ${player.data.LastDaily + Number(1)}, LastDaily = 1, money = ${player.data.money + Number(300)} WHERE userid = ${message.author.id}`);
+        con.query(`UPDATE data SET daily = ${player.data.daily + Number(1)}, LastDaily = 1, money = ${player.data.money + Number(300)} WHERE userid = ${message.author.id}`);
         return message.reply(`${lang.daily.done}`);
     } else if (player.data.LastDaily == "1") {
         return message.reply(`${lang.daily.notNow}`);

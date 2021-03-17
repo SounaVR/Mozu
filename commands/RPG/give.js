@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const Default = require('../../utils/default.json');
-const Emotes  = require('../../utils/default.json');
+const Emotes  = require('../../utils/emotes.json');
 
 function manageGive(client, con, args, player, member, message, objectName, objectAliases) {
     var con = client.connection

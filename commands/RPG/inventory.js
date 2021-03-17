@@ -23,20 +23,19 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     }
     
     const embed1 = new Discord.MessageEmbed()
-      .setAuthor(`${lang.inventory.inventoryOf} ${message.author.tag}`, message.author.displayAvatarURL())
-      .setColor(message.member.displayColor)
-      .setFooter(`Page 1/4 | ${lang.globalHelpFooter}`)
-      .addField(`⭐ Mana`, `${player.data.MANA}/50`, true)
-      .addField(`❤️ PV`, `${player.data.PV}/50`, true)
-      .addField(`⚡ ${lang.inventory.energy} [+1/5s]`, `${player.data.energy || 0}/100`, true)
-      .addField(`🆙 ${lang.inventory.level}`, `${player.data.level} [${Emotes.idk} Exp: ${player.data.xp}]`, true)
-      .addField(`${Emotes.cash} Balance: ${nFormatter(player.data.money)}`, `${Emotes.rep} Reputations : ${player.data.rep}`, true)
-      .addField(`⚔️ ${lang.inventory.combat}:`, `${Emotes.chests.Guerrier.rune_sword} ATK: ${player.data.ATK}\n${Emotes.chests.Guerrier.rune_shield} DEF: ${player.data.DEF}`, true)
+        .setAuthor(`${lang.inventory.inventoryOf} ${message.author.tag}`, message.author.displayAvatarURL())
+        .setColor(message.member.displayColor)
+        .setFooter(`Page 1/4 | ${lang.globalHelpFooter}`)
+        .addField(`⭐ Mana`, `${player.data.MANA}/50`, true)
+        .addField(`❤️ PV`, `${player.data.PV}/50`, true)
+        .addField(`⚡ ${lang.inventory.energy} [+1/5s]`, `${player.data.energy || 0}/100`, true)
+        .addField(`⚔️ ${lang.inventory.combat}:`, `${Emotes.chests.Guerrier.rune_sword} ATK: ${player.data.ATK}\n${Emotes.chests.Guerrier.rune_shield} DEF: ${player.data.DEF}`, true)
+        .addField(`Autres:`, `${Emotes.cash} Balance: ${nFormatter(player.data.money)}\n${Emotes.rep} Reputations : ${player.data.rep}`, true)
 
     const embed2 = new Discord.MessageEmbed()
-      .setAuthor(`${lang.inventory.inventory} ${message.author.tag}`, message.author.displayAvatarURL())
-      .setColor(message.member.displayColor)
-      .setFooter(`Page 2/4 | ${lang.globalHelpFooter}`)
+        .setAuthor(`${lang.inventory.inventory} ${message.author.tag}`, message.author.displayAvatarURL())
+        .setColor(message.member.displayColor)
+        .setFooter(`Page 2/4 | ${lang.globalHelpFooter}`)
 
     var txt = [],
         txt2 = [],

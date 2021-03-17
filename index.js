@@ -88,7 +88,7 @@ client.on('ready', async () => {
 	let dailyReset = new cron.CronJob('00 00 * * *', async () => {
 		try {
 			exec(`mysqldump --all-databases --single-transaction --quick --lock-tables=false > ./backups/full-backup-$(date +%F).sql -u ReallySouna -p ${process.env.BACKUP_PASSWORD}`)
-			con.query(`UPDATE data SET LastRep = 0, daily = 0`)
+			con.query(`UPDATE data SET LastRep = 0, LastDaily = 0`)
 			backupsChannel.send(`🟢 Daily backup done.`)
 		} catch (error) {
 			backupsChannel.send(`🔴 An error occurred. Check the console.`)

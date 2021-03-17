@@ -17,7 +17,6 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         lang, ban, cmd,
         money, energy, LastActivity,
         PV, MANA, ATK, DEF,
-        xp, level,
         HR, LastHR, daily, LastDaily, rep, LastRep,
         stone, coal, copper, iron, gold, malachite,
         zone, dungeon_stone,
@@ -39,7 +38,6 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         '${Default.player.lang}', '${Default.player.ban}', '${Default.player.cmd}',
         '${Default.player.money}', '${Default.player.energy}', '${Default.player.LastActivity}',
         '${Default.player.PV}', '${Default.player.MANA}', '${Default.player.ATK}', '${Default.player.DEF}',
-        '${Default.player.xp}', '${Default.player.level}',
         '${Default.player.HR}', '${Default.player.LastHR}', '${Default.player.daily}', '${Default.player.LastDaily}', '${Default.player.rep}', '${Default.player.LastRep}',
         '${Default.mine.stone}', '${Default.mine.coal}', '${Default.mine.copper}', '${Default.mine.iron}', '${Default.mine.gold}', '${Default.mine.malachite}',
         '${Default.player.zone}', '${Default.player.dungeon_stone}',
@@ -95,15 +93,16 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     } else {
         if (!member) return message.reply("il est pas inscrit")
         const embed = new Discord.MessageEmbed()
-        .setTitle(`${user.tag}`)
+        .setAuthor(user.tag, message.author.displayAvatarURL())
         .addField("informations", `
         :notepad_spiral: Titre : null\n${Emotes.trophy}Points de succès : X`, true)
         .addField("Badges (X)", `
         <a:sexxx:800109145889964053>`, true)
         .addField("Other stats", `
         Commandes effectuées : ${member.data.cmd}`, true)
-        .addField("Ornement", `
-        blabla (et en dessous l'ornement en image)`)
+        .addField("Ornement", "X")
+        .attachFiles(["./utils/ornement.png"])
+        .setImage("attachment://ornement.png")
         .setFooter(`#${member.data.uuid}`)
 
         message.channel.send(embed)
@@ -115,5 +114,5 @@ exports.help = {
   description_fr: "Affiche votre profil",
   description_en: "Display your profile",
   category: "RPG",
-  aliases: ["profil"]
+  aliases: ["profil", "p"]
 };
