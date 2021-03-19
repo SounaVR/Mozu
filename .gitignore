@@ -1,3 +1,4 @@
 node_modules/
 .env
 utils/config.js
+backups/
