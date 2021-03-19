@@ -1,11 +1,11 @@
 const Discord = require("discord.js");
 
 exports.run = async (client, message, args, getPlayer, getUser) => {
-	const user = getUserFromMention(client, args[0]) || message.author;
+	let member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
 	const ppEmbed = new Discord.MessageEmbed()
-    .setColor(message.member.displayColor)
-		.setImage(user.avatarURL({ dynamic: true, size: 512 }))
-		.setDescription("Profile picture of " + `${user}`);
+        .setColor(message.member.displayColor)
+		.setImage(member.user.avatarURL({ dynamic: true, size: 512 }))
+		.setDescription("Profile picture of " + `${member}`);
 	message.channel.send(ppEmbed);
 };
 
