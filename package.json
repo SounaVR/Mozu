@@ -5,12 +5,12 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ReallySouna/ReallyMozu.git"
+    "url": "https://github.com/SounaFR/Mozu.git"
   },
   "scripts": {
     "start": "node ."
   },
-  "author": "ReallySouna",
+  "author": "Souna",
   "license": "MIT",
   "dependencies": {
     "cron": "^1.8.2",
