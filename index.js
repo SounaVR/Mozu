@@ -22,13 +22,13 @@ client.config = config;
 ["commands", "aliases"].forEach(x => client[x] = new Discord.Collection());
 
 const con = mysql.createConnection({
+	multipleStatements: true,
 	encoding: 'utf8',
 	charset: 'utf8mb4',
-	host: "localhost",
-	user: "ReallyMozu",
+	host: process.env.DB_HOST,
+	user: process.env.DB_USER,
 	password: process.env.DB_PASS,
-	database: "Mozu",
-	multipleStatements: true
+	database: process.env.DB_NAME
 });
 
 client.on('ready', async () => {
@@ -155,7 +155,7 @@ client.on("message", async message => {
 	const player = await getPlayer(con, message.author.id);
 	const blacklist = new Discord.MessageEmbed()
         .setColor("#e31212")
-        .setDescription("ERROR: You are banned from the bot by the owner.\nFor more information, please contact **ReallySouna#2424**.")
+        .setDescription("ERROR: You are banned from the bot by the owner.\nFor more information, please contact **Souna#2424**.")
 
     if (!player || player.data.ban == "0") {
 		if (client.commands.has(cmd)) command = client.commands.get(cmd);
@@ -168,9 +168,12 @@ client.on("message", async message => {
     }
 });
 
-// client.on("userUpdate", function(oldUser, newUser){
-//     console.log(`${oldUser}/${newUser}`);
-// });
+client.on("userUpdate", async function(oldUser, newUser) {
+    const player = await getPlayer(con, oldUser.id);
+	if (player) {
+		con.query(`UPDATE data SET username = "${newUser.username + "#" + newUser.discriminator}" WHERE userid = ${oldUser.id}`);
+	} else return;
+});
 
 // all guilds event need edit for guild handler with mysql
 
