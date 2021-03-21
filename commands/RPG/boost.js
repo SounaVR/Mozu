@@ -1,8 +1,8 @@
 require("moment-duration-format");
 // const { timeFormating } = require('timeformatter');
 const Discord     = require('discord.js'),
-Emotes            = require('../../utils/emotes.json'),
-moment            = require("moment");
+    Emotes        = require('../../utils/emotes.json'),
+    moment        = require("moment");
 moment.locale("fr");
 
 exports.run = async (client, message, args, getPlayer) => {
@@ -28,10 +28,10 @@ exports.run = async (client, message, args, getPlayer) => {
 };
 
 exports.help = {
-  name: "boost",
-  description_fr: "Récupèrez des récompenses en boostant le serveur",
-  description_en: "Collect rewards by boosting the server",
-  usage_fr: "(claim)",
-  usage_en: "(claim)",
-  category: "RPG"
+    name: "boost",
+    description_fr: "Récupèrez des récompenses en boostant le serveur",
+    description_en: "Collect rewards by boosting the server",
+    usage_fr: "(claim)",
+    usage_en: "(claim)",
+    category: "RPG"
 };

@@ -1,7 +1,7 @@
 const { nFormatter } = require('../../utils/u.js');
 const Discord        = require('discord.js'),
-Default              = require('../../utils/default.json'),
-Emotes               = require('../../utils/emotes.json');
+    Default          = require('../../utils/default.json'),
+    Emotes           = require('../../utils/emotes.json');
 
 async function manageEnchant(client, con, player, message, category, object, objectName) {
     const Enchant = require(`../../utils/items/enchant.json`);
@@ -103,11 +103,11 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 };
 
 exports.help = {
-  name: "enchant",
-  description_fr: "Pour enchanter votre équipement",
-  description_en: "To enchant your equipment",
-  usage_fr: "<item>",
-  usage_en: "<objet>",
-  category: "RPG",
-  aliases: ["ench", "en", "enchantement", "enchantment"]
+    name: "enchant",
+    description_fr: "Pour enchanter votre équipement",
+    description_en: "To enchant your equipment",
+    usage_fr: "<item>",
+    usage_en: "<objet>",
+    category: "RPG",
+    aliases: ["ench", "en", "enchantement", "enchantment"]
 };

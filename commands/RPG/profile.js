@@ -110,9 +110,9 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 };
 
 exports.help = {
-  name: "profile",
-  description_fr: "Affiche votre profil",
-  description_en: "Display your profile",
-  category: "RPG",
-  aliases: ["profil", "p"]
+    name: "profile",
+    description_fr: "Affiche votre profil",
+    description_en: "Display your profile",
+    category: "RPG",
+    aliases: ["profil", "p"]
 };

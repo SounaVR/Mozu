@@ -1,7 +1,7 @@
 const { nFormatter } = require('../../utils/u.js');
 const Discord        = require('discord.js'),
-Emotes               = require('../../utils/emotes.json'),
-Default              = require('../../utils/default.json');
+    Emotes           = require('../../utils/emotes.json'),
+    Default          = require('../../utils/default.json');
 
 async function manageCraft(con, player, message, category, objectName) {
     const Craft = require(`../../utils/items/${player.data.lang}.json`);

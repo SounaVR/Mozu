@@ -1,7 +1,7 @@
 const { nFormatter } = require('../../utils/u.js');
 const Discord        = require('discord.js'),
-Default              = require('../../utils/default.json'),
-Emotes               = require('../../utils/emotes.json');
+    Default          = require('../../utils/default.json'),
+    Emotes           = require('../../utils/emotes.json');
 
 function manageChest(client, con, player, message, args, objectName, rarityName, min, max) {
     const lang = require(`../../utils/text/${player.data.lang}.json`);

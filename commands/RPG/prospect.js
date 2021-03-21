@@ -1,7 +1,7 @@
 const { nFormatter } = require('../../utils/u');
 const Discord = require('discord.js'),
-Default       = require('../../utils/default.json'),
-Emotes        = require('../../utils/emotes.json');
+    Default   = require('../../utils/default.json'),
+    Emotes    = require('../../utils/emotes.json');
 
 async function manageProspecting(client, con, player, message, ore, quantity, gem) {
     const lang = require(`../../utils/text/${player.data.lang}.json`);

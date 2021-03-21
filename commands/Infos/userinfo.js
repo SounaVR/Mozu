@@ -18,11 +18,11 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 }
 // Help Object
 exports.help = {
-  name: "userinfo",
-  description_fr: "Affiche des informations sur l'utilisateur",
-  description_en: "Displays user information",
-  usage_fr: "(@quelqu'un)",
-  usage_en: "(@someone)",
-  category: "Infos",
-  aliases: ["ui"]
+    name: "userinfo",
+    description_fr: "Affiche des informations sur l'utilisateur",
+    description_en: "Displays user information",
+    usage_fr: "(@quelqu'un)",
+    usage_en: "(@someone)",
+    category: "Infos",
+    aliases: ["ui"]
 };

@@ -1,7 +1,7 @@
 require("moment-duration-format");
 const { checkDays } = require('../../utils/u.js');
 const Discord       = require("discord.js"),
-moment 	      	    = require("moment");
+    moment 	      	= require("moment");
 
 exports.run = async (client, message, args, getPlayer, getUser) => {
 	const con = client.connection;

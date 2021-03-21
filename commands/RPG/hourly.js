@@ -1,5 +1,5 @@
 const ms      = require("parse-ms"),
-      Default = require('../../utils/default.json');
+    Default = require('../../utils/default.json');
 
 exports.run = async (client, message, args, getPlayer, getUser) => {
     var con = client.connection

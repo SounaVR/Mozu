@@ -1,6 +1,6 @@
 const { nFormatter } = require("../../utils/u.js");
 const Default        = require("../../utils/default.json"),
-Emotes         = require("../../utils/emotes.json");
+    Emotes           = require("../../utils/emotes.json");
 
 exports.run = async (client, message, args, getPlayer, getUser) => {
     const con = client.connection;

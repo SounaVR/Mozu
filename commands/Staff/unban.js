@@ -12,10 +12,10 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 };
 
 exports.help = {
-  name: "unban",
-  description_fr: "Pour débannir un joueur du bot",
-  description_en: "To unban a player from the bot",
-  usage_fr: "<joueur>",
-  usage_en: "<player>",
-  category: "Staff"
+    name: "unban",
+    description_fr: "Pour débannir un joueur du bot",
+    description_en: "To unban a player from the bot",
+    usage_fr: "<joueur>",
+    usage_en: "<player>",
+    category: "Staff"
 };
