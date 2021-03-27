@@ -7,8 +7,8 @@ function manageChest(client, con, player, message, args, objectName, rarityName,
     const lang = require(`../../utils/text/${player.data.lang}.json`);
     const userid = message.author.id;
 
-    if (player.data.dungeon_amulet == "0") return message.reply(`${lang.chest.dontHaveAmulet}`);
-    if (player.data[objectName] < args[2]) return message.reply(`${lang.chest.notEnoughChests}`);
+    if (player.items.dungeon_amulet == "0") return message.reply(`${lang.chest.dontHaveAmulet}`);
+    if (player.ress[objectName] < args[2]) return message.reply(`${lang.chest.notEnoughChests}`);
 
     const embed = new Discord.MessageEmbed()
     .setTitle(`${Emotes.chest} ${lang.chest.openingOf} ${args[2]} ${lang.chest.chests} | ${lang.chest.rarity} : ${rarityName}`);
@@ -19,9 +19,9 @@ function manageChest(client, con, player, message, args, objectName, rarityName,
     var txt = [],
         txt2 = [],
         sql = [];
-    for (const runes in Default.runes[player.data.classe]) {
+    for (const runes in Default.runes.Guerrier) {
         const value = Danny.random(min, max);
-        txt.push(`${Emotes.chests[player.data.classe][runes]} : ${nFormatter(value)}`);
+        txt.push(`${Emotes.chests.Guerrier[runes]} : ${nFormatter(value)}`);
         sql.push(`${runes} = ${runes} + ${value}`);
     }
 
@@ -43,7 +43,7 @@ function manageChest(client, con, player, message, args, objectName, rarityName,
         }
     }
 
-    con.query(`UPDATE data SET ${sql.join(",")}, ${objectName} = ${player.data[objectName] - args[2]} WHERE userid = ${userid}`);
+    con.query(`UPDATE ress SET ${sql.join(",")}, ${objectName} = ${player.ress[objectName] - args[2]} WHERE userid = ${userid}`);
     embed.addField(`**Gain**`, `
     ${txt.join("\n")}
     ${txt2.join("\n")}`);
@@ -54,7 +54,7 @@ function manageChest(client, con, player, message, args, objectName, rarityName,
 exports.run = async (client, message, args, getPlayer, getUser) => {
     const con = client.connection
     const player = await getPlayer(con, message.author.id);
-    if (!player) return message.channel.send(`${Default.notRegistered}`);
+    if (!player) return message.channel.send(Default.notRegistered);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
 
     args[0] = "o" || "open";
