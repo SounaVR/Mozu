@@ -1,7 +1,9 @@
+const Default = require("../../utils/default.json");
+
 module.exports.run = async (client, message, args, getPlayer, getUser) => {
     var con = client.connection
     var player = await getPlayer(con, message.author.id);
-    if (!player) return message.channel.send("You are not registered, please do the `m!village` command to remedy this.");
+    if (!player) return message.channel.send(Default.notRegistered);
     const userid = message.author.id;
 
     if (args[0] && ["en", "EN"].includes(args[0].toLowerCase())) {
