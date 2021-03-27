@@ -11,7 +11,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     const embed = new Discord.MessageEmbed()
         .setAuthor(`${message.author.username}`, sicon)
         .setColor("#E6E6FA")
-        .addField("Suggestion", text)
+        .addField("BUG/PROBLEME", text)
         .setFooter(`ID : ${message.author.id}`)
         .setTimestamp(message.createdAt);
 
