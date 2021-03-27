@@ -2,14 +2,13 @@ require('dotenv').config();
 const { getUser, getPlayer }      = require("./utils/u");
 const { sep } 					  = require("path");
 const { success, error, warning } = require("log-symbols");
-const fs	= require('fs'),
-	path	= require('path'),
-	moment  = require('moment'),
-	cron    = require('cron'),
-	Discord = require("discord.js"),
-	config  = require("./utils/config"),
-  	sql     = fs.readFileSync('./sql/schema.sql').toString(),
-  	mysql   = require('mysql');
+const fs	 = require('fs'),
+	moment   = require('moment'),
+	cron     = require('cron'),
+	Discord  = require("discord.js"),
+	config   = require("./utils/config"),
+  	mysql    = require('mysql');
+const arraydebg = ["data", "ress", "items", "enchant", "prospect", "stats"];
 
 const client = new Discord.Client({
 	disableMentions: "everyone",
@@ -32,14 +31,15 @@ const con = mysql.createConnection({
 });
 
 client.on('ready', async () => {
+    const rdy = client.channels.cache.find(ch => ch.id === "689876186599653512");
 	client.connection = con;
 
-	con.query(sql, function (err) {
-		if (err) throw err;
-	});
-
-	const systemlogs = client.channels.cache.find(ch => ch.id === "698861927652261988");
-	const rdy = client.channels.cache.find(ch => ch.id === "689876186599653512");
+    arraydebg.forEach(async element => {
+        const thing = fs.readFileSync(`./sql/${element}.sql`).toString();
+        con.query(thing, function (err) {
+            if (err) throw err;
+        });
+    });
 
 	const load = (dir = "./commands/") => {
 		fs.readdirSync(dir).forEach(dirs => {
@@ -66,14 +66,7 @@ client.on('ready', async () => {
 	};
 	load();
 
-	const embed = new Discord.MessageEmbed()
-		.setTitle(`[SYSTEM START] Log du ${moment().format('DD/MM/YYYY | HH:mm:ss')}`)
-		.setDescription(`${client.user.username} just started !\n${client.user.username} vient de démarrer !`)
-		.setColor("#1DCC8F")
-	systemlogs.send(embed);
-
 	const { exec } = require ('child_process');
-	const backupsChannel = client.channels.cache.find(ch => ch.id === "804174293453766679");
 	// -----------------
 	// CRON MEMO
 	// *  *  *  *  *  *
@@ -89,9 +82,7 @@ client.on('ready', async () => {
 		try {
 			exec(`mysqldump --all-databases --single-transaction --quick --lock-tables=false > ./backups/full-backup-$(date +%F).sql -u Souna -p ${process.env.BACKUP_PASSWORD}`)
 			con.query(`UPDATE data SET LastRep = 0, LastDaily = 0`)
-			backupsChannel.send(`🟢 Daily backup done.`)
 		} catch (error) {
-			backupsChannel.send(`🔴 An error occurred. Check the console.`)
 			if (error) throw error;
 		}
 	});
@@ -101,11 +92,9 @@ client.on('ready', async () => {
 			exec("rm -r backups/");
 			exec("mkdir backups");
 			exec(`mysqldump --all-databases --single-transaction --quick --lock-tables=false > ./backups/full-backup-$(date +%F).sql -u Souna -p ${process.env.BACKUP_PASSWORD}`)
-			backupsChannel.send(`🟢 Weekly backup done.`);
 		} else {
 			exec("mkdir backups");
 			exec(`mysqldump --all-databases --single-transaction --quick --lock-tables=false > ./backups/full-backup-$(date +%F).sql -u Souna -p ${process.env.BACKUP_PASSWORD}`)
-			backupsChannel.send(`🟢 Weekly backup done.`);
 		}
 	});
 
@@ -128,24 +117,6 @@ client.on("message", async message => {
 	const cmd = args.shift().toLowerCase();
 	let command;
 
-	if (message.channel.type == "dm") {
-			const channel = client.channels.cache.get('744953016339136562');
-			if (channel) {
-			const embed = new Discord.MessageEmbed()
-				.setTitle('Message')
-				.setColor("#0183c2")
-				.addField('Author', `${message.author.tag} (${message.author.id})`, true)
-				.setDescription(message.content)
-				.setTimestamp();
-			if (message.attachments.array().length > 0) {
-				const result = message.attachments.array()
-				embed.setImage(result[0].proxyURL)
-			 }
-			channel.send(embed);
-		} else {
-			return message.channel.send("Deleted message log channel not found.");
-		}
-	}
 	if (message.author.bot || !message.guild) return;
 
 	if (!message.member) message.member = await message.guild.fetchMember(message.author);
@@ -155,109 +126,30 @@ client.on("message", async message => {
 	const player = await getPlayer(con, message.author.id);
 	const blacklist = new Discord.MessageEmbed()
         .setColor("#e31212")
-        .setDescription("ERROR: You are banned from the bot by the owner.\nFor more information, please contact **Souna#2424**.")
+        .setDescription("ERROR: You are banned from the bot by the Mozu team.\nFor more information, please contact **Souna#2424**.")
 
     if (!player || player.data.ban == "0") {
-		if (client.commands.has(cmd)) command = client.commands.get(cmd);
-		else if (client.aliases.has(cmd)) command = client.commands.get(client.aliases.get(cmd));
+        if (client.commands.has(cmd)) command = client.commands.get(cmd);
+            else if (client.aliases.has(cmd)) command = client.commands.get(client.aliases.get(cmd));
 
-        if (command) command.run(client, message, args, getPlayer, getUser);
-        if (player) con.query(`UPDATE data SET cmd = ${player.data.cmd + Number(1)} WHERE userid = ${message.author.id}`);
+            if (command) command.run(client, message, args, getPlayer, getUser);
+        if (player) {
+            const cooldown = 5000;
+            con.query(`UPDATE stats SET cmd = ${player.stats.cmd + Number(1)} WHERE userid = ${message.author.id}`);
+
+            if ((Date.now() - player.data.lastActivity) - cooldown > 0) {
+                const timeObj = Date.now() - player.data.lastActivity;
+                const gagnees = Math.floor(timeObj / cooldown);
+        
+                player.ress.energy = (player.ress.energy || 0) + gagnees;
+                if (player.ress.energy > 100) player.ress.energy = 100;
+                con.query(`UPDATE ress SET energy = ${player.ress.energy} WHERE userid = ${message.author.id}`);
+                con.query(`UPDATE data SET lastActivity = ${Date.now()} WHERE userid = ${message.author.id}`);
+            }
+        }
     } else if (player.data.ban == "1") {
         return message.channel.send(blacklist);
     }
-});
-
-client.on("userUpdate", async function(oldUser, newUser) {
-    const player = await getPlayer(con, oldUser.id);
-	if (player) {
-		con.query(`UPDATE data SET username = "${newUser.username + "#" + newUser.discriminator}" WHERE userid = ${oldUser.id}`);
-	} else return;
-});
-
-// all guilds event need edit for guild handler with mysql
-
-client.on('guildMemberAdd', member => {
-	const guild = member.guild;
-	if (guild.id === "689471316570406914") {
-		client.channels.cache.get("785207465784115239").setName(`Discord > ${member.guild.members.cache.filter(m => !m.user.bot).size} Members`);
-		const channel = client.channels.cache.find(channel => channel.id === "689471317203877893");
-		channel.send(`Bienvenue ${member} ! N'hésite pas à lire <#774318768833953812> pour bien débuter !`)
-		member.roles.set(['691678064282697788'])
-	}
-});
-
-client.on('guildMemberRemove', member => {
-	const guild = member.guild;
-	if (guild.id === "689471316570406914") {
-		client.channels.cache.get("785207465784115239").setName(`Discord > ${member.guild.members.cache.filter(m => !m.user.bot).size} Members`);
-		const channel = client.channels.cache.find(channel => channel.id === "689471317203877893");
-		channel.send(`L'utilisateur ${member}/${member.user.username} est parti.`)
-	}
-});
-
-client.on('messageDelete', message => {
-	if (message.channel.type == "dm") {
-			const channel = client.channels.cache.get('744953016339136562');
-			if (channel) {
-			const embed = new Discord.MessageEmbed()
-				.setTitle('Deleted Message')
-				.setColor("#0183c2")
-				.addField('Author', `${message.author.tag} (${message.author.id})`, true)
-				.addField('Channel', `In DM`, true)
-				.setDescription(message.content)
-				.setTimestamp();
-			if (message.attachments.array().length > 0) {
-				const result = message.attachments.array()
-				embed.setImage(result[0].proxyURL)
-			 }
-			channel.send(embed);
-		} else return;
-	}
-	if (!message.guild) return;
-    if (!message.partial) {
-		if (message.guild.id === "689471316570406914") {
-			if (message.author.bot) return;
-			const channel = client.channels.cache.get('744949137560174702');
-			if (channel) {
-			const embed = new Discord.MessageEmbed()
-				.setTitle('Deleted Message')
-				.setColor("#0183c2")
-				.addField('Author', `${message.author.tag} (${message.author.id})`, true)
-				.addField('Channel', `${message.channel.name} (${message.channel.id})`, true)
-				.setDescription(message.content)
-				.setTimestamp();
-			if (message.attachments.array().length > 0) {
-				const result = message.attachments.array()
-				embed.setImage(result[0].proxyURL)
-			}
-			channel.send(embed);
-		} else return;
-	  } else return;
-	}
-});
-
-client.on('messageUpdate', (message, newMessage) => {
-    if (!message.guild || message.channel.type == "dm") return;
-    if (message.guild.id === "689471316570406914") {
-        if (message.author.bot) return;
-        const channel = client.channels.cache.get('744949137560174702');
-        if (channel) {
-        const embed = new Discord.MessageEmbed()
-            .setTitle('Edited Message')
-            .setColor("#0183c2")
-            .addField('Old message', `${message}`)
-            .addField('New message', newMessage)
-            .addField('Author', `${message.author.tag} (${message.author.id})`, true)
-            .addField('Channel', `${message.channel.name} (${message.channel.id})`, true)
-            .setTimestamp();
-        if (message.attachments.array().length > 0) {
-            const result = message.attachments.array()
-            embed.setImage(result[0].proxyURL)
-        }
-        channel.send(embed);
-    } else return;
-  } else return;
 });
 
 client.login(process.env.BOT_TOKEN);
