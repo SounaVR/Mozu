@@ -1,11 +1,11 @@
 const { nFormatter } = require("../../utils/u.js");
-const Default        = require("../../utils/default.json"),
-    Emotes           = require("../../utils/emotes.json");
+const Emotes         = require("../../utils/emotes.json");
+const Default        = require("../../utils/default.json");
 
 exports.run = async (client, message, args, getPlayer, getUser) => {
     const con = client.connection;
     const player = await getPlayer(con, message.author.id);
-    if (!player) return message.channel.send(`${Default.notRegistered}`)
+    if (!player) return message.channel.send(Default.notRegistered);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
 
     message.channel.send(`💳 ► ${lang.bal.actualBal} **${nFormatter(player.data.money)}**${Emotes.cash} ${lang.bal.actualBal2}`);
