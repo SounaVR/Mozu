@@ -1,11 +1,11 @@
-const Discord = require("discord.js");
-const Default = require("../../utils/default.json"),
-    Emotes    = require("../../utils/emotes.json");
+const Discord = require("discord.js"),
+    Emotes    = require("../../utils/emotes.json"),
+    Default   = require("../../utils/default.json");
 
 exports.run = async (client, message, args, getPlayer, getUser) => {
     const con = client.connection
     const player = await getPlayer(con, message.author.id);
-    if (!player) return message.channel.send(`${Default.notRegistered}`);
+    if (!player) return message.channel.send(Default.notRegistered);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
     const userid = message.author.id;
     const chest   = ["chest_d", "chest_c", "chest_b", "chest_a", "chest_s"]
@@ -30,27 +30,27 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
             zones.delete();
             switch (r.emoji.name) {
                 case "0️⃣":
-                    con.query(`UPDATE data SET zone = 0 WHERE userid = ${userid}`);
+                    con.query(`UPDATE ress SET zone = 0 WHERE userid = ${userid}`);
                     message.reply(" vous entrez dans ► **Mine Abandonnée**.");
                     break;
                 case "1️⃣":
-                    if (player.data.dungeon_amulet <= 0) return message.reply(`${lang.explore.switchError}`);
-                    con.query(`UPDATE data SET zone = 1 WHERE userid = ${userid}`);
+                    if (player.items.dungeon_amulet <= 0) return message.reply(`${lang.explore.switchError}`);
+                    con.query(`UPDATE ress SET zone = 1 WHERE userid = ${userid}`);
                     message.reply("vous entrez dans ► **Ruines Antiques**.");
                     break;
                 case "2️⃣":
-                    if (player.data.dungeon_amulet <= 1) return message.reply(`${lang.explore.switchError}`);
-                    con.query(`UPDATE data SET zone = 2 WHERE userid = ${userid}`);
+                    if (player.items.dungeon_amulet <= 1) return message.reply(`${lang.explore.switchError}`);
+                    con.query(`UPDATE ress SET zone = 2 WHERE userid = ${userid}`);
                     message.reply("vous entrez dans ► **Village Souterrain**.");
                     break;
                 case "3️⃣":
-                    if (player.data.dungeon_amulet <= 2) return message.reply(`${lang.explore.switchError}`);
-                    con.query(`UPDATE data SET zone = 3 WHERE userid = ${userid}`);
+                    if (player.items.dungeon_amulet <= 2) return message.reply(`${lang.explore.switchError}`);
+                    con.query(`UPDATE ress SET zone = 3 WHERE userid = ${userid}`);
                     message.reply("vous entrez dans ► **Catacombes**.");
                     break;
                 case "4️⃣":
-                    if (player.data.dungeon_amulet <= 3) return message.reply(`${lang.explore.switchError}`);
-                    con.query(`UPDATE data SET zone = 4 WHERE userid = ${userid}`);
+                    if (player.items.dungeon_amulet <= 3) return message.reply(`${lang.explore.switchError}`);
+                    con.query(`UPDATE ress SET zone = 4 WHERE userid = ${userid}`);
                     message.reply("vous entrez dans ► **Salle aux trésors**.");
                     break;
             }
@@ -58,19 +58,19 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
             collectorZones.stop();
         })
     } else if (args[0] > 0) {
-        if (player.data.dungeon_stone < args[0]) return message.channel.send(`${lang.explore.notEnoughDungeonStone} (${player.data.dungeon_stone}/${args[0]} ${Emotes.dungeon_stone})`);
-        if (player.data.dungeon_amulet <= 0) return message.channel.send(`pas le niveau requis d'amulette`)
-        con.query(`UPDATE data SET ${chest[player.data.zone]} = ${player.data[chest[player.data.zone]] + Number(args[0])}, dungeon_stone = ${player.data.dungeon_stone - (args[0])} WHERE userid = ${userid}`)
+        if (player.ress.dungeon_stone < args[0]) return message.channel.send(`${lang.explore.notEnoughDungeonStone} (${player.ress.dungeon_stone}/${args[0]} ${Emotes.dungeon_stone})`);
+        if (player.items.dungeon_amulet <= 0) return message.channel.send(`pas le niveau requis d'amulette`);
+        con.query(`UPDATE ress SET ${chest[player.ress.zone]} = ${player.ress[chest[player.ress.zone]] + Number(args[0])}, dungeon_stone = ${player.ress.dungeon_stone - (args[0])} WHERE userid = ${userid}`)
 
-        return message.reply(`${Emotes.torch} ${lang.explore.explored} **${array[player.data.zone]}** ${lang.explore.haveGot} **${args[0]}** ${lang.explore.chestRarity} **${rarity[player.data.zone]}**.\n*${lang.explore.switch}*.`)
+        return message.reply(`${Emotes.torch} ${lang.explore.explored} **${array[player.ress.zone]}** ${lang.explore.haveGot} **${args[0]}** ${lang.explore.chestRarity} **${rarity[player.ress.zone]}**.\n*${lang.explore.switch}*.`)
     } else if (!args[0]) {
         //return message.reply(`${lang.explore.correctUsage}`)
         const embed = new Discord.MessageEmbed()
         .setColor(message.member.displayColor)
         .setTitle("EXPLORE")
         .setDescription("*`m!explore switch` pour changer de zone*\n*`m!explore [quantité]` pour obtenir des coffres*")
-        .addField("Current location :", `${array[player.data.zone]}/${reactZones[player.data.zone]}`)
-        .addField("Dungeon stone :", `${player.data.dungeon_stone}`)
+        .addField("Current location :", `${array[player.ress.zone]}/${reactZones[player.ress.zone]}`)
+        .addField("Dungeon stone :", `${player.ress.dungeon_stone}`)
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL());
 
