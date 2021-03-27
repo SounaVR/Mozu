@@ -270,7 +270,7 @@
     ]
   },
   "armors" : {
-    "tete" : [
+    "head" : [
       {
         "name" : "Aucun"
       },
@@ -302,7 +302,7 @@
         }
       }
     ],
-    "epaule" : [
+    "shoulders" : [
       {
         "name" : "Aucun"
       },
@@ -334,7 +334,7 @@
         }
       }
     ],
-    "torse" : [
+    "chest" : [
       {
         "name" : "Aucun"
       },
@@ -366,7 +366,7 @@
         }
       }
     ],
-    "poignets" : [
+    "wrists" : [
       {
         "name" : "Aucun"
       },
@@ -398,7 +398,7 @@
         }
       }
     ],
-    "mains" : [
+    "hands" : [
       {
         "name" : "Aucun"
       },
@@ -430,7 +430,7 @@
         }
       }
     ],
-    "taille" : [
+    "waist" : [
       {
         "name" : "Aucun"
       },
@@ -462,7 +462,7 @@
         }
       }
     ],
-    "jambes" : [
+    "legs" : [
       {
         "name" : "Aucun"
       },
@@ -494,7 +494,7 @@
         }
       }
     ],
-    "pieds" : [
+    "feet" : [
       {
         "name" : "Aucun"
       },

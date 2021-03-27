@@ -1,530 +1,531 @@
 {
-  "objects" : {
-    "dungeon_stone" : [
-      {
-        "name" : "Pierre de Donjon",
-        "ATK" : "0",
-        "DEF" : "0",
-        "ressource" : {
-          "energy" : 2,
-          "coal" : 3000
+    "objects" : {
+      "dungeon_stone" : [
+        {
+          "name" : "Pierre de Donjon",
+          "ATK" : "0",
+          "DEF" : "0",
+          "ressource" : {
+            "energy" : 2,
+            "coal" : 3000
+          }
         }
-      }
-    ],
-    "dungeon_amulet" : [
-      {
-        "name" : "Aucun"
-      },
-      {
-        "name" : "Amulette de donjon Normale",
-        "ATK" : "0",
-        "DEF" : "0",
-        "ressource" : {
-          "energy" : 100,
-          "stone" : "1000000000",
-          "coal" : "1000000000",
-          "copper" : "1000000000",
-          "gold" : "1000000000",
-          "iron" : "1000000000",
-          "malachite" : "1000000000000"
+      ],
+      "dungeon_amulet" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "Amulette de donjon Normale",
+          "ATK" : "0",
+          "DEF" : "0",
+          "ressource" : {
+            "energy" : 100,
+            "stone" : "1000000000",
+            "coal" : "1000000000",
+            "copper" : "1000000000",
+            "gold" : "1000000000",
+            "iron" : "1000000000",
+            "malachite" : "1000000000000"
+          }
+        },
+        {
+          "name" : "Amulette de donjon Rare",
+          "ATK" : "0",
+          "DEF" : "0",
+          "ressource" : {
+            "energy" : 100,
+            "stone" : "1000000000",
+            "coal" : "1000000000",
+            "copper" : "1000000000",
+            "gold" : "1000000000",
+            "iron" : "1000000000",
+            "malachite" : "1000000000000"
+          }
+        },
+        {
+          "name" : "Amulette de donjon Épique",
+          "ATK" : "0",
+          "DEF" : "0",
+          "ressource" : {
+            "energy" : 100,
+            "stone" : "1000000000",
+            "coal" : "1000000000",
+            "copper" : "1000000000",
+            "gold" : "1000000000",
+            "iron" : "1000000000",
+            "malachite" : "1000000000000"
+          }
+        },
+        {
+          "name" : "Amulette de donjon Légendaire",
+          "ATK" : "0",
+          "DEF" : "0",
+          "ressource" : {
+            "energy" : 100,
+            "stone" : "1000000000",
+            "coal" : "1000000000",
+            "copper" : "1000000000",
+            "gold" : "1000000000",
+            "iron" : "1000000000",
+            "malachite" : "1000000000000"
+          }
+        },
+        {
+          "name" : "Amulette de donjon **ULTIME**",
+          "ATK" : "0",
+          "DEF" : "0",
+          "ressource" : {
+            "energy" : 100,
+            "stone" : "1000000000",
+            "coal" : "1000000000",
+            "copper" : "1000000000",
+            "gold" : "1000000000",
+            "iron" : "1000000000",
+            "malachite" : "1000000000000"
+          }
         }
-      },
-      {
-        "name" : "Amulette de donjon Rare",
-        "ATK" : "0",
-        "DEF" : "0",
-        "ressource" : {
-          "energy" : 100,
-          "stone" : "1000000000",
-          "coal" : "1000000000",
-          "copper" : "1000000000",
-          "gold" : "1000000000",
-          "iron" : "1000000000",
-          "malachite" : "1000000000000"
+      ]
+    },
+    "tools" : {
+      "pickaxe" : [
+        {
+          "name" : "Mains nues"
+        },
+        {
+          "name" : "Pioche en Pierre",
+          "ATK" : "0",
+          "DEF" : "0",
+          "ressource" : {
+            "energy" : 10,
+            "stone" : 5000
+          }
+        },
+        {
+          "name" : "Pioche Cuivrée",
+          "ATK" : "0",
+          "DEF" : "0",
+          "ressource" : {
+            "energy" : 20,
+            "stone" : 5000,
+            "coal" : 4000
+          }
+        },
+        {
+          "name" : "Belle pioche de Fer",
+          "ATK" : "0",
+          "DEF" : "0",
+          "ressource" : {
+            "energy" : 30,
+            "stone" : 5000,
+            "coal" : 4000,
+            "copper" : 3000
+          }
+        },
+        {
+          "name" : "Pioche Ostentatoire",
+          "ATK" : "0",
+          "DEF" : "0",
+          "ressource" : {
+            "energy" : 40,
+            "stone" : 5000,
+            "coal" : 4000,
+            "copper" : 3000,
+            "iron" : 2000
+          }
+        },
+        {
+          "name" : "Pioche en Malachite de haute qualité",
+          "ATK" : "0",
+          "DEF" : "0",
+          "ressource" : {
+            "energy" : 50,
+            "stone" : 5000,
+            "coal" : 4000,
+            "copper" : 3000,
+            "iron" : 2000,
+            "malachite" : 1000
+          }
         }
-      },
-      {
-        "name" : "Amulette de donjon Épique",
-        "ATK" : "0",
-        "DEF" : "0",
-        "ressource" : {
-          "energy" : 100,
-          "stone" : "1000000000",
-          "coal" : "1000000000",
-          "copper" : "1000000000",
-          "gold" : "1000000000",
-          "iron" : "1000000000",
-          "malachite" : "1000000000000"
+      ],
+      "sword" : [
+        {
+          "name" : "Épée en Mousse"
+        },
+        {
+          "name" : "Épée en Pierre",
+          "ATK" : "2",
+          "DEF" : "0",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "Épée en Cuivre",
+          "ATK" : "3",
+          "DEF" : "0",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : 9850
+          }
+        },
+        {
+          "name" : "Épée en Fer",
+          "ATK" : "4",
+          "DEF" : "0",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : 9850,
+            "iron" : 7580
+          }
+        },
+        {
+          "name" : "Épée en Or",
+          "ATK" : "5",
+          "DEF" : "0",
+          "ressource" : {
+            "energy" : "40",
+            "stone" : 10000,
+            "copper" : 9850,
+            "iron" : 7580,
+            "gold" : 4850
+          }
+        },
+        {
+          "name" : "Épée en Malachite",
+          "ATK" : "6",
+          "DEF" : "0",
+          "ressource" : {
+            "energy" : "50",
+            "stone" : 10000,
+            "copper" : 9850,
+            "iron" : 7580,
+            "gold" : 4850,
+            "malachite" : 2450
+          }
         }
-      },
-      {
-        "name" : "Amulette de donjon Légendaire",
-        "ATK" : "0",
-        "DEF" : "0",
-        "ressource" : {
-          "energy" : 100,
-          "stone" : "1000000000",
-          "coal" : "1000000000",
-          "copper" : "1000000000",
-          "gold" : "1000000000",
-          "iron" : "1000000000",
-          "malachite" : "1000000000000"
+      ],
+      "shield" : [
+        {
+          "name" : "Bouclier en Mousse"
+        },
+        {
+          "name" : "Bouclier en Pierre",
+          "ATK" : "0",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "Bouclier en Cuivre",
+          "ATK" : "0",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : 9850
+          }
+        },
+        {
+          "name" : "Bouclier en Fer",
+          "ATK" : "0",
+          "DEF" : "4",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : 9850,
+            "iron" : 7580
+          }
+        },
+        {
+          "name" : "Bouclier en Or",
+          "ATK" : "0",
+          "DEF" : "5",
+          "ressource" : {
+            "energy" : "40",
+            "stone" : 10000,
+            "copper" : 9850,
+            "iron" : 7580,
+            "gold" : 48500
+          }
+        },
+        {
+          "name" : "Bouclier en Malachite",
+          "ATK" : "0",
+          "DEF" : "6",
+          "ressource" : {
+            "energy" : "50",
+            "stone" : 10000,
+            "copper" : 9850,
+            "iron" : 7580,
+            "gold" : 4850,
+            "malachite" : 2450
+          }
         }
-      },
-      {
-        "name" : "Amulette de donjon **ULTIME**",
-        "ATK" : "0",
-        "DEF" : "0",
-        "ressource" : {
-          "energy" : 100,
-          "stone" : "1000000000",
-          "coal" : "1000000000",
-          "copper" : "1000000000",
-          "gold" : "1000000000",
-          "iron" : "1000000000",
-          "malachite" : "1000000000000"
+      ]
+    },
+    "armors" : {
+      "head" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Heaume de puissance",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Heaume de courroux",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Casque de cuirassier",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
         }
-      }
-    ]
-  },
-  "tools" : {
-    "pickaxe" : [
-      {
-        "name" : "Mains nues"
-      },
-      {
-        "name" : "Pioche en Pierre",
-        "ATK" : "0",
-        "DEF" : "0",
-        "ressource" : {
-          "energy" : 10,
-          "stone" : 5000
+      ],
+      "shoulders" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Espauliers de puissance",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Espauliers de courroux",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Espauliers de cuirassier",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
         }
-      },
-      {
-        "name" : "Pioche Cuivrée",
-        "ATK" : "0",
-        "DEF" : "0",
-        "ressource" : {
-          "energy" : 20,
-          "stone" : 5000,
-          "coal" : 4000
+      ],
+      "chest" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Cuirasse de puissance",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Cuirasse de courroux",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Cuirasse de cuirassier",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
         }
-      },
-      {
-        "name" : "Belle pioche de Fer",
-        "ATK" : "0",
-        "DEF" : "0",
-        "ressource" : {
-          "energy" : 30,
-          "stone" : 5000,
-          "coal" : 4000,
-          "copper" : 3000
+      ],
+      "wrists" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Brassards de puissance",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Bracelets de courroux",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Brassards de cuirassier",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
         }
-      },
-      {
-        "name" : "Pioche Ostentatoire",
-        "ATK" : "0",
-        "DEF" : "0",
-        "ressource" : {
-          "energy" : 40,
-          "stone" : 5000,
-          "coal" : 4000,
-          "copper" : 3000,
-          "iron" : 2000
+      ],
+      "hands" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Gantelets de puissance",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Gantelets de courroux",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Gantelets de cuirassier",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
         }
-      },
-      {
-        "name" : "Pioche en Malachite de haute qualité",
-        "ATK" : "0",
-        "DEF" : "0",
-        "ressource" : {
-          "energy" : 50,
-          "stone" : 5000,
-          "coal" : 4000,
-          "copper" : 3000,
-          "iron" : 2000,
-          "malachite" : 1000
+      ],
+      "waist" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Ceinture de puissance",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Baudrier de courroux",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Sangle de cuirassier",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
         }
-      }
-    ],
-    "sword" : [
-      {
-        "name" : "Épée en Mousse"
-      },
-      {
-        "name" : "Épée en Pierre",
-        "ATK" : "2",
-        "DEF" : "0",
-        "ressource" : {
-          "energy" : "10",
-          "stone" : 10000
+      ],
+      "legs" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Cuissards de puissance",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Cuissards de courroux",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Cuissards de cuirassier",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
         }
-      },
-      {
-        "name" : "Épée en Cuivre",
-        "ATK" : "3",
-        "DEF" : "0",
-        "ressource" : {
-          "energy" : "20",
-          "stone" : 10000,
-          "copper" : 9850
+      ],
+      "feet" : [
+        {
+          "name" : "Aucun"
+        },
+        {
+          "name" : "[T1] Solerets de puissance",
+          "DEF" : "1",
+          "ressource" : {
+            "energy" : "10",
+            "stone" : 10000
+          }
+        },
+        {
+          "name" : "[T2] Solerets de courroux",
+          "DEF" : "2",
+          "ressource" : {
+            "energy" : "20",
+            "stone" : 10000,
+            "copper" : "9850"
+          }
+        },
+        {
+          "name" : "[T3] Solerets de cuirassier",
+          "DEF" : "3",
+          "ressource" : {
+            "energy" : "30",
+            "stone" : 10000,
+            "copper" : "9850",
+            "iron" : "7580"
+          }
         }
-      },
-      {
-        "name" : "Épée en Fer",
-        "ATK" : "4",
-        "DEF" : "0",
-        "ressource" : {
-          "energy" : "30",
-          "stone" : 10000,
-          "copper" : 9850,
-          "iron" : 7580
-        }
-      },
-      {
-        "name" : "Épée en Or",
-        "ATK" : "5",
-        "DEF" : "0",
-        "ressource" : {
-          "energy" : "40",
-          "stone" : 10000,
-          "copper" : 9850,
-          "iron" : 7580,
-          "gold" : 4850
-        }
-      },
-      {
-        "name" : "Épée en Malachite",
-        "ATK" : "6",
-        "DEF" : "0",
-        "ressource" : {
-          "energy" : "50",
-          "stone" : 10000,
-          "copper" : 9850,
-          "iron" : 7580,
-          "gold" : 4850,
-          "malachite" : 2450
-        }
-      }
-    ],
-    "shield" : [
-      {
-        "name" : "Bouclier en Mousse"
-      },
-      {
-        "name" : "Bouclier en Pierre",
-        "ATK" : "0",
-        "DEF" : "2",
-        "ressource" : {
-          "energy" : "10",
-          "stone" : 10000
-        }
-      },
-      {
-        "name" : "Bouclier en Cuivre",
-        "ATK" : "0",
-        "DEF" : "3",
-        "ressource" : {
-          "energy" : "20",
-          "stone" : 10000,
-          "copper" : 9850
-        }
-      },
-      {
-        "name" : "Bouclier en Fer",
-        "ATK" : "0",
-        "DEF" : "4",
-        "ressource" : {
-          "energy" : "30",
-          "stone" : 10000,
-          "copper" : 9850,
-          "iron" : 7580
-        }
-      },
-      {
-        "name" : "Bouclier en Or",
-        "ATK" : "0",
-        "DEF" : "5",
-        "ressource" : {
-          "energy" : "40",
-          "stone" : 10000,
-          "copper" : 9850,
-          "iron" : 7580,
-          "gold" : 48500
-        }
-      },
-      {
-        "name" : "Bouclier en Malachite",
-        "ATK" : "0",
-        "DEF" : "6",
-        "ressource" : {
-          "energy" : "50",
-          "stone" : 10000,
-          "copper" : 9850,
-          "iron" : 7580,
-          "gold" : 4850,
-          "malachite" : 2450
-        }
-      }
-    ]
-  },
-  "armors" : {
-    "tete" : [
-      {
-        "name" : "Aucun"
-      },
-      {
-        "name" : "[T1] Heaume de puissance",
-        "DEF" : "1",
-        "ressource" : {
-          "energy" : "10",
-          "stone" : 10000
-        }
-      },
-      {
-        "name" : "[T2] Heaume de courroux",
-        "DEF" : "2",
-        "ressource" : {
-          "energy" : "20",
-          "stone" : 10000,
-          "copper" : "9850"
-        }
-      },
-      {
-        "name" : "[T3] Casque de cuirassier",
-        "DEF" : "3",
-        "ressource" : {
-          "energy" : "30",
-          "stone" : 10000,
-          "copper" : "9850",
-          "iron" : "7580"
-        }
-      }
-    ],
-    "epaule" : [
-      {
-        "name" : "Aucun"
-      },
-      {
-        "name" : "[T1] Espauliers de puissance",
-        "DEF" : "1",
-        "ressource" : {
-          "energy" : "10",
-          "stone" : 10000
-        }
-      },
-      {
-        "name" : "[T2] Espauliers de courroux",
-        "DEF" : "2",
-        "ressource" : {
-          "energy" : "20",
-          "stone" : 10000,
-          "copper" : "9850"
-        }
-      },
-      {
-        "name" : "[T3] Espauliers de cuirassier",
-        "DEF" : "3",
-        "ressource" : {
-          "energy" : "30",
-          "stone" : 10000,
-          "copper" : "9850",
-          "iron" : "7580"
-        }
-      }
-    ],
-    "torse" : [
-      {
-        "name" : "Aucun"
-      },
-      {
-        "name" : "[T1] Cuirasse de puissance",
-        "DEF" : "1",
-        "ressource" : {
-          "energy" : "10",
-          "stone" : 10000
-        }
-      },
-      {
-        "name" : "[T2] Cuirasse de courroux",
-        "DEF" : "2",
-        "ressource" : {
-          "energy" : "20",
-          "stone" : 10000,
-          "copper" : "9850"
-        }
-      },
-      {
-        "name" : "[T3] Cuirasse de cuirassier",
-        "DEF" : "3",
-        "ressource" : {
-          "energy" : "30",
-          "stone" : 10000,
-          "copper" : "9850",
-          "iron" : "7580"
-        }
-      }
-    ],
-    "poignets" : [
-      {
-        "name" : "Aucun"
-      },
-      {
-        "name" : "[T1] Brassards de puissance",
-        "DEF" : "1",
-        "ressource" : {
-          "energy" : "10",
-          "stone" : 10000
-        }
-      },
-      {
-        "name" : "[T2] Bracelets de courroux",
-        "DEF" : "2",
-        "ressource" : {
-          "energy" : "20",
-          "stone" : 10000,
-          "copper" : "9850"
-        }
-      },
-      {
-        "name" : "[T3] Brassards de cuirassier",
-        "DEF" : "3",
-        "ressource" : {
-          "energy" : "30",
-          "stone" : 10000,
-          "copper" : "9850",
-          "iron" : "7580"
-        }
-      }
-    ],
-    "mains" : [
-      {
-        "name" : "Aucun"
-      },
-      {
-        "name" : "[T1] Gantelets de puissance",
-        "DEF" : "1",
-        "ressource" : {
-          "energy" : "10",
-          "stone" : 10000
-        }
-      },
-      {
-        "name" : "[T2] Gantelets de courroux",
-        "DEF" : "2",
-        "ressource" : {
-          "energy" : "20",
-          "stone" : 10000,
-          "copper" : "9850"
-        }
-      },
-      {
-        "name" : "[T3] Gantelets de cuirassier",
-        "DEF" : "3",
-        "ressource" : {
-          "energy" : "30",
-          "stone" : 10000,
-          "copper" : "9850",
-          "iron" : "7580"
-        }
-      }
-    ],
-    "taille" : [
-      {
-        "name" : "Aucun"
-      },
-      {
-        "name" : "[T1] Ceinture de puissance",
-        "DEF" : "1",
-        "ressource" : {
-          "energy" : "10",
-          "stone" : 10000
-        }
-      },
-      {
-        "name" : "[T2] Baudrier de courroux",
-        "DEF" : "2",
-        "ressource" : {
-          "energy" : "20",
-          "stone" : 10000,
-          "copper" : "9850"
-        }
-      },
-      {
-        "name" : "[T3] Sangle de cuirassier",
-        "DEF" : "3",
-        "ressource" : {
-          "energy" : "30",
-          "stone" : 10000,
-          "copper" : "9850",
-          "iron" : "7580"
-        }
-      }
-    ],
-    "jambes" : [
-      {
-        "name" : "Aucun"
-      },
-      {
-        "name" : "[T1] Cuissards de puissance",
-        "DEF" : "1",
-        "ressource" : {
-          "energy" : "10",
-          "stone" : 10000
-        }
-      },
-      {
-        "name" : "[T2] Cuissards de courroux",
-        "DEF" : "2",
-        "ressource" : {
-          "energy" : "20",
-          "stone" : 10000,
-          "copper" : "9850"
-        }
-      },
-      {
-        "name" : "[T3] Cuissards de cuirassier",
-        "DEF" : "3",
-        "ressource" : {
-          "energy" : "30",
-          "stone" : 10000,
-          "copper" : "9850",
-          "iron" : "7580"
-        }
-      }
-    ],
-    "pieds" : [
-      {
-        "name" : "Aucun"
-      },
-      {
-        "name" : "[T1] Solerets de puissance",
-        "DEF" : "1",
-        "ressource" : {
-          "energy" : "10",
-          "stone" : 10000
-        }
-      },
-      {
-        "name" : "[T2] Solerets de courroux",
-        "DEF" : "2",
-        "ressource" : {
-          "energy" : "20",
-          "stone" : 10000,
-          "copper" : "9850"
-        }
-      },
-      {
-        "name" : "[T3] Solerets de cuirassier",
-        "DEF" : "3",
-        "ressource" : {
-          "energy" : "30",
-          "stone" : 10000,
-          "copper" : "9850",
-          "iron" : "7580"
-        }
-      }
-    ]
+      ]
+    }
   }
-}
+  
