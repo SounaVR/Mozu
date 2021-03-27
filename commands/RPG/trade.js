@@ -1,5 +1,5 @@
-const Discord = require('discord.js');
-const Emotes = require('../../utils/emotes.json');
+const Emotes = require('../../utils/emotes.json'),
+    Default  = require('../../utils/default.json');
 
 function manageTrade(client, con, args, player, member, message, objectName, objectAliases, objectName2, objectAliases2) {
     var con = client.connection
@@ -27,18 +27,18 @@ function manageTrade(client, con, args, player, member, message, objectName, obj
                 const reaction = collected.first();
 
                 if (reaction.emoji.name === '✅') {
-                if (player.data[objectName] < args[1]) {
+                if (player.ress[objectName] < args[1]) {
                     e.reactions.removeAll();
                     return e.edit(`${lang.trade.notEnoughRess}`)
                 }
-                if (member.data[objectName2] < args[4]) {
+                if (member.ress[objectName2] < args[4]) {
                     e.reactions.removeAll();
                     return e.edit(`${lang.trade.userDontHaveEnoughRessToTrade}`)
                 }
-                con.query(`UPDATE data SET ${objectName} = ${player.data[objectName] - (args[1])} WHERE userid = ${userid}`)
-                con.query(`UPDATE data SET ${objectName2} = ${player.data[objectName2] + Number(args[4])} WHERE userid = ${userid}`)
-                con.query(`UPDATE data SET ${objectName2} = ${member.data[objectName2] - (args[4])} WHERE userid = ${someone.id}`)
-                con.query(`UPDATE data SET ${objectName} = ${member.data[objectName] + Number(args[1])} WHERE userid = ${someone.id}`)
+                con.query(`UPDATE ress SET ${objectName} = ${player.ress[objectName] - (args[1])} WHERE userid = ${userid}`)
+                con.query(`UPDATE ress SET ${objectName2} = ${player.ress[objectName2] + Number(args[4])} WHERE userid = ${userid}`)
+                con.query(`UPDATE ress SET ${objectName2} = ${member.ress[objectName2] - (args[4])} WHERE userid = ${someone.id}`)
+                con.query(`UPDATE ress SET ${objectName} = ${member.ress[objectName] + Number(args[1])} WHERE userid = ${someone.id}`)
                 e.edit(`**[TRANSACTION]**\nJoueur **<@${message.author.id}>** **propose de donner** [${args[1]} **${lang.inventory[objectName]}${Emotes[objectName]}**]\nJoueur **${someone}** **est invité à donner** [${args[4]} **${lang.inventory[objectName2]}${Emotes[objectName2]}**]\nStatut : **Validé** ✅`);
                 } else if (reaction.emoji.name === '❌') {
                     e.edit(`**[TRANSACTION]**\nJoueur **<@${message.author.id}>** **propose de donner** [${args[1]} **${lang.inventory[objectName]}${Emotes[objectName]}**]\nJoueur **${someone}** **est invité à donner** [${args[4]} **${lang.inventory[objectName2]}${Emotes[objectName2]}**]\nStatut : **Annulé** ❌`);
@@ -61,7 +61,7 @@ function manageTrade(client, con, args, player, member, message, objectName, obj
 module.exports.run = async (client, message, args, getPlayer, getUser) => {
     var con = client.connection
     var player = await getPlayer(con, message.author.id);
-    if (!player) return message.channel.send(`${Default.notRegistered}`)
+    if (!player) return message.channel.send(Default.notRegistered);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
     const someone = message.mentions.users.first();
     const userid = message.author.id;
