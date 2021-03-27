@@ -1,20 +1,20 @@
 const ms      = require("parse-ms"),
-    Default = require('../../utils/default.json');
+    Default   = require("../../utils/default.json");
 
 exports.run = async (client, message, args, getPlayer, getUser) => {
     var con = client.connection
     var player = await getPlayer(con, message.author.id);
-    if (!player) return message.channel.send(`${Default.notRegistered}`);
+    if (!player) return message.channel.send(Default.notRegistered);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
     let userid = message.author.id;
     let cooldown = 3600000;
 
-    if (player.data.LastHR !== null && cooldown - (Date.now() - player.data.LastHR) > 0) {
-    let timeObj = ms(cooldown - (Date.now() -  player.data.LastHR));
+    if (player.data.lastHR !== null && cooldown - (Date.now() - player.data.lastHR) > 0) {
+    let timeObj = ms(cooldown - (Date.now() -  player.data.lastHR));
 
     return message.reply(`${lang.hr.notNow} **${timeObj.minutes}m${timeObj.seconds}sec** !`);
     } else {
-        con.query(`UPDATE data SET LastHR = ${Date.now()}, money = ${player.data.money + Number(30)} WHERE userid = ${userid}`);
+        con.query(`UPDATE data SET lastHR = ${Date.now()}, money = ${player.data.money + Number(30)} WHERE userid = ${userid}`);
 
         return message.reply(`${lang.hr.done}`);
     }
