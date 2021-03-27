@@ -1,7 +1,7 @@
 const { nFormatter } = require('../../utils/u');
 const Discord = require('discord.js'),
-    Default   = require('../../utils/default.json'),
-    Emotes    = require('../../utils/emotes.json');
+    Emotes    = require('../../utils/emotes.json'),
+    Default   = require('../../utils/default.json');
 
 async function manageProspecting(client, con, player, message, ore, quantity, gem) {
     const lang = require(`../../utils/text/${player.data.lang}.json`);
@@ -56,34 +56,39 @@ async function manageProspecting(client, con, player, message, ore, quantity, ge
 }
 
 exports.run = async (client, message, args, getPlayer, getUser) => {
-    return message.channel.send("Commande en maintenance.");
+    if (message.author.id !== "436310611748454401") return message.channel.send("Commande en maintenance.");
     const con = client.connection;
     const player = await getPlayer(con, message.author.id);
-    if (!player) return message.channel.send(`${Default.notRegistered}`);
+    if (!player) return message.channel.send(Default.notRegistered);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
 
     const prospectEmbed = new Discord.MessageEmbed()
         .setColor(message.member.displayColor)
         .setTitle(`${lang.prospect.title}`)
-        .setThumbnail("https://media.discordapp.net/attachments/691992473999769623/796006868212383755/EnchantedDiamondSwordNew.gif")
+        .attachFiles(["./utils/images/gem_thumbnail_prospect.png"])
+        .setThumbnail("attachment://gem_thumbnail_prospect.png")
         .addField("Description", `${lang.prospect.description}`)
         .addField("Documentation", `${lang.prospect.doc} [ stone/coal/copper/iron/gold/malachite ]`)
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL());
+    
+    if (!args[1] && args[0]) {
+        return message.channel.send(`${lang.prospect.specifyQuantity}`);
+    }
 
     switch (args[0]) {
         case "stone":
-            return manageProspecting(client, con, player, message, "stone", args[1], `${lang.prospect.gem}`)
+            return manageProspecting(client, con, player, message, "stone", args[1], );
         case "coal":
-            return manageProspecting(client, con, player, message, "coal", args[1], `${lang.prospect.gem}`);
+            return manageProspecting(client, con, player, message, "coal", args[1], );
         case "copper":
-            return manageProspecting(client, con, player, message, "copper", args[1], `${lang.prospect.gem}`)
+            return manageProspecting(client, con, player, message, "copper", args[1], );
         case "iron":
-            return manageProspecting(client, con, player, message, "iron", args[1], `${lang.prospect.gem}`)
+            return manageProspecting(client, con, player, message, "iron", args[1], );
         case "gold":
-            return manageProspecting(client, con, player, message, "gold", args[1], `${lang.prospect.gem}`)
+            return manageProspecting(client, con, player, message, "gold", args[1], );
         case "malachite":
-            return manageProspecting(client, con, player, message, "malachite", args[1], `${lang.prospect.gem}`)
+            return manageProspecting(client, con, player, message, "malachite", args[1], );
         default:
             return message.channel.send(prospectEmbed);
     }
