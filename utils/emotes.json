@@ -10,16 +10,16 @@
     },
     "Gear" : {
       "P1" : {
-        "rune_tete" : "<:tete:748959964663382106>",
-        "rune_epaule" : "<:epaule:748959724170379324>",
-        "rune_torse" : "<:torse:748960199389479053>",
-        "rune_poignets" : "<:poignets:748960470479798324>"
+        "rune_head" : "<:head:748959964663382106>",
+        "rune_shoulders" : "<:shoulders:748959724170379324>",
+        "rune_chest" : "<:chest:748960199389479053>",
+        "rune_wrists" : "<:wrists:748960470479798324>"
       },
       "P2" : {
-        "rune_mains" : "<:mains:748960653930135613>",
-        "rune_taille" : "<:taille:748961288960606300>",
-        "rune_jambes" : "<:jambes:748961288968994888>",
-        "rune_pieds" : "<:pieds:748961289145155684>"
+        "rune_hands" : "<:hands:748960653930135613>",
+        "rune_waist" : "<:waist:748961288960606300>",
+        "rune_legs" : "<:legs:748961288968994888>",
+        "rune_feet" : "<:feet:748961289145155684>"
       }
     }
   },
@@ -29,14 +29,14 @@
     "rune_wand" : "<:wand:748960787946537030>",
     "rune_bow" : "<:bow:771331757399212053>",
     "rune_pickaxe" : "<:pickaxe:748973331642056764>",
-    "rune_tete" : "<:tete:748959964663382106>",
-    "rune_epaule" : "<:epaule:748959724170379324>",
-    "rune_torse" : "<:torse:748960199389479053>",
-    "rune_poignets" : "<:poignets:748960470479798324>",
-    "rune_mains" : "<:mains:748960653930135613>",
-    "rune_taille" : "<:taille:748961288960606300>",
-    "rune_jambes" : "<:jambes:748961288968994888>",
-    "rune_pieds" : "<:pieds:748961289145155684>"
+    "rune_head" : "<:head:748959964663382106>",
+    "rune_shoulders" : "<:shoulders:748959724170379324>",
+    "rune_chest" : "<:chest:748960199389479053>",
+    "rune_wrists" : "<:wrists:748960470479798324>",
+    "rune_hands" : "<:hands:748960653930135613>",
+    "rune_waist" : "<:waist:748961288960606300>",
+    "rune_legs" : "<:legs:748961288968994888>",
+    "rune_feet" : "<:feet:748961289145155684>"
   },
   "trophy" : "<:trophy:800113494258614293>",
   "boost" : "<a:boost:778678466749005864>",
