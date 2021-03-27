@@ -1,11 +1,11 @@
 const { MessageEmbed } = require("discord.js");
 const { readdirSync }  = require("fs");
-const Default 		   = require('../../utils/default.json');
+const Default          = require("../../utils/default.json");
 
 exports.run = async (client, message, args, getPlayer, getUser) => {
 	const con = client.connection;
 	const player = await getPlayer(con, message.author.id);
-	if (!player) return message.channel.send(`${Default.notRegistered}`);
+    if (!player) return message.channel.send(Default.notRegistered);
 	const lang = require(`../../utils/text/${player.data.lang}.json`);
 
 	const embed = new MessageEmbed()
