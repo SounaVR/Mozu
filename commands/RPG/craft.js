@@ -1,15 +1,15 @@
 const { nFormatter } = require('../../utils/u.js');
 const Discord        = require('discord.js'),
-    Emotes           = require('../../utils/emotes.json'),
-    Default          = require('../../utils/default.json');
+    Default          = require('../../utils/default.json'),
+    Emotes           = require('../../utils/emotes.json');
 
 async function manageCraft(con, player, message, category, objectName) {
     const Craft = require(`../../utils/items/${player.data.lang}.json`);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
     const react = ["780222056007991347", "780222833808506920"];
 
-    const level = Math.floor(player.data[objectName])+1;
-    const levelTitle = Math.floor(player.data[objectName]);
+    const level = Math.floor(player.items[objectName])+1;
+    const levelTitle = Math.floor(player.items[objectName]);
 
     const embed = new Discord.MessageEmbed()
     .setColor(message.member.displayColor);
@@ -41,8 +41,8 @@ async function manageCraft(con, player, message, category, objectName) {
 
                 let txt = [];
                 for (const ressource in currentObject.ressource) {
-                    if (player.data[ressource.toLowerCase()] <= currentObject.ressource[ressource] * reponse) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource] * reponse)} (${Emotes.cancel} - Missing ${nFormatter(Math.floor((currentObject.ressource[ressource] * reponse)-player.data[ressource.toLowerCase()]))})`);
-                    if (player.data[ressource.toLowerCase()] >= currentObject.ressource[ressource] * reponse) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource] * reponse)} (${Emotes.checked})`);
+                    if (player.ress[ressource.toLowerCase()] <= currentObject.ressource[ressource] * reponse) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource] * reponse)} (${Emotes.cancel} - Missing ${nFormatter(Math.floor((currentObject.ressource[ressource] * reponse)-player.ress[ressource.toLowerCase()]))})`);
+                    if (player.ress[ressource.toLowerCase()] >= currentObject.ressource[ressource] * reponse) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource] * reponse)} (${Emotes.checked})`);
                 }
                 embed.addField("**Cost**", txt);
 
@@ -62,12 +62,12 @@ async function manageCraft(con, player, message, category, objectName) {
                             let resssql = [];
 
                             for (var ressource in currentObject.ressource) {
-                                if (player.data[ressource.toLowerCase()] < currentObject.ressource[ressource]) need.push(`sorry bro`);
+                                if (player.ress[ressource.toLowerCase()] < currentObject.ressource[ressource]) need.push(`sorry bro`);
                                 resssql.push(`${ressource} = ${ressource} - ${currentObject.ressource[ressource] * reponse}`);
                             }
                             if (need.length >= 1) return message.channel.send(`${lang.craft.notEnoughRess}`);
 
-                            con.query(`UPDATE data SET ${resssql.join(',')}, ${objectName} = ${player.data.dungeon_stone + Number(reponse)} WHERE userid = ${message.author.id}`);
+                            con.query(`UPDATE ress SET ${resssql.join(',')}, ${objectName} = ${player.ress.dungeon_stone + Number(reponse)} WHERE userid = ${message.author.id}`);
                             msg.delete();
 
                             return message.channel.send(`${lang.craft.done} **${currentObject.name}** x${reponse} !`);
@@ -85,13 +85,13 @@ async function manageCraft(con, player, message, category, objectName) {
         currentObject = Craft[category][objectName][level];
         currentObjectTitle = Craft[category][objectName][levelTitle];
     }
-    embed.setTitle(`Upgrade "${currentObjectTitle.name}" to "${currentObject.name}" ?`)
+    embed.setTitle(`${lang.craft.upgrade} "${currentObjectTitle.name}" ${lang.craft.to} "${currentObject.name}" ?`)
     let txt = [];
     for (const ressource in currentObject.ressource) {
-        if (player.data[ressource.toLowerCase()] < currentObject.ressource[ressource]) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource])} (${Emotes.cancel} - Missing ${nFormatter(Math.floor(currentObject.ressource[ressource]-player.data[ressource.toLowerCase()]))})`);
-        if (player.data[ressource.toLowerCase()] >= currentObject.ressource[ressource]) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource])} (${Emotes.checked})`);
+        if (player.ress[ressource.toLowerCase()] < currentObject.ressource[ressource]) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource])} (${Emotes.cancel} - Missing ${nFormatter(Math.floor(currentObject.ressource[ressource]-player.ress[ressource.toLowerCase()]))})`);
+        if (player.ress[ressource.toLowerCase()] >= currentObject.ressource[ressource]) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource])} (${Emotes.checked})`);
     }
-    embed.addField("**Cost**", txt);
+    embed.addField(`**${lang.craft.cost}**`, txt);
 
     const msg = await message.channel.send(embed);
 
@@ -110,12 +110,14 @@ async function manageCraft(con, player, message, category, objectName) {
                 let resssql = [];
 
                 for (var ressource in currentObject.ressource) {
-                    if (player.data[ressource.toLowerCase()] < currentObject.ressource[ressource]) need.push(`sorry bro`);
+                    if (player.ress[ressource.toLowerCase()] < currentObject.ressource[ressource]) need.push(`sorry bro`);
                     resssql.push(`${ressource} = ${ressource} - ${currentObject.ressource[ressource]}`);
                 }
                 if (need.length >= 1) return message.channel.send(`${lang.craft.notEnoughRess}`);
-
-                con.query(`UPDATE data SET ${resssql.join(',')}, ATK = ${player.data.ATK + Number(currentObject.ATK)}, DEF = ${player.data.DEF + Number(currentObject.DEF)}, ${objectName} = ${level} WHERE userid = ${message.author.id}`);
+                
+                con.query(`UPDATE data SET ATK = ${player.data.ATK + Number(currentObject.ATK)}, DEF = ${player.data.DEF + Number(currentObject.DEF)} WHERE userid = ${message.author.id}`);
+                con.query(`UPDATE ress SET ${resssql.join(',')} WHERE userid = ${message.author.id}`);
+                con.query(`UPDATE items SET ${objectName} = ${level} WHERE userid = ${message.author.id}`);
                 msg.delete();
 
                 return message.channel.send(`${lang.craft.done} **${currentObject.name}** !`);
@@ -131,19 +133,8 @@ async function manageCraft(con, player, message, category, objectName) {
 exports.run = async (client, message, args, getPlayer, getUser) => {
     const con = client.connection;
     const player = await getPlayer(con, message.author.id);
-    if (!player) return message.channel.send(`${Default.notRegistered}`);
+    if (!player) return message.channel.send(Default.notRegistered);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
-    const userid = message.author.id;
-    const cooldown = 5000;
-
-    if ((Date.now() - player.data.LastActivity) - cooldown > 0) {
-        const timeObj = Date.now() - player.data.LastActivity;
-        const gagnees = Math.floor(timeObj / cooldown);
-
-        player.data.energy = (player.data.energy || 0) + gagnees;
-        if (player.data.energy > 100) player.data.energy = 100;
-        con.query(`UPDATE data SET energy = ${player.data.energy}, LastActivity = ${Date.now()} WHERE userid = ${userid}`);
-    }
 
     const craftEmbed = new Discord.MessageEmbed()
         .setColor(message.member.displayColor)
