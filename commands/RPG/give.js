@@ -1,6 +1,5 @@
-const Discord = require('discord.js');
-const Default = require('../../utils/default.json');
-const Emotes  = require('../../utils/emotes.json');
+const Emotes  = require('../../utils/emotes.json'),
+    Default   = require('../../utils/default.json');
 
 function manageGive(client, con, args, player, member, message, objectName, objectAliases) {
     var con = client.connection
@@ -25,12 +24,12 @@ function manageGive(client, con, args, player, member, message, objectName, obje
                     const reaction = collected.first();
 
                     if (reaction.emoji.name === '✅') {
-                        if (player.data[objectName] < args[2]) {
+                        if (player.ress[objectName] < args[2]) {
                             e.reactions.removeAll();
                             return e.edit(`${lang.give.notEnoughRess}`)
                         }
-                        con.query(`UPDATE data SET ${objectName} = ${player.data[objectName] - args[2]} WHERE userid = ${userid}`)
-                        con.query(`UPDATE data SET ${objectName} = ${member.data[objectName] + Number(args[2])} WHERE userid = ${user.id}`)
+                        con.query(`UPDATE ress SET ${objectName} = ${player.ress[objectName] - args[2]} WHERE userid = ${userid}`)
+                        con.query(`UPDATE ress SET ${objectName} = ${member.ress[objectName] + Number(args[2])} WHERE userid = ${user.id}`)
                         e.edit(`${lang.give.giveSuccess} **${args[2]} ${lang.inventory[objectName]}**${Emotes[objectName]} ${lang.give.giveSuccessTo} **${user}** !`)
                     } else if (reaction.emoji.name === '❌') {
                         e.edit(`${lang.give.canceled}`);
@@ -49,7 +48,7 @@ function manageGive(client, con, args, player, member, message, objectName, obje
 module.exports.run = async (client, message, args, getPlayer, getUser) => {
     var con = client.connection
     var player = await getPlayer(con, message.author.id);
-    if (!player) return message.channel.send(`${Default.notRegistered}`)
+    if (!player) return message.channel.send(Default.notRegistered);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
     const user = message.mentions.users.first();
     const userid = message.author.id;
