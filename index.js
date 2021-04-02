@@ -31,9 +31,12 @@ const con = mysql.createConnection({
 });
 
 client.on('ready', async () => {
-    const rdy = client.channels.cache.find(ch => ch.id === "689876186599653512");
+    const rdy = client.channels.cache.find(channel => channel.id === "689876186599653512");
+    const start = client.channels.cache.find(channel => channel.id === "827453929955786794");
+    const backup = client.channels.cache.find(channel => channel.id === "827453893205688350");
 	client.connection = con;
 
+    //initialisation des db
     arraydebg.forEach(async element => {
         const thing = fs.readFileSync(`./sql/${element}.sql`).toString();
         con.query(thing, function (err) {
@@ -80,32 +83,48 @@ client.on('ready', async () => {
 
 	let dailyReset = new cron.CronJob('00 00 * * *', async () => {
 		try {
-			exec(`mysqldump --all-databases --single-transaction --quick --lock-tables=false > ./backups/full-backup-$(date +%F).sql -u Souna -p ${process.env.BACKUP_PASSWORD}`)
-			con.query(`UPDATE data SET LastRep = 0, LastDaily = 0`)
-		} catch (error) {
+			exec(`mysqldump --all-databases --single-transaction --quick --lock-tables=false > ./backups/full-backup-$(date +%F).sql -u Souna -p ${process.env.BACKUP_PASSWORD}`);
+			con.query(`UPDATE data SET LastRep = 0, LastDaily = 0`);
+            backup.send(`🟢 Daily backup done.`);
+        } catch (error) {
+            backup.send("🔴 An error occurred.");
 			if (error) throw error;
 		}
 	});
 	
 	let weekReset = new cron.CronJob('00 00 * * 1', async () => {
-		if (fs.existsSync('./backups')) {
-			exec("rm -r backups/");
-			exec("mkdir backups");
-			exec(`mysqldump --all-databases --single-transaction --quick --lock-tables=false > ./backups/full-backup-$(date +%F).sql -u Souna -p ${process.env.BACKUP_PASSWORD}`)
-		} else {
-			exec("mkdir backups");
-			exec(`mysqldump --all-databases --single-transaction --quick --lock-tables=false > ./backups/full-backup-$(date +%F).sql -u Souna -p ${process.env.BACKUP_PASSWORD}`)
-		}
+        try {
+            if (fs.existsSync('./backups')) {
+                exec("rm -r backups/");
+                exec("mkdir backups");
+                exec(`mysqldump --all-databases --single-transaction --quick --lock-tables=false > ./backups/full-backup-$(date +%F).sql -u Souna -p ${process.env.BACKUP_PASSWORD}`);
+                backup.send(`🟢 Weekly backup done.`);
+            } else {
+                exec("mkdir backups");
+                exec(`mysqldump --all-databases --single-transaction --quick --lock-tables=false > ./backups/full-backup-$(date +%F).sql -u Souna -p ${process.env.BACKUP_PASSWORD}`);
+                bakup.send(`🟢 Weekly backup done.`);
+            }
+        } catch (error) {
+            backup.send("🔴 An error occurred.");
+            if (error) throw error;
+        }
 	});
 
 	dailyReset.start();
 	weekReset.start();
 
+    //garder la db allumée
 	setInterval(function () {
 		con.query('SELECT 1');
 	}, 2, 52e+7);
 
 	await client.user.setActivity(`m!profile`, { type: "PLAYING" });
+
+    const embed = new Discord.MessageEmbed()
+		.setTitle(`[SYSTEM START] Log du ${moment().format('DD/MM/YYYY | HH:mm:ss')}`)
+		.setDescription(`${client.user.username} just started !`)
+		.setColor("#1DCC8F")
+	start.send(embed);
 
 	console.log(`${client.user.username} is ready !`);
 	rdy.send(`✅ Bot connecté et prêt !`);
@@ -150,6 +169,73 @@ client.on("message", async message => {
     } else if (player.data.ban == "1") {
         return message.channel.send(blacklist);
     }
+});
+
+client.on('guildMemberAdd', member => {
+	const guild = member.guild;
+	if (guild.id === "689471316570406914") {
+		//client.channels.cache.get("785207465784115239").setName(`Discord > ${member.guild.members.cache.filter(m => !m.user.bot).size} Members`);
+		const channel = client.channels.cache.find(channel => channel.id === "689471317203877893");
+		channel.send(`Bienvenue à ${member} !`)
+		member.roles.set(['691678064282697788'])
+	}
+});
+
+client.on('guildMemberRemove', member => {
+	const guild = member.guild;
+	if (guild.id === "689471316570406914") {
+		//client.channels.cache.get("785207465784115239").setName(`Discord > ${member.guild.members.cache.filter(m => !m.user.bot).size} Members`);
+		const channel = client.channels.cache.find(channel => channel.id === "689471317203877893");
+		channel.send(`L'utilisateur ${member}/${member.user.username}#${member.user.discriminator} est parti.`);
+	}
+});
+
+client.on('messageDelete', message => {
+	if (!message.guild) return;
+    if (!message.partial) {
+		if (message.guild.id === "689471316570406914") {
+			if (message.author.bot) return;
+			const channel = client.channels.cache.get('827457768277409792');
+			if (channel) {
+			const embed = new Discord.MessageEmbed()
+				.setTitle('Deleted Message')
+				.setColor("#0183c2")
+				.addField('Author', `${message.author.tag} (${message.author.id})`, true)
+				.addField('Channel', `${message.channel.name} (${message.channel.id})`, true)
+				.setDescription(message.content)
+				.setTimestamp();
+			if (message.attachments.array().length > 0) {
+				const result = message.attachments.array()
+				embed.setImage(result[0].proxyURL)
+			}
+			channel.send(embed);
+		} else return;
+	  } else return;
+	}
+});
+
+client.on('messageUpdate', (message, newMessage) => {
+    if (!message.guild || message.channel.type == "dm") return;
+    if (message.guild.id === "689471316570406914") {
+        if (message.author.bot) return;
+        const channel = client.channels.cache.get('827457768277409792');
+        if (channel) {
+            const embed = new Discord.MessageEmbed()
+                .setTitle('Edited Message')
+                .setColor("#0183c2");
+                if (message) embed.addField('Old message', `${message}`)
+                else embed.addField('Old message', `empty`)
+                embed.addField('New message', newMessage)
+                embed.addField('Author', `${message.author.tag} (${message.author.id})`, true)
+                embed.addField('Channel', `${message.channel.name} (${message.channel.id})`, true)
+                embed.setTimestamp();
+            if (message.attachments.array().length > 0) {
+                const result = message.attachments.array()
+                embed.setImage(result[0].proxyURL)
+            }
+            channel.send(embed);
+        } else return;
+    } else return;
 });
 
 client.login(process.env.BOT_TOKEN);
