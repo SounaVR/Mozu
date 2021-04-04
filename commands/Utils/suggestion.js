@@ -15,7 +15,6 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         .setFooter(`ID : ${message.author.id}`)
         .setTimestamp(message.createdAt);
 
-    chann.send("<@&689881923912335406>");
     chann.send(embed).then(async e => {
         await e.react("✅");
         await e.react("❌");
