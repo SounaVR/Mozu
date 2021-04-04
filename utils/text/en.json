@@ -17,7 +17,7 @@
         "helpMore": "Si vous voulez en savoir plus sur une commande : `m!help [commande]`"
     },
     "rep": {
-        "notNow": "votre point de réputation n'est pas encore disponible ! Revenez à 00h00 (UTC+1) pour récompenser une bonne personne !",
+        "notNow": "votre point de réputation n'est pas encore disponible ! Revenez à 00h00 pour récompenser une bonne personne !",
         "now" : "votre point de réputation est disponible !",
         "giveToSelf": "vous ne pouvez pas vous donner un point de réputation !",
         "giveToMozu": "je suis assez connu comme ça, merci.",
@@ -31,7 +31,7 @@
         "done": "vous avez récupéré **30** <:cash:776115188498956329>, à dans 1 heure !"
     },
     "daily": {
-        "notNow": "vous avez déjà collecté votre daily, veuillez attendre jusqu'à 00h00 (UTC+1).",
+        "notNow": "vous avez déjà collecté votre daily, veuillez attendre jusqu'à 00h00.",
         "done": "vous avez récupéré **300** <:cash:776115188498956329>, à demain !"
     },
     "bal": {
@@ -60,6 +60,7 @@
         "winnedXP": "Exp gagnée"
     },
     "inventory": {
+        "ring" : "Anneau",
         "dungeon_amulet": "Amulette de Donjon",
         "yourObjects": "Vos objets",
         "head": "Tete",
@@ -148,7 +149,7 @@
         "switch": "`m!explore switch` pour changer de zone"
     },
     "chest": {
-        "dontHaveAmulet": "vous n'avez pas l'Amulette de Donjon, pour s'y faire, tapez `m!craft dungeon_amulet` !",
+        "dontHaveAmulet": "vous n'avez pas l'Amulette de Donjon, pour y remédier, tapez `m!craft dungeon_amulet` !",
         "chests": "coffre(s)",
         "openingOf": "Ouverture de",
         "rarity": "Rareté",
