@@ -72,7 +72,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         .setTitle("ENCHANT")
         .setThumbnail("https://media.discordapp.net/attachments/691992473999769623/796006868212383755/EnchantedDiamondSwordNew.gif")
         .addField("Description", `${lang.enchant.description}`)
-        .addField("Documentation", `${lang.enchant.doc} [ pickaxe ]\n[ sword / shield ]\n[ head / shoulders / bust / wrist\nhands / waist / legs / foots ]\n[ dungeon_amulet / dungeon_stone ]}`)
+        .addField("Documentation", `${lang.enchant.doc} [ pickaxe ]\n[ sword / shield ]\n[ head / shoulders / bust / wrist\nhands / waist / legs / foots ]`)
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL());
 
