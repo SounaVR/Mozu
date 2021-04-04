@@ -1,5 +1,7 @@
+require("moment-duration-format");
 const { nFormatter } = require('../../utils/u.js');
 const Discord        = require('discord.js'),
+    moment           = require('moment'),
     Pagination       = require('discord-paginationembed'),
     Default          = require('../../utils/default.json'),
     Emotes           = require('../../utils/emotes.json');
@@ -10,6 +12,8 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     if (!player) return message.channel.send(Default.notRegistered);
     const Items = require(`../../utils/items/${player.data.lang}.json`);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
+    const maxEnergy = Items.objects.ring[player.items.ring].energy;
+    const cooldown = Items.objects.ring[player.items.ring].cooldown;
     
     const embed1 = new Discord.MessageEmbed()
         .setAuthor(`${lang.inventory.inventoryOf} ${message.author.tag}`, message.author.displayAvatarURL())
@@ -17,7 +21,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         .setFooter(`Page 1/4 | ${lang.globalHelpFooter}`)
         .addField(`⭐ Mana`, `${player.data.MANA}/50`, true)
         .addField(`❤️ PV`, `${player.data.PV}/50`, true)
-        .addField(`⚡ ${lang.inventory.energy} [+1/5s]`, `${player.ress.energy || 0}/100`, true)
+        .addField(`⚡ ${lang.inventory.energy} [+1/${moment.duration(cooldown).format("s")}s]`, `${player.ress.energy || 0}/${maxEnergy}`, true)
         .addField(`⚔️ ${lang.inventory.combat}:`, `${Emotes.chests.Guerrier.rune_sword} ATK: ${player.data.ATK}\n${Emotes.chests.Guerrier.rune_shield} DEF: ${player.data.DEF}`, true)
         .addField(`Autres:`, `${Emotes.cash} Balance: ${nFormatter(player.data.money)}\n${Emotes.rep} Reputations : ${player.data.rep}`, true)
 
@@ -73,6 +77,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     let feet = Items.armors.feet[player.items.feet]
 
     let dungeon_amulet = Items.objects.dungeon_amulet[player.items.dungeon_amulet]
+    let ring = Items.objects.ring[player.items.ring]
 
     const embed3 = new Discord.MessageEmbed()
         .setAuthor(`${lang.inventory.inventoryOf} ${message.author.tag}`, message.author.displayAvatarURL())
@@ -98,6 +103,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     .setFooter(`Page 4/4 | ${lang.globalHelpFooter}`)
     .setDescription(`${Emotes.bag} ${lang.inventory.objects}`)
     .addField(`${Emotes.dungeon_amulet} ${lang.inventory.dungeon_amulet}:`, `${dungeon_amulet.name}\n${lang.inventory.level}: ${player.items.dungeon_amulet}`, true)
+    .addField(`${Emotes.ring} ${lang.inventory.ring}:`, `${ring.name}\n${lang.inventory.level}: ${player.items.ring}`, true)
 
     const embeds = [
         embed1,
