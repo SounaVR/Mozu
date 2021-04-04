@@ -153,7 +153,9 @@ client.on("message", async message => {
 
             if (command) command.run(client, message, args, getPlayer, getUser);
         if (player) {
-            const cooldown = 5000;
+            const Items = require(`./utils/items/${player.data.lang}.json`);
+            const maxEnergy = Items.objects.ring[player.items.ring].energy;
+            const cooldown = Items.objects.ring[player.items.ring].cooldown;
             con.query(`UPDATE stats SET cmd = ${player.stats.cmd + Number(1)} WHERE userid = ${message.author.id}`);
 
             if ((Date.now() - player.data.lastActivity) - cooldown > 0) {
@@ -161,7 +163,7 @@ client.on("message", async message => {
                 const gagnees = Math.floor(timeObj / cooldown);
         
                 player.ress.energy = (player.ress.energy || 0) + gagnees;
-                if (player.ress.energy > 100) player.ress.energy = 100;
+                if (player.ress.energy > maxEnergy) player.ress.energy = maxEnergy;
                 con.query(`UPDATE ress SET energy = ${player.ress.energy} WHERE userid = ${message.author.id}`);
                 con.query(`UPDATE data SET lastActivity = ${Date.now()} WHERE userid = ${message.author.id}`);
             }
