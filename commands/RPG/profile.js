@@ -3,7 +3,7 @@ const Discord = require('discord.js'),
     Emotes    = require('../../utils/emotes.json');
 
 exports.run = async (client, message, args, getPlayer, getUser) => {
-    const databaselogs = client.channels.cache.find(channel => channel.id === "714080913583243275");
+    const databaselogs = client.channels.cache.find(channel => channel.id === "827453945131696139");
 
     const user = message.mentions.users.first() || message.author;
     const con = client.connection;
@@ -56,12 +56,12 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         }); //end query ress
 
         await con.query(`INSERT INTO items (
-        uuid, userid, dungeon_amulet,
+        uuid, userid, ring, dungeon_amulet,
         pickaxe, sword, shield,
         head, shoulders, chest, wrists,
         hands, waist, legs, feet
         ) VALUES (
-        '${Default.player.uuid}', '${message.author.id}', '${Default.player.dungeon_amulet}',
+        '${Default.player.uuid}', '${message.author.id}', '${Default.player.ring}','${Default.player.dungeon_amulet}',
         '${Default.player.pickaxe}', '${Default.player.sword}', '${Default.player.shield}',
         '${Default.player.head}', '${Default.player.shoulders}', '${Default.player.chest}', '${Default.player.wrists}',
         '${Default.player.hands}', '${Default.player.waist}', '${Default.player.legs}', '${Default.player.feet}'
@@ -132,10 +132,10 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         .addField("Badges (X)", `
         <a:sexxx:800109145889964053>`, true)
         .addField("Other stats", `
-        Commandes effectuées : ${member.data.cmd}`, true)
+        Commandes effectuées : ${member.stats.cmd}`, true)
         .addField("Ornement", "X")
-        .attachFiles(["./utils/images/ornement.png"])
-        .setImage("attachment://ornement.png")
+        // .attachFiles(["./utils/images/ornement.png"])
+        // .setImage("attachment://ornement.png")
         .setFooter(`#${member.data.uuid}`)
 
         message.channel.send(embed)
