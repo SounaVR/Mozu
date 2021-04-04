@@ -141,7 +141,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         .setTitle("CRAFT")
         .setThumbnail("https://media.discordapp.net/attachments/695902978858680390/715976650197827594/unnamed.png")
         .addField("Description", `${lang.craft.description}`)
-        .addField("Documentation", `${lang.craft.doc} [ pickaxe ]\n[ sword / shield ]\n[ head / shoulders / bust / wrist\nhands / waist / legs / foots ]\n[ dungeon_amulet / dungeon_stone ]`)
+        .addField("Documentation", `${lang.craft.doc} [ pickaxe ]\n[ sword / shield ]\n[ head / shoulders / bust / wrist\nhands / waist / legs / foots ]\n[ ring / dungeon_amulet / dungeon_stone ]`)
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL());
 
@@ -170,6 +170,8 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
             return manageCraft(con, player, message, "armors", "pieds");
         case "dungeon_amulet":
             return manageCraft(con, player, message, "objects", "dungeon_amulet");
+        case "ring":
+            return manageCraft(con, player, message, "objects", "ring");
         case "dungeon_stone":
             return manageCraft(con, player, message, "objects", "dungeon_stone");
         default:
