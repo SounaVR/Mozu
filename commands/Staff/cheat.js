@@ -3,10 +3,10 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     var con = client.connection
 
     const someone = message.mentions.members.first();
-
-    var member = await getUser(con, someone.id);
-
     if (!someone) return message.react("❌");
+    
+    var member = await getUser(con, someone.id);
+    if (!member) return message.channel.send("Not registered.")
 
     if (args[1] === "set") {
         if (!args[3]) return message.react("❌");
