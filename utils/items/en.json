@@ -11,6 +11,25 @@
           }
         }
       ],
+      "ring" : [
+          {
+              "name" : "Aucun",
+              "energy" : "100",
+              "cooldown" : "10000"
+          },
+          {
+              "name" : "Anneau puissant",
+              "ATK" : "0",
+              "DEF" : "0",
+              "energy" : "250",
+              "cooldown" : "5000",
+              "ressource" : {
+                  "energy" : "40",
+                  "stone" : "30000",
+                  "gold" : "75000"
+              }
+          }
+      ],
       "dungeon_amulet" : [
         {
           "name" : "Aucun"
