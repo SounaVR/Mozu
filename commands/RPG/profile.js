@@ -17,7 +17,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         PV, MANA, ATK, DEF,
         HR, lastHR, daily, lastDaily, rep, lastRep
         ) VALUES (
-        '${Default.player.uuid}', '${message.author.id}', '${Default.player.lang}', '${Default.player.ban}',
+        '${Default.player.uuid}', '${message.author.username}#${message.author.discriminator}', '${message.author.id}', '${Default.player.lang}', '${Default.player.ban}',
         '${Default.player.money}', '${Default.player.lastActivity}',
         '${Default.player.PV}', '${Default.player.MANA}', '${Default.player.ATK}', '${Default.player.DEF}',
         '${Default.player.HR}', '${Default.player.lastHR}', '${Default.player.daily}', '${Default.player.lastDaily}', '${Default.player.rep}', '${Default.player.lastRep}'
@@ -26,7 +26,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
             databaselogs.send(`🟢 table **data** : **${message.author.id}** aka **${message.author.tag}**.`);
             const waiting = await message.channel.send("")
             .then(async a => {
-                con.query(`SELECT COUNT(*) AS usersCount FROM data`, function (err, rows, fields) {
+                con.query(`SELECT COUNT(*) AS usersCount FROM ress`, function (err, rows, fields) {
                     if (err) throw err;
 
                     con.query(`UPDATE data SET uuid = ${rows[0].usersCount} WHERE userid = ${userid}`);
@@ -136,7 +136,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         .addField("Ornement", "X")
         // .attachFiles(["./utils/images/ornement.png"])
         // .setImage("attachment://ornement.png")
-        .setFooter(`#${member.data.uuid}`)
+        .setFooter(`#${member.stats.uuid}`)
 
         message.channel.send(embed)
     }
