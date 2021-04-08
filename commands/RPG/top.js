@@ -7,31 +7,21 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     if (!player) return message.channel.send(Default.notRegistered);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
 
-    //if (!args[0]) return message.channel.send(`${lang.top.correctUsage}`);
+    const top10query = `SELECT username, money FROM data ORDER BY cast(money as SIGNED) DESC LIMIT 10`
 
-    //if (args[0] && ["money", "argent"].includes(args[0].toLowerCase())) {
-        const top10query = `SELECT userid, money FROM data ORDER BY cast(money as SIGNED) DESC LIMIT 10`
-
-        const query = querytxt => {
-            return new Promise((resolve, reject) => {
-            con.query(querytxt, (err, results, fields) => {
-                if (err) reject(err);
-                resolve([results, fields]);
-            });
-            });
-        };
-        const [results, fields] = await query(top10query);
-
-        userids = results.id;
-
-        userids.forEach(element => {
-            return console.log('element:', element);
+    const query = querytxt => {
+        return new Promise((resolve, reject) => {
+        con.query(querytxt, (err, results, fields) => {
+            if (err) reject(err);
+            resolve([results, fields]);
         });
+        });
+    };
+    const [results, fields] = await query(top10query);
+    const map1 = results.map((results, position) => `#${position + 1} **${results.username}** : ${results.money}💰`)
 
-        const map1 = results.map((results, position) => `#${position + 1} **${results.id}** : ${results.money}💰`)
+    return message.channel.send("🏆 __**Classement de la moula**__ 🏆\n\n" + map1.join("\n"));
 
-        return message.channel.send("🏆 __**Classement des Pièces de Phénix**__ 🏆\n\n" + map1.join("\n"));
-    //}
 };
 
 exports.help = {
