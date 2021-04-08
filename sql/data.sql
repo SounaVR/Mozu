@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS data (
     uuid bigint,
+	username text,
 	userid bigint,
 
 	lang text,
