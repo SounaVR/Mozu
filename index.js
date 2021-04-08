@@ -173,6 +173,13 @@ client.on("message", async message => {
     }
 });
 
+client.on("userUpdate", async function(oldUser, newUser) {
+    const player = await getPlayer(con, oldUser.id);
+	if (player) {
+		con.query(`UPDATE data SET username = "${newUser.username + "#" + newUser.discriminator}" WHERE userid = ${oldUser.id}`);
+	} else return;
+});
+
 client.on('guildMemberAdd', member => {
 	const guild = member.guild;
 	if (guild.id === "689471316570406914") {
