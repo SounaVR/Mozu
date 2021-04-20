@@ -10,15 +10,16 @@ async function manageProspecting(client, con, player, message, ore, quantity, ge
     const embed = new Discord.MessageEmbed()
     .setColor(message.member.displayColor);
 
-    const getNeededRessource = quantity * 100;
+    const getNeededRessource = quantity * 10000;
 
     embed.setTitle(`Do you want to prospect that ?`)
     let txt = [];
 
-    if (player.data[ore] < getNeededRessource) txt.push(`${Emotes[ore]} ${ore} : ${nFormatter(getNeededRessource)} (${Emotes.cancel} - Missing ${nFormatter(Math.floor(getNeededRessource-player.data[ore]))})`);
-    if (player.data[ore] >= getNeededRessource) txt.push(`${Emotes[ore]} ${ore} : ${nFormatter(getNeededRessource)} (${Emotes.checked})`);
+    if (player.ress[ore] < getNeededRessource) txt.push(`${Emotes[ore]} ${ore} : ${nFormatter(getNeededRessource)} (${Emotes.cancel} - Missing ${nFormatter(Math.floor(getNeededRessource-player.ress[ore]))})`);
+    if (player.ress[ore] >= getNeededRessource) txt.push(`${Emotes[ore]} ${ore} : ${nFormatter(getNeededRessource)} (${Emotes.checked})`);
 
     embed.addField("**Cost**", txt);
+    embed.addField("**Reward**", `${Emotes[gem]} ${gem} x${quantity}`)
 
     const msg = await message.channel.send(embed);
 
@@ -42,9 +43,10 @@ async function manageProspecting(client, con, player, message, ore, quantity, ge
 
                 if (need.length >= 1) return message.channel.send(`${lang.prospect.notEnoughRess}`);
 
-                con.query(`UPDATE data SET ${resssql.join(',')}, ${gem} = ${player.data[gem] + Number(quantity)} WHERE userid = ${message.author.id}`);
+                con.query(`UPDATE ress SET ${resssql.join(',')} WHERE userid = ${message.author.id}`);
+                con.query(`UPDATE prospect SET ${gem} = ${player.prospect[gem] + Number(quantity)} WHERE userid = ${message.author.id}`);
 
-                return message.channel.send(`${lang.prospect.success} : ${gem} x${quantity}`);
+                return message.channel.send(`${lang.prospect.success} : **${gem}** x${quantity} !`);
 
             case react[1]:
                 msg.delete();
@@ -78,17 +80,17 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 
     switch (args[0]) {
         case "stone":
-            return manageProspecting(client, con, player, message, "stone", args[1], );
+            return manageProspecting(client, con, player, message, "stone", args[1], "sapphire");
         case "coal":
-            return manageProspecting(client, con, player, message, "coal", args[1], );
+            return manageProspecting(client, con, player, message, "coal", args[1], "amber");
         case "copper":
-            return manageProspecting(client, con, player, message, "copper", args[1], );
+            return manageProspecting(client, con, player, message, "copper", args[1], "citrine");
         case "iron":
-            return manageProspecting(client, con, player, message, "iron", args[1], );
+            return manageProspecting(client, con, player, message, "iron", args[1], "ruby");
         case "gold":
-            return manageProspecting(client, con, player, message, "gold", args[1], );
+            return manageProspecting(client, con, player, message, "gold", args[1], "jade");
         case "malachite":
-            return manageProspecting(client, con, player, message, "malachite", args[1], );
+            return manageProspecting(client, con, player, message, "malachite", args[1], "amethyst");
         default:
             return message.channel.send(prospectEmbed);
     }
@@ -96,8 +98,8 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 
 exports.help = {
     name: "prospect",
-    description_fr: "Cherche des gemmes précieuses dans 5 minerais d'un métal de faible valeur. Cela détruira le minerai.",
-    description_en: "Look for precious gems in 5 ores of a low value metal. This will destroy the ore.",
+    description_fr: "Cherche des gemmes précieuses dans 5 minerais d'un métal de faible valeur. Cela détruira les minerais.",
+    description_en: "Look for precious gems in 5 ores of a low value metal. This will destroy the ores.",
     usage_fr: "<minerai> <quantité>",
     usage_en: "<ore> <quantity>",
     category: "RPG",
