@@ -9,51 +9,53 @@ function manageTrade(client, con, args, player, member, message, objectName, obj
 
     if (args[0] && objectAliases.includes(args[0].toLowerCase()) || objectName.includes(args[0].toLowerCase())) {
         if (args[3] && objectAliases2.includes(args[3].toLowerCase()) || objectName2.includes(args[3].toLowerCase())) {
-        args[1] = Math.floor(args[1])
-        args[4] = Math.floor(args[4])
+            args[1] = Math.floor(args[1])
+            args[4] = Math.floor(args[4])
 
-        if (args[1] > 0) {
-        if (args[4] > 0) {
-            message.channel.send(`**[TRANSACTION]**\nJoueur **<@${message.author.id}>** **propose de donner** [${args[1]} **${lang.inventory[objectName]}${Emotes[objectName]}**]\nJoueur **${someone}** **est invité à donner** [${args[4]} **${lang.inventory[objectName2]}${Emotes[objectName2]}**]\nStatut : **En attente** ${Emotes.loading}`).then(async e => {
-                await e.react("✅");
-                await e.react("❌");
+            if (args[1] > 0) {
+                if (args[4] > 0) {
+                    message.channel.send(`**[TRANSACTION]**\nJoueur **<@${message.author.id}>** **propose de donner** [${args[1]} **${lang.inventory[objectName]}${Emotes[objectName]}**]\nJoueur **${someone}** **est invité à donner** [${args[4]} **${lang.inventory[objectName2]}${Emotes[objectName2]}**]\nStatut : **En attente** ${Emotes.loading}`).then(async e => {
+                        await e.react("✅");
+                        await e.react("❌");
 
-                const filter = (reaction, user) => {
-                return ['✅', '❌'].includes(reaction.emoji.name) && user.id === (message.author.id && someone.id);
-                };
+                        const filter = (reaction, user) => {
+                            return ['✅', '❌'].includes(reaction.emoji.name) && user.id === (message.author.id && someone.id);
+                        };
 
-                e.awaitReactions(filter, { max: 1, time: 45000, errors: ['time']})
-                .then(async collected => {
-                const reaction = collected.first();
+                        e.awaitReactions(filter, { max: 1, time: 45000, errors: ['time']})
+                        .then(async collected => {
+                            const reaction = collected.first();
 
-                if (reaction.emoji.name === '✅') {
-                if (player.ress[objectName] < args[1]) {
-                    e.reactions.removeAll();
-                    return e.edit(`${lang.trade.notEnoughRess}`)
+                            if (reaction.emoji.name === '✅') {
+                                if (player.ress[objectName] < args[1]) {
+                                    e.reactions.removeAll();
+                                    return e.edit(`${lang.trade.notEnoughRess}`)
+                                }
+                                if (member.ress[objectName2] < args[4]) {
+                                    e.reactions.removeAll();
+                                    return e.edit(`${lang.trade.userDontHaveEnoughRessToTrade}`)
+                                }
+
+                                con.query(`UPDATE ress SET ${objectName} = ${player.ress[objectName] - (args[1])} WHERE userid = ${userid}`)
+                                con.query(`UPDATE ress SET ${objectName2} = ${player.ress[objectName2] + Number(args[4])} WHERE userid = ${userid}`)
+                                con.query(`UPDATE ress SET ${objectName2} = ${member.ress[objectName2] - (args[4])} WHERE userid = ${someone.id}`)
+                                con.query(`UPDATE ress SET ${objectName} = ${member.ress[objectName] + Number(args[1])} WHERE userid = ${someone.id}`)
+
+                                e.edit(`**[TRANSACTION]**\nJoueur **<@${message.author.id}>** **propose de donner** [${args[1]} **${lang.inventory[objectName]}${Emotes[objectName]}**]\nJoueur **${someone}** **est invité à donner** [${args[4]} **${lang.inventory[objectName2]}${Emotes[objectName2]}**]\nStatut : **Validé** ✅`);
+                            } else if (reaction.emoji.name === '❌') {
+                                e.edit(`**[TRANSACTION]**\nJoueur **<@${message.author.id}>** **propose de donner** [${args[1]} **${lang.inventory[objectName]}${Emotes[objectName]}**]\nJoueur **${someone}** **est invité à donner** [${args[4]} **${lang.inventory[objectName2]}${Emotes[objectName2]}**]\nStatut : **Annulé** ❌`);
+                            }
+                            e.reactions.removeAll();
+                        }).catch(collected => {
+                            e.reactions.removeAll();
+                        })
+                    });
+                } else {
+                    return message.channel.send(`${lang.trade.needSpecifyAmount}`)
                 }
-                if (member.ress[objectName2] < args[4]) {
-                    e.reactions.removeAll();
-                    return e.edit(`${lang.trade.userDontHaveEnoughRessToTrade}`)
-                }
-                con.query(`UPDATE ress SET ${objectName} = ${player.ress[objectName] - (args[1])} WHERE userid = ${userid}`)
-                con.query(`UPDATE ress SET ${objectName2} = ${player.ress[objectName2] + Number(args[4])} WHERE userid = ${userid}`)
-                con.query(`UPDATE ress SET ${objectName2} = ${member.ress[objectName2] - (args[4])} WHERE userid = ${someone.id}`)
-                con.query(`UPDATE ress SET ${objectName} = ${member.ress[objectName] + Number(args[1])} WHERE userid = ${someone.id}`)
-                e.edit(`**[TRANSACTION]**\nJoueur **<@${message.author.id}>** **propose de donner** [${args[1]} **${lang.inventory[objectName]}${Emotes[objectName]}**]\nJoueur **${someone}** **est invité à donner** [${args[4]} **${lang.inventory[objectName2]}${Emotes[objectName2]}**]\nStatut : **Validé** ✅`);
-                } else if (reaction.emoji.name === '❌') {
-                    e.edit(`**[TRANSACTION]**\nJoueur **<@${message.author.id}>** **propose de donner** [${args[1]} **${lang.inventory[objectName]}${Emotes[objectName]}**]\nJoueur **${someone}** **est invité à donner** [${args[4]} **${lang.inventory[objectName2]}${Emotes[objectName2]}**]\nStatut : **Annulé** ❌`);
-                }
-                e.reactions.removeAll();
-                }).catch(collected => {
-                e.reactions.removeAll();
-                })
-            });
             } else {
-            return message.channel.send(`${lang.trade.needSpecifyAmount}`)
+                return message.channel.send(`${lang.trade.needSpecifyAmount}`)
             }
-        } else {
-            return message.channel.send(`${lang.trade.needSpecifyAmount}`)
-        }
         }
     }
 }
