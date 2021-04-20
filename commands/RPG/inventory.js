@@ -60,7 +60,8 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     embed2.addField(`${Emotes.ressource} ${lang.inventory.ressources} (2)`, txt2, true)
     embed2.addField(`${Emotes.rune} ${lang.inventory.runes}`, `${txt3.join(" ")}\n${txt4.join(" ")}\n${txt5.join(" ")}\n${txt6.join(" ")}`)
     embed2.addField(`${Emotes.bag} ${lang.inventory.yourObjects}`, `${Emotes.dungeon_stone} ${player.ress.dungeon_stone}`)
-    embed2.addField(`${Emotes.open_chest} ${lang.chest.rarity}/${lang.inventory.chests}`, `${Emotes.chest_d} ${player.ress.chest_d} ${Emotes.chest_c} ${player.ress.chest_c} ${Emotes.chest_b} ${player.ress.chest_b} ${Emotes.chest_a} ${player.ress.chest_a} ${Emotes.chest_s} ${player.ress.chest_s}`)
+    embed2.addField(`${Emotes.open_chest} ${lang.inventory.chests}`, `${Emotes.chest_d} ${player.ress.chest_d} ${Emotes.chest_c} ${player.ress.chest_c} ${Emotes.chest_b} ${player.ress.chest_b} ${Emotes.chest_a} ${player.ress.chest_a} ${Emotes.chest_s} ${player.ress.chest_s}`)
+    embed2.addField(`${Emotes.gem} ${lang.inventory.gems}`, `${Emotes.sapphire} ${player.prospect.sapphire} ${Emotes.amber} ${player.prospect.amber} ${Emotes.citrine} ${player.prospect.citrine} ${Emotes.ruby} ${player.prospect.ruby} ${Emotes.jade} ${player.prospect.jade} ${Emotes.amethyst} ${player.prospect.amethyst}`)
 
     let pickaxe = Items.tools.pickaxe[player.items.pickaxe];
 
