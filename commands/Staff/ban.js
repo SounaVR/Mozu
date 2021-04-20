@@ -3,6 +3,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     var con = client.connection
 
     const someone = message.mentions.members.first();
+    const log = client.channels.cache.find(channel => channel.id === "833863209228042252");
 
     if (!someone) {
         return message.reply("please mention an user.");
@@ -10,6 +11,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     if (!client.config.owners.includes(someone.id)) {
         con.query(`UPDATE data SET ban = 1 WHERE userid = ${someone.id}`);
         message.channel.send(`${someone} a été banni !`);
+        log.send(`${someone} a été banni !`);
     }
 };
 
