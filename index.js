@@ -2,12 +2,13 @@ require('dotenv').config();
 const { getUser, getPlayer }      = require("./utils/u");
 const { sep } 					  = require("path");
 const { success, error, warning } = require("log-symbols");
-const fs	 = require('fs'),
-	moment   = require('moment'),
-	cron     = require('cron'),
-	Discord  = require("discord.js"),
-	config   = require("./utils/config"),
-  	mysql    = require('mysql');
+const fs	  = require('fs'),
+	moment    = require('moment'),
+	cron      = require('cron'),
+	Discord   = require("discord.js"),
+	config    = require("./utils/config"),
+	roleClaim = require("./utils/reaction_role/role-claim");
+  	mysql     = require('mysql');
 const arraydebg = ["data", "ress", "items", "enchant", "prospect", "stats"];
 
 const client = new Discord.Client({
@@ -112,6 +113,7 @@ client.on('ready', async () => {
 
 	dailyReset.start();
 	weekReset.start();
+	roleClaim(client);
 
     //garder la db allumée
 	setInterval(function () {
@@ -204,6 +206,7 @@ client.on('messageDelete', message => {
     if (!message.partial) {
 		if (message.guild.id === "689471316570406914") {
 			if (message.author.bot) return;
+			if (message.length <= 0) return;
 			const channel = client.channels.cache.get('827457768277409792');
 			if (channel) {
 			const embed = new Discord.MessageEmbed()
