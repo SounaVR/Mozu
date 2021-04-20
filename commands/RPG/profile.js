@@ -13,7 +13,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 
     if (!player) {
         await con.query(`INSERT INTO data (
-        uuid, userid, lang, ban, money, lastActivity,
+        uuid, username, userid, lang, ban, money, lastActivity,
         PV, MANA, ATK, DEF,
         HR, lastHR, daily, lastDaily, rep, lastRep
         ) VALUES (
@@ -26,7 +26,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
             databaselogs.send(`🟢 table **data** : **${message.author.id}** aka **${message.author.tag}**.`);
             const waiting = await message.channel.send("")
             .then(async a => {
-                con.query(`SELECT COUNT(*) AS usersCount FROM ress`, function (err, rows, fields) {
+                con.query(`SELECT COUNT(*) AS usersCount FROM data`, function (err, rows, fields) {
                     if (err) throw err;
 
                     con.query(`UPDATE data SET uuid = ${rows[0].usersCount} WHERE userid = ${userid}`);
@@ -96,9 +96,11 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         }); //end query enchant
 
         await con.query(`INSERT INTO prospect (
-        uuid, userid
+        uuid, userid, sapphire, amber,
+        citrine, ruby, jade, amethyst
         ) VALUES (
-        '${Default.player.uuid}', '${message.author.id}'
+        '${Default.player.uuid}', '${message.author.id}', '${Default.player.sapphire}', '${Default.player.amber}',
+        '${Default.player.citrine}', '${Default.player.ruby}', '${Default.player.jade}', '${Default.player.amethyst}'
         )`, async function(err) {
             if (err) return databaselogs.send(`🔴 table **prospect** > An error occurred :\n**${err}**`);
             databaselogs.send(`🟢 table **prospect** : **${message.author.id}** aka **${message.author.tag}**.`);
