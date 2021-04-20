@@ -20,49 +20,49 @@
         ]
     },
     "armors" : {
-        "tete" : [
-        {
-            "ATK" : 0,
-            "DEF" : 1
-        }
-        ],
-        "epaule" : [
-        {
-            "ATK" : 0,
-            "DEF" : 1
-        }
-        ],
-        "torse" : [
+        "head" : [
             {
                 "ATK" : 0,
                 "DEF" : 1
             }
         ],
-        "poignets" : [
+        "shoulders" : [
             {
                 "ATK" : 0,
                 "DEF" : 1
             }
         ],
-        "mains" : [
+        "chest" : [
             {
                 "ATK" : 0,
                 "DEF" : 1
             }
         ],
-        "taille" : [
+        "wrists" : [
             {
                 "ATK" : 0,
                 "DEF" : 1
             }
         ],
-        "jambes" : [
+        "hands" : [
             {
                 "ATK" : 0,
                 "DEF" : 1
             }
         ],
-        "pieds" : [
+        "waist" : [
+            {
+                "ATK" : 0,
+                "DEF" : 1
+            }
+        ],
+        "legs" : [
+            {
+                "ATK" : 0,
+                "DEF" : 1
+            }
+        ],
+        "feet" : [
             {
                 "ATK" : 0,
                 "DEF" : 1
