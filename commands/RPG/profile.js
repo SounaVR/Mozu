@@ -24,14 +24,6 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         )`, async function(err) {
             if (err) return databaselogs.send(`🔴 table **data** > An error occurred :\n**${err}**`);
             databaselogs.send(`🟢 table **data** : **${message.author.id}** aka **${message.author.tag}**.`);
-            const waiting = await message.channel.send("")
-            .then(async a => {
-                con.query(`SELECT COUNT(*) AS usersCount FROM data`, function (err, rows, fields) {
-                    if (err) throw err;
-
-                    con.query(`UPDATE data SET uuid = ${rows[0].usersCount} WHERE userid = ${userid}`);
-                });
-            });
         }); //end query data
 
         await con.query(`INSERT INTO ress (
@@ -52,6 +44,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
                 if (err) throw err;
 
                 con.query(`UPDATE ress SET uuid = ${rows[0].usersCount} WHERE userid = ${userid}`);
+                con.query(`UPDATE data SET uuid = ${rows[0].usersCount} WHERE userid = ${userid}`);
             });
         }); //end query ress
 
@@ -128,7 +121,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     } else {
         if (!member) return message.reply("il est pas inscrit")
         const embed = new Discord.MessageEmbed()
-        .setAuthor(user.tag, message.author.displayAvatarURL())
+        .setAuthor(user.tag, user.displayAvatarURL())
         .addField("informations", `
         :notepad_spiral: Titre : null\n${Emotes.trophy}Points de succès : X`, true)
         .addField("Badges (X)", `
