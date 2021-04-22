@@ -127,7 +127,8 @@
           "ressource" : {
             "energy" : 20,
             "stone" : 5000,
-            "coal" : 4000
+            "coal" : 4000,
+            "copper" : 3000
           }
         },
         {
@@ -138,7 +139,8 @@
             "energy" : 30,
             "stone" : 5000,
             "coal" : 4000,
-            "copper" : 3000
+            "copper" : 3000,
+            "iron" : 2000
           }
         },
         {
@@ -150,7 +152,8 @@
             "stone" : 5000,
             "coal" : 4000,
             "copper" : 3000,
-            "iron" : 2000
+            "iron" : 2000,
+            "gold" : 1000
           }
         },
         {
@@ -159,10 +162,11 @@
           "DEF" : "0",
           "ressource" : {
             "energy" : 50,
-            "stone" : 5000,
-            "coal" : 4000,
-            "copper" : 3000,
-            "iron" : 2000,
+            "stone" : 6000,
+            "coal" : 5000,
+            "copper" : 4000,
+            "iron" : 3000,
+            "gold" : 2000,
             "malachite" : 1000
           }
         }
