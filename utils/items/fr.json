@@ -115,6 +115,7 @@
         "name" : "Pioche en Pierre",
         "ATK" : "0",
         "DEF" : "0",
+        "power" : "1",
         "ressource" : {
           "energy" : 10,
           "stone" : 5000
@@ -124,6 +125,7 @@
         "name" : "Pioche Cuivrée",
         "ATK" : "0",
         "DEF" : "0",
+        "power" : "2",
         "ressource" : {
           "energy" : 20,
           "stone" : 5000,
@@ -135,6 +137,7 @@
         "name" : "Belle pioche de Fer",
         "ATK" : "0",
         "DEF" : "0",
+        "power" : "3",
         "ressource" : {
           "energy" : 30,
           "stone" : 5000,
@@ -147,6 +150,7 @@
         "name" : "Pioche Ostentatoire",
         "ATK" : "0",
         "DEF" : "0",
+        "power" : "4",
         "ressource" : {
           "energy" : 40,
           "stone" : 5000,
@@ -160,6 +164,7 @@
         "name" : "Pioche en Malachite de haute qualité",
         "ATK" : "0",
         "DEF" : "0",
+        "power" : "5",
         "ressource" : {
           "energy" : 50,
           "stone" : 6000,
@@ -299,6 +304,7 @@
       },
       {
         "name" : "[T1] Heaume de puissance",
+        "ATK" : "0",
         "DEF" : "1",
         "ressource" : {
           "energy" : "10",
@@ -307,6 +313,7 @@
       },
       {
         "name" : "[T2] Heaume de courroux",
+        "ATK" : "0",
         "DEF" : "2",
         "ressource" : {
           "energy" : "20",
@@ -316,6 +323,7 @@
       },
       {
         "name" : "[T3] Casque de cuirassier",
+        "ATK" : "0",
         "DEF" : "3",
         "ressource" : {
           "energy" : "30",
@@ -331,6 +339,7 @@
       },
       {
         "name" : "[T1] Espauliers de puissance",
+        "ATK" : "0",
         "DEF" : "1",
         "ressource" : {
           "energy" : "10",
@@ -339,6 +348,7 @@
       },
       {
         "name" : "[T2] Espauliers de courroux",
+        "ATK" : "0",
         "DEF" : "2",
         "ressource" : {
           "energy" : "20",
@@ -348,6 +358,7 @@
       },
       {
         "name" : "[T3] Espauliers de cuirassier",
+        "ATK" : "0",
         "DEF" : "3",
         "ressource" : {
           "energy" : "30",
@@ -363,6 +374,7 @@
       },
       {
         "name" : "[T1] Cuirasse de puissance",
+        "ATK" : "0",
         "DEF" : "1",
         "ressource" : {
           "energy" : "10",
@@ -371,6 +383,7 @@
       },
       {
         "name" : "[T2] Cuirasse de courroux",
+        "ATK" : "0",
         "DEF" : "2",
         "ressource" : {
           "energy" : "20",
@@ -380,6 +393,7 @@
       },
       {
         "name" : "[T3] Cuirasse de cuirassier",
+        "ATK" : "0",
         "DEF" : "3",
         "ressource" : {
           "energy" : "30",
@@ -395,6 +409,7 @@
       },
       {
         "name" : "[T1] Brassards de puissance",
+        "ATK" : "0",
         "DEF" : "1",
         "ressource" : {
           "energy" : "10",
@@ -403,6 +418,7 @@
       },
       {
         "name" : "[T2] Bracelets de courroux",
+        "ATK" : "0",
         "DEF" : "2",
         "ressource" : {
           "energy" : "20",
@@ -412,6 +428,7 @@
       },
       {
         "name" : "[T3] Brassards de cuirassier",
+        "ATK" : "0",
         "DEF" : "3",
         "ressource" : {
           "energy" : "30",
@@ -427,6 +444,7 @@
       },
       {
         "name" : "[T1] Gantelets de puissance",
+        "ATK" : "0",
         "DEF" : "1",
         "ressource" : {
           "energy" : "10",
@@ -435,6 +453,7 @@
       },
       {
         "name" : "[T2] Gantelets de courroux",
+        "ATK" : "0",
         "DEF" : "2",
         "ressource" : {
           "energy" : "20",
@@ -444,6 +463,7 @@
       },
       {
         "name" : "[T3] Gantelets de cuirassier",
+        "ATK" : "0",
         "DEF" : "3",
         "ressource" : {
           "energy" : "30",
@@ -459,6 +479,7 @@
       },
       {
         "name" : "[T1] Ceinture de puissance",
+        "ATK" : "0",
         "DEF" : "1",
         "ressource" : {
           "energy" : "10",
@@ -467,6 +488,7 @@
       },
       {
         "name" : "[T2] Baudrier de courroux",
+        "ATK" : "0",
         "DEF" : "2",
         "ressource" : {
           "energy" : "20",
@@ -476,6 +498,7 @@
       },
       {
         "name" : "[T3] Sangle de cuirassier",
+        "ATK" : "0",
         "DEF" : "3",
         "ressource" : {
           "energy" : "30",
@@ -491,6 +514,7 @@
       },
       {
         "name" : "[T1] Cuissards de puissance",
+        "ATK" : "0",
         "DEF" : "1",
         "ressource" : {
           "energy" : "10",
@@ -499,6 +523,7 @@
       },
       {
         "name" : "[T2] Cuissards de courroux",
+        "ATK" : "0",
         "DEF" : "2",
         "ressource" : {
           "energy" : "20",
@@ -508,6 +533,7 @@
       },
       {
         "name" : "[T3] Cuissards de cuirassier",
+        "ATK" : "0",
         "DEF" : "3",
         "ressource" : {
           "energy" : "30",
@@ -523,6 +549,7 @@
       },
       {
         "name" : "[T1] Solerets de puissance",
+        "ATK" : "0",
         "DEF" : "1",
         "ressource" : {
           "energy" : "10",
@@ -531,6 +558,7 @@
       },
       {
         "name" : "[T2] Solerets de courroux",
+        "ATK" : "0",
         "DEF" : "2",
         "ressource" : {
           "energy" : "20",
@@ -540,6 +568,7 @@
       },
       {
         "name" : "[T3] Solerets de cuirassier",
+        "ATK" : "0",
         "DEF" : "3",
         "ressource" : {
           "energy" : "30",
