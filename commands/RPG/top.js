@@ -1,7 +1,6 @@
 const Default = require("../../utils/default.json");
 
 exports.run = async (client, message, args, getPlayer, getUser) => {
-    if (message.author.id !== "436310611748454401") return message.channel.send("Commande en maintenance.");
     var con = client.connection
     var player = await getPlayer(con, message.author.id);
     if (!player) return message.channel.send(Default.notRegistered);
