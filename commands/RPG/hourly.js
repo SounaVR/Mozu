@@ -1,5 +1,6 @@
 const ms      = require("parse-ms"),
-    Default   = require("../../utils/default.json");
+    Default   = require("../../utils/default.json"),
+    Emotes    = require("../../utils/emotes.json");
 
 exports.run = async (client, message, args, getPlayer, getUser) => {
     var con = client.connection
@@ -8,6 +9,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     const lang = require(`../../utils/text/${player.data.lang}.json`);
     let userid = message.author.id;
     let cooldown = 3600000;
+    const energy = Math.ceil(Math.random() * 15)+5;
 
     if (player.data.lastHR !== null && cooldown - (Date.now() - player.data.lastHR) > 0) {
     let timeObj = ms(cooldown - (Date.now() -  player.data.lastHR));
@@ -15,8 +17,9 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     return message.reply(`${lang.hr.notNow} **${timeObj.minutes}m${timeObj.seconds}sec** !`);
     } else {
         con.query(`UPDATE data SET lastHR = ${Date.now()}, money = ${player.data.money + Number(30)} WHERE userid = ${userid}`);
+        con.query(`UPDATE ress SET energy = ${player.ress.energy + Number(energy)} WHERE userid = ${userid}`);
 
-        return message.reply(`${lang.hr.done}`);
+        return message.reply(`${lang.hr.done} ${energy} ${Emotes.energy}, ${lang.hr.seeyoulater}`);
     }
 };
 
