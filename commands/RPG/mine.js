@@ -41,11 +41,11 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     let pickaxe = Items.tools.pickaxe[player.items.pickaxe];
 
     const embed = new Discord.MessageEmbed()
-        .setAuthor(message.author.username, message.author.displayAvatarURL())
+        .setAuthor(message.author.tag, message.author.displayAvatarURL())
         .setColor(message.member.displayColor)
         .setThumbnail("https://equity.guru/wp-content/uploads/2018/01/blockchain2.gif")
         .addField(lang.mine.title, ressLoot.join("\n"))
-        .addField(lang.mine.infos, `⚡ ${lang.mine.usedEnergy} : ${manaAmount}\n⚡ ${lang.mine.remainingEnergy} : ${player.ress.energy-manaAmount}\n${Emotes.chests.Tools.rune_pickaxe} ${pickaxe.name}\n${lang.inventory.level}: ${player.items.pickaxe}\n${lang.inventory.enchant}: ${player.enchant.ench_pickaxe}`)
+        .addField(lang.mine.infos, `⚡ ${lang.mine.usedEnergy} : ${manaAmount}\n⚡ ${lang.mine.remainingEnergy} : ${player.ress.energy-manaAmount}\n${Emotes.chests.Tools.rune_pickaxe} ${pickaxe.name}\n💪 ${lang.mine.power} ${player.data.power}`);//\n${lang.inventory.level}: ${player.items.pickaxe}\n${lang.inventory.enchant}: ${player.enchant.ench_pickaxe}`)
 
     message.channel.send(embed);
 
