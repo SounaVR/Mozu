@@ -22,7 +22,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         .addField(`⭐ Mana`, `${player.data.MANA}/50`, true)
         .addField(`❤️ PV`, `${player.data.PV}/50`, true)
         .addField(`⚡ ${lang.inventory.energy} [+1/${moment.duration(cooldown).format("s")}s]`, `${player.ress.energy || 0}/${maxEnergy}`, true)
-        .addField(`⚔️ ${lang.inventory.combat}:`, `${Emotes.chests.Guerrier.rune_sword} ATK: ${player.data.ATK}\n${Emotes.chests.Guerrier.rune_shield} DEF: ${player.data.DEF}`, true)
+        .addField(`📊 ${lang.inventory.stats}:`, `${Emotes.chests.Guerrier.rune_sword} ATK: ${player.data.ATK}\n${Emotes.chests.Guerrier.rune_shield} DEF: ${player.data.DEF}\n${Emotes.chests.Tools.rune_pickaxe} Power : ${player.data.power}`, true)
         .addField(`Autres:`, `${Emotes.cash} Balance: ${nFormatter(player.data.money)}\n${Emotes.rep} Reputations : ${player.data.rep}`, true)
 
     const embed2 = new Discord.MessageEmbed()
