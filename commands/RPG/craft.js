@@ -13,7 +13,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         .setTitle("CRAFT")
         .setThumbnail("https://media.discordapp.net/attachments/695902978858680390/715976650197827594/unnamed.png")
         .addField("Description", `${lang.craft.description}`)
-        .addField("Documentation", `${lang.craft.doc} [ pickaxe ]\n[ sword / shield ]\n[ head / shoulders / bust / wrist\nhands / waist / legs / foots ]\n[ ring / dungeon_amulet / dungeon_stone ]`)
+        .addField("Documentation", `${lang.craft.doc} [ pickaxe ]\n[ sword / shield ]\n[ head / shoulders / bust / wrists\nhands / waist / legs / feet ]\n[ ring / dungeon_amulet / dungeon_stone ]`)
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL());
 
@@ -25,21 +25,21 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         case "sh": case "shield":
             return manageCraft(con, player, message, "tools", "shield");
         case "head":
-            return manageCraft(con, player, message, "armors", "tete");
+            return manageCraft(con, player, message, "armors", "head");
         case "shoulders":
-            return manageCraft(con, player, message, "armors", "epaule");
+            return manageCraft(con, player, message, "armors", "shoulders");
         case "bust":
-            return manageCraft(con, player, message, "armors", "torse");
-        case "wrist":
-            return manageCraft(con, player, message, "armors", "poignets");
+            return manageCraft(con, player, message, "armors", "bust");
+        case "wrists":
+            return manageCraft(con, player, message, "armors", "wrists");
         case "hands":
-            return manageCraft(con, player, message, "armors", "mains");
+            return manageCraft(con, player, message, "armors", "hands");
         case "waist":
-            return manageCraft(con, player, message, "armors", "taille");
+            return manageCraft(con, player, message, "armors", "waist");
         case "legs":
-            return manageCraft(con, player, message, "armors", "jambes");
+            return manageCraft(con, player, message, "armors", "legs");
         case "foots":
-            return manageCraft(con, player, message, "armors", "pieds");
+            return manageCraft(con, player, message, "armors", "feet");
         case "dungeon_amulet":
             return manageCraft(con, player, message, "objects", "dungeon_amulet");
         case "ring":
