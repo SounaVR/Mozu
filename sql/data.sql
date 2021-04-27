@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS data (
 	MANA bigint,
 	ATK bigint,
 	DEF bigint,
+	power bigint,
 
 	HR bigint,
 	lastHR bigint,
