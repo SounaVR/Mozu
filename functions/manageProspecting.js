@@ -17,7 +17,7 @@ module.exports = async function manageProspecting(client, con, player, message, 
     if (player.ress[ore] < getNeededRessource) txt.push(`${Emotes[ore]} ${ore} : ${nFormatter(getNeededRessource)} (${Emotes.cancel} - Missing ${nFormatter(Math.floor(getNeededRessource-player.ress[ore]))})`);
     if (player.ress[ore] >= getNeededRessource) txt.push(`${Emotes[ore]} ${ore} : ${nFormatter(getNeededRessource)} (${Emotes.checked})`);
 
-    embed.addField("**Cost**", txt);
+    embed.addField(`**${lang.craft.cost}**`, txt);
     embed.addField("**Reward**", `${Emotes[gem]} ${gem} x${quantity}`)
 
     const msg = await message.channel.send(embed);
