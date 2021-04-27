@@ -44,9 +44,7 @@ module.exports = function manageChest(client, con, player, message, args, object
     }
 
     con.query(`UPDATE ress SET ${sql.join(",")}, ${objectName} = ${player.ress[objectName] - args[2]} WHERE userid = ${userid}`);
-    embed.addField(`**Gain**`, `
-    ${txt.join("\n")}
-    ${txt2.join("\n")}`);
+    embed.addField(`**Gain**`, `${txt.join("\n")}\n${txt2.join("\n")}`);
 
     return message.channel.send(embed);
 }
