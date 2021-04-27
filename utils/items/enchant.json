@@ -3,7 +3,8 @@
         "pickaxe" : [
         {
             "ATK" : 0,
-            "DEF" : 0
+            "DEF" : 0,
+            "power" : 1
         }
         ],
         "sword" : [
@@ -15,7 +16,7 @@
         "shield" : [
         {
             "ATK" : 0,
-            "DEF" : 0
+            "DEF" : 1
         }
         ]
     },
