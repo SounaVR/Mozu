@@ -43,7 +43,8 @@ module.exports = async function manageCraft(con, player, message, category, obje
                     if (player.ress[ressource.toLowerCase()] <= currentObject.ressource[ressource] * reponse) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource] * reponse)} (${Emotes.cancel} - Missing ${nFormatter(Math.floor((currentObject.ressource[ressource] * reponse)-player.ress[ressource.toLowerCase()]))})`);
                     if (player.ress[ressource.toLowerCase()] >= currentObject.ressource[ressource] * reponse) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource] * reponse)} (${Emotes.checked})`);
                 }
-                embed.addField("**Cost**", txt);
+                embed.addField(`**${lang.craft.cost}**`, txt);
+                embed.addField("**Reward**", `${currentObject.name} x**${reponse}**`)
 
                 const msg = await message.channel.send(embed);
                 await msg.react(react[0]);
@@ -91,6 +92,7 @@ module.exports = async function manageCraft(con, player, message, category, obje
         if (player.ress[ressource.toLowerCase()] >= currentObject.ressource[ressource]) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource])} (${Emotes.checked})`);
     }
     embed.addField(`**${lang.craft.cost}**`, txt);
+    embed.addField(`**Reward**`, `${currentObject.name}`)
 
     const msg = await message.channel.send(embed);
 
