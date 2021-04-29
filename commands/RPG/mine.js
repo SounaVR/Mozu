@@ -1,3 +1,4 @@
+const { nFormatter } = require('../../utils/u');
 const Discord = require('discord.js'),
     Emotes    = require('../../utils/emotes.json'),
     Default   = require('../../utils/default.json');
@@ -9,6 +10,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     const Items = require(`../../utils/items/${player.data.lang}.json`);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
     const userid = message.author.id;
+    const power = player.data.power;
 
     // all/a | [numbers] | aucun argument = 1 énergie par commande
     let manaAmount = 'all'.startsWith(args[0]) ? player.ress.energy : (!isNaN(args[0]) && args[0] > 0 ? args[0] : 1)
@@ -22,21 +24,21 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     Malachite = 0;
     // Drop de ressources
     for (let i = 0; i < manaAmount; i++) {
-        Stone     += Math.ceil(Math.random() * 70)                                // Pioche level 0 (mains nues)
-        Coal      += Math.ceil(Math.random() * 50)                                // Pioche level 0 (mains nues)
-        Copper    += player.items.pickaxe > 0 ? Math.ceil(Math.random() * 45) : 0 // Pioche level 1 (pioche en pierre)
-        Iron      += player.items.pickaxe > 1 ? Math.ceil(Math.random() * 30) : 0 // Pioche level 2 (pioche en cuivre)
-        Gold      += player.items.pickaxe > 2 ? Math.ceil(Math.random() * 15) : 0 // Pioche level 3 (pioche en fer)
-        Malachite += player.items.pickaxe > 3 ? Math.ceil(Math.random() * 5) : 0  // Pioche level 4 (pioche en or)
+        Stone     += (Math.ceil(Math.random() * 70)) + power;                               // Pioche level 0 (mains nues)
+        Coal      += (Math.ceil(Math.random() * 50)) + power;                               // Pioche level 0 (mains nues)
+        Copper    += player.items.pickaxe > 0 ? (Math.ceil(Math.random() * 45)) + power : 0 // Pioche level 1 (pioche en pierre)
+        Iron      += player.items.pickaxe > 1 ? (Math.ceil(Math.random() * 30)) + power : 0 // Pioche level 2 (pioche en cuivre)
+        Gold      += player.items.pickaxe > 2 ? (Math.ceil(Math.random() * 15)) + power : 0 // Pioche level 3 (pioche en fer)
+        Malachite += player.items.pickaxe > 3 ? (Math.ceil(Math.random() * 5)) + power : 0  // Pioche level 4 (pioche en or)
     }
 
     let ressLoot = []
-    if (Stone)      ressLoot.push(`+ ${Stone} ${Emotes.stone}`)
-    if (Coal)       ressLoot.push(`+ ${Coal} ${Emotes.coal}`)
-    if (Copper)     ressLoot.push(`+ ${Copper} ${Emotes.copper}`)
-    if (Iron)       ressLoot.push(`+ ${Iron} ${Emotes.iron}`)
-    if (Gold)       ressLoot.push(`+ ${Gold} ${Emotes.gold}`)
-    if (Malachite)  ressLoot.push(`+ ${Malachite} ${Emotes.malachite}`)
+    if (Stone)      ressLoot.push(`+ ${nFormatter(Stone)} ${Emotes.stone}`)
+    if (Coal)       ressLoot.push(`+ ${nFormatter(Coal)} ${Emotes.coal}`)
+    if (Copper)     ressLoot.push(`+ ${nFormatter(Copper)} ${Emotes.copper}`)
+    if (Iron)       ressLoot.push(`+ ${nFormatter(Iron)} ${Emotes.iron}`)
+    if (Gold)       ressLoot.push(`+ ${nFormatter(Gold)} ${Emotes.gold}`)
+    if (Malachite)  ressLoot.push(`+ ${nFormatter(Malachite)} ${Emotes.malachite}`)
 
     let pickaxe = Items.tools.pickaxe[player.items.pickaxe];
 
