@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS ress (
 
     energy bigint,
     zone bigint,
-    dungeon_stone bigint,
+    torch bigint,
 
     stone bigint,
 	coal bigint,
