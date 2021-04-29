@@ -1,8 +1,8 @@
 {
   "objects" : {
-    "dungeon_stone" : [
+    "torch" : [
       {
-        "name" : "Pierre de Donjon",
+        "name" : "Torche",
         "ATK" : "0",
         "DEF" : "0",
         "ressource" : {
