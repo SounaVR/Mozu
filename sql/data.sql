@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS data (
 	money bigint,
 	lastActivity bigint,
 
-	PV bigint,
+	HP bigint,
 	MANA bigint,
 	ATK bigint,
 	DEF bigint,
