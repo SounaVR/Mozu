@@ -1,0 +1,266 @@
+{
+    "sapphire" : [
+        {
+            "head" : [
+                {
+                    "power" : 1
+                }
+            ],
+            "shoulders" : [
+                {
+                    "power" : 1
+                }
+            ],
+            "chest" : [
+                {
+                    "power" : 1
+                }
+            ],
+            "wrists" : [
+                {
+                    "power" : 1
+                }
+            ],
+            "hands" : [
+                {
+                    "power" : 1
+                }
+            ],
+            "waist" : [
+                {
+                    "power" : 1
+                }
+            ],
+            "legs" : [
+                {
+                    "power" : 1
+                }
+            ],
+            "feet" : [
+                {
+                    "power" : 1
+                }
+            ]
+        }
+    ],
+    "amber" : [
+        {
+            "head" : [
+                {
+                    "gem_cooldown" : 1000
+                }
+            ],
+            "shoulders" : [
+                {
+                    "gem_cooldown" : 1000
+                }
+            ],
+            "chest" : [
+                {
+                    "gem_cooldown" : 1000
+                }
+            ],
+            "wrists" : [
+                {
+                    "gem_cooldown" : 1000
+                }
+            ],
+            "hands" : [
+                {
+                    "gem_cooldown" : 1000
+                }
+            ],
+            "waist" : [
+                {
+                    "gem_cooldown" : 1000
+                }
+            ],
+            "legs" : [
+                {
+                    "gem_cooldown" : 1000
+                }
+            ],
+            "feet" : [
+                {
+                    "gem_cooldown" : 1000
+                }
+            ]
+        }
+    ],
+    "citrine" : [
+        {
+            "head" : [
+                {
+                    "mana" : 1
+                }
+            ],
+            "shoulders" : [
+                {
+                    "mana" : 1
+                }
+            ],
+            "chest" : [
+                {
+                    "mana" : 1
+                }
+            ],
+            "wrists" : [
+                {
+                    "mana" : 1
+                }
+            ],
+            "hands" : [
+                {
+                    "mana" : 1
+                }
+            ],
+            "waist" : [
+                {
+                    "mana" : 1
+                }
+            ],
+            "legs" : [
+                {
+                    "mana" : 1
+                }
+            ],
+            "feet" : [
+                {
+                    "mana" : 1
+                }
+            ]
+        }
+    ],
+    "ruby" : [
+        {
+            "head" : [
+                {
+                    "HP" : 1
+                }
+            ],
+            "shoulders" : [
+                {
+                    "HP" : 1
+                }
+            ],
+            "chest" : [
+                {
+                    "HP" : 1
+                }
+            ],
+            "wrists" : [
+                {
+                    "HP" : 1
+                }
+            ],
+            "hands" : [
+                {
+                    "HP" : 1
+                }
+            ],
+            "waist" : [
+                {
+                    "HP" : 1
+                }
+            ],
+            "legs" : [
+                {
+                    "HP" : 1
+                }
+            ],
+            "feet" : [
+                {
+                    "HP" : 1
+                }
+            ]
+        }
+    ],
+    "jade" : [
+        {
+            "head" : [
+                {
+                    "ATK" : 1
+                }
+            ],
+            "shoulders" : [
+                {
+                    "ATK" : 1
+                }
+            ],
+            "chest" : [
+                {
+                    "ATK" : 1
+                }
+            ],
+            "wrists" : [
+                {
+                    "ATK" : 1
+                }
+            ],
+            "hands" : [
+                {
+                    "ATK" : 1
+                }
+            ],
+            "waist" : [
+                {
+                    "ATK" : 1
+                }
+            ],
+            "legs" : [
+                {
+                    "ATK" : 1
+                }
+            ],
+            "feet" : [
+                {
+                    "ATK" : 1
+                }
+            ]
+        }
+    ],
+    "amethyst" : [
+        {
+            "head" : [
+                {
+                    "DEF" : 1
+                }
+            ],
+            "shoulders" : [
+                {
+                    "DEF" : 1
+                }
+            ],
+            "chest" : [
+                {
+                    "DEF" : 1
+                }
+            ],
+            "wrists" : [
+                {
+                    "DEF" : 1
+                }
+            ],
+            "hands" : [
+                {
+                    "DEF" : 1
+                }
+            ],
+            "waist" : [
+                {
+                    "DEF" : 1
+                }
+            ],
+            "legs" : [
+                {
+                    "DEF" : 1
+                }
+            ],
+            "feet" : [
+                {
+                    "DEF" : 1
+                }
+            ]
+        }
+    ]
+}
