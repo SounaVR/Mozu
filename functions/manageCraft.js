@@ -15,7 +15,7 @@ module.exports = async function manageCraft(con, player, message, category, obje
 
     var currentObject = [];
     var currentObjectTitle = [];
-    if (category === "objects") {
+    if (category === "objects" && objectName === "torch") {
         let filter = (m) => m.author.id === message.author.id;
 
         message.channel.send(`${lang.craft.typingNumber}`);
