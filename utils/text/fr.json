@@ -1,8 +1,6 @@
 {
-    "welcome": "Bienvenue à toi",
-    "welcome2": "Es-tu prêt à vivre en ma compagnie une incroyable aventure :sunglasses: ?\nContenant, entre autres, des pets trop choupis et utiles, des tas de ressources, de stuff, d'enchantements ! Mais aussi des succès et des badges, que tu pourras farmer si t'as rien d'autre à faire de ta vie, ainsi qu'un premium payant pour que ton évolution soit plus rapide (et que tu supportes le dev par la même occasion, bg).\nSi tu te sens partant pour ça, commence par voir la liste des commandes en tapant `m!help` !",
-    "confirmLanguage": "The language has been set to `EN`.",
-    "globalHelpFooter": "Si besoin : m!help pour la liste des commandes.",
+    "confirmLanguage": "The language has been set to `FR`.",
+    "globalHelpFooter": "`m!help` pour la liste des commandes.",
     "help": {
         "commandsOf": "Commandes de",
         "invalidCommand": "Commande invalide.",
@@ -28,7 +26,8 @@
     },
     "hr": {
         "notNow": "vous avez déjà collecté votre hourly, veuillez attendre encore",
-        "done": "vous avez récupéré **30** <:cash:776115188498956329>, à dans 1 heure !"
+        "done": "vous avez récupéré **30** <:cash:776115188498956329> et",
+        "seeyoulater" : "à dans 1 heure !"
     },
     "daily": {
         "notNow": "vous avez déjà collecté votre daily, veuillez attendre jusqu'à 00h00.",
@@ -57,7 +56,8 @@
         "infos": "Informations",
         "usedEnergy": "Énergie utilisée",
         "remainingEnergy": "Énergie restante",
-        "winnedXP": "Exp gagnée"
+        "winnedXP": "Exp gagnée",
+        "power" : "Puissance totale :"
     },
     "inventory": {
         "ring" : "Anneau",
@@ -73,7 +73,7 @@
         "feet": "Pieds",
         "level": "Niveau",
         "energy": "Énergie",
-        "combat": "Combat",
+        "stats": "Stats",
         "ressources": "Ressources",
         "enchant": "Enchantement",
         "objects": "Objets",
@@ -92,7 +92,8 @@
         "pickaxe": "Pioche",
         "inventoryOf": "Inventaire de",
         "dungeon_stone": "Pierre de Donjon",
-        "chests": "Coffres"
+        "chests": "Coffres",
+        "gems" : "Gemmes"
     },
     "shop": {
 
@@ -165,8 +166,8 @@
         "notEnoughRess": ":x: Vous n'avez pas assez de ressources pour faire cette amélioration.",
         "maxLevel": ":x: Vous avez déjà le niveau maximum de cet objet.",
         "level": "de niveau",
-        "done": "Vous venez d'obtenir :",
-        "canceled": "Craft annulé.",
+        "done": "Fabrication réussie ! Vous venez d'obtenir :",
+        "canceled": ":x: Craft annulé.",
         "description": "Améliorez votre matériel.",
         "doc": "Ajoutez comme argument le nom de l'élément que vous souhaitez améliorer, les éléments disponibles sont les suivants:\n",
         "validNumber": ":x: Veuillez recommencer et entrer un nombre valide.",
@@ -180,16 +181,16 @@
         "doc" : "Ajoutez comme argument le nom de l'élément que vous souhaitez enchanter, les éléments disponibles sont les suivants:\n",
         "maxLevel" : ":x: Vous avez déjà l'enchantement maximum de cet objet.",
         "notEnoughRess" : ":x: Vous n'avez pas assez de ressources pour faire cet enchantement.",
-        "enchantSuccess" : ":white_check_mark: Enchantement réussi au niveau",
+        "enchantSuccess" : "Enchantement réussi au niveau",
         "canceled" : ":x: Enchantement annulé."
     },
     "prospect" : {
         "title" : "PROSPECTION",
-        "description" : "Prospectez vos minerais pour obtenir des gemmes.",
-        "doc" : "Ajoutez comme argument le nom de l'élément que vous souhaitez prospecter, ainsi que la quantité de gemmes que vous voulez.\nLes éléments disponibles sont les suivants:\n",
+        "description" : "Prospectez vos minerais pour obtenir des gemmes que vous pourrez sertir sur votre équipement (`m!no_name`).\n:warning: Les minerais seront détruits.",
+        "doc" : "Chaque minerai correspond à une gemme qui ajoute une stat bien précise.\nAjoutez comme argument le nom de l'élément que vous souhaitez prospecter, ainsi que la quantité de gemmes que vous voulez.\n",
         "notEnoughRess": ":x: Vous n'avez pas assez de ressources pour faire cette prospection.",
         "specifyQuantity" : ":x: Vous devez spécifier une quantité.",
-        "success" : ":white_check_mark: Prospection réussie ! Vous avez récupérer ",
+        "success" : "Prospection réussie ! Vous avez récupérer",
         "canceled" : ":x: Prospection annulée."
     }
 }
