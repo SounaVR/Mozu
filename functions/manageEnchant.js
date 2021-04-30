@@ -15,21 +15,23 @@ module.exports = async function manageEnchant(client, con, player, message, cate
     //const objectRessource = Enchant[category][object][1];
     const getNeededRessource = (player.enchant[objectName] * player.enchant[objectName] * 5)+1;
 
-    embed.setTitle(`Enchant your item from level ${level - 1} to ${level} ?`)
+    embed.setTitle(`Enchant your item ?`)
     let txt = [];
+    let reward = [];
 
     if (player.ress[`rune_${object}`] < getNeededRessource) txt.push(`${Emotes.enchant[`rune_${object}`]} rune_${object} : ${nFormatter(getNeededRessource)} (${Emotes.cancel} - Missing ${nFormatter(Math.floor(getNeededRessource-player.ress[`rune_${object}`]))})`);
     if (player.ress[`rune_${object}`] >= getNeededRessource) txt.push(`${Emotes.enchant[`rune_${object}`]} rune_${object} : ${nFormatter(getNeededRessource)} (${Emotes.checked})`);
 
-    let reward = [];
-    if (Enchant[category][object][0].ATK >= 1) reward.push(`${Emotes.chests.Guerrier.rune_sword} ATK : ${player.data.ATK} => **${player.data.ATK + Enchant[category][object][0].ATK}**`);
-    if (Enchant[category][object][0].DEF >= 1) reward.push(`${Emotes.chests.Guerrier.rune_shield} DEF : ${player.data.DEF} => **${player.data.DEF + Enchant[category][object][0].DEF}**`);
+    if (Enchant[category][object][0].ATK >= 1) reward.push(`${Emotes.ATK} ATK : ${player.data.ATK} => **${player.data.ATK + Enchant[category][object][0].ATK}**`);
+    if (Enchant[category][object][0].DEF >= 1) reward.push(`${Emotes.DEF} DEF : ${player.data.DEF} => **${player.data.DEF + Enchant[category][object][0].DEF}**`);
     if (object === "pickaxe") reward.push(`💪 Power : ${player.data.power} => **${player.data.power + Enchant.tools.pickaxe[0].power}**`);
 
     embed.addField(`**${lang.craft.cost}**`, txt);
     embed.addField("**Reward**", `${Emotes.enchant[`rune_${object}`]} ${object} enchant level : ${level - 1} => **${level}**\n${reward.join("\n")}`);
 
     const msg = await message.channel.send(embed);
+
+    if (player.ress[`rune_${object}`] < getNeededRessource) return;
 
     await msg.react(react[0]);
     await msg.react(react[1]);
@@ -42,7 +44,6 @@ module.exports = async function manageEnchant(client, con, player, message, cate
 
         switch(reaction.emoji.id) {
             case react[0]:
-                msg.delete();
                 let need = [];
                 let resssql = [];
 
@@ -58,7 +59,6 @@ module.exports = async function manageEnchant(client, con, player, message, cate
                 return message.channel.send(`${lang.enchant.enchantSuccess} : **${level}** !`);
 
             case react[1]:
-                msg.delete();
                 return message.channel.send(`${lang.enchant.canceled}`);
         }
     }).catch(() => {
