@@ -22,9 +22,9 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         case "p": case "pick": case "pickaxe":
             return manageCraft(con, player, message, "tools", "pickaxe", Emotes.chests.Tools.rune_pickaxe);
         case "sw": case "sword":
-            return manageCraft(con, player, message, "tools", "sword", Emotes.chests.Guerrier.rune_sword);
+            return manageCraft(con, player, message, "tools", "sword", Emotes.chests.Weapons.rune_sword);
         case "sh": case "shield":
-            return manageCraft(con, player, message, "tools", "shield", Emotes.chests.Guerrier.rune_shield);
+            return manageCraft(con, player, message, "tools", "shield", Emotes.chests.Weapons.rune_shield);
         case "head":
             return manageCraft(con, player, message, "armors", "head", Emotes.chests.Gear.P1.rune_head);
         case "shoulders":
@@ -39,7 +39,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
             return manageCraft(con, player, message, "armors", "waist", Emotes.chests.Gear.P2.rune_waist);
         case "legs":
             return manageCraft(con, player, message, "armors", "legs", Emotes.chests.Gear.P2.rune_legs);
-        case "foots":
+        case "feet":
             return manageCraft(con, player, message, "armors", "feet", Emotes.chests.Gear.P2.rune_feet);
         case "dungeon_amulet":
             return manageCraft(con, player, message, "objects", "dungeon_amulet", Emotes.dungeon_amulet);
