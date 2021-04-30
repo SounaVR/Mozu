@@ -32,7 +32,7 @@
         "energy" : "100",
         "lastActivity" : "0",
 
-        "PV" : "50",
+        "HP" : "50",
         "MANA" : "50",
         "ATK" : "1",
         "DEF" : "1",
@@ -113,7 +113,7 @@
         }
     },
     "runes" : {
-        "Guerrier" : {
+        "Weapons" : {
             "rune_sword" : "rune_sword",
             "rune_shield" : "rune_shield"
         },
