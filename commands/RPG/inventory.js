@@ -68,41 +68,47 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         .addField(`${Emotes.bag} ${lang.inventory.yourObjects}`, `${Emotes.torch} ${player.ress.torch}`)
         .addField(`${Emotes.open_chest} ${lang.inventory.chests}`, `${Emotes.chest_d} ${player.ress.chest_d} ${Emotes.chest_c} ${player.ress.chest_c} ${Emotes.chest_b} ${player.ress.chest_b} ${Emotes.chest_a} ${player.ress.chest_a} ${Emotes.chest_s} ${player.ress.chest_s}`)
  
+    const P1 = ["head", "shoulders", "chest", "wrists"];
+    const P2 = ["hands", "waist", "legs", "feet"];
+    const weapons = ["sword", "shield"];
 
     let pickaxe = Items.tools.pickaxe[player.items.pickaxe];
-
-    let sword = Items.tools.sword[player.items.sword];
-    let shield = Items.tools.shield[player.items.shield];
-
-    let head = Items.armors.head[player.items.head]
-    let shoulders = Items.armors.shoulders[player.items.shoulders]
-    let chest = Items.armors.chest[player.items.chest]
-    let wrists = Items.armors.wrists[player.items.wrists]
-    let hands = Items.armors.hands[player.items.hands]
-    let waist = Items.armors.waist[player.items.waist]
-    let legs = Items.armors.legs[player.items.legs]
-    let feet = Items.armors.feet[player.items.feet]
-
-    let dungeon_amulet = Items.objects.dungeon_amulet[player.items.dungeon_amulet]
-    let ring = Items.objects.ring[player.items.ring]
 
     const embed4 = new Discord.MessageEmbed()
         .setAuthor(`${lang.inventory.inventoryOf} ${message.author.tag}`, message.author.displayAvatarURL())
         .setColor(message.member.displayColor)
-        .setFooter(`Page 4/5 | ${lang.globalHelpFooter}`)
-        .addField(`${Emotes.chests.Weapons.rune_sword} ${lang.inventory.sword}:`, `${sword.name}\n${lang.inventory.level}: ${player.items.sword}\n[${lang.inventory.enchant}: ${player.enchant.ench_sword}]`, true)
-        .addField(`${Emotes.chests.Weapons.rune_shield} ${lang.inventory.shield}:`, `${shield.name}\n${lang.inventory.level}: ${player.items.shield}\n[${lang.inventory.enchant}: ${player.enchant.ench_shield}]`, true)      
-    
-        .addField(`${Emotes.chests.Tools.rune_pickaxe} ${lang.inventory.pickaxe}:`, `${pickaxe.name}\n${lang.inventory.level}: ${player.items.pickaxe}\n[${lang.inventory.enchant}: ${player.enchant.ench_pickaxe}]`, true)
+        .setFooter(`Page 4/5 | ${lang.globalHelpFooter}`) 
         
-        .addField(`${Emotes.chests.Gear.P1.rune_head} ${lang.inventory.head}:`, `${head.name}\n${lang.inventory.level}: ${player.items.head}\n[${lang.inventory.enchant}: ${player.enchant.ench_head}]`, true)
-        .addField(`${Emotes.chests.Gear.P1.rune_shoulders} ${lang.inventory.shoulders}:`, `${shoulders.name}\n${lang.inventory.level}: ${player.items.shoulders}\n[${lang.inventory.enchant}: ${player.enchant.ench_shoulders}]`, true)
-        .addField(`${Emotes.chests.Gear.P1.rune_chest} ${lang.inventory.chest}:`, `${chest.name}\n${lang.inventory.level}: ${player.items.chest}\n[${lang.inventory.enchant}: ${player.enchant.ench_chest}]`, true)
-        .addField(`${Emotes.chests.Gear.P1.rune_wrists} ${lang.inventory.wrists}:`, `${wrists.name}\n${lang.inventory.level}: ${player.items.wrists}\n[${lang.inventory.enchant}: ${player.enchant.ench_wrists}]`, true)
-        .addField(`${Emotes.chests.Gear.P2.rune_hands} ${lang.inventory.hands}:`, `${hands.name}\n${lang.inventory.level}: ${player.items.hands}\n[${lang.inventory.enchant}: ${player.enchant.ench_hands}]`, true)
-        .addField(`${Emotes.chests.Gear.P2.rune_waist} ${lang.inventory.waist}:`, `${waist.name}\n${lang.inventory.level}: ${player.items.waist}\n[${lang.inventory.enchant}: ${player.enchant.ench_waist}]`, true)
-        .addField(`${Emotes.chests.Gear.P2.rune_legs} ${lang.inventory.legs}:`, `${legs.name}\n${lang.inventory.level}: ${player.items.legs}\n[${lang.inventory.enchant}: ${player.enchant.ench_legs}]`, true)
-        .addField(`${Emotes.chests.Gear.P2.rune_feet} ${lang.inventory.feet}:`, `${feet.name}\n${lang.inventory.level}: ${player.items.feet}\n[${lang.inventory.enchant}: ${player.enchant.ench_feet}]`, true)
+    weapons.forEach(element => {
+        let part = Items.tools[element][player.items[element]];
+        let enchantmentLevel = player.enchant[`ench_${element}`] > 0 ? player.enchant[`ench_${element}`] + Number(0) : player.enchant[`ench_${element}`]
+
+        if (enchantmentLevel) embed4.addField(`${Emotes.chests.Weapons[`rune_${element}`]} ${lang.inventory[element]}:`, `${part.name}\n${lang.inventory.level}: ${player.items[element]}\n[${lang.inventory.enchant} ${player.enchant[`rune_${element}`]}]`, true)
+        else embed4.addField(`${Emotes.chests.Weapons[`rune_${element}`]} ${lang.inventory[element]}:`, `${part.name}\n${lang.inventory.level}: ${player.items[element]}`, true)
+    });
+
+    let enchantmentLevel = player.enchant.ench_pickaxe > 0 ? player.enchant.ench_pickaxe + Number(0) : player.enchant.ench_pickaxe
+    if (enchantmentLevel) embed4.addField(`${Emotes.chests.Tools.rune_pickaxe} ${lang.inventory.pickaxe}:`, `${pickaxe.name}\n${lang.inventory.level}: ${player.items.pickaxe}\n[${lang.inventory.enchant} ${player.enchant.ench_pickaxe}]`, true)
+    else embed4.addField(`${Emotes.chests.Tools.rune_pickaxe} ${lang.inventory.pickaxe}:`, `${pickaxe.name}\n${lang.inventory.level}: ${player.items.pickaxe}`, true)
+    
+    P1.forEach(element => {
+        let part = Items.armors[element][player.items[element]];
+        let enchantmentLevel = player.enchant[`ench_${element}`] > 0 ? player.enchant[`ench_${element}`] + Number(0) : player.enchant[`ench_${element}`]
+ 
+        if (enchantmentLevel) embed4.addField(`${Emotes.chests.Gear.P1[`rune_${element}`]} ${lang.inventory[element]}:`, `${part.name}\n${lang.inventory.level}: ${player.items[element]}\n[${lang.inventory.enchant} ${player.enchant[`ench_${element}`]}]`, true)
+        else embed4.addField(`${Emotes.chests.Gear.P1[`rune_${element}`]} ${lang.inventory[element]}:`, `${part.name}\n${lang.inventory.level}: ${player.items[element]}`, true)
+    });
+   
+    P2.forEach(element => {
+        let part = Items.armors[element][player.items[element]];
+        let enchantmentLevel = player.enchant[`ench_${element}`] > 0 ? player.enchant[`ench_${element}`] + Number(0) : player.enchant[`ench_${element}`]
+  
+        if (enchantmentLevel) embed4.addField(`${Emotes.chests.Gear.P2[`rune_${element}`]} ${lang.inventory[element]}:`, `${part.name}\n${lang.inventory.level}: ${player.items[element]}\n[${lang.inventory.enchant} ${player.enchant[`ench_${element}`]}]`, true)
+        else embed4.addField(`${Emotes.chests.Gear.P2[`rune_${element}`]} ${lang.inventory[element]}:`, `${part.name}\n${lang.inventory.level}: ${player.items[element]}`, true)
+    });
+
+    let dungeon_amulet = Items.objects.dungeon_amulet[player.items.dungeon_amulet]
+    let ring = Items.objects.ring[player.items.ring]
 
     const embed5 = new Discord.MessageEmbed()
         .setAuthor(`${lang.inventory.inventoryOf} ${message.author.tag}`, message.author.displayAvatarURL())
