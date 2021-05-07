@@ -1,6 +1,6 @@
 {
     "confirmLanguage": "The language has been set to `FR`.",
-    "globalHelpFooter": "`m!help` pour la liste des commandes.",
+    "globalHelpFooter": "m!help pour la liste des commandes.",
     "help": {
         "commandsOf": "Commandes de",
         "invalidCommand": "Commande invalide.",
@@ -57,7 +57,7 @@
         "usedEnergy": "Énergie utilisée",
         "remainingEnergy": "Énergie restante",
         "winnedXP": "Exp gagnée",
-        "power" : "Puissance totale :"
+        "power" : "Power :"
     },
     "inventory": {
         "ring" : "Anneau",
