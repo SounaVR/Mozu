@@ -9,7 +9,7 @@ const fs	  = require('fs'),
 	config    = require("./utils/config"),
 	roleClaim = require("./utils/reaction_role/role-claim");
   	mysql     = require('mysql');
-const arraydebg = ["data", "ress", "items", "enchant", "prospect", "stats"];
+const arraydebg = ["data", "ress", "items", "enchant", "prospect", "slots", "stats"];
 
 const client = new Discord.Client({
 	disableMentions: "everyone",
