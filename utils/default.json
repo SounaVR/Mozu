@@ -59,6 +59,8 @@
         "ruby" : "0",
         "jade" : "0",
         "amethyst" : "0",
+
+        "slots" : -1,
         
         "rune_pickaxe" : "0",
         "rune_sword" : "0",
