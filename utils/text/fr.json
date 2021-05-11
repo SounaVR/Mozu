@@ -136,7 +136,7 @@
     },
     "explore": {
         "selectZone" : "Où souhaitez-vous aller ?\n0️⃣ : Mine abandonnée (chest D, Amulette de Donjon de niveau 0 requise)\n1️⃣ : Ruines Antiques (chest C, Amulette de Donjon de niveau 1 requise)\n2️⃣ : Village souterrain (chest B, Amulette de Donjon de niveau 2 requise)\n3️⃣ : Catacombes (chest A, Amulette de Donjon de niveau 3 requise)\n4️⃣ : Salle aux trésors (chest S, Amulette de Donjon de niveau 4 requise)",
-        "notEnoughDungeonStone": ":x: Vous n'avez pas assez de pierre de donjon pour explorer. Utilisez `m!craft dungeon_stone` pour en avoir une !",
+        "notEnoughDungeonStone": ":x: Vous n'avez pas assez de torches pour explorer. Utilisez `m!craft torch` pour en avoir une !",
         "switchError": "votre Amulette de Donjon n'a pas le niveau requis.",
         "explored": "vous ressortez de ►",
         "zone_0": "Mine Abandonnée",
