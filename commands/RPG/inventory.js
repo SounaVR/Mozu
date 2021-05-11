@@ -150,6 +150,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
             break;
         case "5":
             wow.setPage(5);
+            break;
         default:
             wow.setPage(1);
             break;
