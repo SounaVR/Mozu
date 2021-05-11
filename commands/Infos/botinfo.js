@@ -15,17 +15,18 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 			.setAuthor(`${client.user.username}`, bicon)
 			.setColor(message.member.displayColor)
 			.setThumbnail(bicon)
-			.addField("Creator", "Souna#2424", true)
-			.addField("Servers", `${client.guilds.cache.size} servers`, true)
+			.addField("Developer", "Souna#2424", true)
+			.addField("Uptime", duration, true)
+			.addField("Programming language", "Node.js", true)
 
-			.addField("Users", `${client.users.cache.size} users`, true)
+			.addField("API", "discord.js", true)
+			.addField("Memory used", Math.floor(process.memoryUsage().heapUsed / 1024 / 1024) + " Mb", true)
 			.addField("Players", `${rows[0].usersCount} players`, true)
 
-			.addField("Uptime", duration, true)
-			.addField("Library", "discord.js", true)
-
-			.addField("Memory used", Math.floor(process.memoryUsage().heapUsed / 1024 / 1024) + " Mb", true)
+			.addField("Servers", `${client.guilds.cache.size} servers`, true)
+			.addField("Users", `${client.users.cache.size} users`, true)
 			.addField("My link", "[Don't click](https://cdn.discordapp.com/attachments/657298202688749579/686932751881994266/non.jpg)", true)
+			
 			.addField("Creation Date", `${test}\n(${checkDays(client.user.createdAt)})`, true)
 
 			.setFooter(`${client.user.username}`, client.user.avatarURL())
