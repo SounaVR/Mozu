@@ -14,12 +14,12 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     if (player.data.lastHR !== null && cooldown - (Date.now() - player.data.lastHR) > 0) {
     let timeObj = ms(cooldown - (Date.now() -  player.data.lastHR));
 
-    return message.reply(`${lang.hr.notNow} **${timeObj.minutes}m${timeObj.seconds}sec** !`);
+    return message.reply(`${lang.hr.notNow.replace("%s", `**${timeObj.minutes}m${timeObj.seconds}sec**`)} !`);
     } else {
         con.query(`UPDATE data SET lastHR = ${Date.now()}, money = ${player.data.money + Number(30)} WHERE userid = ${userid}`);
         con.query(`UPDATE ress SET energy = ${player.ress.energy + Number(energy)} WHERE userid = ${userid}`);
 
-        return message.reply(`${lang.hr.done} ${energy} ${Emotes.energy}, ${lang.hr.seeyoulater}`);
+        return message.reply(`${lang.hr.done.replace("%a", `${energy} ${Emotes.energy}`)}`);
     }
 };
 
