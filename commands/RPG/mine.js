@@ -14,7 +14,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 
     // all/a | [numbers] | aucun argument = 1 énergie par commande
     let manaAmount = 'all'.startsWith(args[0]) ? player.ress.energy : (!isNaN(args[0]) && args[0] > 0 ? args[0] : 1)
-    if (manaAmount > player.ress.energy) return message.channel.send(`${lang.mine.notEnoughEnergy}`)
+    if (manaAmount > player.ress.energy) return message.reply(`${lang.mine.notEnoughEnergy}`)
 
     let Stone  = 0,
     Coal      = 0,
@@ -47,7 +47,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         .setColor(message.member.displayColor)
         .setThumbnail("https://equity.guru/wp-content/uploads/2018/01/blockchain2.gif")
         .addField(lang.mine.title, ressLoot.join("\n"))
-        .addField(lang.mine.infos, `⚡ ${lang.mine.usedEnergy} : ${manaAmount}\n⚡ ${lang.mine.remainingEnergy} : ${player.ress.energy-manaAmount}\n${Emotes.chests.Tools.rune_pickaxe} ${pickaxe.name}\n💪 ${lang.mine.power} ${player.data.power}`);//\n${lang.inventory.level}: ${player.items.pickaxe}\n${lang.inventory.enchant}: ${player.enchant.ench_pickaxe}`)
+        .addField(lang.mine.infos, `⚡ ${lang.mine.usedEnergy.replace("%s", manaAmount)}\n⚡ ${lang.mine.remainingEnergy.replace("%s", player.ress.energy-manaAmount)}\n${Emotes.chests.Tools.rune_pickaxe} ${pickaxe.name}\n💪 ${lang.mine.power.replace("%s", player.data.power)}`);//\n${lang.inventory.level}: ${player.items.pickaxe}\n${lang.inventory.enchant}: ${player.enchant.ench_pickaxe}`)
 
     message.channel.send(embed);
 
