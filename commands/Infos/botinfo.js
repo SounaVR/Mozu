@@ -10,12 +10,13 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 
 		const duration = moment.duration(client.uptime).format("D [days], HH [hrs], m [mins], s [secs]");
 		const test = moment(client.user.createdAt).format("DD/MM/YYYY");
+		const developer = client.users.cache.find(user => user.id === client.config.owners[0]);
 		let bicon = client.user.avatarURL();
 		let botembed = new Discord.MessageEmbed()
 			.setAuthor(`${client.user.username}`, bicon)
 			.setColor(message.member.displayColor)
 			.setThumbnail(bicon)
-			.addField("Developer", "Souna#2424", true)
+			.addField("Developer", developer.tag, true)
 			.addField("Uptime", duration, true)
 			.addField("Programming language", "Node.js", true)
 
@@ -25,7 +26,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 
 			.addField("Servers", `${client.guilds.cache.size} servers`, true)
 			.addField("Users", `${client.users.cache.size} users`, true)
-			.addField("My link", "[Don't click](https://cdn.discordapp.com/attachments/657298202688749579/686932751881994266/non.jpg)", true)
+			.addField("My link", "[Don't click](https://media.discordapp.net/attachments/706350683766390854/845538726162989076/3237789807_1_3_brmovBmI.png)", true)
 			
 			.addField("Creation Date", `${test}\n(${checkDays(client.user.createdAt)})`, true)
 
