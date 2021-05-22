@@ -1,14 +1,16 @@
 require('dotenv').config();
-const { getUser, getPlayer }      = require("./utils/u");
-const { sep } 					  = require("path");
+const { DB_HOST, DB_USER, DB_NAME, DB_PASS, BOT_TOKEN, OWNER, PREFIX } = process.env
 const { success, error, warning } = require("log-symbols");
-const fs	  = require('fs'),
-	moment    = require('moment'),
-	cron      = require('cron'),
-	Discord   = require("discord.js"),
-	config    = require("./utils/config"),
-	roleClaim = require("./utils/reaction_role/role-claim");
-  	mysql     = require('mysql');
+const { getUser, getPlayer } = require("./utils/u");
+const { sep } = require("path");
+const roleClaim = require("./utils/reaction_role/role-claim");
+const moment  = require("moment"),
+Discord   = require("discord.js"),
+cron	  = require("cron"),
+config    = require("./utils/config"),
+mysql     = require("mysql"),
+fs		  = require("fs");
+
 const arraydebg = ["data", "ress", "items", "enchant", "prospect", "slots", "stats"];
 
 const client = new Discord.Client({
@@ -16,7 +18,7 @@ const client = new Discord.Client({
 	restTimeOffset: 0
 });
 
-moment.locale('fr');
+moment.locale("fr");
 
 client.config = config;
 ["commands", "aliases"].forEach(x => client[x] = new Discord.Collection());
@@ -25,10 +27,10 @@ const con = mysql.createConnection({
 	multipleStatements: true,
 	encoding: 'utf8',
 	charset: 'utf8mb4',
-	host: process.env.DB_HOST,
-	user: process.env.DB_USER,
-	password: process.env.DB_PASS,
-	database: process.env.DB_NAME
+	host: DB_HOST,
+	user: DB_USER,
+	password: DB_PASS,
+	database: DB_NAME
 });
 
 client.on('ready', async () => {
@@ -47,10 +49,10 @@ client.on('ready', async () => {
 
 	const load = (dir = "./commands/") => {
 		fs.readdirSync(dir).forEach(dirs => {
-			const commands = fs.readdirSync(`${dir}${sep}${dirs}${sep}`).filter(files => files.endsWith(".js"));
+			const commands = fs.readdirSync(`${dir}${sep}${dirs}${sep}`).filter(f => f.endsWith(".js"));
 
-			for (const file of commands) {
-				const pull = require(`${dir}/${dirs}/${file}`);
+			for (const f of commands) {
+				const pull = require(`${dir}/${dirs}/${f}`);
 				if (pull.help && typeof (pull.help.name) === "string" && typeof (pull.help.category) === "string") {
 					if (client.commands.get(pull.help.name)) return console.warn(`${warning} Two or more commands have the same name ${pull.help.name}.`);
 					client.commands.set(pull.help.name, pull);
@@ -133,6 +135,7 @@ client.on('ready', async () => {
 });
 
 client.on("message", async message => {
+	const owner = client.users.cache.find(user => user.id === client.config.owners[0]);
 	const prefix = client.config.prefix;
 	const args = message.content.slice(prefix.length).trim().split(/ +/g);
 	const cmd = args.shift().toLowerCase();
@@ -147,7 +150,7 @@ client.on("message", async message => {
 	const player = await getPlayer(con, message.author.id);
 	const blacklist = new Discord.MessageEmbed()
         .setColor("#e31212")
-        .setDescription("ERROR: You are banned from the bot by the Mozu team.\nFor more information, please contact **Souna#2424**.")
+        .setDescription(`ERROR: You are banned from the bot by the Mozu team.\nFor more information, please contact **${owner.tag}**.`)
 
     if (!player || player.data.ban == "0") {
         if (client.commands.has(cmd)) command = client.commands.get(cmd);
@@ -208,6 +211,7 @@ client.on('messageDelete', message => {
 			if (message.author.bot) return;
 			if (message.length <= 0) return;
 			const channel = client.channels.cache.get('827457768277409792');
+			const privateChannel = client.channels.cache.get('845528260044390410');
 			if (channel) {
 			const embed = new Discord.MessageEmbed()
 				.setTitle('Deleted Message')
@@ -221,6 +225,7 @@ client.on('messageDelete', message => {
 				embed.setImage(result[0].proxyURL)
 			}
 			channel.send(embed);
+			privateChannel.send(embed);
 		} else return;
 	  } else return;
 	}
@@ -230,7 +235,9 @@ client.on('messageUpdate', (message, newMessage) => {
     if (!message.guild || message.channel.type == "dm") return;
     if (message.guild.id === "689471316570406914") {
         if (message.author.bot) return;
+		if (message.length <= 0) return;
         const channel = client.channels.cache.get('827457768277409792');
+		const privateChannel = client.channels.cache.get('845528370774933524');
         if (channel) {
             const embed = new Discord.MessageEmbed()
                 .setTitle('Edited Message')
@@ -246,8 +253,9 @@ client.on('messageUpdate', (message, newMessage) => {
                 embed.setImage(result[0].proxyURL)
             }
             channel.send(embed);
+			privateChannel.send(embed);
         } else return;
     } else return;
 });
 
-client.login(process.env.BOT_TOKEN);
+client.login(BOT_TOKEN);
