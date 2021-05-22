@@ -16,19 +16,12 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     const cooldown = Items.objects.ring[player.items.ring].cooldown;
     
     const embed1 = new Discord.MessageEmbed()
-        .setAuthor(`${lang.inventory.inventoryOf} ${message.author.tag}`, message.author.displayAvatarURL())
-        .setColor(message.member.displayColor)
-        .setFooter(`Page 1/5 | ${lang.globalHelpFooter}`)
+        .setFooter(`Page 1/5 | ${lang.globalHelpFooter.replace("%s", client.config.prefix)}`)
         .addField(`⭐ Mana`, `${player.data.MANA}/50`, true)
         .addField(`❤️ HP`, `${player.data.HP}/50`, true)
-        .addField(`⚡ ${lang.inventory.energy} [+1/${moment.duration(cooldown).format("s")}s]`, `${player.ress.energy || 0}/${maxEnergy}`, true)
+        .addField(`⚡ ${lang.inventory.energy.replace("%s", `[+1/${moment.duration(cooldown).format("s")}s]`)}`, `${player.ress.energy || 0}/${maxEnergy}`, true)
         .addField(`📊 ${lang.inventory.stats}:`, `${Emotes.ATK} ATK: ${player.data.ATK}\n${Emotes.DEF} DEF: ${player.data.DEF}\n${Emotes.chests.Tools.rune_pickaxe} Power : ${player.data.power}`, true)
         .addField(`Autres:`, `${Emotes.cash} Balance: ${nFormatter(player.data.money)}\n${Emotes.rep} Reputations : ${player.data.rep}`, true)
-
-    const embed2 = new Discord.MessageEmbed()
-        .setAuthor(`${lang.inventory.inventory} ${message.author.tag}`, message.author.displayAvatarURL())
-        .setColor(message.member.displayColor)
-        .setFooter(`Page 2/5 | ${lang.globalHelpFooter}`)
 
     var txt = [],
         txt2 = [],
@@ -56,14 +49,14 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         txt6.push(`${Emotes.chests.Gear.P2[runes]} ${nFormatter(player.ress[runes])}`)
     }
 
-    embed2.addField(`${Emotes.ressource} ${lang.inventory.ressources} (1)`, txt, true)
-    embed2.addField(`${Emotes.ressource} ${lang.inventory.ressources} (2)`, txt2, true)
-    embed2.addField(`${Emotes.gem} ${lang.inventory.gems}`, `${Emotes.sapphire} ${player.prospect.sapphire} ${Emotes.amber} ${player.prospect.amber} ${Emotes.citrine} ${player.prospect.citrine} ${Emotes.ruby} ${player.prospect.ruby} ${Emotes.jade} ${player.prospect.jade} ${Emotes.amethyst} ${player.prospect.amethyst}`)
+    const embed2 = new Discord.MessageEmbed()
+        .setFooter(`Page 2/5 | ${lang.globalHelpFooter.replace("%s", client.config.prefix)}`)
+        .addField(`${Emotes.ressource} ${lang.inventory.ressources} (1)`, txt, true)
+        .addField(`${Emotes.ressource} ${lang.inventory.ressources} (2)`, txt2, true)
+        .addField(`${Emotes.gem} ${lang.inventory.gems}`, `${Emotes.sapphire} ${player.prospect.sapphire} ${Emotes.amber} ${player.prospect.amber} ${Emotes.citrine} ${player.prospect.citrine} ${Emotes.ruby} ${player.prospect.ruby} ${Emotes.jade} ${player.prospect.jade} ${Emotes.amethyst} ${player.prospect.amethyst}`)
 
     const embed3 = new Discord.MessageEmbed()
-        .setAuthor(`${lang.inventory.inventory} ${message.author.tag}`, message.author.displayAvatarURL())
-        .setColor(message.member.displayColor)
-        .setFooter(`Page 3/5 | ${lang.globalHelpFooter}`)
+        .setFooter(`Page 3/5 | ${lang.globalHelpFooter.replace("%s", client.config.prefix)}`)
         .addField(`${Emotes.rune} ${lang.inventory.runes}`, `${txt3.join(" ")}\n${txt4.join(" ")}\n${txt5.join(" ")}\n${txt6.join(" ")}`)
         .addField(`${Emotes.bag} ${lang.inventory.yourObjects}`, `${Emotes.torch} ${player.ress.torch}`)
         .addField(`${Emotes.open_chest} ${lang.inventory.chests}`, `${Emotes.chest_d} ${player.ress.chest_d} ${Emotes.chest_c} ${player.ress.chest_c} ${Emotes.chest_b} ${player.ress.chest_b} ${Emotes.chest_a} ${player.ress.chest_a} ${Emotes.chest_s} ${player.ress.chest_s}`)
@@ -75,9 +68,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     let pickaxe = Items.tools.pickaxe[player.items.pickaxe];
 
     const embed4 = new Discord.MessageEmbed()
-        .setAuthor(`${lang.inventory.inventoryOf} ${message.author.tag}`, message.author.displayAvatarURL())
-        .setColor(message.member.displayColor)
-        .setFooter(`Page 4/5 | ${lang.globalHelpFooter}`) 
+        .setFooter(`Page 4/5 | ${lang.globalHelpFooter.replace("%s", client.config.prefix)}`) 
         
     weapons.forEach(element => {
         let part = Items.tools[element][player.items[element]];
@@ -111,9 +102,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     let ring = Items.objects.ring[player.items.ring]
 
     const embed5 = new Discord.MessageEmbed()
-        .setAuthor(`${lang.inventory.inventoryOf} ${message.author.tag}`, message.author.displayAvatarURL())
-        .setColor(message.member.displayColor)
-        .setFooter(`Page 5/5 | ${lang.globalHelpFooter}`)
+        .setFooter(`Page 5/5 | ${lang.globalHelpFooter.replace("%s", client.config.prefix)}`)
         .setDescription(`${Emotes.bag} ${lang.inventory.objects}`)
         .addField(`${Emotes.dungeon_amulet} ${lang.inventory.dungeon_amulet}:`, `${dungeon_amulet.name}\n${lang.inventory.level}: ${player.items.dungeon_amulet}`, true)
         .addField(`${Emotes.ring} ${lang.inventory.ring}:`, `${ring.name}\n${lang.inventory.level}: ${player.items.ring}`, true)
@@ -126,13 +115,13 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         embed5
     ];
     for (let i = 0; i < 0; ++i)
-    embeds.push(new Discord.MessageEmbed().setFooter(`Page ${i + 1}`));
+    embeds.push(new Discord.MessageEmbed());
     const wow = new Pagination.Embeds()
         .setArray(embeds)
         .setAuthorizedUsers([message.author.id])
         .setChannel(message.channel)
         .setPageIndicator(false)
-        .setAuthor(`${lang.inventory.inventoryOf} ${message.author.tag}`, message.author.displayAvatarURL())
+        .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
         .setColor(message.member.displayColor)
 
     switch (args[0]) {
