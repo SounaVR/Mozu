@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { DB_HOST, DB_USER, DB_NAME, DB_PASS, BOT_TOKEN, OWNER, PREFIX } = process.env
+const { DB_HOST, DB_USER, DB_NAME, DB_PASS, BOT_TOKEN } = process.env
 const { success, error, warning } = require("log-symbols");
 const { getUser, getPlayer } = require("./utils/u");
 const { sep } = require("path");
