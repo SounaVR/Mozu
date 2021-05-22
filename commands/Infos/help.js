@@ -10,7 +10,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 
 	const embed = new MessageEmbed()
 		.setColor(message.member.displayColor)
-		.setAuthor(`${lang.help.commandsOf} ${client.user.username}`, client.user.displayAvatarURL())
+		.setAuthor(`${lang.help.embedTitle.replace("%u", client.user.username)}`, client.user.displayAvatarURL())
 		.setTimestamp();
 
 	if (args[0]) {
@@ -22,7 +22,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 			cmd = client.commands.get(client.aliases.get(command));
 		}
 
-		if (!cmd) return message.channel.send(embed.setTitle(`${lang.help.invalidCommand}`).setDescription(`\`${client.config.prefix}help\` ${lang.help.doForList}`));
+		if (!cmd) return message.channel.send(embed.setTitle(`${lang.help.invalidCommand}`).setDescription(`${lang.help.InvalidCommandField.replace("%s", `${client.config.prefix + "help"}`)}`));
 
 		command = cmd.help;
 		var description;
@@ -55,8 +55,8 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 	const categories = readdirSync("./commands/");
 
 	embed.setDescription([
-		`${lang.help.prefix} **${client.config.prefix}**`,
-		`${lang.help.helpMore}`
+		`${lang.help.prefix.replace("%s", `**` + client.config.prefix)}**`,
+		`${lang.help.helpMore.replace("%s", client.config.prefix)}`
 	].join("\n"));
 	
 	categories.forEach(category => {
