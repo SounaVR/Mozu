@@ -9,12 +9,13 @@ module.exports.run = async (client, message, args, getPlayer, getUser) => {
     const user = message.mentions.users.first();
     const userid = message.author.id;
 
-    if (!args[0]) return message.channel.send(`${lang.give.correctUsage}`)
-    if (!args[1]) return message.channel.send(`${lang.give.correctUsage}`)
-    if (!args[2]) return message.channel.send(`${lang.give.specifyAmount}`)
-    if (user.id === userid) return message.channel.send(`${lang.give.giveToSelf}`)
-    if (user.id === client.user.id) return message.channel.send(`${lang.give.giveToMozu}`)
-    if (user.bot) return message.channel.send(`${lang.give.giveToOtherBots}`)
+    if (!user) return message.reply(lang.specifyUser);
+    if (user.id === userid) return message.reply(`${lang.give.giveToSelf}`)
+    if (user.bot) return message.reply(`${lang.give.giveToOtherBots}`)
+    if (!args[0]) return message.reply(`${lang.give.correctUsage.replace("%s", client.config.prefix)}`)
+    if (!args[1]) return message.reply(`${lang.give.correctUsage.replace("%s", client.config.prefix)}`)
+    if (!args[2]) return message.reply(`${lang.give.specifyAmount}`)
+    
     var member = await getUser(con, user.id);
 
     manageGive(client, con, args, player, member, message, 'stone', ['caillou', 'cailloux', 'stones']);
