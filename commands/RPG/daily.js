@@ -1,4 +1,5 @@
-const Default = require("../../utils/default.json");
+const Default = require("../../utils/default.json"),
+    Emotes = require("../../utils/emotes.json");
 
 exports.run = async (client, message, args, getPlayer, getUser) => {
     const con = client.connection;
@@ -8,9 +9,9 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 
     if (player.data.lastDaily == "0") {
         con.query(`UPDATE data SET daily = ${player.data.daily + Number(1)}, LastDaily = 1, money = ${player.data.money + Number(300)} WHERE userid = ${message.author.id}`);
-        return message.reply(`${lang.daily.done}`);
+        return message.reply(`${lang.daily.done.replace("%s", `300 ${Emotes.cash}`)}`);
     } else if (player.data.lastDaily == "1") {
-        return message.reply(`${lang.daily.notNow}`);
+        return message.reply(`${lang.daily.notNow.replace("%s", "00h00")}`);
     }
 };
 
