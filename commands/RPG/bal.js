@@ -8,7 +8,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     if (!player) return message.channel.send(Default.notRegistered);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
 
-    message.channel.send(`💳 ► ${lang.bal.actualBal} **${nFormatter(player.data.money)}**${Emotes.cash} ${lang.bal.actualBal2}`);
+    message.channel.send(`💳 ► ${lang.bal.actualBal.replace("%s", `**${nFormatter(player.data.money)}**${Emotes.cash}`)}`);
 };
 
 exports.help = {
