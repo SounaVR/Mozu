@@ -14,7 +14,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     const reactZones = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣'];
 
     if (args[0] == "switch") {
-        const zones = await message.channel.send(`${lang.explore.selectZone}`);
+        const zones = await message.channel.send(`${lang.explore.selectZone.replace("%u", `<@${userid}>`)}`);
 
         await zones.react(reactZones[0]);
         await zones.react(reactZones[1]);
@@ -58,19 +58,18 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
             collectorZones.stop();
         })
     } else if (args[0] > 0) {
-        if (player.ress.torch < args[0]) return message.channel.send(`${lang.explore.notEnoughDungeonStone} (${player.ress.torch}/${args[0]} ${Emotes.torch})`);
-        if (player.items.dungeon_amulet <= 0) return message.channel.send(`pas le niveau requis d'amulette`);
+        if (player.ress.torch < args[0]) return message.channel.send(`${lang.explore.notEnoughDungeonStone.replace("%s", client.config.prefix)} (${player.ress.torch}/${args[0]} ${Emotes.torch})`);
+        if (player.items.dungeon_amulet <= 0) return message.channel.send(`${lang.explore.switchError}`);
         con.query(`UPDATE ress SET ${chest[player.ress.zone]} = ${player.ress[chest[player.ress.zone]] + Number(args[0])}, torch = ${player.ress.torch - (args[0])} WHERE userid = ${userid}`)
 
-        return message.reply(`${Emotes.torch_explore} ${lang.explore.explored} **${array[player.ress.zone]}** ${lang.explore.haveGot} **${args[0]}** ${lang.explore.chestRarity} **${rarity[player.ress.zone]}**.\n*${lang.explore.switch}*.`)
+        return message.channel.send(`${Emotes.torch_explore} <@${userid}> ${lang.explore.explored.replace("%s", `**${array[player.ress.zone]}**`).replace("%m", `**${args[0]}**`).replace("%r", `**${rarity[player.ress.zone]}**`)}\n*${lang.explore.switch.replace("%s", client.config.prefix)}*.`)
     } else if (!args[0]) {
-        //return message.reply(`${lang.explore.correctUsage}`)
         const embed = new Discord.MessageEmbed()
         .setColor(message.member.displayColor)
         .setTitle("EXPLORE")
-        .setDescription("*`m!explore switch` pour changer de zone*\n*`m!explore [quantité]` pour obtenir des coffres*")
-        .addField("Current location :", `${array[player.ress.zone]}/${reactZones[player.ress.zone]}`)
-        .addField("Torch :", `${Emotes.torch} ${player.ress.torch}`)
+        .setDescription(`${lang.explore.description.replace("%s", client.config.prefix).replace("%p", client.config.prefix)}`)
+        .addField(`${lang.explore.currentLocation}`, `${array[player.ress.zone]}/${reactZones[player.ress.zone]}`)
+        .addField(`${lang.explore.torch}`, `${Emotes.torch} ${player.ress.torch}`)
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL());
 
