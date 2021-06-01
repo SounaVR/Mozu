@@ -1,63 +1,69 @@
 {
-    "confirmLanguage": "youre lenGAGE haze bine 7 inne anglishe",
-    "globalHelpFooter": "m!help pour la liste des commandes.",
+    "availableLanguages" : "Langues disponibles : `EN/FR`",
+    "confirmLanguage": "La langue a bien été définie sur %s.",
+    "globalHelpFooter": "%shelp pour la liste des commandes.",
     "help": {
-        "commandsOf": "Commandes de",
+        "embedTitle": "Commandes de %u",
         "invalidCommand": "Commande invalide.",
-        "doForList": "pour la liste de toutes les commandes.",
+        "InvalidCommandField": "%s pour la liste de toutes les commandes.",
         "infos": "`<>` veut dire que c'est nécessaire, et `()` que c'est optionnel",
-        "noUsage": "Pas d'utilisation",
-        "nothing": "Aucun",
+        "noUsage": "Aucune",
+        "noAliases": "Aucun",
         "category": "Catégorie",
-        "prefix": "Le préfix du bot est :",
+        "prefix": "Le préfix du bot est : %s",
         "usage": "Utilisation",
         "description": "Aucune description fournie",
-        "helpMore": "Si vous voulez en savoir plus sur une commande : `m!help [commande]`"
+        "helpMore": "Si vous voulez en savoir plus sur une commande : `%shelp [commande]`"
     },
     "rep": {
-        "notNow": "votre point de réputation n'est pas encore disponible ! Revenez à 00h00 pour récompenser une bonne personne !",
+        "notNow": "votre point de réputation n'est pas encore disponible ! Revenez à %s pour récompenser une bonne personne !",
         "now" : "votre point de réputation est disponible !",
+        "argsRequired": "veuillez mentionner un utilisateur valide.",
         "giveToSelf": "vous ne pouvez pas vous donner un point de réputation !",
-        "giveToMozu": "je suis assez connu comme ça, merci.",
         "giveToOtherBots": "ce bot n'a pas besoin d'être connu.",
-        "unknownUser": ":x: Il est pas inscrit l'autre là.",
-        "done": "Votre point de réputation a été donné avec succès à",
-        "correctUsage": ":x: Usage correct : `m!rep [utilisateur]`"
+        "unknownUser": "je ne parviens pas à trouver cet utilisateur dans ma base de données.",
+        "done": "votre point de réputation a été donné avec succès à %u."
     },
     "hr": {
-        "notNow": "vous avez déjà collecté votre hourly, veuillez attendre encore",
-        "done": "vous avez récupéré **30** <:cash:776115188498956329> et",
-        "seeyoulater" : "à dans 1 heure !"
+        "notNow": "vous avez déjà collecté votre hourly, veuillez attendre encore %s",
+        "done": "vous avez récupéré **30** <:cash:776115188498956329> et %a, à dans 1 heure !"
     },
     "daily": {
-        "notNow": "vous avez déjà collecté votre daily, veuillez attendre jusqu'à 00h00.",
-        "done": "vous avez récupéré **300** <:cash:776115188498956329>, à demain !"
+        "notNow": "vous avez déjà collecté votre daily, veuillez attendre jusqu'à %s.",
+        "done": "vous avez récupéré **%s** , à demain !"
     },
     "bal": {
-        "actualBal": "Vous avez actuellement",
-        "actualBal2": "en votre possession."
+        "actualBal": "Vous avez actuellement %s en votre possession."
     },
     "gift": {
-        "giveToOtherBots": ":x: Vous ne pouvez pas donner de l'argent à un bot.",
-        "giveToSelf": ":x: Vous ne pouvez pas vous donner de l'argent !",
-        "invalidAmount": ":x: Ce montant est invalide.",
-        "confirmTransfer": "Voulez-vous transférer",
-        "confirmTransferTo": "à",
-        "notEnoughMoney": ":x: Vous n'avez pas assez d'argent. Il vous manque",
+        "giveToOtherBots": "vous ne pouvez pas donner de l'argent à un bot.",
+        "giveToSelf": "vous ne pouvez pas vous donner de l'argent !",
+        "invalidAmount": "ce montant est invalide.",
+        "notEnoughMoney": "vous n'avez pas assez d'argent. Il vous manque %s !",
         "canceled": "**[Transfert]**\nStatut : **Annulé** :x:",
-        "unknownUser": ":x: Cet utilisateur n'est pas inscrit (`m!profile`).",
-        "correctUsage":":x: Usage correct : `m!gift [@quelqu'un] [nombre]`"
+        "unknownUser": "cet utilisateur est introuvable dans mes données.",
+        "correctUsage":"usage correct : `%sgift [@quelqu'un] [montant]`",
+        "transfer": "**[Transfert]**",
+        "from": "De:",
+        "for": "Pour:",
+        "amount": "Montant:",
+        "progress": "Avancée:",
+        "completed": "effectués",
+        "state": "Statut :",
+        "state_pending" : "**En attente**",
+        "state_inProgress": "**En cours**",
+        "state_canceled": "**Annulé**",
+        "state_done": "**Validé**",
+        "state_timedOut": "**Temps écoulé**"
     },
     "mine": {
         "title": "Ressources minées",
         "level": "Niveau",
-        "notEnoughEnergy": ":x: Vous n'avez pas assez d'énergie.",
-        "ressGained": "Ressources minées",
+        "notEnoughEnergy": "vous n'avez pas assez d'énergie.",
         "infos": "Informations",
-        "usedEnergy": "Énergie utilisée",
-        "remainingEnergy": "Énergie restante",
-        "winnedXP": "Exp gagnée",
-        "power" : "Power :"
+        "usedEnergy": "Énergie utilisée : %s",
+        "remainingEnergy": "Énergie restante : %s",
+        "power" : "Power : %s"
     },
     "inventory": {
         "ring" : "Anneau",
@@ -72,7 +78,7 @@
         "legs": "Jambes",
         "feet": "Pieds",
         "level": "Niveau",
-        "energy": "Énergie",
+        "energy": "Énergie %s",
         "stats": "Stats",
         "ressources": "Ressources",
         "enchant": "Enchantement",
@@ -90,7 +96,6 @@
         "sword": "Épée",
         "shield": "Bouclier",
         "pickaxe": "Pioche",
-        "inventoryOf": "Inventaire de",
         "dungeon_stone": "Pierre de Donjon",
         "chests": "Coffres",
         "gems" : "Gemmes"
@@ -99,27 +104,22 @@
 
     },
     "give": {
-        "wantGive": "Voulez-vous donner",
-        "wantGiveTo": "à",
-        "notEnoughRess": ":x: Vous n'avez pas assez de ressources à donner.",
-        "giveSuccess": ":white_check_mark: Donation effectuée ! Vous avez donné",
-        "giveSuccessTo": "à",
-        "canceled": ":x: Donation annulée.",
-        "needSpecifyAmount": ":x: Vous devez spécifier une quantité !",
-        "giveToSelf": ":x: Vous ne pouvez pas vous donner des objets !",
-        "giveToMozu": ":x: Non merci.",
-        "giveToOtherBots": ":x: Vous ne pouvez pas donner des objets à un autre bot.",
-        "specifyUser": ":x: Vous devez spécifier un joueur.",
-        "specifyAmount": ":x: Vous devez spécifier une quantité d'objets à donner.",
-        "specifyItem": ":x: Vous devez spécifier un objet à donner.",
-        "correctUsage": ":x: Usage correct : `m!give [@quelqu'un] [stone/charbon/cuivre/fer/or/malachite] [quantité]`"
+        "wantGive": "voulez-vous donner %s à %u ?",
+        "notEnoughRess": "Vous n'avez pas assez de ressources à donner.",
+        "giveSuccess": "Donation effectuée ! Vous avez donné %m à %u !",
+        "canceled": "Donation annulée.",
+        "giveToSelf": "vous ne pouvez pas vous donner des objets !",
+        "giveToOtherBots": "vous ne pouvez pas donner des objets à un bot.",
+        "specifyUser": "vous devez spécifier un joueur inscrit.",
+        "specifyAmount": "vous devez spécifier un montant d'objet à donner.",
+        "specifyItem": "vous devez spécifier un objet à donner.",
+        "correctUsage": "usage correct : `%sgive [@quelqu'un] [stone/charbon/cuivre/fer/or/malachite] [montant]`"
     },
     "top": {
-        "correctUsage": ":x: Usage correct : `m!top <XP/money>`"
+       
     },
     "trade": {
-        "wantTrade": "Voulez-vous échanger",
-        "wantTradeTo": "à",
+        "wantTrade": "voulez-vous échanger %s à %u",
         "notEnoughRess": ":x: Vous n'avez pas assez de ressources à échanger.",
         "userDontHaveEnoughRessToTrade": ":x: L'utilisateur mentionné n'as pas assez de ressources à échanger.",
         "tradeSuccess": ":white_check_mark: Échange effectué ! Vous avez échangé",
@@ -128,69 +128,65 @@
         "needSpecifyAmount": ":x: Vous devez spécifier une quantité !",
         "giveToSelf": ":x: Vous ne pouvez pas vous échanger des objets !",
         "giveToMozu": ":x: Non merci.",
-        "giveToOtherBots": ":x: Vous ne pouvez pas échanger des objets avec un autre bot.",
+        "giveToOtherBots": ":x: Vous ne pouvez pas échanger des objets avec un bot.",
         "specifyUser": ":x: Vous devez spécifier un joueur.",
         "specifyAmount": ":x: Vous devez spécifier une quantité d'objets à échanger.",
         "specifyItem": ":x: Vous devez spécifier un objet à échanger.",
         "correctUsage": ":x: Usage correct : `m!trade [stone/charbon/cuivre/fer/or/malachite] [quantité] [@quelqu'un] [stone/charbon/cuivre/fer/or/malachite] [quantité]`"
     },
     "explore": {
-        "selectZone" : "Où souhaitez-vous aller ?\n0️⃣ : Mine abandonnée (chest D, Amulette de Donjon de niveau 0 requise)\n1️⃣ : Ruines Antiques (chest C, Amulette de Donjon de niveau 1 requise)\n2️⃣ : Village souterrain (chest B, Amulette de Donjon de niveau 2 requise)\n3️⃣ : Catacombes (chest A, Amulette de Donjon de niveau 3 requise)\n4️⃣ : Salle aux trésors (chest S, Amulette de Donjon de niveau 4 requise)",
-        "notEnoughDungeonStone": ":x: Vous n'avez pas assez de torches pour explorer. Utilisez `m!craft torch` pour en avoir une !",
+        "selectZone" : "Où souhaitez-vous aller %u ?\n0️⃣ : Mine abandonnée (chest D, Amulette de Donjon de niveau 0 requise)\n1️⃣ : Ruines Antiques (chest C, Amulette de Donjon de niveau 1 requise)\n2️⃣ : Village souterrain (chest B, Amulette de Donjon de niveau 2 requise)\n3️⃣ : Catacombes (chest A, Amulette de Donjon de niveau 3 requise)\n4️⃣ : Salle aux trésors (chest S, Amulette de Donjon de niveau 4 requise)",
+        "notEnoughDungeonStone": "vous n'avez pas assez de torche pour explorer. Utilisez `%scraft torch` pour en avoir une !",
         "switchError": "votre Amulette de Donjon n'a pas le niveau requis.",
-        "explored": "vous ressortez de ►",
+        "explored": "vous ressortez de ► **%s** avec **%m** coffre(s) de rareté %r.",
         "zone_0": "Mine Abandonnée",
         "zone_1": "Ruines Antiques",
         "zone_2": "Village souterrain",
         "zone_3": "Catacombes",
         "zone_4": "Salle aux trésors",
-        "haveGot": "avec",
-        "chestRarity": "coffre(s) de rareté",
-        "correctUsage": "usage correct : `m!explore [switch/quantité]`",
-        "switch": "`m!explore switch` pour changer de zone"
+        "switch": "`%sexplore switch` pour changer de zone",
+        "description": "*`%sexplore switch` pour changer de zone*\n*`%pexplore [quantité]` pour obtenir des coffres*",
+        "currentLocation": "Emplacement actuel :",
+        "torch": "Torches :"
     },
     "chest": {
-        "dontHaveAmulet": "vous n'avez pas l'Amulette de Donjon, pour y remédier, tapez `m!craft dungeon_amulet` !",
-        "chests": "coffre(s)",
-        "openingOf": "Ouverture de",
-        "rarity": "Rareté",
+        "dontHaveAmulet": "vous n'avez pas l'Amulette de Donjon, pour y remédier, tapez `%scraft dungeon_amulet` !",
+        "openingOf": "Ouverture de %m coffre(s) | Rareté : %r",
         "rarity_d": "Médiocre (D)",
         "rarity_c": "Commun (C)",
         "rarity_b": "Rare (B)",
         "rarity_a": "Épique (A)",
         "rarity_s": "Légendaire (S)",
-        "correctUsage": "usage correct : `m!chest open [D/C/B/A/S] [quantité]`",
-        "notEnoughChests": "vous avez pas assez de coffres. (Essayez `m!explore` pour en avoir plus)"
+        "correctUsage": "usage correct : `%schest open [D/C/B/A/S] [montant]`",
+        "notEnoughChests": "vous avez pas assez de coffres. (Essayez `%sexplore` pour en avoir plus)"
     },
     "craft": {
-        "notEnoughRess": ":x: Vous n'avez pas assez de ressources pour faire cette amélioration.",
-        "maxLevel": ":x: Vous avez déjà le niveau maximum de cet objet.",
-        "level": "de niveau",
-        "done": "Fabrication réussie ! Vous venez d'obtenir :",
+        "invalidNumber": "veuillez entrer une valeur valide.",
+        "notEnoughRess": "vous n'avez pas assez de ressources pour faire ce craft.",
+        "maxLevel": "vous avez déjà le niveau maximum de cet objet.",
+        "done": "Fabrication réussie ! Vous venez d'obtenir : %s",
         "canceled": "Craft annulé.",
         "description": "Améliorez votre matériel.",
         "doc": "Ajoutez comme argument le nom de l'élément que vous souhaitez améliorer, les éléments disponibles sont les suivants:\n",
-        "validNumber": ":x: Veuillez recommencer et entrer un nombre valide.",
-        "typingNumber": "Combien en voulez-vous ? Écrivez un nombre valide.",
-        "upgrade" : "Améliorer",
-        "to" : "en",
-        "cost" : "Coût"
+        "upgrade" : "Améliorer %a en %n ?",
+        "cost" : "Coût",
+        "craft" : "Fabriquer"
     },
     "enchant" : {
         "description" : "Enchantez votre matériel.",
         "doc" : "Ajoutez comme argument le nom de l'élément que vous souhaitez enchanter, les éléments disponibles sont les suivants:\n",
-        "maxLevel" : ":x: Vous avez déjà l'enchantement maximum de cet objet.",
-        "notEnoughRess" : ":x: Vous n'avez pas assez de ressources pour faire cet enchantement.",
-        "enchantSuccess" : "Enchantement réussi au niveau",
-        "canceled" : ":x: Enchantement annulé."
+        "maxLevel" : "vous avez déjà l'enchantement maximum de cet objet.",
+        "notEnoughRess" : "vous n'avez pas assez de ressources pour faire cet enchantement.",
+        "enchantSuccess" : "Enchantement réussi au niveau : %s !",
+        "canceled" : "Enchantement annulé."
     },
     "prospect" : {
         "title" : "PROSPECTION",
-        "description" : "Prospectez vos minerais pour obtenir des gemmes que vous pourrez sertir sur votre équipement (`m!no_name`).\n:warning: Les minerais seront détruits.",
+        "description" : "Prospectez vos minerais pour obtenir des gemmes que vous pourrez sertir sur votre équipement (`%sbind`).\n:warning: Les minerais seront détruits.",
         "doc" : "Chaque minerai correspond à une gemme qui ajoute une stat bien précise.\nAjoutez comme argument le nom de l'élément que vous souhaitez prospecter, ainsi que la quantité de gemmes que vous voulez.\n",
-        "notEnoughRess": ":x: Vous n'avez pas assez de ressources pour faire cette prospection.",
-        "specifyQuantity" : ":x: Vous devez spécifier une quantité.",
-        "success" : "Prospection réussie ! Vous avez récupérer ",
-        "canceled" : ":x: Prospection annulée."
+        "notEnoughRess": "vous n'avez pas assez de ressources pour faire cette prospection.",
+        "specifyItem" : "vous devez spécifier un item à prospecter.",
+        "success" : "Prospection réussie ! Vous avez récupérer : %s !",
+        "canceled" : "Prospection annulée."
     }
 }
