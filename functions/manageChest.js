@@ -7,11 +7,11 @@ module.exports = function manageChest(client, con, player, message, args, object
     const lang = require(`../utils/text/${player.data.lang}.json`);
     const userid = message.author.id;
 
-    if (player.items.dungeon_amulet == "0") return message.reply(`${lang.chest.dontHaveAmulet}`);
-    if (player.ress[objectName] < args[2]) return message.reply(`${lang.chest.notEnoughChests}`);
+    if (player.items.dungeon_amulet == "0") return message.reply(`${lang.chest.dontHaveAmulet.replace("%s", client.config.prefix)}`);
+    if (player.ress[objectName] < args[2]) return message.reply(`${lang.chest.notEnoughChests.replace("%s", client.config.prefix)}`);
 
     const embed = new Discord.MessageEmbed()
-    .setTitle(`${Emotes.chest} ${lang.chest.openingOf} ${args[2]} ${lang.chest.chests} | ${lang.chest.rarity} : ${rarityName}`);
+    .setTitle(`${Emotes.chest} ${lang.chest.openingOf.replace("%m", args[2]).replace("%r", rarityName)}`);
 
     Danny = {};
     Danny.random = () => min + Math.ceil(Math.random() * (max - min) * args[2]);
