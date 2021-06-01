@@ -13,7 +13,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     const Items = require(`../../utils/items/${player.data.lang}.json`);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
     const maxEnergy = Items.objects.ring[player.items.ring].energy;
-    const cooldown = Items.objects.ring[player.items.ring].cooldown;
+    const cooldown = player.data.energyCooldown;
     
     const embed1 = new Discord.MessageEmbed()
         .setFooter(`Page 1/5 | ${lang.globalHelpFooter.replace("%s", client.config.prefix)}`)
