@@ -50,13 +50,13 @@ module.exports = async function manageEnchant(client, con, player, message, cate
                 if (player.ress[`rune_${object}`] < getNeededRessource) need.push(`sorry bro`);
                 resssql.push(`rune_${object} = rune_${object} - ${getNeededRessource}`);
 
-                if (need.length >= 1) return message.channel.send(`${lang.enchant.notEnoughRess}`);
+                if (need.length >= 1) return message.reply(`${lang.enchant.notEnoughRess}`);
 
                 con.query(`UPDATE ress SET ${resssql.join(',')} WHERE userid = ${message.author.id}`);
                 con.query(`UPDATE data SET ATK = ${player.data.ATK + Number(Enchant[category][object][0].ATK)}, DEF = ${player.data.DEF + Number(Enchant[category][object][0].DEF)}, power = ${player.data.power + Number(Enchant[category][object][0].power)} WHERE userid = ${message.author.id}`);
                 con.query(`UPDATE enchant SET ${objectName} = ${level} WHERE userid = ${message.author.id}`);
 
-                return message.channel.send(`${lang.enchant.enchantSuccess} : **${level}** !`);
+                return message.channel.send(`${lang.enchant.enchantSuccess.replace("%s", `**${level}**`)}`);
 
             case react[1]:
                 return message.channel.send(`${lang.enchant.canceled}`);
