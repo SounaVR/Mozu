@@ -47,42 +47,42 @@
         {
             "head" : [
                 {
-                    "gem_cooldown" : 1000
+                    "energyCooldown" : 1000
                 }
             ],
             "shoulders" : [
                 {
-                    "gem_cooldown" : 1000
+                    "energyCooldown" : 1000
                 }
             ],
             "chest" : [
                 {
-                    "gem_cooldown" : 1000
+                    "energyCooldown" : 1000
                 }
             ],
             "wrists" : [
                 {
-                    "gem_cooldown" : 1000
+                    "energyCooldown" : 1000
                 }
             ],
             "hands" : [
                 {
-                    "gem_cooldown" : 1000
+                    "energyCooldown" : 1000
                 }
             ],
             "waist" : [
                 {
-                    "gem_cooldown" : 1000
+                    "energyCooldown" : 1000
                 }
             ],
             "legs" : [
                 {
-                    "gem_cooldown" : 1000
+                    "energyCooldown" : 1000
                 }
             ],
             "feet" : [
                 {
-                    "gem_cooldown" : 1000
+                    "energyCooldown" : 1000
                 }
             ]
         }
@@ -91,42 +91,42 @@
         {
             "head" : [
                 {
-                    "mana" : 1
+                    "MANA" : 1
                 }
             ],
             "shoulders" : [
                 {
-                    "mana" : 1
+                    "MANA" : 1
                 }
             ],
             "chest" : [
                 {
-                    "mana" : 1
+                    "MANA" : 1
                 }
             ],
             "wrists" : [
                 {
-                    "mana" : 1
+                    "MANA" : 1
                 }
             ],
             "hands" : [
                 {
-                    "mana" : 1
+                    "MANA" : 1
                 }
             ],
             "waist" : [
                 {
-                    "mana" : 1
+                    "MANA" : 1
                 }
             ],
             "legs" : [
                 {
-                    "mana" : 1
+                    "MANA" : 1
                 }
             ],
             "feet" : [
                 {
-                    "mana" : 1
+                    "MANA" : 1
                 }
             ]
         }
