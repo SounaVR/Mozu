@@ -14,13 +14,13 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         .setTitle(`${lang.prospect.title}`)
         .attachFiles(["./utils/images/prospect/gem.png"])
         .setThumbnail("attachment://gem.png")
-        .addField("Description", `${lang.prospect.description}`)
+        .addField("Description", `${lang.prospect.description.replace("%s", client.config.prefix)}`)
         .addField("Documentation", `${lang.prospect.doc}10k ${Emotes.ressource} = 1 ${Emotes.gem}\n\n${Emotes.stone} => ${Emotes.sapphire} +1 Power\n${Emotes.coal} => ${Emotes.amber} -1 sec on energy cooldown\n${Emotes.copper} => ${Emotes.citrine} +1 Mana Max\n${Emotes.iron} => ${Emotes.ruby} +1 HP Max\n${Emotes.gold} => ${Emotes.jade} +1 ATK\n${Emotes.malachite} => ${Emotes.amethyst} +1 DEF`)
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL());
-    
-    if (!args[1] && args[0]) {
-        return message.channel.send(`${lang.prospect.specifyQuantity}`);
+
+    if (!args[1]) {
+        args[1] = 1
     }
 
     switch (args[0]) {
