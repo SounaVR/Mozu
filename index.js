@@ -17,6 +17,7 @@ const client = new Discord.Client({
 	disableMentions: "everyone",
 	restTimeOffset: 0
 });
+require('discord-buttons')(client)
 
 moment.locale("fr");
 
@@ -160,7 +161,7 @@ client.on("message", async message => {
         if (player) {
             const Items = require(`./utils/items/${player.data.lang}.json`);
             const maxEnergy = Items.objects.ring[player.items.ring].energy;
-            const cooldown = Items.objects.ring[player.items.ring].cooldown;
+            const cooldown = player.data.energyCooldown;
             con.query(`UPDATE stats SET cmd = ${player.stats.cmd + Number(1)} WHERE userid = ${message.author.id}`);
 
             if ((Date.now() - player.data.lastActivity) - cooldown > 0) {

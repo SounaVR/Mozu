@@ -14,6 +14,7 @@
   "license": "MIT",
   "dependencies": {
     "cron": "^1.8.2",
+    "discord-buttons": "^3.0.1",
     "discord-paginationembed": "^2.0.0-beta.4",
     "discord.js": "^12.5.2",
     "dotenv": "^8.2.0",
