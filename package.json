@@ -5,12 +5,12 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SounaFR/Mozu.git"
+    "url": "https://github.com/KinchiFR/Mozu.git"
   },
   "scripts": {
     "start": "node ."
   },
-  "author": "Souna",
+  "author": "Kinchi",
   "license": "MIT",
   "dependencies": {
     "cron": "^1.8.2",
