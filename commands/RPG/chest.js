@@ -8,9 +8,9 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     const lang = require(`../../utils/text/${player.data.lang}.json`);
 
     args[0] = "o" || "open";
-    if (!args[0].toLowerCase()) return message.reply(`${lang.chest.correctUsage}`);
-    if (!args[2] || args[2] < 1) return message.reply(`${lang.chest.correctUsage}`);
-    if (!args[1].toLowerCase()) return message.reply(`${lang.chest.correctUsage}`);
+    if (!args[0].toLowerCase()) return message.reply(`${lang.chest.correctUsage.replace("%s", client.config.prefix)}`);
+    if (!args[2] || args[2] < 1) return message.reply(`${lang.chest.correctUsage.replace("%s", client.config.prefix)}`);
+    if (!args[1].toLowerCase()) return message.reply(`${lang.chest.correctUsage.replace("%s", client.config.prefix)}`);
 
     switch (args[1].toLowerCase()) {
         case "d":
@@ -30,7 +30,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
             break;
 
         default:
-            message.reply(`${lang.chest.correctUsage}`);
+            message.reply(`${lang.chest.correctUsage.replace("%s", client.config.prefix)}`);
             break;
     }
 };
