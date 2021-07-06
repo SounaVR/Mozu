@@ -199,6 +199,6 @@
         "notEnoughGem" : "Tout les boutons sont désactivés ?",
         "notEnoughGemDoc" : "Essayez la commande `m!prospect` pour vous procurer des gemmes.",
         "success" : "Attachement réussi !",
-        "successfullyBinded" : "Vous avez lier avec succès la gemme %s sur : %g."
+        "successfullyBinded" : "Vous avez lier avec succès la gemme %s sur %g."
     }
 }
