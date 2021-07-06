@@ -45,7 +45,7 @@ module.exports = async function manageProspecting(client, con, player, message, 
                 con.query(`UPDATE ress SET ${resssql.join(',')} WHERE userid = ${message.author.id}`);
                 con.query(`UPDATE prospect SET ${gem} = ${player.prospect[gem] + Number(quantity)} WHERE userid = ${message.author.id}`);
 
-                return message.channel.send(`${lang.prospect.success.replace("%s", `**${gem}** x${quantity}`)}`);
+                return message.channel.send(`${lang.prospect.success.replace("%s", `${Emotes[gem]} **${gem}** x${quantity}`)}`);
 
             case react[1]:
                 msg.delete();
