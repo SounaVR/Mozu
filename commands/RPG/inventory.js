@@ -83,19 +83,47 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     else embed4.addField(`${Emotes.chests.Tools.rune_pickaxe} ${lang.inventory.pickaxe}:`, `${pickaxe.name}\n${lang.inventory.level}: ${player.items.pickaxe}`, true)
     
     P1.forEach(element => {
+        var slot1;
+        var slot2;
+        var slot3;
+        const slot_a = player.slots[`slot_a_${element}`]-1;
+        const slot_b = player.slots[`slot_b_${element}`]-1;
+        const slot_c = player.slots[`slot_c_${element}`]-1;
+
+        if (slot_a <= -1) slot1 = `${Emotes.emptySocket}`;
+        else slot1 = `${Emotes.gems[slot_a]}`;
+        if (slot_b <= -1) slot2 = `${Emotes.emptySocket}`;
+        else slot2 = `${Emotes.gems[slot_b]}`;
+        if (slot_c <= -1) slot3 = `${Emotes.emptySocket}`;
+        else slot3 = `${Emotes.gems[slot_c]}`;
+
         let part = Items.armors[element][player.items[element]];
         let enchantmentLevel = player.enchant[`ench_${element}`] > 0 ? player.enchant[`ench_${element}`] + Number(0) : player.enchant[`ench_${element}`]
  
-        if (enchantmentLevel) embed4.addField(`${Emotes.chests.Gear.P1[`rune_${element}`]} ${lang.inventory[element]}:`, `${part.name}\n${lang.inventory.level}: ${player.items[element]}\n[${lang.inventory.enchant} ${player.enchant[`ench_${element}`]}]`, true)
-        else embed4.addField(`${Emotes.chests.Gear.P1[`rune_${element}`]} ${lang.inventory[element]}:`, `${part.name}\n${lang.inventory.level}: ${player.items[element]}`, true)
+        if (enchantmentLevel) embed4.addField(`${Emotes.chests.Gear.P1[`rune_${element}`]} ${lang.inventory[element]}:`, `${slot1 + "" + slot2 + "" + slot3}\n${part.name}\n${lang.inventory.level}: ${player.items[element]}\n[${lang.inventory.enchant} ${player.enchant[`ench_${element}`]}]`, true)
+        else embed4.addField(`${Emotes.chests.Gear.P1[`rune_${element}`]} ${lang.inventory[element]}:`, `${slot1 + "" + slot2 + "" + slot3}\n${part.name}\n${lang.inventory.level}: ${player.items[element]}`, true)
     });
    
     P2.forEach(element => {
+        var slot1;
+        var slot2;
+        var slot3;
+        const slot_a = player.slots[`slot_a_${element}`]-1;
+        const slot_b = player.slots[`slot_b_${element}`]-1;
+        const slot_c = player.slots[`slot_c_${element}`]-1;
+
+        if (slot_a <= -1) slot1 = `${Emotes.emptySocket}`;
+        else slot1 = `${Emotes.gems[slot_a]}`;
+        if (slot_b <= -1) slot2 = `${Emotes.emptySocket}`;
+        else slot2 = `${Emotes.gems[slot_b]}`;
+        if (slot_c <= -1) slot3 = `${Emotes.emptySocket}`;
+        else slot3 = `${Emotes.gems[slot_c]}`;
+
         let part = Items.armors[element][player.items[element]];
         let enchantmentLevel = player.enchant[`ench_${element}`] > 0 ? player.enchant[`ench_${element}`] + Number(0) : player.enchant[`ench_${element}`]
   
-        if (enchantmentLevel) embed4.addField(`${Emotes.chests.Gear.P2[`rune_${element}`]} ${lang.inventory[element]}:`, `${part.name}\n${lang.inventory.level}: ${player.items[element]}\n[${lang.inventory.enchant} ${player.enchant[`ench_${element}`]}]`, true)
-        else embed4.addField(`${Emotes.chests.Gear.P2[`rune_${element}`]} ${lang.inventory[element]}:`, `${part.name}\n${lang.inventory.level}: ${player.items[element]}`, true)
+        if (enchantmentLevel) embed4.addField(`${Emotes.chests.Gear.P2[`rune_${element}`]} ${lang.inventory[element]}:`, `${slot1 + "" + slot2 + "" + slot3}\n${part.name}\n${lang.inventory.level}: ${player.items[element]}\n[${lang.inventory.enchant} ${player.enchant[`ench_${element}`]}]`, true)
+        else embed4.addField(`${Emotes.chests.Gear.P2[`rune_${element}`]} ${lang.inventory[element]}:`, `${slot1 + "" + slot2 + "" + slot3}\n${part.name}\n${lang.inventory.level}: ${player.items[element]}`, true)
     });
 
     let dungeon_amulet = Items.objects.dungeon_amulet[player.items.dungeon_amulet]
