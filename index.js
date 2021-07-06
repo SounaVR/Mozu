@@ -15,7 +15,7 @@ const arraydebg = ["data", "ress", "items", "enchant", "prospect", "slots", "sta
 
 const client = new Discord.Client({
 	disableMentions: "everyone",
-	restTimeOffset: 0
+	restTimeOffset: 250
 });
 require('discord-buttons')(client)
 
@@ -35,7 +35,7 @@ const con = mysql.createConnection({
 });
 
 client.on('ready', async () => {
-    const rdy = client.channels.cache.find(channel => channel.id === "689876186599653512");
+    const rdy = client.channels.cache.find(channel => channel.id === "858815406508605490");
     const start = client.channels.cache.find(channel => channel.id === "827453929955786794");
     const backup = client.channels.cache.find(channel => channel.id === "827453893205688350");
 	client.connection = con;
@@ -116,7 +116,7 @@ client.on('ready', async () => {
 
 	dailyReset.start();
 	weekReset.start();
-	roleClaim(client);
+	//roleClaim(client);
 
     //garder la db allumée
 	setInterval(function () {
@@ -257,6 +257,10 @@ client.on('messageUpdate', (message, newMessage) => {
 			privateChannel.send(embed);
         } else return;
     } else return;
+});
+
+client.on('clickButton', async (button) => {
+	await button.reply.defer();
 });
 
 client.login(BOT_TOKEN);
