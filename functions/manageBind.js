@@ -13,7 +13,10 @@ module.exports = async function manageBind(con, player, message, gem, part, slot
 
     await con.query(`UPDATE prospect SET ${gem} = ${player.prospect[gem] - Number(1)} WHERE userid = ${userid}`);
 
-    await con.query(`UPDATE data SET ${key[0]} = ${player.data[key[0]] + Number(Gems[gem][part][stat])} WHERE userid = ${userid}`);
+    if (stat === "energyCooldown") {
+        await con.query(`UPDATE data SET energyCooldown = ${player.data.energyCooldown - Number(1000)} WHERE userid = ${userid}`);
+    }
+    else await con.query(`UPDATE data SET ${key[0]} = ${player.data[key[0]] + Number(Gems[gem][part][stat])} WHERE userid = ${userid}`);
 
     await con.query(`UPDATE slots SET ${slot} = 1 WHERE userid = ${userid}`);
 
