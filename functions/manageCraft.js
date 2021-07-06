@@ -104,6 +104,19 @@ module.exports = async function manageCraft(con, player, args, message, category
                         con.query(`UPDATE items SET ${objectName} = ${level} WHERE userid = ${message.author.id}`);
                         break;
                 }
+                if (category === "armors") {
+                    switch (level) {
+                        case 1:
+                            con.query(`UPDATE slots SET slot_a_${objectName} = 0 WHERE userid = ${message.author.id}`);
+                            break;
+                        case 2:
+                            con.query(`UPDATE slots SET slot_b_${objectName} = 0 WHERE userid = ${message.author.id}`);
+                            break;
+                        case 3:
+                            con.query(`UPDATE slots SET slot_c_${objectName} = 0 WHERE userid = ${message.author.id}`);
+                            break;
+                    }
+                }
                 const torch = objectName ? objectName === "torch" : true;
                 if (torch) return message.channel.send(`${lang.craft.done.replace("%s", `${amount} **${currentObject.name}**`)}.`)
                 else return message.channel.send(`${lang.craft.done.replace("%s", `**${currentObject.name}**`)}.`);
