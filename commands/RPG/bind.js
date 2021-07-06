@@ -5,7 +5,6 @@ Emotes        = require('../../utils/emotes.json'),
 manageBind    = require('../../functions/manageBind');
 
 exports.run = async (client, message, args, getPlayer, getUser) => {
-    if (message.author.id !== client.config.owners[0]) return message.channel.send("Commande en maintenance.")
     const emptySocket = "https://cdn.discordapp.com/attachments/691992473999769623/850298943467159552/emptySocket.png";
     const con = client.connection;
     const player = await getPlayer(con, message.author.id);
