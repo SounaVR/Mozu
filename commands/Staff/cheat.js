@@ -13,7 +13,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         if (!args[4]) return message.react("❌");
 
         switch (args[2]) {
-            case "data": case "ress": case "items": case "enchant": case "prospect": case "stats":
+            case "data": case "ress": case "items": case "enchant": case "prospect": case "slots": case "stats":
                 con.query(`UPDATE ${args[2]} SET ${args[3]} = ${args[4]} WHERE userid = ${someone.id}`);
                 break;
         }
@@ -23,7 +23,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         if (!args[3]) return message.react("❌");
 
         switch (args[2]) {
-            case "data": case "ress": case "items": case "enchant": case "prospect": case "stats":
+            case "data": case "ress": case "items": case "enchant": case "prospect": case "slots": case "stats":
                 con.query(`UPDATE ${args[2]} SET ${args[3]} = ${member[args[2]][args[3]] + Number(args[4])} WHERE userid = ${someone.id}`);
                 break;
         }
