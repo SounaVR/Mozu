@@ -183,10 +183,22 @@
     "prospect" : {
         "title" : "PROSPECTION",
         "description" : "Prospectez vos minerais pour obtenir des gemmes que vous pourrez sertir sur votre équipement (`%sbind`).\n:warning: Les minerais seront détruits.",
-        "doc" : "Chaque minerai correspond à une gemme qui ajoute une stat bien précise.\nAjoutez comme argument le nom de l'élément que vous souhaitez prospecter, ainsi que la quantité de gemmes que vous voulez.\n",
+        "doc" : "Chaque minerai correspond à une gemme qui ajoute une statistique bien précise.\nAjoutez comme argument le nom de l'élément que vous souhaitez prospecter, ainsi que la quantité de gemmes que vous voulez.\n",
         "notEnoughRess": "vous n'avez pas assez de ressources pour faire cette prospection.",
         "specifyItem" : "vous devez spécifier un item à prospecter.",
         "success" : "Prospection réussie ! Vous avez récupérer : %s !",
         "canceled" : "Prospection annulée."
+    },
+    "bind" : {
+        "title" : "BIND",
+        "description" : "Équipez vos gemmes sur votre équipement pour obtenir des statistiques supplémentaires.",
+        "gearDoc" : "Cliquez sur le bouton correspondant à la pièce d'équipement que vous souhaitez sertir.",
+        "gemDoc" : "Cliquez sur le bouton correspondant à la gemme que vous voulez sertir.",
+        "socketDoc" : "Cliquez sur le bouton correspondant à l'emplacement sur lequel vous voulez sertir votre gemme.",
+        "timeout" : "Temps écoulé.",
+        "notEnoughGem" : "Tout les boutons sont désactivés ?",
+        "notEnoughGemDoc" : "Essayez la commande `m!prospect` pour vous procurer des gemmes.",
+        "success" : "Attachement réussi !",
+        "successfullyBinded" : "Vous avez lier avec succès la gemme %s sur : %g."
     }
 }
