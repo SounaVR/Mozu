@@ -56,7 +56,11 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
             }
 
             collectorZones.stop();
-        })
+        });
+
+        collectorZones.on('end', () => {
+            zones.reactions.removeAll();
+        });
     } else if (args[0] > 0) {
         if (player.ress.torch < args[0]) return message.channel.send(`${lang.explore.notEnoughDungeonStone.replace("%s", client.config.prefix)} (${player.ress.torch}/${args[0]} ${Emotes.torch})`);
         if (player.items.dungeon_amulet <= 0) return message.channel.send(`${lang.explore.switchError}`);
