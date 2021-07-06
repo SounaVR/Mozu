@@ -53,7 +53,8 @@ module.exports = async function manageEnchant(client, con, player, message, cate
                 if (need.length >= 1) return message.reply(`${lang.enchant.notEnoughRess}`);
 
                 con.query(`UPDATE ress SET ${resssql.join(',')} WHERE userid = ${message.author.id}`);
-                con.query(`UPDATE data SET ATK = ${player.data.ATK + Number(Enchant[category][object][0].ATK)}, DEF = ${player.data.DEF + Number(Enchant[category][object][0].DEF)}, power = ${player.data.power + Number(Enchant[category][object][0].power)} WHERE userid = ${message.author.id}`);
+                con.query(`UPDATE data SET ATK = ${player.data.ATK + Number(Enchant[category][object][0].ATK)}, DEF = ${player.data.DEF + Number(Enchant[category][object][0].DEF)} WHERE userid = ${message.author.id}`);
+                if (object === "pickaxe") con.query(`UPDATE data SET power = ${player.data.power + Number(Enchant.tools.pickaxe[0].power)}`)
                 con.query(`UPDATE enchant SET ${objectName} = ${level} WHERE userid = ${message.author.id}`);
 
                 return message.channel.send(`${lang.enchant.enchantSuccess.replace("%s", `**${level}**`)}`);
