@@ -31,17 +31,17 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     } else {
         if (user && !member) return message.reply(`this user is not registered !`)
         const embed = new Discord.MessageEmbed()
-        .setAuthor(user.tag, user.displayAvatarURL())
-        .addField("informations", `
-        :notepad_spiral: Titre : null\n${Emotes.trophy}Points de succès : X`, true)
-        .addField("Badges (X)", `
-        <a:sexxx:800109145889964053>`, true)
-        .addField("Other stats", `
-        Commandes effectuées : ${member.stats.cmd}`, true)
-        .addField("Ornement", "X")
-        // .attachFiles(["./utils/images/ornement.png"])
-        // .setImage("attachment://ornement.png")
-        .setFooter(`#${member.stats.uuid}`)
+            .setAuthor(user.tag, user.displayAvatarURL())
+            .addField("informations", `
+            :notepad_spiral: Titre : null\n${Emotes.trophy}Points de succès : X`, true)
+            .addField("Badges (X)", `
+            <a:sexxx:800109145889964053>`, true)
+            .addField("Other stats", `
+            Commandes effectuées : ${member.stats.cmd}`, true)
+            .addField("Ornement", "X")
+            // .attachFiles(["./utils/images/ornement.png"])
+            // .setImage("attachment://ornement.png")
+            .setFooter(`#${member.stats.uuid}`)
 
         message.channel.send(embed)
     }
