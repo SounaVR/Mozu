@@ -28,6 +28,7 @@
         "lang" : "en",
         "ban" : "0",
         "money" : "0",
+        "energyCooldown" : "10000",
         
         "energy" : "100",
         "lastActivity" : "0",
