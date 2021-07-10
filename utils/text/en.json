@@ -198,6 +198,8 @@
         "timeout" : "Temps écoulé.",
         "notEnoughGem" : "Tout les boutons sont désactivés ?",
         "notEnoughGemDoc" : "Essayez la commande `m!prospect` pour vous procurer des gemmes.",
+        "gearInfo" : "Améliorez votre équipement pour débloquer plus de slot (`m!craft`).",
+        "gearField" : "Plus de slot ?",
         "success" : "Attachement réussi !",
         "successfullyBinded" : "Vous avez lier avec succès la gemme %s sur %g."
     }
