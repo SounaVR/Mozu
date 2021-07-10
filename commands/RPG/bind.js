@@ -17,6 +17,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         .setThumbnail(emptySocket)
         .addField("Description", lang.bind.description)
         .addField("Documentation", lang.bind.gearDoc)
+        .addField(lang.bind.gearField, lang.bind.gearInfo)
         .setTimestamp()
         .setFooter(message.author.tag, message.author.displayAvatarURL());
 
@@ -111,6 +112,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     var gem;
     var part;
     var stat;
+    var number;
 
     collector.on('collect', button => {
         // socket row
@@ -162,44 +164,50 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
             case "sapphire":
                 gem = "sapphire";
                 stat = "power";
+                number = 1;
                 bind.edit({ component: socketRow, embed: socketEmbed });
                 break;
             case "amber":
                 gem = "amber";
                 stat = "energyCooldown";
+                number = 2;
                 bind.edit({ component: socketRow, embed: socketEmbed });
                 break;
             case "citrine":
                 gem = "citrine";
                 stat = "MANA";
+                number = 3;
                 bind.edit({ component: socketRow, embed: socketEmbed });
                 break;
             case "ruby":
                 gem = "ruby";
                 stat = "HP";
+                number = 4;
                 bind.edit({ component: socketRow, embed: socketEmbed });
                 break;
             case "jade":
                 gem = "jade";
                 stat = "ATK";
+                number = 5;
                 bind.edit({ component: socketRow, embed: socketEmbed });
                 break;
             case "amethyst":
                 gem = "amethyst";
                 stat = "DEF";
+                number = 6;
                 bind.edit({ component: socketRow, embed: socketEmbed });
                 break;
 
             case "socket1":
-                manageBind(con, player, message, gem, part, `slot_a_${part}`, stat, bind);
+                manageBind(con, player, message, gem, part, `slot_a_${part}`, stat, bind, number);
                 collector.stop("success");
                 break;
             case "socket2":
-                manageBind(con, player, message, gem, part, `slot_b_${part}`, stat, bind);
+                manageBind(con, player, message, gem, part, `slot_b_${part}`, stat, bind, number);
                 collector.stop("success");
                 break;
             case "socket3":
-                manageBind(con, player, message, gem, part, `slot_c_${part}`, stat, bind);
+                manageBind(con, player, message, gem, part, `slot_c_${part}`, stat, bind, number);
                 collector.stop("success");
                 break;
             }
