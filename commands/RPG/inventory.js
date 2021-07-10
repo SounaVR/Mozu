@@ -86,15 +86,15 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         var slot1;
         var slot2;
         var slot3;
-        const slot_a = player.slots[`slot_a_${element}`];
-        const slot_b = player.slots[`slot_b_${element}`];
-        const slot_c = player.slots[`slot_c_${element}`];
+        const slot_a = player.slots[`slot_a_${element}`]-1;
+        const slot_b = player.slots[`slot_b_${element}`]-1;
+        const slot_c = player.slots[`slot_c_${element}`]-1;
 
-        if (slot_a <= 0) slot1 = `${Emotes.emptySocket}`;
+        if (slot_a <= -1) slot1 = `${Emotes.emptySocket}`;
         else slot1 = `${Emotes.gems[slot_a]}`;
-        if (slot_b <= 0) slot2 = `${Emotes.emptySocket}`;
+        if (slot_b <= -1) slot2 = `${Emotes.emptySocket}`;
         else slot2 = `${Emotes.gems[slot_b]}`;
-        if (slot_c <= 0) slot3 = `${Emotes.emptySocket}`;
+        if (slot_c <= -1) slot3 = `${Emotes.emptySocket}`;
         else slot3 = `${Emotes.gems[slot_c]}`;
 
         let part = Items.armors[element][player.items[element]];
@@ -108,15 +108,15 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         var slot1;
         var slot2;
         var slot3;
-        const slot_a = player.slots[`slot_a_${element}`];
-        const slot_b = player.slots[`slot_b_${element}`];
-        const slot_c = player.slots[`slot_c_${element}`];
+        const slot_a = player.slots[`slot_a_${element}`]-1;
+        const slot_b = player.slots[`slot_b_${element}`]-1;
+        const slot_c = player.slots[`slot_c_${element}`]-1;
 
-        if (slot_a <= 0) slot1 = `${Emotes.emptySocket}`;
+        if (slot_a <= -1) slot1 = `${Emotes.emptySocket}`;
         else slot1 = `${Emotes.gems[slot_a]}`;
-        if (slot_b <= 0) slot2 = `${Emotes.emptySocket}`;
+        if (slot_b <= -1) slot2 = `${Emotes.emptySocket}`;
         else slot2 = `${Emotes.gems[slot_b]}`;
-        if (slot_c <= 0) slot3 = `${Emotes.emptySocket}`;
+        if (slot_c <= -1) slot3 = `${Emotes.emptySocket}`;
         else slot3 = `${Emotes.gems[slot_c]}`;
 
         let part = Items.armors[element][player.items[element]];
