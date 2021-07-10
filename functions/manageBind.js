@@ -3,7 +3,7 @@ const { MessageButton } = require("discord-buttons");
 const Gems = require("../utils/items/gems.json");
 const Emotes = require("../utils/emotes.json");
 
-module.exports = async function manageBind(con, player, message, gem, part, slot, stat, bind) {
+module.exports = async function manageBind(con, player, message, gem, part, slot, stat, bind, number) {
     const lang = require(`../utils/text/${player.data.lang}.json`);
     const userid = message.author.id;
 
@@ -18,7 +18,7 @@ module.exports = async function manageBind(con, player, message, gem, part, slot
     }
     else await con.query(`UPDATE data SET ${key[0]} = ${player.data[key[0]] + Number(Gems[gem][part][stat])} WHERE userid = ${userid}`);
 
-    await con.query(`UPDATE slots SET ${slot} = 1 WHERE userid = ${userid}`);
+    await con.query(`UPDATE slots SET ${slot} = ${number} WHERE userid = ${userid}`);
 
     const successEmbed = new MessageEmbed()
         .setTitle(lang.bind.title)
