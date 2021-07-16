@@ -28,7 +28,8 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         txt3 = [],
         txt4 = [],
         txt5 = [],
-        txt6 = [];
+        txt6 = [],
+        txt7 = [];
 
     for (const ressource in Default.pickaxe.R1) {
         txt.push(`${Emotes[ressource]} ${lang.inventory[ressource]}: ${nFormatter(player.ress[ressource])}`);
@@ -48,6 +49,9 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     for (const runes in Default.runes.Gear.P2) {
         txt6.push(`${Emotes.chests.Gear.P2[runes]} ${nFormatter(player.ress[runes])}`)
     }
+    for (const chest in Emotes.explore) {
+        txt7.push(`${Emotes.explore[chest]} ${player.ress[chest]}`)
+    }
 
     const embed2 = new Discord.MessageEmbed()
         .setFooter(`Page 2/5 | ${lang.globalHelpFooter.replace("%s", client.config.prefix)}`)
@@ -59,10 +63,9 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         .setFooter(`Page 3/5 | ${lang.globalHelpFooter.replace("%s", client.config.prefix)}`)
         .addField(`${Emotes.rune} ${lang.inventory.runes}`, `${txt3.join(" ")}\n${txt4.join(" ")}\n${txt5.join(" ")}\n${txt6.join(" ")}`)
         .addField(`${Emotes.bag} ${lang.inventory.yourObjects}`, `${Emotes.torch} ${player.ress.torch}`)
-        .addField(`${Emotes.open_chest} ${lang.inventory.chests}`, `${Emotes.chest_d} ${player.ress.chest_d} ${Emotes.chest_c} ${player.ress.chest_c} ${Emotes.chest_b} ${player.ress.chest_b} ${Emotes.chest_a} ${player.ress.chest_a} ${Emotes.chest_s} ${player.ress.chest_s}`)
+        .addField(`${Emotes.open_chest} ${lang.inventory.chests}`, txt7.join(" "))
  
-    const P1 = ["head", "shoulders", "chest", "wrists"];
-    const P2 = ["hands", "waist", "legs", "feet"];
+    const gear = ["head", "shoulders", "chest", "wrists", "hands", "waist", "legs", "feet"];
     const weapons = ["sword", "shield"];
 
     let pickaxe = Items.tools.pickaxe[player.items.pickaxe];
@@ -82,7 +85,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     if (enchantmentLevel) embed4.addField(`${Emotes.chests.Tools.rune_pickaxe} ${lang.inventory.pickaxe}:`, `${pickaxe.name}\n${lang.inventory.level}: ${player.items.pickaxe}\n[${lang.inventory.enchant} ${player.enchant.ench_pickaxe}]`, true)
     else embed4.addField(`${Emotes.chests.Tools.rune_pickaxe} ${lang.inventory.pickaxe}:`, `${pickaxe.name}\n${lang.inventory.level}: ${player.items.pickaxe}`, true)
     
-    P1.forEach(element => {
+    gear.forEach(element => {
         var slot1;
         var slot2;
         var slot3;
@@ -100,34 +103,12 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         let part = Items.armors[element][player.items[element]];
         let enchantmentLevel = player.enchant[`ench_${element}`] > 0 ? player.enchant[`ench_${element}`] + Number(0) : player.enchant[`ench_${element}`]
  
-        if (enchantmentLevel) embed4.addField(`${Emotes.chests.Gear.P1[`rune_${element}`]} ${lang.inventory[element]}:`, `${slot1 + "" + slot2 + "" + slot3}\n${part.name}\n${lang.inventory.level}: ${player.items[element]}\n[${lang.inventory.enchant} ${player.enchant[`ench_${element}`]}]`, true)
-        else embed4.addField(`${Emotes.chests.Gear.P1[`rune_${element}`]} ${lang.inventory[element]}:`, `${slot1 + "" + slot2 + "" + slot3}\n${part.name}\n${lang.inventory.level}: ${player.items[element]}`, true)
-    });
-   
-    P2.forEach(element => {
-        var slot1;
-        var slot2;
-        var slot3;
-        const slot_a = player.slots[`slot_a_${element}`]-1;
-        const slot_b = player.slots[`slot_b_${element}`]-1;
-        const slot_c = player.slots[`slot_c_${element}`]-1;
-
-        if (slot_a <= -1) slot1 = `${Emotes.emptySocket}`;
-        else slot1 = `${Emotes.gems[slot_a]}`;
-        if (slot_b <= -1) slot2 = `${Emotes.emptySocket}`;
-        else slot2 = `${Emotes.gems[slot_b]}`;
-        if (slot_c <= -1) slot3 = `${Emotes.emptySocket}`;
-        else slot3 = `${Emotes.gems[slot_c]}`;
-
-        let part = Items.armors[element][player.items[element]];
-        let enchantmentLevel = player.enchant[`ench_${element}`] > 0 ? player.enchant[`ench_${element}`] + Number(0) : player.enchant[`ench_${element}`]
-  
-        if (enchantmentLevel) embed4.addField(`${Emotes.chests.Gear.P2[`rune_${element}`]} ${lang.inventory[element]}:`, `${slot1 + "" + slot2 + "" + slot3}\n${part.name}\n${lang.inventory.level}: ${player.items[element]}\n[${lang.inventory.enchant} ${player.enchant[`ench_${element}`]}]`, true)
-        else embed4.addField(`${Emotes.chests.Gear.P2[`rune_${element}`]} ${lang.inventory[element]}:`, `${slot1 + "" + slot2 + "" + slot3}\n${part.name}\n${lang.inventory.level}: ${player.items[element]}`, true)
+        if (enchantmentLevel) embed4.addField(`${Emotes.enchant[`rune_${element}`]} ${lang.inventory[element]}:`, `${slot1 + "" + slot2 + "" + slot3}\n${part.name}\n${lang.inventory.level}: ${player.items[element]}\n[${lang.inventory.enchant} ${player.enchant[`ench_${element}`]}]`, true)
+        else embed4.addField(`${Emotes.enchant[`rune_${element}`]} ${lang.inventory[element]}:`, `${slot1 + "" + slot2 + "" + slot3}\n${part.name}\n${lang.inventory.level}: ${player.items[element]}`, true)
     });
 
-    let dungeon_amulet = Items.objects.dungeon_amulet[player.items.dungeon_amulet]
-    let ring = Items.objects.ring[player.items.ring]
+    let dungeon_amulet = Items.objects.dungeon_amulet[player.items.dungeon_amulet];
+    let ring = Items.objects.ring[player.items.ring];
 
     const embed5 = new Discord.MessageEmbed()
         .setFooter(`Page 5/5 | ${lang.globalHelpFooter.replace("%s", client.config.prefix)}`)
