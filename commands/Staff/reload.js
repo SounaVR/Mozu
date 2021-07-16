@@ -10,19 +10,18 @@ exports.run = (client, message, args, getPlayer, getUser) => {
 	if (!command) return message.react("❌");
 	readdirSync(join(__dirname, "..")).forEach(f => {
 		const files = readdirSync(join(__dirname, "..", f));
-		if (files.includes(`${commandName}.js`)) {
-			const file = `../${f}/${commandName}.js`;
+		if (files.includes(`${command.help.name}.js`)) {
+			const file = `../${f}/${command.help.name}.js`;
 			try {
 				delete require.cache[require.resolve(file)];
-				client.commands.delete(commandName);
+				client.commands.delete(command.help.name);
 				const pull = require(file);
-				client.commands.set(commandName, pull);
-				return message.channel.send(`\`${commandName}.js\` a bien été réinitialisée !`).then(e => {
-				});
+				client.commands.set(command.help.name, pull);
+				return message.channel.send(`\`${command.help.name}.js\` a bien été réinitialisée !`);
 			}
 			catch (err) {
-				message.channel.send(`Could not reload: \`${args[0].toUpperCase()}\``).then(e => {
-				});
+				console.error(err)
+				message.channel.send(`Could not reload: \`${args[0].toUpperCase()}\``)
 			}
 		}
 	});
