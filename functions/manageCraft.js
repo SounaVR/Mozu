@@ -1,4 +1,5 @@
 const { nFormatter } = require('../utils/u.js');
+const { MessageButton } = require('discord-buttons');
 const Discord        = require('discord.js'),
     Emotes           = require('../utils/emotes.json'),
     moment           = require('moment');
@@ -10,16 +11,17 @@ module.exports = async function manageCraft(con, player, args, message, category
 
     const level = Math.floor(player.items[objectName])+1;
     const levelTitle = Math.floor(player.items[objectName]);
-    const filter = (reaction, user) => react.includes(reaction.emoji.id) && user.id === message.author.id;
 
     const embed = new Discord.MessageEmbed()
     .setColor(message.member.displayColor);
+
+    let validButton = new MessageButton().setStyle("green").setEmoji(react[0]).setID("valid");
+    let cancelButton = new MessageButton().setStyle("red").setEmoji(react[1]).setID("cancel");
 
     var currentObject = [];
     var currentObjectTitle = [];
     let txt = [];
     let reward = [];
-    let need = [];
     let sql = [];
     var amount;
     
@@ -67,27 +69,27 @@ module.exports = async function manageCraft(con, player, args, message, category
     if (rewardLength) embed.addField(`**Reward**`, `${emote} ${currentObject.name}\n${reward.join("\n")}`);
     else embed.addField(`**Reward**`, `${emote} ${currentObject.name}`);
 
-    const msg = await message.channel.send(embed);
-
     for (var ressource in currentObject.ressource) {
-        if (player.ress[ressource.toLowerCase()] < currentObject.ressource[ressource]) {
-            need.push(`sorry bro`);
-            return;
+        let ress;
+        if (objectName === "torch") ress = currentObject.ressource[ressource] * amount;
+        else ress = currentObject.ressource[ressource];
+
+        if (player.ress[ressource.toLowerCase()] < ress) {
+            validButton.setDisabled(true);
+            cancelButton.setDisabled(true);
         }
         sql.push(`${ressource} = ${ressource} - ${currentObject.ressource[ressource]}`);
     }
+    const msg = await message.channel.send({embed: embed, buttons: [validButton, cancelButton]});
 
-    await msg.react(react[0]);
-    await msg.react(react[1]);
+    const filter = (button) => button.clicker.user.id === message.author.id;
+    const collector = msg.createButtonCollector(filter, { time: 30000 });
 
-    msg.awaitReactions(filter, { max: 1, time: 30000, errors: ['time'] })
-    .then(collected => {
-        let reaction = collected.first();
-
-        switch(reaction.emoji.id) {
-            case react[0]:
-                if (need.length >= 1) return message.reply(`${lang.craft.notEnoughRess}`);
-                
+    collector.on('collect', button => {
+        validButton.setDisabled(true);
+        cancelButton.setDisabled(true);
+        switch(button.id) {
+            case "valid":
                 con.query(`UPDATE data SET ATK = ${player.data.ATK + Number(currentObject.ATK)}, DEF = ${player.data.DEF + Number(currentObject.DEF)}, power = ${currentObject.power > 0 ? player.data.power + Number(currentObject.power) : player.data.power} WHERE userid = ${message.author.id}`);
                 con.query(`UPDATE ress SET ${sql.join(',')} WHERE userid = ${message.author.id}`);
                 switch (objectName) {
@@ -118,13 +120,22 @@ module.exports = async function manageCraft(con, player, args, message, category
                     }
                 }
                 const torch = objectName ? objectName === "torch" : true;
-                if (torch) return message.channel.send(`${lang.craft.done.replace("%s", `${amount} **${currentObject.name}**`)}.`)
-                else return message.channel.send(`${lang.craft.done.replace("%s", `**${currentObject.name}**`)}.`);
+                if (torch) {
+                    collector.stop();
+                    return message.channel.send(`${lang.craft.done.replace("%s", `${amount} **${currentObject.name}**`)}.`)
+                } else {
+                    collector.stop();
+                    return message.channel.send(`${lang.craft.done.replace("%s", `**${currentObject.name}**`)}.`);
+                }
 
-            case react[1]:
+            case "cancel":
+                collector.stop();
                 return message.channel.send(`${lang.craft.canceled}`);
         }
-    }).catch(() => {
-        msg.reactions.removeAll();
-    });
+    })
+
+    collector.on('end', () => {
+        msg.edit(embed, { button: null })
+    })
+
 }
