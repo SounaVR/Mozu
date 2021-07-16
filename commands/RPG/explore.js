@@ -62,8 +62,8 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
             zones.reactions.removeAll();
         });
     } else if (args[0] > 0) {
-        if (player.ress.torch < args[0]) return message.channel.send(`${lang.explore.notEnoughDungeonStone.replace("%s", client.config.prefix)} (${player.ress.torch}/${args[0]} ${Emotes.torch})`);
-        if (player.items.dungeon_amulet <= 0) return message.channel.send(`${lang.explore.switchError}`);
+        if (player.ress.torch < args[0]) return message.reply(`${lang.explore.notEnoughDungeonStone.replace("%s", client.config.prefix)} (${player.ress.torch}/${args[0]} ${Emotes.torch})`);
+        if (player.items.dungeon_amulet <= 0) return message.reply(`${lang.explore.switchError}`);
         con.query(`UPDATE ress SET ${chest[player.ress.zone]} = ${player.ress[chest[player.ress.zone]] + Number(args[0])}, torch = ${player.ress.torch - (args[0])} WHERE userid = ${userid}`)
 
         return message.channel.send(`${Emotes.torch_explore} <@${userid}> ${lang.explore.explored.replace("%s", `**${array[player.ress.zone]}**`).replace("%m", `**${args[0]}**`).replace("%r", `**${rarity[player.ress.zone]}**`)}\n*${lang.explore.switch.replace("%s", client.config.prefix)}*.`)
