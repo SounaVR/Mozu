@@ -3,7 +3,7 @@ const Default = require('../../utils/default.json');
 module.exports = async function insert_data(client, con, player, message, databaselogs, userid) {
     if (!player) {
         await con.query(`INSERT INTO data (
-            uuid, username, userid, lang, ban, money, energyCooldown, astActivity,
+            uuid, username, userid, lang, ban, money, energyCooldown, lastActivity,
             HP, MANA, ATK, DEF, power,
             HR, lastHR, daily, lastDaily, rep, lastRep
             ) VALUES (
