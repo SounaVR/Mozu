@@ -123,7 +123,7 @@ client.on('ready', async () => {
 		con.query('SELECT 1');
 	}, 2, 52e+7);
 
-	await client.user.setActivity(`m!profile`, { type: "PLAYING" });
+	await client.user.setActivity(`m!profile`, { type: "WATCHING" });
 
     const embed = new Discord.MessageEmbed()
 		.setTitle(`[SYSTEM START] Log du ${moment().format('DD/MM/YYYY | HH:mm:ss')}`)
