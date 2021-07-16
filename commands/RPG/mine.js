@@ -9,6 +9,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     if (!player) return message.channel.send(Default.notRegistered);
     const Items = require(`../../utils/items/${player.data.lang}.json`);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
+    const maxEnergy = Items.objects.ring[player.items.ring].energy;
     const userid = message.author.id;
     const power = player.data.power;
 
@@ -46,8 +47,8 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         .setAuthor(message.author.tag, message.author.displayAvatarURL())
         .setColor(message.member.displayColor)
         .setThumbnail("https://equity.guru/wp-content/uploads/2018/01/blockchain2.gif")
-        .addField(lang.mine.title, ressLoot.join("\n"))
-        .addField(lang.mine.infos, `⚡ ${lang.mine.usedEnergy.replace("%s", manaAmount)}\n⚡ ${lang.mine.remainingEnergy.replace("%s", player.ress.energy-manaAmount)}\n${Emotes.chests.Tools.rune_pickaxe} ${pickaxe.name}\n💪 ${lang.mine.power.replace("%s", player.data.power)}`);//\n${lang.inventory.level}: ${player.items.pickaxe}\n${lang.inventory.enchant}: ${player.enchant.ench_pickaxe}`)
+        .addField(lang.mine.title, ressLoot.join("\n")) //⚡ ${lang.mine.usedEnergy.replace("%s", manaAmount)}\n
+        .addField(lang.mine.infos, `⚡ ${lang.mine.remainingEnergy.replace("%s", player.ress.energy-manaAmount + "/" + maxEnergy)}\n${Emotes.chests.Tools.rune_pickaxe} ${pickaxe.name}\n💪 ${lang.mine.power.replace("%s", player.data.power)}`);//\n${lang.inventory.level}: ${player.items.pickaxe}\n${lang.inventory.enchant}: ${player.enchant.ench_pickaxe}`)
 
     message.channel.send(embed);
 
