@@ -1,4 +1,5 @@
 exports.run = async (client, message, args, getPlayer, getUser) => {
+    if (!client.config.owners.includes(message.author.id)) return message.react("❌");
     async function verify(channel, user, { time = 30000, extraYes = [], extraNo = [] } = {}) {
         const yes = ['yes', 'y', 'ye', 'yeah', 'yup', 'yea', 'ya', 'hai', 'si', 'sí', 'oui', 'はい', 'correct'];
         const no = ['no', 'n', 'nah', 'nope', 'nop', 'iie', 'いいえ', 'non', 'fuck off'];
@@ -29,7 +30,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
             `Are you sure you want to ${nickname ? `rename everyone to **${nickname}**` : 'remove all nicknames'}?`
         );
         const verification = await verify(message.channel, message.author);
-        if (!verification) return message.say('Aborted.');
+        if (!verification) return message.channel.send('Aborted.');
         await message.reply('Fetching members...');
         await message.guild.members.fetch();
         await message.reply('Fetched members! Renaming...');
