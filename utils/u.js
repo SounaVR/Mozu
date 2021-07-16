@@ -72,5 +72,24 @@ module.exports = {
         let diff = now.getTime() - date.getTime();
         let days = Math.floor(diff / 86400000);
         return days + (days == 1 ? " day" : " days") + " ago";
+    },
+    getPremiumDuration: function (member) {
+        const duration = Date.now() - member.premiumSinceTimestamp
+      
+        const seconds = Math.floor(duration / 1000)
+        const minutes = Math.floor(seconds / 60)
+        const hours = Math.floor(minutes / 60)
+        const days = Math.floor(hours / 24)
+        const months = Math.floor(days / 30)
+        const years = Math.floor(months / 12)
+
+        return {
+            years,
+            months: months % 12,
+            days: days % 30,
+            hours: hours % 24,
+            minutes: minutes % 60,
+            seconds: seconds % 60
+        }
     }
 }
