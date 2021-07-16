@@ -8,10 +8,13 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     if (!player) return message.channel.send(Default.notRegistered);
 	const lang = require(`../../utils/text/${player.data.lang}.json`);
 
+	let emote = "<a:eyeshake:864202410884857867>"
+
 	const embed = new MessageEmbed()
 		.setColor(message.member.displayColor)
 		.setAuthor(`${lang.help.embedTitle.replace("%u", client.user.username)}`, client.user.displayAvatarURL())
-		.setTimestamp();
+		.setTimestamp()
+		.setFooter(`${client.commands.size} commands`, "https://cdn.discordapp.com/emojis/864202410884857867.gif?v=1")
 
 	if (args[0]) {
 		let command = args[0];
@@ -45,7 +48,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 			`❯ **Command:** ${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}`,
 			`❯ **Description:** ${description || lang.help.infos}`,
 			`❯ **${lang.help.usage}:** ${usage ? `\`${client.config.prefix}${command.name} ${usage}\`` : lang.help.noUsage} `,
-			`❯ **Alias:** ${command.aliases ? command.aliases.join(", ") : lang.help.nothing}`,
+			`❯ **Alias:** ${command.aliases ? command.aliases.join(", ") : lang.help.noAliases}`,
 			`❯ **${lang.help.category}:** ${command.category ? command.category : "General" || "Misc"}`,
 		].join("\n"));
 
@@ -69,7 +72,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 			if (category !== "Staff") embed.addField(`❯ ${capitalise}`, dir.map(c => `\`${c.help.name}\``).join(", "));
 		}
 		catch (e) {
-			return catchErr(err, message)
+			return console.warn(e);
 		}
 	});
 	return message.channel.send(embed);
