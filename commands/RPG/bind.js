@@ -43,14 +43,14 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     let disabledButton = new MessageButton().setLabel("Timeout").setStyle("grey").setEmoji("780222833808506920").setID("disabled").setDisabled();
 
     // gear buttons
-    let head = new MessageButton().setLabel("head").setStyle("blurple").setEmoji("748959964663382106").setID("head");
-    let shoulders = new MessageButton().setLabel("shoulders").setStyle("blurple").setEmoji("748959724170379324").setID("shoulders");
-    let chest = new MessageButton().setLabel("chest").setStyle("blurple").setEmoji("748960199389479053").setID("chest");
-    let wrists = new MessageButton().setLabel("wrists").setStyle("blurple").setEmoji("748960470479798324").setID("wrists");
-    let hands = new MessageButton().setLabel("hands").setStyle("blurple").setEmoji("748960653930135613").setID("hands");
-    let waist = new MessageButton().setLabel("waist").setStyle("blurple").setEmoji("748961288960606300").setID("waist");
-    let legs = new MessageButton().setLabel("legs").setStyle("blurple").setEmoji("748961288968994888").setID("legs");
-    let feet = new MessageButton().setLabel("feet").setStyle("blurple").setEmoji("748961289145155684").setID("feet");
+    let head = new MessageButton().setLabel(lang.inventory.head).setStyle("blurple").setEmoji("748959964663382106").setID("head");
+    let shoulders = new MessageButton().setLabel(lang.inventory.shoulders).setStyle("blurple").setEmoji("748959724170379324").setID("shoulders");
+    let chest = new MessageButton().setLabel(lang.inventory.chest).setStyle("blurple").setEmoji("748960199389479053").setID("chest");
+    let wrists = new MessageButton().setLabel(lang.inventory.wrists).setStyle("blurple").setEmoji("748960470479798324").setID("wrists");
+    let hands = new MessageButton().setLabel(lang.inventory.hands).setStyle("blurple").setEmoji("748960653930135613").setID("hands");
+    let waist = new MessageButton().setLabel(lang.inventory.waist).setStyle("blurple").setEmoji("748961288960606300").setID("waist");
+    let legs = new MessageButton().setLabel(lang.inventory.legs).setStyle("blurple").setEmoji("748961288968994888").setID("legs");
+    let feet = new MessageButton().setLabel(lang.inventory.feet).setStyle("blurple").setEmoji("748961289145155684").setID("feet");
 
     // gems buttons
     let sapphireButton = new MessageButton().setLabel("sapphire").setStyle("blurple").setEmoji("831956969854205952").setID("sapphire");
@@ -216,8 +216,8 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     collector.on('end', (reason) => {
         if (reason && reason === "success") {
             return;
-        } else bind.edit(disabledButton);
-    }); //need to fix
+        } else bind.edit(gearEmbed, disabledButton);
+    });
 };
 
 exports.help = {
