@@ -34,7 +34,8 @@ module.exports = function manageGive(client, con, args, player, member, message,
                             break;
                     }
                     e.reactions.removeAll();
-                }).catch(collected => {
+                }).catch(err => {
+                    console.error(err);
                     e.reactions.removeAll();
                 })
             });
