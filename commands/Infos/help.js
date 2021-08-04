@@ -8,8 +8,6 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     if (!player) return message.channel.send(Default.notRegistered);
 	const lang = require(`../../utils/text/${player.data.lang}.json`);
 
-	let emote = "<a:eyeshake:864202410884857867>"
-
 	const embed = new MessageEmbed()
 		.setColor(message.member.displayColor)
 		.setAuthor(`${lang.help.embedTitle.replace("%u", client.user.username)}`, client.user.displayAvatarURL())
