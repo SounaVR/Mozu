@@ -28,6 +28,8 @@
         "lang" : "en",
         "ban" : "0",
         "money" : "0",
+        "manaCooldown" : "10000",
+        "hpCooldown" : "10000",
         "energyCooldown" : "10000",
         
         "energy" : "100",
