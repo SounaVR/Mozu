@@ -8,8 +8,9 @@ module.exports.run = async (client, message, args, getPlayer, getUser) => {
     const lang = require(`../../utils/text/${player.data.lang}.json`);
     const user = message.mentions.users.first();
     const userid = message.author.id;
+    var userDB = await getUser(con, user.id);
 
-    if (!user) return message.reply(lang.specifyUser);
+    if (!user || !userDB) return message.reply(lang.give.specifyUser);
     if (user.id === userid) return message.reply(`${lang.give.giveToSelf}`)
     if (user.bot) return message.reply(`${lang.give.giveToOtherBots}`)
     if (!args[0]) return message.reply(`${lang.give.correctUsage.replace("%s", client.config.prefix)}`)
