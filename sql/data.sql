@@ -7,6 +7,9 @@ CREATE TABLE IF NOT EXISTS data (
 	ban bigint,
 
 	money bigint,
+	manaCooldown bigint,
+	hpCooldown bigint,
+	energyCooldown bigint,
 	lastActivity bigint,
 
 	HP bigint,
