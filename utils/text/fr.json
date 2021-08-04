@@ -173,12 +173,13 @@
         "craft" : "Fabriquer"
     },
     "enchant" : {
-        "description" : "Enchantez votre matériel.",
+        "description" : "Enchantez votre matériel.\n:warning: L'objet que vous voulez enchanter doit-être de niveau 1 minimum. :warning:",
         "doc" : "Ajoutez comme argument le nom de l'élément que vous souhaitez enchanter, les éléments disponibles sont les suivants:\n",
         "maxLevel" : "vous avez déjà l'enchantement maximum de cet objet.",
         "notEnoughRess" : "vous n'avez pas assez de ressources pour faire cet enchantement.",
         "enchantSuccess" : "Enchantement réussi au niveau : %s !",
-        "canceled" : "Enchantement annulé."
+        "canceled" : "Enchantement annulé.",
+        "levelTooLow" : "L'objet que vous souhaitez enchanter est de niveau 0. Améliorez-le d'abord avant de l'enchanter (`m!craft`)."
     },
     "prospect" : {
         "title" : "PROSPECTION",
