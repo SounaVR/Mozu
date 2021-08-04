@@ -155,23 +155,34 @@ client.on("message", async message => {
 
     if (!player || player.data.ban == "0") {
         if (client.commands.has(cmd)) command = client.commands.get(cmd);
-            else if (client.aliases.has(cmd)) command = client.commands.get(client.aliases.get(cmd));
+        else if (client.aliases.has(cmd)) command = client.commands.get(client.aliases.get(cmd));
 
-            if (command) command.run(client, message, args, getPlayer, getUser);
+        if (command) command.run(client, message, args, getPlayer, getUser);
+
         if (player) {
             const Items = require(`./utils/items/${player.data.lang}.json`);
             const maxEnergy = Items.objects.ring[player.items.ring].energy;
-            const cooldown = player.data.energyCooldown;
+			const maxHP = 50;
+            const energyCooldown = player.data.energyCooldown;
+			const hpCooldown = player.data.hpCooldown;
             con.query(`UPDATE stats SET cmd = ${player.stats.cmd + Number(1)} WHERE userid = ${message.author.id}`);
 
-            if ((Date.now() - player.data.lastActivity) - cooldown > 0) {
+            if ((Date.now() - player.data.lastActivity) - energyCooldown > 0) {
                 const timeObj = Date.now() - player.data.lastActivity;
-                const gagnees = Math.floor(timeObj / cooldown);
+                const gagnees = Math.floor(timeObj / energyCooldown);
         
                 player.ress.energy = (player.ress.energy || 0) + gagnees;
                 if (player.ress.energy > maxEnergy) player.ress.energy = maxEnergy;
                 con.query(`UPDATE ress SET energy = ${player.ress.energy} WHERE userid = ${message.author.id}`);
                 con.query(`UPDATE data SET lastActivity = ${Date.now()} WHERE userid = ${message.author.id}`);
+            }
+			if ((Date.now() - player.data.lastActivity) - hpCooldown > 0) {
+                const timeObj = Date.now() - player.data.lastActivity;
+                const gagnees = Math.floor(timeObj / hpCooldown);
+        
+				player.data.HP = (player.data.HP || 0) + gagnees;
+				if (player.data.HP > maxHP) player.data.HP = maxHP;
+                con.query(`UPDATE data SET HP = ${player.data.HP}, lastActivity = ${Date.now()} WHERE userid = ${message.author.id}`);
             }
         }
     } else if (player.data.ban == "1") {
@@ -194,6 +205,11 @@ client.on('guildMemberAdd', member => {
 		channel.send(`Bienvenue à ${member} !`)
 		member.roles.set(['691678064282697788'])
 	}
+	if (guild.id === "846005274061963274") {
+		const channel = client.channels.cache.find(channel => channel.id === "868368147034538044");
+		channel.send(`Bienvenue à ${member} !`)
+		member.roles.set(['861712751796944917'])
+	}
 });
 
 client.on('guildMemberRemove', member => {
@@ -203,60 +219,106 @@ client.on('guildMemberRemove', member => {
 		const channel = client.channels.cache.find(channel => channel.id === "689471317203877893");
 		channel.send(`L'utilisateur ${member}/${member.user.username}#${member.user.discriminator} est parti.`);
 	}
+	if (guild.id === "846005274061963274") {
+		const channel = client.channels.cache.find(channel => channel.id === "868368147034538044");
+		channel.send(`L'utilisateur ${member}/${member.user.username}#${member.user.discriminator} est parti.`);
+	}
 });
 
 client.on('messageDelete', message => {
 	if (!message.guild) return;
+	if (message.author.bot) return;
+	if (message.length == 0) return;
     if (!message.partial) {
-		if (message.guild.id === "689471316570406914") {
-			if (message.author.bot) return;
-			if (message.length <= 0) return;
+		if (message.guild.id === "689471316570406914") {	
 			const channel = client.channels.cache.get('827457768277409792');
 			const privateChannel = client.channels.cache.get('845528260044390410');
 			if (channel) {
 			const embed = new Discord.MessageEmbed()
 				.setTitle('Deleted Message')
 				.setColor("#0183c2")
-				.addField('Author', `${message.author.tag} (${message.author.id})`, true)
-				.addField('Channel', `${message.channel.name} (${message.channel.id})`, true)
-				.setDescription(message.content)
-				.setTimestamp();
+				if (message.content) embed.addField('Message', message.content);
+				embed.addField('Author', `${message.author.tag} (${message.author.id})`, true)
+				embed.addField('Channel', `${message.channel.name} (${message.channel.id})`, true)
+				embed.setTimestamp();
 			if (message.attachments.array().length > 0) {
 				const result = message.attachments.array()
+				embed.addField("Image Name", result[0].name)
 				embed.setImage(result[0].proxyURL)
 			}
 			channel.send(embed);
 			privateChannel.send(embed);
-		} else return;
-	  } else return;
+			}
+		}
+		if (message.guild.id === "846005274061963274") {			
+			const channel = client.channels.cache.get('868360765499912202');
+			const privateChannel = client.channels.cache.get('868360903857414204');
+			if (channel) {
+			const embed = new Discord.MessageEmbed()
+				.setTitle('Deleted Message')
+				.setColor("#0183c2")
+				if (message.content) embed.addField('Message', message.content);
+				embed.addField('Author', `${message.author.tag} (${message.author.id})`, true)
+				embed.addField('Channel', `${message.channel.name} (${message.channel.id})`, true)
+				embed.setTimestamp();
+			if (message.attachments.array().length > 0) {
+				const result = message.attachments.array()
+				embed.addField("Image Name", result[0].name)
+				embed.setImage(result[0].proxyURL)
+			}
+			channel.send(embed);
+			privateChannel.send(embed);
+			}
+		}
 	}
 });
 
 client.on('messageUpdate', (message, newMessage) => {
     if (!message.guild || message.channel.type == "dm") return;
+	if (message.author.bot) return;
+	if (message.length == 0) return;
     if (message.guild.id === "689471316570406914") {
-        if (message.author.bot) return;
-		if (message.length <= 0) return;
         const channel = client.channels.cache.get('827457768277409792');
 		const privateChannel = client.channels.cache.get('845528370774933524');
         if (channel) {
             const embed = new Discord.MessageEmbed()
                 .setTitle('Edited Message')
                 .setColor("#0183c2");
-                if (message) embed.addField('Old message', `${message}`)
-                else embed.addField('Old message', `empty`)
+                if (message.content) embed.addField('Old message', `${message}`)
                 embed.addField('New message', newMessage)
                 embed.addField('Author', `${message.author.tag} (${message.author.id})`, true)
                 embed.addField('Channel', `${message.channel.name} (${message.channel.id})`, true)
                 embed.setTimestamp();
             if (message.attachments.array().length > 0) {
                 const result = message.attachments.array()
+				embed.addField("Image Name", result[0].name)
                 embed.setImage(result[0].proxyURL)
             }
             channel.send(embed);
 			privateChannel.send(embed);
-        } else return;
-    } else return;
+        }
+    }
+    if (message.guild.id === "846005274061963274") {
+        const channel = client.channels.cache.get('868360765499912202');
+		const privateChannel = client.channels.cache.get('868360942960918578');
+        if (channel) {
+            const embed = new Discord.MessageEmbed()
+                .setTitle('Edited Message')
+                .setColor("#0183c2");
+                if (message.content) embed.addField('Old message', `${message}`)
+                embed.addField('New message', newMessage)
+                embed.addField('Author', `${message.author.tag} (${message.author.id})`, true)
+                embed.addField('Channel', `${message.channel.name} (${message.channel.id})`, true)
+                embed.setTimestamp();
+            if (message.attachments.array().length > 0) {
+				embed.addField("Image Name", result[0].name)
+                const result = message.attachments.array()
+                embed.setImage(result[0].proxyURL)
+            }
+            channel.send(embed);
+			privateChannel.send(embed);
+        }
+    }
 });
 
 client.on('clickButton', async (button) => {
