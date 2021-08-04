@@ -13,13 +13,15 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     const Items = require(`../../utils/items/${player.data.lang}.json`);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
     const maxEnergy = Items.objects.ring[player.items.ring].energy;
-    const cooldown = player.data.energyCooldown;
+    const maxHP = 50;
+    const energyCooldown = player.data.energyCooldown;
+    const hpCooldown = player.data.hpCooldown;
     
     const embed1 = new Discord.MessageEmbed()
         .setFooter(`Page 1/5 | ${lang.globalHelpFooter.replace("%s", client.config.prefix)}`)
         .addField(`⭐ Mana`, `${player.data.MANA}/50`, true)
-        .addField(`❤️ HP`, `${player.data.HP}/50`, true)
-        .addField(`⚡ ${lang.inventory.energy.replace("%s", `[+1/${moment.duration(cooldown).format("s")}s]`)}`, `${player.ress.energy || 0}/${maxEnergy}`, true)
+        .addField(`❤️ HP [+1/${moment.duration(hpCooldown).format("s")}s]`, `${player.data.HP || 0}/${maxHP}`, true)
+        .addField(`⚡ ${lang.inventory.energy.replace("%s", `[+1/${moment.duration(energyCooldown).format("s")}s]`)}`, `${player.ress.energy || 0}/${maxEnergy}`, true)
         .addField(`📊 ${lang.inventory.stats}:`, `${Emotes.ATK} ATK: ${player.data.ATK}\n${Emotes.DEF} DEF: ${player.data.DEF}\n${Emotes.chests.Tools.rune_pickaxe} Power : ${player.data.power}`, true)
         .addField(`Autres:`, `${Emotes.cash} Balance: ${nFormatter(player.data.money)}\n${Emotes.rep} Reputations : ${player.data.rep}`, true)
 
