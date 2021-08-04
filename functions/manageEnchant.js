@@ -7,6 +7,8 @@ module.exports = async function manageEnchant(client, con, player, message, cate
     const lang = require(`../utils/text/${player.data.lang}.json`);
     const react = ['780222056007991347', '780222833808506920'];
 
+    if (player.items[object] == "0") return message.channel.send(lang.enchant.levelTooLow);
+
     const level = Math.floor(player.enchant[objectName])+1;
 
     const embed = new Discord.MessageEmbed()
@@ -39,7 +41,7 @@ module.exports = async function manageEnchant(client, con, player, message, cate
     const filter = (reaction, user) => react.includes(reaction.emoji.id) && user.id === message.author.id;
 
     msg.awaitReactions(filter, { max: 1, time: 30000, errors: ['time'] })
-    .then(collected => {
+    .then(async collected => {
         let reaction = collected.first();
 
         switch(reaction.emoji.id) {
