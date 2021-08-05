@@ -17,9 +17,9 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         });
     };
     const [results, fields] = await query(top10query);
-    const map1 = results.map((results, position) => `#${position + 1} **${results.username}** : ${results.money}💰`)
+    const map1 = results.map((results, position) => `#${position + 1} **${results.username}** : ${results.money}💰`);
 
-    return message.channel.send("🏆 __**Classement de la moula**__ 🏆\n\n" + map1.join("\n"));
+    return message.channel.send("🏆 __**Classement de la moula**__ 🏆\n\n" + map1.join("\n").replace("#1", "🥇").replace("#2", "🥈").replace("#3", "🥉"));
 
 };
 
