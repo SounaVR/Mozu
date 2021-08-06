@@ -2,7 +2,7 @@ require("moment-duration-format");
 const { nFormatter } = require('../../utils/u.js');
 const Discord        = require('discord.js'),
     moment           = require('moment'),
-    Pagination       = require('discord-paginationembed'),
+    simplydjs        = require('simply-djs'),
     Default          = require('../../utils/default.json'),
     Emotes           = require('../../utils/emotes.json');
 
@@ -18,6 +18,8 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     const hpCooldown = player.data.hpCooldown;
     
     const embed1 = new Discord.MessageEmbed()
+        .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+        .setColor(message.member.displayColor)
         .setFooter(`Page 1/5 | ${lang.globalHelpFooter.replace("%s", client.config.prefix)}`)
         .addField(`⭐ Mana`, `${player.data.MANA}/50`, true)
         .addField(`❤️ HP [+1/${moment.duration(hpCooldown).format("s")}s]`, `${player.data.HP || 0}/${maxHP}`, true)
@@ -56,12 +58,16 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     }
 
     const embed2 = new Discord.MessageEmbed()
+        .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+        .setColor(message.member.displayColor)
         .setFooter(`Page 2/5 | ${lang.globalHelpFooter.replace("%s", client.config.prefix)}`)
         .addField(`${Emotes.ressource} ${lang.inventory.ressources} (1)`, txt, true)
         .addField(`${Emotes.ressource} ${lang.inventory.ressources} (2)`, txt2, true)
         .addField(`${Emotes.gem} ${lang.inventory.gems}`, `${Emotes.sapphire} ${player.prospect.sapphire} ${Emotes.amber} ${player.prospect.amber} ${Emotes.citrine} ${player.prospect.citrine} ${Emotes.ruby} ${player.prospect.ruby} ${Emotes.jade} ${player.prospect.jade} ${Emotes.amethyst} ${player.prospect.amethyst}`)
 
     const embed3 = new Discord.MessageEmbed()
+        .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+        .setColor(message.member.displayColor)
         .setFooter(`Page 3/5 | ${lang.globalHelpFooter.replace("%s", client.config.prefix)}`)
         .addField(`${Emotes.rune} ${lang.inventory.runes}`, `${txt3.join(" ")}\n${txt4.join(" ")}\n${txt5.join(" ")}\n${txt6.join(" ")}`)
         .addField(`${Emotes.bag} ${lang.inventory.yourObjects}`, `${Emotes.torch} ${player.ress.torch}`)
@@ -73,6 +79,8 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     let pickaxe = Items.tools.pickaxe[player.items.pickaxe];
 
     const embed4 = new Discord.MessageEmbed()
+        .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+        .setColor(message.member.displayColor)
         .setFooter(`Page 4/5 | ${lang.globalHelpFooter.replace("%s", client.config.prefix)}`) 
         
     weapons.forEach(element => {
@@ -113,49 +121,22 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     let ring = Items.objects.ring[player.items.ring];
 
     const embed5 = new Discord.MessageEmbed()
+        .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+        .setColor(message.member.displayColor)
         .setFooter(`Page 5/5 | ${lang.globalHelpFooter.replace("%s", client.config.prefix)}`)
         .setDescription(`${Emotes.bag} ${lang.inventory.objects}`)
         .addField(`${Emotes.dungeon_amulet} ${lang.inventory.dungeon_amulet}:`, `${dungeon_amulet.name}\n${lang.inventory.level}: ${player.items.dungeon_amulet}`, true)
         .addField(`${Emotes.ring} ${lang.inventory.ring}:`, `${ring.name}\n${lang.inventory.level}: ${player.items.ring}`, true)
 
-    const embeds = [
+    const pages = [
         embed1,
         embed2,
         embed3,
         embed4,
         embed5
     ];
-    for (let i = 0; i < 0; ++i)
-    embeds.push(new Discord.MessageEmbed());
-    const wow = new Pagination.Embeds()
-        .setArray(embeds)
-        .setAuthorizedUsers([message.author.id])
-        .setChannel(message.channel)
-        .setPageIndicator(false)
-        .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
-        .setColor(message.member.displayColor)
 
-    switch (args[0]) {
-        case "1":
-            wow.setPage(1);
-            break;
-        case "2":
-            wow.setPage(2);
-            break;
-        case "3":
-            wow.setPage(3);
-            break;
-        case "4":
-            wow.setPage(4);
-            break;
-        case "5":
-            wow.setPage(5);
-            break;
-        default:
-            wow.setPage(1);
-            break;
-    }
-    wow.build();
+    simplydjs.embedPages(client, message, pages, { color: 'green' })
 }
 
 module.exports.help = {
