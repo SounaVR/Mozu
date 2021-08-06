@@ -3,7 +3,20 @@ const Discord = require("discord.js"),
     moment    = require("moment");
 
 exports.run = async (client, message, args, getPlayer, getUser) => {
-    let verifLevels = {
+    //variables
+    const guild = message.guild;
+    const channelCache = guild.channels.cache;
+    const presenceCache = guild.presences.cache;
+
+    // presence calculation
+    const online = `🟢 Online : ${presenceCache.filter((presence) => presence.status === "online").size}\n`;
+    const idle = `🌙 Idle : ${presenceCache.filter((presence) => presence.status === "idle").size}\n`;
+    const dnd = `⛔ Do not disturb : ${presenceCache.filter((presence) => presence.status === "dnd").size}\n`;
+    const offline = `⭕ Offline : ${presenceCache.filter((presence) => presence.status === "offline").size}\n`;
+    let presenceString = online + idle + dnd + offline;
+
+    // verification levels for "guild.verificationLevel" fied
+    const verifLevels = {
         "NONE": "None",
         "LOW": "Low",
         "MEDIUM": "Medium",
@@ -11,7 +24,8 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         "VERY_HIGH": "┻━┻ミヽ(ಠ益ಠ)ノ彡┻━┻"
     };
 
-    let region = {
+    // region flag object for "guild.region" field
+    const region = {
         "brazil": ":flag_br: Brazil",
         "europe": ":flag_eu: Central Europe",
         "singapore": ":flag_sg: Singapore",
@@ -30,21 +44,23 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     };
 
     const embed = new Discord.MessageEmbed()
-        .setAuthor(message.guild.name, message.guild.iconURL())
         .setColor(message.member.displayColor)
-        .addField("Name", message.guild.name, true)
-        .addField("ID", message.guild.id, true)
-        .addField("Owner", `${message.guild.owner.user.username}#${message.guild.owner.user.discriminator}`, true)
-        .addField("Region", region[message.guild.region], true)
-        .addField("Total | Humans and Bots", `${message.guild.members.cache.size} | ${message.guild.members.cache.filter(member => !member.user.bot).size} and ${message.guild.members.cache.filter(member => member.user.bot).size}`, true)
-        .addField("Verification Level", verifLevels[message.guild.verificationLevel], true)
-        .addField("Channels", `${message.guild.channels.cache.size} channels`, true)
-        .addField("Roles", `${message.guild.roles.cache.size} roles`, true)
-        .addField("Boosts", `Level ${message.guild.premiumTier} | ${message.guild.premiumSubscriptionCount} boosts`, true)
-        .addField("Created at", `${moment.utc(message.channel.guild.createdAt).format('DD/MM/YYYY')}\n(${checkDays(message.channel.guild.createdAt)})`, true)
-        .setThumbnail(message.guild.iconURL())
-        .setFooter(`${client.user.username}`, client.user.avatarURL())
-        .setTimestamp()
+        .setThumbnail(guild.iconURL({ dynamic: true }))
+        .addField("📝 Name", guild.name)
+        .addField("👑 Owner", `${guild.owner.user.username}#${guild.owner.user.discriminator}`)
+        .addField("🏴 Region", region[guild.region], true)
+        .addField("🚀 Boosts", `Level: ${guild.premiumTier} | ${guild.premiumSubscriptionCount} boosts`, true)
+        .addField("✅ Verification Level", verifLevels[guild.verificationLevel], true)
+        .addField("🕒 Created at", `${moment.utc(message.channel.guild.createdAt).format('DD/MM/YYYY')}\n(${checkDays(message.channel.guild.createdAt)})`, true)
+        .addField("👥 Member Status", presenceString)
+        .addField("🤖 Bots", guild.members.cache.filter((member) => member.user.bot === true).size, true)
+        .addField("📜 Roles", guild.roles.cache.filter((role) => role.name != "@everyone").size, true)
+        .addField("😊 Emoji Count", guild.emojis.cache.size, true)
+        .addField("📁 Categories", channelCache.filter((channel) => channel.type === "category").size, true)
+        .addField("💬 Text Channels", channelCache.filter((channel) => channel.type === "text").size, true)
+        .addField("📣 Voice Channels", channelCache.filter((channel) => channel.type === "voice").size, true)
+        .setFooter(`${client.user.username}`, client.user.avatarURL({ dynamic: true }))
+        .setTimestamp();
     message.channel.send({ embed });
 };
 
