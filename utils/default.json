@@ -11,17 +11,12 @@
         "orichalque": "0",
         "cobalt": "0",
         "argent": "0",
-        "fer_nain": "0",
-        "argent_lycanthrope": "0",
-        "or_elfe": "0",
         "emeraude": "0",
         "saphir": "0",
         "rubis": "0",
         "diamant": "0",
         "joyau_pur": "0",
-        "ebonite": "0",
-        "ecaille_de_dragon_ancien": "0",
-        "adamantium": "0"
+        "ebonite": "0"
     },
     "player" : {
         "uuid" : "0",
