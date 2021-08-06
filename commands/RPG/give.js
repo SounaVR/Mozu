@@ -6,7 +6,7 @@ module.exports.run = async (client, message, args, getPlayer, getUser) => {
     var player = await getPlayer(con, message.author.id);
     if (!player) return message.channel.send(Default.notRegistered);
     const lang = require(`../../utils/text/${player.data.lang}.json`);
-    const user = message.mentions.users.first();
+    const user = message.mentions.users.first() || message.author;
     const userid = message.author.id;
     var userDB = await getUser(con, user.id);
 
