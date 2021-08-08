@@ -1,6 +1,5 @@
 require('dotenv').config();
 const { DB_HOST, DB_USER, DB_NAME, DB_PASS, BOT_TOKEN } = process.env
-const { success, error, warning } = require("log-symbols");
 const { getUser, getPlayer } = require("./utils/u");
 const { sep } = require("path");
 const roleClaim = require("./utils/reaction_role/role-claim");
@@ -55,16 +54,15 @@ client.on('ready', async () => {
 			for (const f of commands) {
 				const pull = require(`${dir}/${dirs}/${f}`);
 				if (pull.help && typeof (pull.help.name) === "string" && typeof (pull.help.category) === "string") {
-					if (client.commands.get(pull.help.name)) return console.warn(`${warning} Two or more commands have the same name ${pull.help.name}.`);
+					if (client.commands.get(pull.help.name)) return console.warn(`⚠️ Two or more commands have the same name ${pull.help.name}.`);
 					client.commands.set(pull.help.name, pull);
-					console.log(`${success} Loaded command ${pull.help.name} in ${dirs}.`);
 				} else {
-					console.log(`${error} Error loading command in ${dir}${dirs}. you have a missing help.name or help.name is not a string. or you have a missing help.category or help.category is not a string`);
+					console.log(`⛔ Error loading command in ${dir}${dirs}. you have a missing help.name or help.name is not a string. or you have a missing help.category or help.category is not a string`);
 					continue;
 				}
 				if (pull.help.aliases && typeof (pull.help.aliases) === "object") {
 					pull.help.aliases.forEach(alias => {
-						if (client.aliases.get(alias)) return console.warn(`${warning} Two commands or more commands have the same aliases ${alias}`);
+						if (client.aliases.get(alias)) return console.warn(`⚠️ Two commands or more commands have the same aliases ${alias}`);
 						client.aliases.set(alias, pull.help.name);
 					});
 				}
@@ -225,101 +223,101 @@ client.on('guildMemberRemove', member => {
 	}
 });
 
-client.on('messageDelete', message => {
-	if (!message.guild) return;
-	if (message.author.bot) return;
-	if (message.length == 0) return;
-    if (!message.partial) {
-		if (message.guild.id === "689471316570406914") {	
-			const channel = client.channels.cache.get('827457768277409792');
-			const privateChannel = client.channels.cache.get('845528260044390410');
-			if (channel) {
-			const embed = new Discord.MessageEmbed()
-				.setTitle('Deleted Message')
-				.setColor("#0183c2")
-				if (message.content) embed.addField('Message', message.content);
-				embed.addField('Author', `${message.author.tag} (${message.author.id})`, true)
-				embed.addField('Channel', `${message.channel.name} (${message.channel.id})`, true)
-				embed.setTimestamp();
-			if (message.attachments.array().length > 0) {
-				const result = message.attachments.array()
-				embed.addField("Image Name", result[0].name)
-				embed.setImage(result[0].proxyURL)
-			}
-			channel.send(embed);
-			privateChannel.send(embed);
-			}
-		}
-		if (message.guild.id === "846005274061963274") {			
-			const channel = client.channels.cache.get('868360765499912202');
-			const privateChannel = client.channels.cache.get('868360903857414204');
-			if (channel) {
-			const embed = new Discord.MessageEmbed()
-				.setTitle('Deleted Message')
-				.setColor("#0183c2")
-				if (message.content) embed.addField('Message', message.content);
-				embed.addField('Author', `${message.author.tag} (${message.author.id})`, true)
-				embed.addField('Channel', `${message.channel.name} (${message.channel.id})`, true)
-				embed.setTimestamp();
-			if (message.attachments.array().length > 0) {
-				const result = message.attachments.array()
-				embed.addField("Image Name", result[0].name)
-				embed.setImage(result[0].proxyURL)
-			}
-			channel.send(embed);
-			privateChannel.send(embed);
-			}
-		}
-	}
-});
+// client.on('messageDelete', message => {
+// 	if (!message.guild) return;
+// 	if (message.author.bot) return;
+// 	if (message.length == 0) return;
+//     if (!message.partial) {
+// 		if (message.guild.id === "689471316570406914") {	
+// 			const channel = client.channels.cache.get('827457768277409792');
+// 			const privateChannel = client.channels.cache.get('845528260044390410');
+// 			if (channel) {
+// 			const embed = new Discord.MessageEmbed()
+// 				.setTitle('Deleted Message')
+// 				.setColor("#0183c2")
+// 				if (message.content) embed.addField('Message', message.content);
+// 				embed.addField('Author', `${message.author.tag} (${message.author.id})`, true)
+// 				embed.addField('Channel', `${message.channel.name} (${message.channel.id})`, true)
+// 				embed.setTimestamp();
+// 			if (message.attachments.array().length > 0) {
+// 				const result = message.attachments.array()
+// 				embed.addField("Image Name", result[0].name)
+// 				embed.setImage(result[0].proxyURL)
+// 			}
+// 			channel.send(embed);
+// 			privateChannel.send(embed);
+// 			}
+// 		}
+// 		if (message.guild.id === "846005274061963274") {			
+// 			const channel = client.channels.cache.get('868360765499912202');
+// 			const privateChannel = client.channels.cache.get('868360903857414204');
+// 			if (channel) {
+// 			const embed = new Discord.MessageEmbed()
+// 				.setTitle('Deleted Message')
+// 				.setColor("#0183c2")
+// 				if (message.content) embed.addField('Message', message.content);
+// 				embed.addField('Author', `${message.author.tag} (${message.author.id})`, true)
+// 				embed.addField('Channel', `${message.channel.name} (${message.channel.id})`, true)
+// 				embed.setTimestamp();
+// 			if (message.attachments.array().length > 0) {
+// 				const result = message.attachments.array()
+// 				embed.addField("Image Name", result[0].name)
+// 				embed.setImage(result[0].proxyURL)
+// 			}
+// 			channel.send(embed);
+// 			privateChannel.send(embed);
+// 			}
+// 		}
+// 	}
+// });
 
-client.on('messageUpdate', (message, newMessage) => {
-    if (!message.guild || message.channel.type == "dm") return;
-	if (message.author.bot) return;
-	if (message.length == 0) return;
-    if (message.guild.id === "689471316570406914") {
-        const channel = client.channels.cache.get('827457768277409792');
-		const privateChannel = client.channels.cache.get('845528370774933524');
-        if (channel) {
-            const embed = new Discord.MessageEmbed()
-                .setTitle('Edited Message')
-                .setColor("#0183c2");
-                if (message.content) embed.addField('Old message', `${message}`)
-                embed.addField('New message', newMessage)
-                embed.addField('Author', `${message.author.tag} (${message.author.id})`, true)
-                embed.addField('Channel', `${message.channel.name} (${message.channel.id})`, true)
-                embed.setTimestamp();
-            if (message.attachments.array().length > 0) {
-                const result = message.attachments.array()
-				embed.addField("Image Name", result[0].name)
-                embed.setImage(result[0].proxyURL)
-            }
-            channel.send(embed);
-			privateChannel.send(embed);
-        }
-    }
-    if (message.guild.id === "846005274061963274") {
-        const channel = client.channels.cache.get('868360765499912202');
-		const privateChannel = client.channels.cache.get('868360942960918578');
-        if (channel) {
-            const embed = new Discord.MessageEmbed()
-                .setTitle('Edited Message')
-                .setColor("#0183c2");
-                if (message.content) embed.addField('Old message', `${message}`)
-                embed.addField('New message', newMessage)
-                embed.addField('Author', `${message.author.tag} (${message.author.id})`, true)
-                embed.addField('Channel', `${message.channel.name} (${message.channel.id})`, true)
-                embed.setTimestamp();
-            if (message.attachments.array().length > 0) {
-				embed.addField("Image Name", result[0].name)
-                const result = message.attachments.array()
-                embed.setImage(result[0].proxyURL)
-            }
-            channel.send(embed);
-			privateChannel.send(embed);
-        }
-    }
-});
+// client.on('messageUpdate', (message, newMessage) => {
+//     if (!message.guild || message.channel.type == "dm") return;
+// 	if (message.author.bot) return;
+// 	if (message.length == 0) return;
+//     if (message.guild.id === "689471316570406914") {
+//         const channel = client.channels.cache.get('827457768277409792');
+// 		const privateChannel = client.channels.cache.get('845528370774933524');
+//         if (channel) {
+//             const embed = new Discord.MessageEmbed()
+//                 .setTitle('Edited Message')
+//                 .setColor("#0183c2");
+//                 if (message.content) embed.addField('Old message', `${message}`)
+//                 embed.addField('New message', newMessage)
+//                 embed.addField('Author', `${message.author.tag} (${message.author.id})`, true)
+//                 embed.addField('Channel', `${message.channel.name} (${message.channel.id})`, true)
+//                 embed.setTimestamp();
+//             if (message.attachments.array().length > 0) {
+//                 const result = message.attachments.array()
+// 				embed.addField("Image Name", result[0].name)
+//                 embed.setImage(result[0].proxyURL)
+//             }
+//             channel.send(embed);
+// 			privateChannel.send(embed);
+//         }
+//     }
+//     if (message.guild.id === "846005274061963274") {
+//         const channel = client.channels.cache.get('868360765499912202');
+// 		const privateChannel = client.channels.cache.get('868360942960918578');
+//         if (channel) {
+//             const embed = new Discord.MessageEmbed()
+//                 .setTitle('Edited Message')
+//                 .setColor("#0183c2");
+//                 if (message.content) embed.addField('Old message', `${message}`)
+//                 embed.addField('New message', newMessage)
+//                 embed.addField('Author', `${message.author.tag} (${message.author.id})`, true)
+//                 embed.addField('Channel', `${message.channel.name} (${message.channel.id})`, true)
+//                 embed.setTimestamp();
+//             if (message.attachments.array().length > 0) {
+// 				embed.addField("Image Name", result[0].name)
+//                 const result = message.attachments.array()
+//                 embed.setImage(result[0].proxyURL)
+//             }
+//             channel.send(embed);
+// 			privateChannel.send(embed);
+//         }
+//     }
+// });
 
 client.on('clickButton', async (button) => {
 	await button.reply.defer();
