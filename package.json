@@ -14,15 +14,14 @@
     "license": "MIT",
     "dependencies": {
         "cron": "^1.8.2",
-        "discord-buttons": "^4.0.0",
-        "discord-paginationembed": "^2.0.0-beta.4",
-        "discord.js": "^12.5.3",
+        "discord.js": "^13.0.1",
         "dotenv": "^8.2.0",
         "moment": "^2.24.0",
         "moment-duration-format": "^2.3.2",
         "mysql": "^2.18.1",
         "parse-ms": "^2.1.0",
         "path": "^0.12.7",
-        "simply-djs": "^1.0.87"
+        "simply-djs": "^1.0.87",
+        "simply-djs-v13": "^1.0.886"
     }
 }

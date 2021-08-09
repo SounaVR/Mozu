@@ -2,6 +2,8 @@ const Discord = require("discord.js"),
     Emotes    = require("../../utils/emotes.json"),
     Default   = require("../../utils/default.json");
 
+//todo: buttons
+
 exports.run = async (client, message, args, getPlayer, getUser) => {
     const con = client.connection
     const player = await getPlayer(con, message.author.id);

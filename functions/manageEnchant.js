@@ -2,6 +2,8 @@ const { nFormatter } = require('../utils/u.js');
 const Discord        = require('discord.js'),
     Emotes           = require('../utils/emotes.json');
 
+
+//todo : buttons
 module.exports = async function manageEnchant(client, con, player, message, category, object, objectName) {
     const Enchant = require(`../utils/items/enchant.json`);
     const lang = require(`../utils/text/${player.data.lang}.json`);
@@ -28,10 +30,10 @@ module.exports = async function manageEnchant(client, con, player, message, cate
     if (Enchant[category][object][0].DEF >= 1) reward.push(`${Emotes.DEF} DEF : ${player.data.DEF} => **${player.data.DEF + Enchant[category][object][0].DEF}**`);
     if (object === "pickaxe") reward.push(`💪 Power : ${player.data.power} => **${player.data.power + Enchant.tools.pickaxe[0].power}**`);
 
-    embed.addField(`**${lang.craft.cost}**`, txt);
+    embed.addField(`**${lang.craft.cost}**`, txt.join("\n"));
     embed.addField("**Reward**", `${Emotes.enchant[`rune_${object}`]} ${object} enchant level : ${level - 1} => **${level}**\n${reward.join("\n")}`);
 
-    const msg = await message.channel.send(embed);
+    const msg = await message.channel.send({ embeds: [embed] });
 
     if (player.ress[`rune_${object}`] < getNeededRessource) return;
 
@@ -40,7 +42,7 @@ module.exports = async function manageEnchant(client, con, player, message, cate
 
     const filter = (reaction, user) => react.includes(reaction.emoji.id) && user.id === message.author.id;
 
-    msg.awaitReactions(filter, { max: 1, time: 30000, errors: ['time'] })
+    msg.awaitReactions({ filter, max: 1, time: 30000, errors: ['time'] })
     .then(async collected => {
         let reaction = collected.first();
 
@@ -59,9 +61,11 @@ module.exports = async function manageEnchant(client, con, player, message, cate
                 if (object === "pickaxe") con.query(`UPDATE data SET power = ${player.data.power + Number(Enchant.tools.pickaxe[0].power)}`)
                 con.query(`UPDATE enchant SET ${objectName} = ${level} WHERE userid = ${message.author.id}`);
 
-                return message.channel.send(`${lang.enchant.enchantSuccess.replace("%s", `**${level}**`)}`);
+                message.channel.send(`${lang.enchant.enchantSuccess.replace("%s", `**${level}**`)}`);
+                msg.reactions.removeAll();
 
             case react[1]:
+                msg.reactions.removeAll();
                 return message.channel.send(`${lang.enchant.canceled}`);
         }
     }).catch(() => {

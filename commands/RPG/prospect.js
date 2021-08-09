@@ -37,7 +37,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         case "malachite":
             return manageProspecting(client, con, player, message, "malachite", args[1], "amethyst", "+DEF");
         default:
-            return message.channel.send(prospectEmbed);
+            return message.channel.send({ embeds: [prospectEmbed] });
     }
 };
 

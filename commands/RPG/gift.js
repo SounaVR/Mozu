@@ -3,6 +3,8 @@ const Discord = require('discord.js'),
 Emotes        = require('../../utils/emotes.json'),
 Default       = require('../../utils/default.json');
 
+//todo : buttons
+
 exports.run = async (client, message, args, getPlayer, getUser) => {
     const con = client.connection;
     const player = await getPlayer(con, message.author.id);
@@ -26,13 +28,13 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
             .addField(`${lang.gift.for}`, `${user}`, true)
             .addField(`${lang.gift.amount}`, `**${Math.floor(args[1])}**${Emotes.cash}`, true)
 
-        message.channel.send(embed).then(async e => {
+        message.channel.send({ embeds: [embed] }).then(async e => {
             await e.react(react[0]);
             await e.react(react[1]);
 
             const filter = (reaction, user) => react.includes(reaction.emoji.id) && user.id === message.author.id;
 
-            e.awaitReactions(filter, { max: 1, time: 45000, errors: ['time'] })
+            e.awaitReactions({filter, max: 1, time: 45000, errors: ['time'] })
             .then(async collected => {
                 const reaction = collected.first();
 
@@ -66,7 +68,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
                                 .addField(`${lang.gift.amount}`, `**${Math.floor(args[1])}**${Emotes.cash}`, true)
                                 .addField(`${lang.gift.progress}`, `**${width}% ${lang.gift.completed}** ${Emotes.loading}`, true)
                             setTimeout(() => {
-                            e.edit(embedProcessing)
+                            e.edit({ embeds: [embedProcessing] })
                             }, 1000 * width/20)
                             width += 20;
                         }
@@ -80,7 +82,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
                                 .addField(`${lang.gift.for}`, `${user}`, true)
                                 .addField(`${lang.gift.amount}`, `**${args[1]}**${Emotes.cash}`, true)
                                 .addField(`${lang.gift.progress}`, `**100% ${lang.gift.completed}**`, true)
-                                e.edit(embedProcessing)
+                                e.edit({ embeds: [embedProcessing] })
                             }, 1000 * 7)
                         break;
                     case react[1]:
@@ -92,7 +94,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
                             .addField(`${lang.gift.from}`, `${message.author}`, true)
                             .addField(`${lang.gift.for}`, `${user}`, true)
                             .addField(`${lang.gift.amount}`, `**${Math.floor(args[1])}**${Emotes.cash}`, true)
-                        return message.channel.send(embedCanceled);
+                        return message.channel.send({ embeds: [embedCanceled] });
                 }
                 e.reactions.removeAll();   
             }).catch(collected => {
@@ -104,7 +106,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
                     .addField(`${lang.gift.from}`, `${message.author}`, true)
                     .addField(`${lang.gift.for}`, `${user}`, true)
                     .addField(`${lang.gift.amount}`, `**${Math.floor(args[1])}**${Emotes.cash}`, true)
-                return message.channel.send(embedCanceled);
+                return message.channel.send({ embeds: [embedCanceled] });
             })
         });
     } else {

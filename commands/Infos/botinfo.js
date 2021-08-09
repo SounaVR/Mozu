@@ -32,7 +32,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 
 			.setFooter(`${client.user.username}`, client.user.avatarURL())
 			.setTimestamp();
-		message.channel.send(botembed);
+		message.channel.send({ embeds: [botembed] });
 	});
 };
 

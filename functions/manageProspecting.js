@@ -2,6 +2,8 @@ const { nFormatter } = require('../utils/u');
 const Discord        = require('discord.js'),
     Emotes           = require('../utils/emotes.json');
 
+//todo : buttons
+
 module.exports = async function manageProspecting(client, con, player, message, ore, quantity, gem, stat) {
     const lang = require(`../utils/text/${player.data.lang}.json`);
     const react = ['780222056007991347', '780222833808506920'];
@@ -20,14 +22,14 @@ module.exports = async function manageProspecting(client, con, player, message, 
     embed.addField(`**${lang.craft.cost}**`, txt);
     embed.addField("**Reward**", `${Emotes[gem]} ${gem} x${quantity}\n*${stat}*`)
 
-    const msg = await message.channel.send(embed);
+    const msg = await message.channel.send({ embeds: [embed] });
 
     await msg.react(react[0]);
     await msg.react(react[1]);
 
     const filter = (reaction, user) => react.includes(reaction.emoji.id) && user.id === message.author.id;
 
-    msg.awaitReactions(filter, { max: 1, time: 30000, errors: ['time'] })
+    msg.awaitReactions({ filter, max: 1, time: 30000, errors: ['time'] })
     .then(collected => {
         let reaction = collected.first();
 

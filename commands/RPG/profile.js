@@ -43,7 +43,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
             // .setImage("attachment://ornement.png")
             .setFooter(`#${member.stats.uuid}`)
 
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed] })
     }
 };
 

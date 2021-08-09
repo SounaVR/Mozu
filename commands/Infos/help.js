@@ -50,7 +50,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 			`❯ **${lang.help.category}:** ${command.category ? command.category : "General" || "Misc"}`,
 		].join("\n"));
 
-		return message.channel.send(embed);
+		return message.channel.send({ embeds: [embed] });
 	}
 
 	const categories = readdirSync("./commands/");
@@ -73,7 +73,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 			return console.warn(e);
 		}
 	});
-	return message.channel.send(embed);
+	return message.channel.send({ embeds: [embed] });
 };
 
 exports.help = {

@@ -2,7 +2,7 @@ require("moment-duration-format");
 const { nFormatter } = require('../../utils/u.js');
 const Discord        = require('discord.js'),
     moment           = require('moment'),
-    simplydjs        = require('simply-djs'),
+    simplydjs        = require('simply-djs-v13'),
     Default          = require('../../utils/default.json'),
     Emotes           = require('../../utils/emotes.json');
 
@@ -61,8 +61,8 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
         .setColor(message.member.displayColor)
         .setFooter(`Page 2/5 | ${lang.globalHelpFooter.replace("%s", client.config.prefix)}`)
-        .addField(`${Emotes.ressource} ${lang.inventory.ressources} (1)`, txt, true)
-        .addField(`${Emotes.ressource} ${lang.inventory.ressources} (2)`, txt2, true)
+        .addField(`${Emotes.ressource} ${lang.inventory.ressources} (1)`, txt.join('\n'), true)
+        .addField(`${Emotes.ressource} ${lang.inventory.ressources} (2)`, txt2.join('\n'), true)
         .addField(`${Emotes.gem} ${lang.inventory.gems}`, `${Emotes.sapphire} ${player.prospect.sapphire} ${Emotes.amber} ${player.prospect.amber} ${Emotes.citrine} ${player.prospect.citrine} ${Emotes.ruby} ${player.prospect.ruby} ${Emotes.jade} ${player.prospect.jade} ${Emotes.amethyst} ${player.prospect.amethyst}`)
 
     const embed3 = new Discord.MessageEmbed()

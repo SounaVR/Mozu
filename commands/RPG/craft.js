@@ -48,7 +48,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         case "torch":
             return manageCraft(con, player, args, message, "objects", "torch", Emotes.torch);
         default:
-            return message.channel.send(craftEmbed);
+            return message.channel.send({ embeds: [craftEmbed] });
     }
 };
 

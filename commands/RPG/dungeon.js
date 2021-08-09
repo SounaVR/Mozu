@@ -1,4 +1,3 @@
-
 const Default = require('../../utils/default.json'),
 manageDungeon = require('../../functions/manageDungeon.js');
 

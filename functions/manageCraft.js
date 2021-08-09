@@ -1,5 +1,4 @@
 const { nFormatter } = require('../utils/u.js');
-const { MessageButton } = require('discord-buttons');
 const Discord        = require('discord.js'),
     Emotes           = require('../utils/emotes.json'),
     moment           = require('moment');
@@ -15,8 +14,8 @@ module.exports = async function manageCraft(con, player, args, message, category
     const embed = new Discord.MessageEmbed()
     .setColor(message.member.displayColor);
 
-    let validButton = new MessageButton().setStyle("green").setEmoji(react[0]).setID("valid");
-    let cancelButton = new MessageButton().setStyle("red").setEmoji(react[1]).setID("cancel");
+    let validButton = new Discord.MessageButton().setStyle("SUCCESS").setEmoji(react[0]).setCustomId("valid");
+    let cancelButton = new Discord.MessageButton().setStyle("DANGER").setEmoji(react[1]).setCustomId("cancel");
 
     var currentObject = [];
     var currentObjectTitle = [];
@@ -63,7 +62,7 @@ module.exports = async function manageCraft(con, player, args, message, category
     if (objectName === "pickaxe") reward.push(`💪 Power : ${player.data.power} => **${player.data.power + Number(Craft.tools.pickaxe[level].power)}**`);
     if (objectName === "ring") reward.push(`⚡Energy : ${maxEnergy} => **${currentObject.energy}**\n⏲️ Energy Cooldown : ${moment.duration(player.data.energyCooldown).format("s")}s => **${moment.duration(currentObject.cooldown).format("s")}s**`)
 
-    embed.addField(`**${lang.craft.cost}**`, txt);
+    embed.addField(`**${lang.craft.cost}**`, txt.join("\n"));
 
     let rewardLength = reward.join("\n") ? reward.length >= 1 : reward.join("\n");
     if (rewardLength) embed.addField(`**Reward**`, `${emote} ${currentObject.name}\n${reward.join("\n")}`);
@@ -80,15 +79,19 @@ module.exports = async function manageCraft(con, player, args, message, category
         }
         sql.push(`${ressource} = ${ressource} - ${currentObject.ressource[ressource]}`);
     }
-    const msg = await message.channel.send({embed: embed, buttons: [validButton, cancelButton]});
 
-    const filter = (button) => button.clicker.user.id === message.author.id;
-    const collector = msg.createButtonCollector(filter, { time: 30000 });
+    let buttonRow = new Discord.MessageActionRow()
+        .addComponents([validButton, cancelButton]);
+
+    const msg = await message.channel.send({embeds: [embed], components: [buttonRow]});
+
+    const filter = (button) => button.user.id === message.author.id;
+    const collector = msg.createMessageComponentCollector({ filter,time: 30000 });
 
     collector.on('collect', button => {
         validButton.setDisabled(true);
         cancelButton.setDisabled(true);
-        switch(button.id) {
+        switch(button.customId) {
             case "valid":
                 con.query(`UPDATE data SET ATK = ${player.data.ATK + Number(currentObject.ATK)}, DEF = ${player.data.DEF + Number(currentObject.DEF)}, power = ${currentObject.power > 0 ? player.data.power + Number(currentObject.power) : player.data.power} WHERE userid = ${message.author.id}`);
                 con.query(`UPDATE ress SET ${sql.join(',')} WHERE userid = ${message.author.id}`);
@@ -135,7 +138,7 @@ module.exports = async function manageCraft(con, player, args, message, category
     })
 
     collector.on('end', () => {
-        msg.edit(embed, { button: null })
+        msg.edit({ components: [], embeds: [embed]})
     })
 
 }

@@ -42,7 +42,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         case "feet":
             return manageEnchant(client, con, player, message, "armors", "feet", "ench_feet");
         default:
-            return message.channel.send(enchantEmbed);
+            return message.channel.send({ embeds: [enchantEmbed] });
     }
 };
 

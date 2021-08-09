@@ -1,5 +1,7 @@
 const Emotes  = require('../utils/emotes.json');
 
+//todo : buttons
+
 module.exports = function manageGive(client, con, args, player, member, message, objectName, objectAliases) {
     var con = client.connection
     const lang = require(`../utils/text/${player.data.lang}.json`);
@@ -15,7 +17,7 @@ module.exports = function manageGive(client, con, args, player, member, message,
 
                 const filter = (reaction, user) => react.includes(reaction.emoji.id) && user.id === message.author.id;
 
-                e.awaitReactions(filter, { max: 1, time: 45000, errors: ['time'] })
+                e.awaitReactions({ filter, max: 1, time: 45000, errors: ['time'] })
                 .then(async collected => {
                     const reaction = collected.first();
 

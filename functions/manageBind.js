@@ -1,5 +1,4 @@
-const { MessageEmbed } = require("discord.js");
-const { MessageButton } = require("discord-buttons");
+const Discord = require("discord.js");
 const Gems = require("../utils/items/gems.json");
 const Emotes = require("../utils/emotes.json");
 
@@ -20,7 +19,7 @@ module.exports = async function manageBind(con, player, message, gem, part, slot
 
     await con.query(`UPDATE slots SET ${slot} = ${number} WHERE userid = ${userid}`);
 
-    const successEmbed = new MessageEmbed()
+    const successEmbed = new Discord.MessageEmbed()
         .setTitle(lang.bind.title)
         .setColor(message.member.displayColor)
         .setThumbnail("https://cdn.discordapp.com/attachments/691992473999769623/850298943467159552/emptySocket.png")
@@ -28,9 +27,11 @@ module.exports = async function manageBind(con, player, message, gem, part, slot
         .setTimestamp()
         .setFooter(message.author.tag, message.author.displayAvatarURL());
 
-    let successButton = new MessageButton().setStyle("green").setEmoji("780222056007991347").setID("success").setDisabled(true);
+    let successButton = new Discord.MessageButton().setStyle("SUCCESS").setEmoji("780222056007991347").setCustomId("success").setDisabled(true);
+    let successRow = new Discord.MessageActionRow()
+        .addComponents([successButton]);
 
-    bind.edit(successEmbed, successButton);
+    bind.edit({ components: [successRow], embeds: [successEmbed] });
 };
 
 /*

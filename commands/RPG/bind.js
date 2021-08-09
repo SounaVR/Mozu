@@ -1,9 +1,13 @@
-const { MessageButton, MessageActionRow } = require('discord-buttons');
 const Discord = require('discord.js'),
 Default       = require('../../utils/default.json'),
 Emotes        = require('../../utils/emotes.json'),
 manageBind    = require('../../functions/manageBind');
 
+/**
+ * @param {Discord.Client} client
+ * @param {Discord.Message} message
+ * @param {string[]} args
+ */
 exports.run = async (client, message, args, getPlayer, getUser) => {
     const emptySocket = "https://cdn.discordapp.com/attachments/691992473999769623/850298943467159552/emptySocket.png";
     const con = client.connection;
@@ -40,30 +44,30 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         .setFooter(message.author.tag, message.author.displayAvatarURL());
 
     // timeout button
-    let disabledButton = new MessageButton().setLabel("Timeout").setStyle("grey").setEmoji("780222833808506920").setID("disabled").setDisabled();
+    let disabledButton = new Discord.MessageButton().setLabel("Timeout").setStyle("grey").setEmoji("780222833808506920").setCustomId("disabled").setDisabled();
 
     // gear buttons
-    let head = new MessageButton().setLabel(lang.inventory.head).setStyle("blurple").setEmoji("748959964663382106").setID("head");
-    let shoulders = new MessageButton().setLabel(lang.inventory.shoulders).setStyle("blurple").setEmoji("748959724170379324").setID("shoulders");
-    let chest = new MessageButton().setLabel(lang.inventory.chest).setStyle("blurple").setEmoji("748960199389479053").setID("chest");
-    let wrists = new MessageButton().setLabel(lang.inventory.wrists).setStyle("blurple").setEmoji("748960470479798324").setID("wrists");
-    let hands = new MessageButton().setLabel(lang.inventory.hands).setStyle("blurple").setEmoji("748960653930135613").setID("hands");
-    let waist = new MessageButton().setLabel(lang.inventory.waist).setStyle("blurple").setEmoji("748961288960606300").setID("waist");
-    let legs = new MessageButton().setLabel(lang.inventory.legs).setStyle("blurple").setEmoji("748961288968994888").setID("legs");
-    let feet = new MessageButton().setLabel(lang.inventory.feet).setStyle("blurple").setEmoji("748961289145155684").setID("feet");
+    let head = new Discord.MessageButton().setLabel(lang.inventory.head).setStyle("PRIMARY").setEmoji("748959964663382106").setCustomId("head");
+    let shoulders = new Discord.MessageButton().setLabel(lang.inventory.shoulders).setStyle("PRIMARY").setEmoji("748959724170379324").setCustomId("shoulders");
+    let chest = new Discord.MessageButton().setLabel(lang.inventory.chest).setStyle("PRIMARY").setEmoji("748960199389479053").setCustomId("chest");
+    let wrists = new Discord.MessageButton().setLabel(lang.inventory.wrists).setStyle("PRIMARY").setEmoji("748960470479798324").setCustomId("wrists");
+    let hands = new Discord.MessageButton().setLabel(lang.inventory.hands).setStyle("PRIMARY").setEmoji("748960653930135613").setCustomId("hands");
+    let waist = new Discord.MessageButton().setLabel(lang.inventory.waist).setStyle("PRIMARY").setEmoji("748961288960606300").setCustomId("waist");
+    let legs = new Discord.MessageButton().setLabel(lang.inventory.legs).setStyle("PRIMARY").setEmoji("748961288968994888").setCustomId("legs");
+    let feet = new Discord.MessageButton().setLabel(lang.inventory.feet).setStyle("PRIMARY").setEmoji("748961289145155684").setCustomId("feet");
 
     // gems buttons
-    let sapphireButton = new MessageButton().setLabel("sapphire").setStyle("blurple").setEmoji("831956969854205952").setID("sapphire");
-    let amberButton = new MessageButton().setLabel("amber").setStyle("blurple").setEmoji("831956970448748544").setID("amber");
-    let citrineButton = new MessageButton().setLabel("citrine").setStyle("blurple").setEmoji("831956970499211354").setID("citrine");
-    let rubyButton = new MessageButton().setLabel("ruby").setStyle("blurple").setEmoji("831956969492709463").setID("ruby");
-    let jadeButton = new MessageButton().setLabel("jade").setStyle("blurple").setEmoji("831957224020246570").setID("jade");
-    let amethystButton = new MessageButton().setLabel("amethyst").setStyle("blurple").setEmoji("831956970428563486").setID("amethyst");
+    let sapphireButton = new Discord.MessageButton().setLabel("sapphire").setStyle("PRIMARY").setEmoji("831956969854205952").setCustomId("sapphire");
+    let amberButton = new Discord.MessageButton().setLabel("amber").setStyle("PRIMARY").setEmoji("831956970448748544").setCustomId("amber");
+    let citrineButton = new Discord.MessageButton().setLabel("citrine").setStyle("PRIMARY").setEmoji("831956970499211354").setCustomId("citrine");
+    let rubyButton = new Discord.MessageButton().setLabel("ruby").setStyle("PRIMARY").setEmoji("831956969492709463").setCustomId("ruby");
+    let jadeButton = new Discord.MessageButton().setLabel("jade").setStyle("PRIMARY").setEmoji("831957224020246570").setCustomId("jade");
+    let amethystButton = new Discord.MessageButton().setLabel("amethyst").setStyle("PRIMARY").setEmoji("831956970428563486").setCustomId("amethyst");
 
     // sockets buttons
-    let socket1 = new MessageButton().setLabel("n°1").setStyle("blurple").setEmoji("858821600400113704").setID("socket1");
-    let socket2 = new MessageButton().setLabel("n°2").setStyle("blurple").setEmoji("858821600400113704").setID("socket2");
-    let socket3 = new MessageButton().setLabel("n°3").setStyle("blurple").setEmoji("858821600400113704").setID("socket3");
+    let socket1 = new Discord.MessageButton().setLabel("n°1").setStyle("PRIMARY").setEmoji("858821600400113704").setCustomId("socket1");
+    let socket2 = new Discord.MessageButton().setLabel("n°2").setStyle("PRIMARY").setEmoji("858821600400113704").setCustomId("socket2");
+    let socket3 = new Discord.MessageButton().setLabel("n°3").setStyle("PRIMARY").setEmoji("858821600400113704").setCustomId("socket3");
 
     const gearArray = [head, shoulders, chest, wrists, hands, waist, legs, feet];
     const gemArray = [sapphireButton, amberButton, citrineButton, rubyButton, jadeButton, amethystButton];
@@ -91,23 +95,23 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     }
 
     // gear rows
-    let gearRow1 = new MessageActionRow()
+    let gearRow1 = new Discord.MessageActionRow()
     .addComponents([head, shoulders, chest, wrists]);
 
-    let gearRow2 = new MessageActionRow()
+    let gearRow2 = new Discord.MessageActionRow()
     .addComponents([hands, waist, legs, feet]);
 
     // gem rows
-    let gemRow1 = new MessageActionRow()
+    let gemRow1 = new Discord.MessageActionRow()
     .addComponents([sapphireButton, amberButton, citrineButton]);
 
-    let gemRow2 = new MessageActionRow()
+    let gemRow2 = new Discord.MessageActionRow()
     .addComponents([rubyButton, jadeButton, amethystButton]);
 
-    const bind = await message.channel.send({ components: [gearRow1, gearRow2], embed: gearEmbed });
+    const bind = await message.channel.send({ components: [gearRow1, gearRow2], embeds: [gearEmbed] });
 
-    const filter = (button) => button.clicker.user.id === message.author.id; //user filter (author only)
-    const collector = bind.createButtonCollector(filter, { time: 60000 }); //collector for 60 seconds
+    const filter = (button) => button.user.id === message.author.id; //user filter (author only)
+    const collector = bind.createMessageComponentCollector({ filter, time: 60000 }); //collector for 60 seconds
 
     var gem;
     var part;
@@ -115,49 +119,50 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
     var number;
 
     collector.on('collect', button => {
+        if (!button.isButton()) return
         // socket row
-        let socketRow = new MessageActionRow()
+        let socketRow = new Discord.MessageActionRow()
         .addComponents([socket1, socket2, socket3]);
 
-        switch (button.id) {
+        switch (button.customId) {
             case "head":
                 part = "head";
-                bind.edit({ components: [gemRow1, gemRow2], embed: gemEmbed });
+                bind.edit({ components: [gemRow1, gemRow2], embeds: [gemEmbed] });
                 test("head", head);
                 break;
             case "shoulders":
                 part = "shoulders";
-                bind.edit({ components: [gemRow1, gemRow2], embed: gemEmbed });
+                bind.edit({ components: [gemRow1, gemRow2], embeds: [gemEmbed] });
                 test("shoulders", shoulders);
                 break;
             case "chest":
                 part = "chest";
-                bind.edit({ components: [gemRow1, gemRow2], embed: gemEmbed });
+                bind.edit({ components: [gemRow1, gemRow2], embeds: [gemEmbed] });
                 test("chest", chest);
                 break;
             case "wrists":
                 part = "wrists";
-                bind.edit({ components: [gemRow1, gemRow2], embed: gemEmbed });
+                bind.edit({ components: [gemRow1, gemRow2], embeds: [gemEmbed] });
                 test("wrists", wrists);
                 break;
             case "hands":
                 part = "hands";
-                bind.edit({ components: [gemRow1, gemRow2], embed: gemEmbed });
+                bind.edit({ components: [gemRow1, gemRow2], embeds: [gemEmbed] });
                 test("hands", hands);
                 break;
             case "waist":
                 part = "waist";
-                bind.edit({ components: [gemRow1, gemRow2], embed: gemEmbed });
+                bind.edit({ components: [gemRow1, gemRow2], embeds: [gemEmbed] });
                 test("waist", waist);
                 break;
             case "legs":
                 part = "legs";
-                bind.edit({ components: [gemRow1, gemRow2], embed: gemEmbed });
+                bind.edit({ components: [gemRow1, gemRow2], embeds: [gemEmbed] });
                 test("legs", legs);
                 break;
             case "feet":
                 part = "feet";
-                bind.edit({ components: [gemRow1, gemRow2], embed: gemEmbed });
+                bind.edit({ components: [gemRow1, gemRow2], embeds: [gemEmbed] });
                 test("feet", feet);
                 break;
             
@@ -165,58 +170,56 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
                 gem = "sapphire";
                 stat = "power";
                 number = 1;
-                bind.edit({ component: socketRow, embed: socketEmbed });
+                bind.edit({ components: [socketRow], embeds: [socketEmbed] });
                 break;
             case "amber":
                 gem = "amber";
                 stat = "energyCooldown";
                 number = 2;
-                bind.edit({ component: socketRow, embed: socketEmbed });
+                bind.edit({ components: [socketRow], embeds: [socketEmbed] });
                 break;
             case "citrine":
                 gem = "citrine";
                 stat = "MANA";
                 number = 3;
-                bind.edit({ component: socketRow, embed: socketEmbed });
+                bind.edit({ components: [socketRow], embeds: [socketEmbed] });
                 break;
             case "ruby":
                 gem = "ruby";
                 stat = "HP";
                 number = 4;
-                bind.edit({ component: socketRow, embed: socketEmbed });
+                bind.edit({ components: [socketRow], embeds: [socketEmbed] });
                 break;
             case "jade":
                 gem = "jade";
                 stat = "ATK";
                 number = 5;
-                bind.edit({ component: socketRow, embed: socketEmbed });
+                bind.edit({ components: [socketRow], embeds: [socketEmbed] });
                 break;
             case "amethyst":
                 gem = "amethyst";
                 stat = "DEF";
                 number = 6;
-                bind.edit({ component: socketRow, embed: socketEmbed });
+                bind.edit({ components: [socketRow], embeds: [socketEmbed] });
                 break;
 
             case "socket1":
                 manageBind(con, player, message, gem, part, `slot_a_${part}`, stat, bind, number);
-                collector.stop("success");
+                collector.stop();
                 break;
             case "socket2":
                 manageBind(con, player, message, gem, part, `slot_b_${part}`, stat, bind, number);
-                collector.stop("success");
+                collector.stop();
                 break;
             case "socket3":
                 manageBind(con, player, message, gem, part, `slot_c_${part}`, stat, bind, number);
-                collector.stop("success");
+                collector.stop();
                 break;
             }
     })
 
-    collector.on('end', (reason) => {
-        if (reason && reason === "success") {
-            return;
-        } else bind.edit(gearEmbed, disabledButton);
+    collector.on('end', () => {
+        bind.edit({ components: [], embeds: [gearEmbed] });
     });
 };
 

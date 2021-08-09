@@ -6,7 +6,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 		.setColor(message.member.displayColor)
 		.setImage(member.user.avatarURL({ dynamic: true, size: 512 }))
 		.setDescription("Profile picture of " + `${member}`);
-	message.channel.send(ppEmbed);
+	message.channel.send({ embeds: [ppEmbed] });
 };
 
 exports.help = {

@@ -14,7 +14,7 @@ exports.run = async (client, message, args, getPlayer) => {
     .setTitle("Boost Informations")
     .setColor("#f47fff")
     .setDescription(`Boost depuis : **${text}**`)
-    return message.channel.send(embed);
+    return message.channel.send({ embeds: [embed] });
 };
 
 exports.help = {

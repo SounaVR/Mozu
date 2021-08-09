@@ -50,7 +50,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         .addField(lang.mine.title, ressLoot.join("\n")) //⚡ ${lang.mine.usedEnergy.replace("%s", manaAmount)}\n
         .addField(lang.mine.infos, `⚡ ${lang.mine.remainingEnergy.replace("%s", player.ress.energy-manaAmount + "/" + maxEnergy)}\n${Emotes.chests.Tools.rune_pickaxe} ${pickaxe.name}\n💪 ${lang.mine.power.replace("%s", player.data.power)}`);//\n${lang.inventory.level}: ${player.items.pickaxe}\n${lang.inventory.enchant}: ${player.enchant.ench_pickaxe}`)
 
-    message.channel.send(embed);
+    message.channel.send({ embeds: [embed] });
 
     con.query(`UPDATE ress SET energy = energy - ${manaAmount}, stone = stone + ${Stone}, coal = coal + ${Coal}, copper = copper + ${Copper}, iron = iron + ${Iron}, gold = gold + ${Gold}, malachite = malachite + ${Malachite} WHERE userid = ${userid}`);
 };
