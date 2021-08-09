@@ -13,15 +13,17 @@ fs		  = require("fs");
 const arraydebg = ["data", "ress", "items", "enchant", "prospect", "slots", "stats"];
 
 const client = new Discord.Client({
-	disableMentions: "everyone",
+	intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_PRESENCES', 'GUILD_MESSAGE_REACTIONS'],
+	allowedMentions: { parse: ['users', 'roles'], repliedUser: true },
 	restTimeOffset: 250
 });
-require('discord-buttons')(client)
 
 moment.locale("fr");
 
 client.config = config;
-["commands", "aliases"].forEach(x => client[x] = new Discord.Collection());
+client.commands = new Discord.Collection();
+client.aliases = new Discord.Collection();
+client.slashCommands = new Discord.Collection();
 
 const con = mysql.createConnection({
 	multipleStatements: true,
@@ -65,6 +67,9 @@ client.on('ready', async () => {
 						if (client.aliases.get(alias)) return console.warn(`⚠️ Two commands or more commands have the same aliases ${alias}`);
 						client.aliases.set(alias, pull.help.name);
 					});
+				}
+				if (typeof(pull.slashRun) === 'function') {
+					client.slashCommands.set(pull.help.name, pull);
 				}
 			}
 		});
@@ -127,13 +132,13 @@ client.on('ready', async () => {
 		.setTitle(`[SYSTEM START] Log du ${moment().format('DD/MM/YYYY | HH:mm:ss')}`)
 		.setDescription(`${client.user.username} just started !`)
 		.setColor("#1DCC8F")
-	start.send(embed);
+	start.send({ embeds: [embed] });
 
 	console.log(`${client.user.username} is ready !`);
 	rdy.send(`✅ Bot connecté et prêt !`);
 });
 
-client.on("message", async message => {
+client.on('messageCreate', async message => {
 	const owner = client.users.cache.find(user => user.id === client.config.owners[0]);
 	const prefix = client.config.prefix;
 	const args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -319,8 +324,48 @@ client.on('guildMemberRemove', member => {
 //     }
 // });
 
-client.on('clickButton', async (button) => {
-	await button.reply.defer();
+/**
+ * Sync slash commands to Discord
+ */
+async function syncSlashCommands () {
+	const localCmds = client.slashCommands;
+	const remoteCmds = await client.application.commands.fetch();
+
+	// Add new defined slash commands
+	for (const localCmd of localCmds.values()) {
+		const remoteCmd = remoteCmds.find(x => x.name === localCmd.help.name && x.guildId == null);
+		if (remoteCmd != null) continue;
+		
+		await client.application.commands.create({
+			name: localCmd.help.name,
+			description: localCmd.help.description_en
+		});
+	}
+
+	// Remove deleted slash commands
+	for (const remoteCmd of remoteCmds.values()) {
+		if (remoteCmd.guildId != null) continue;
+		const localCmd = client.slashCommands.get(remoteCmd.name);
+		if (localCmd != null) continue;
+
+		await remoteCmd.delete();
+	}
+
+}
+
+client.on('interactionCreate', async interaction => {
+	if (interaction.isButton()) {
+		await interaction.deferUpdate();
+	} else if (interaction.isCommand()) {
+		// Slash Command Handler
+		const commandName = interaction.command.name
+
+		if (client.slashCommands.has(commandName)) {
+			const command = client.slashCommands.get(commandName);
+			await command.slashRun(client, interaction);
+		}
+	}
 });
 
-client.login(BOT_TOKEN);
+client.login(BOT_TOKEN)
+	.then(() => syncSlashCommands());
