@@ -203,5 +203,14 @@
         "gearField" : "Plus de slot ?",
         "success" : "Attachement réussi !",
         "successfullyBinded" : "Vous avez lier avec succès la gemme %s sur %g."
+    },
+    "dungeon" : {
+        "intro" : "Vous engagez le combat contre",
+        "player" : "a infligé %s PV à",
+        "playerTurn" : "C'est à votre tour d'attaquer !",
+        "npc" : "a perdu %s PV à cause de",
+        "npcTurn" : "C'est au tour de la créature d'attaquer !",
+        "timeout" : "le maître du donjon vous as expulsé pour inactivité.",
+        "noob" : "a été battu par :"
     }
 }
