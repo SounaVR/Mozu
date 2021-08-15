@@ -2,11 +2,8 @@ const Discord = require('discord.js'),
     Emotes    = require('../../utils/emotes.json');
 
 const insert_data = require('../../functions/insert/insert_data'),
-    insert_enchant = require('../../functions/insert/insert_enchant'),
     insert_items = require('../../functions/insert/insert_items'),
-    insert_prospect = require('../../functions/insert/insert_prospect'),
     insert_ress = require('../../functions/insert/insert_ress'),
-    insert_slots = require('../../functions/insert/insert_slots'),
     insert_stats = require('../../functions/insert/insert_stats');
 
 exports.run = async (client, message, args, getPlayer, getUser) => {
@@ -20,11 +17,8 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 
     if (!player) {
         insert_data(client, con, player, message, databaselogs, userid);
-        insert_enchant(client, con, player, message, databaselogs, userid);
         insert_items(client, con, player, message, databaselogs, userid);
-        insert_prospect(client, con, player, message, databaselogs, userid);
         insert_ress(client, con, player, message, databaselogs, userid);
-        insert_slots(client, con, player, message, databaselogs, userid);
         insert_stats(client, con, player, message, databaselogs, userid);
         
         message.channel.send("You are now registered. Enjoy !\n*Do `m!help` to display the list of commands and you can change your language with `m!lang`*.")

@@ -7,19 +7,10 @@ module.exports = {
                 if (!ress[0]) return resolve(false)
                     con.query(`SELECT * FROM items WHERE userid = ${user}`, function(err, items) {
                     if (!items[0]) return resolve(false)
-                        con.query(`SELECT * FROM enchant WHERE userid = ${user}`, function(err, enchant) {
-                        if (!enchant[0]) return resolve(false)
-                            con.query(`SELECT * FROM prospect WHERE userid = ${user}`, function(err, prospect) {
-                            if (!prospect[0]) return resolve(false)
-                                con.query(`SELECT * FROM slots WHERE userid = ${user}`, function(err, slots) {
-                                if (!slots[0]) return resolve(false)
-                                    con.query(`SELECT * FROM stats WHERE userid = ${user}`, function(err, stats) {
-                                    if (!stats[0]) return resolve(false)
-                                    resolve({data:data[0],ress:ress[0],items:items[0],enchant:enchant[0],prospect:prospect[0],slots:slots[0],stats:stats[0]})
-                                    })
-                                })
-                            })
-                        })   
+                        con.query(`SELECT * FROM stats WHERE userid = ${user}`, function(err, stats) {
+                            if (!stats[0]) return resolve(false)
+                             resolve({data:data[0],ress:ress[0],items:items[0],stats:stats[0]})
+                        })           
                     })
                 })
             })
@@ -33,20 +24,11 @@ module.exports = {
                 con.query(`SELECT * FROM ress WHERE userid = ${player}`, function(err, ress) {
                 if (!ress[0]) return resolve(false)
                     con.query(`SELECT * FROM items WHERE userid = ${player}`, function(err, items) {
-                    if (!items[0]) return resolve(false)
-                        con.query(`SELECT * FROM enchant WHERE userid = ${player}`, function(err, enchant) {
-                        if (!enchant[0]) return resolve(false)
-                            con.query(`SELECT * FROM prospect WHERE userid = ${player}`, function(err, prospect) {
-                            if (!prospect[0]) return resolve(false)
-                                con.query(`SELECT * FROM slots WHERE userid = ${player}`, function(err, slots) {
-                                if (!slots[0]) return resolve(false)
-                                    con.query(`SELECT * FROM stats WHERE userid = ${player}`, function(err, stats) {
-                                    if (!stats[0]) return resolve(false)
-                                    resolve({data:data[0],ress:ress[0],items:items[0],enchant:enchant[0],prospect:prospect[0],slots:slots[0],stats:stats[0]})
-                                    })
-                                })
-                            })
-                        })   
+                    if (!items[0]) return resolve(false)   
+                        con.query(`SELECT * FROM stats WHERE userid = ${player}`, function(err, stats) {
+                        if (!stats[0]) return resolve(false)
+                            resolve({data:data[0],ress:ress[0],items:items[0],stats:stats[0]})
+                        })  
                     })
                 })
             })
