@@ -1,6 +1,2 @@
 node_modules/
 .env
-utils/config.js
-backups/
-commands/Staff/energy.js
-commands/Staff/test.js
