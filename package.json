@@ -5,7 +5,7 @@
     "main": "index.js",
     "repository": {
         "type": "git",
-        "url": "https://github.com/KinchiFR/Mozu.git"
+        "url": "https://github.com/SounaFR/Mozu.git"
     },
     "scripts": {
         "start": "node ."
@@ -14,13 +14,12 @@
     "license": "MIT",
     "dependencies": {
         "cron": "^1.8.2",
-        "discord.js": "^13.0.1",
-        "dotenv": "^8.2.0",
-        "moment": "^2.24.0",
+        "discord.js": "^13.5.1",
+        "dotenv": "^8.6.0",
+        "moment": "^2.29.1",
         "moment-duration-format": "^2.3.2",
         "mysql": "^2.18.1",
         "parse-ms": "^2.1.0",
-        "path": "^0.12.7",
-        "simply-djs-v13": "^1.0.886"
+        "path": "^0.12.7"
     }
 }
