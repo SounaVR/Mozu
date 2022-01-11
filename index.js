@@ -10,8 +10,6 @@ config    = require("./utils/config"),
 mysql     = require("mysql"),
 fs		  = require("fs");
 
-const arraydebg = ["data", "ress", "items", "enchant", "prospect", "slots", "stats"];
-
 const client = new Discord.Client({
 	intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_PRESENCES', 'GUILD_MESSAGE_REACTIONS'],
 	allowedMentions: { parse: ['users', 'roles'], repliedUser: true },
@@ -42,7 +40,8 @@ client.on('ready', async () => {
 	client.connection = con;
 
     //initialisation des db
-    arraydebg.forEach(async element => {
+	const tables = ["data", "ress", "items", "stats"];
+    tables.forEach(async element => {
         const thing = fs.readFileSync(`./sql/${element}.sql`).toString();
         con.query(thing, function (err) {
             if (err) throw err;
@@ -126,7 +125,7 @@ client.on('ready', async () => {
 		con.query('SELECT 1');
 	}, 2, 52e+7);
 
-	await client.user.setActivity(`m!profile`, { type: "WATCHING" });
+	client.user.setActivity(`m!profile`, { type: "WATCHING" });
 
     const embed = new Discord.MessageEmbed()
 		.setTitle(`[SYSTEM START] Log du ${moment().format('DD/MM/YYYY | HH:mm:ss')}`)
@@ -165,9 +164,7 @@ client.on('messageCreate', async message => {
         if (player) {
             const Items = require(`./utils/items/${player.data.lang}.json`);
             const maxEnergy = Items.objects.ring[player.items.ring].energy;
-			const maxHP = 50;
             const energyCooldown = player.data.energyCooldown;
-			const hpCooldown = player.data.hpCooldown;
             con.query(`UPDATE stats SET cmd = ${player.stats.cmd + Number(1)} WHERE userid = ${message.author.id}`);
 
             if ((Date.now() - player.data.lastActivity) - energyCooldown > 0) {
@@ -178,14 +175,6 @@ client.on('messageCreate', async message => {
                 if (player.ress.energy > maxEnergy) player.ress.energy = maxEnergy;
                 con.query(`UPDATE ress SET energy = ${player.ress.energy} WHERE userid = ${message.author.id}`);
                 con.query(`UPDATE data SET lastActivity = ${Date.now()} WHERE userid = ${message.author.id}`);
-            }
-			if ((Date.now() - player.data.lastActivity) - hpCooldown > 0) {
-                const timeObj = Date.now() - player.data.lastActivity;
-                const gagnees = Math.floor(timeObj / hpCooldown);
-        
-				player.data.HP = (player.data.HP || 0) + gagnees;
-				if (player.data.HP > maxHP) player.data.HP = maxHP;
-                con.query(`UPDATE data SET HP = ${player.data.HP}, lastActivity = ${Date.now()} WHERE userid = ${message.author.id}`);
             }
         }
     } else if (player.data.ban == "1") {

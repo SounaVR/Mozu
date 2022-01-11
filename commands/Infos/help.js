@@ -11,8 +11,7 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
 	const embed = new MessageEmbed()
 		.setColor(message.member.displayColor)
 		.setAuthor(`${lang.help.embedTitle.replace("%u", client.user.username)}`, client.user.displayAvatarURL())
-		.setTimestamp()
-		.setFooter(`${client.commands.size} commands`, "https://cdn.discordapp.com/emojis/864202410884857867.gif?v=1")
+		.setTimestamp();
 
 	if (args[0]) {
 		let command = args[0];
