@@ -10,7 +10,7 @@
     "scripts": {
         "start": "node ."
     },
-    "author": "Kinchi",
+    "author": "Souna",
     "license": "MIT",
     "dependencies": {
         "ascii-table": "^0.0.9",
