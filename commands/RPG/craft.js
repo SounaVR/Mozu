@@ -14,39 +14,15 @@ exports.run = async (client, message, args, getPlayer, getUser) => {
         .setTitle("CRAFT")
         .setThumbnail("https://media.discordapp.net/attachments/695902978858680390/715976650197827594/unnamed.png")
         .addField("Description", `${lang.craft.description}`)
-        .addField("Documentation", `${lang.craft.doc} ${Emotes.tools} [ pickaxe ]\n${Emotes.weapons} [ sword / shield ]\n${Emotes.armors} [ head / shoulders / chest / wrists ]\n${Emotes.armors} [hands / waist / legs / feet ]\n${Emotes.bag} [ ring / dungeon_amulet / torch ]`)
+        .addField("Documentation", `${lang.craft.doc} ${Emotes.tools} [ pickaxe ]\n${Emotes.bag} [ ring ]`)
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL());
 
     switch (args[0]) {
         case "p": case "pick": case "pickaxe":
             return manageCraft(con, player, args, message, "tools", "pickaxe", Emotes.chests.Tools.rune_pickaxe);
-        case "sw": case "sword":
-            return manageCraft(con, player, args, message, "tools", "sword", Emotes.chests.Weapons.rune_sword);
-        case "sh": case "shield":
-            return manageCraft(con, player, args, message, "tools", "shield", Emotes.chests.Weapons.rune_shield);
-        case "head":
-            return manageCraft(con, player, args, message, "armors", "head", Emotes.chests.Gear.P1.rune_head);
-        case "shoulders":
-            return manageCraft(con, player, args, message, "armors", "shoulders", Emotes.chests.Gear.P1.rune_shoulders);
-        case "chest":
-            return manageCraft(con, player, args, message, "armors", "chest", Emotes.chests.Gear.P1.rune_chest);
-        case "wrists":
-            return manageCraft(con, player, args, message, "armors", "wrists", Emotes.chests.Gear.P1.rune_wrists);
-        case "hands":
-            return manageCraft(con, player, args, message, "armors", "hands", Emotes.chests.Gear.P2.rune_hands);
-        case "waist":
-            return manageCraft(con, player, args, message, "armors", "waist", Emotes.chests.Gear.P2.rune_waist);
-        case "legs":
-            return manageCraft(con, player, args, message, "armors", "legs", Emotes.chests.Gear.P2.rune_legs);
-        case "feet":
-            return manageCraft(con, player, args, message, "armors", "feet", Emotes.chests.Gear.P2.rune_feet);
-        case "dungeon_amulet":
-            return manageCraft(con, player, args, message, "objects", "dungeon_amulet", Emotes.dungeon_amulet);
         case "ring":
             return manageCraft(con, player, args, message, "objects", "ring", Emotes.ring);
-        case "torch":
-            return manageCraft(con, player, args, message, "objects", "torch", Emotes.torch);
         default:
             return message.channel.send({ embeds: [craftEmbed] });
     }

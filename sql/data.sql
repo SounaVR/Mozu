@@ -8,14 +8,10 @@ CREATE TABLE IF NOT EXISTS data (
 
 	money bigint,
 	manaCooldown bigint,
-	hpCooldown bigint,
 	energyCooldown bigint,
 	lastActivity bigint,
 
-	HP bigint,
 	MANA bigint,
-	ATK bigint,
-	DEF bigint,
 	power bigint,
 
 	HR bigint,
