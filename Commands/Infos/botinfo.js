@@ -20,8 +20,8 @@ module.exports = {
             .addField("⚒ Développeur", developer.tag)
     
             .addField("🕒 Temps allumé", uptime, true)
-            .addField("💻 Framework", "Node.js", true)
-            .addField("🌐 API", "discord.js", true)
+            .addField("💻 JS Runtime", "Node.js", true)
+            .addField("🌐 Library NodeJS", "discord.js", true)
     
             .addField("🧠 Mémoire utilisée", Math.floor(process.memoryUsage().heapUsed / 1024 / 1024) + " Mb", true)
             .addField("🏠 Serveurs", client.guilds.cache.size.toString(), true)
