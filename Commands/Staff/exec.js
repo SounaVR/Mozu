@@ -1,22 +1,35 @@
-exports.run = async (client, message, args, getPlayer, getUser) => {
-    if (message.author.id !== "436310611748454401") return message.react("❌");
+const { exec } = require("child_process");
+const { CommandInteraction, Client } = require("discord.js");
 
-    const { exec } = require("child_process");
-
-    exec(`${args.join(" ")}`, (error, stdout, stderr) => {
-        if (error) {
-            message.channel.send(`error: ${error.message}`);
-            return;
-        }
-        if (stderr) {
-            message.channel.send(`stderr: ${stderr}`);
-            return;
-        }
-        message.channel.send(`\`\`\`\n${stdout}\n\`\`\``);
-    });
-};
-
-exports.help = {
+module.exports = {
     name: "exec",
-    category: "Staff"
+    description: "💻",
+    permission: "ADMINISTRATOR",
+    options: [
+        {
+            name: "command",
+            description: "execute an command",
+            type: "STRING",
+            required: true
+        }
+    ],
+    /**
+     * @param {Client} client 
+     * @param {CommandInteraction} interaction
+     */
+    async execute(client, interaction) {
+        if (interaction.user.id !== "436310611748454401") return interaction.react("❌");
+
+        exec(`${interaction.options.getString("command")}`, (error, stdout, stderr) => {
+            if (error) {
+                interaction.reply(`error: ${error.message}`);
+                return;
+            }
+            if (stderr) {
+                interaction.reply(`stderr: ${stderr}`);
+                return;
+            }
+            interaction.reply(`\`\`\`\n${stdout}\n\`\`\``);
+        });
+    }
 };

@@ -19,10 +19,9 @@ module.exports = {
         }).catch((err) => {
             console.log(err);
         });
-        const rdy = client.channels.cache.find(ch => ch.id === "900032797375352852");
-        const start = client.channels.cache.find(channel => channel.id === "827453929955786794");
+        const rdy = client.channels.cache.find(ch => ch.id === "930481555879645277");
+        const start = client.channels.cache.find(channel => channel.id === "930481568840040448");
         client.user.setActivity("sa résurrection", { type: "WATCHING" });
-        client.user.setStatus("dnd");
 
         const embed = new MessageEmbed()
             .setTitle(`[SYSTEM START] Log du ${moment().format('DD/MM/YYYY | HH:mm:ss')}`)
