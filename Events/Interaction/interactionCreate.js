@@ -1,11 +1,8 @@
 const { Client, CommandInteraction, MessageEmbed } = require('discord.js');
+const { getUser, getPlayer } = require("../../utils/u");
 
 module.exports = {
     name: "interactionCreate",
-    /**
-     * @param {CommandInteraction} interaction
-     * @param {Client} client
-     */
     async execute(client, interaction) {
         if (interaction.isCommand() || interaction.isContextMenu()) {
             const command = client.commands.get(interaction.commandName);
@@ -15,17 +12,17 @@ module.exports = {
                     .setDescription("⛔ An error occurred while running this command.")
             ]}) && client.commands.delete(interaction.commandName);
 
-            const arguments = [];
+            const args = [];
 
             for (let option of interaction.options.data) {
                 if (option.type === 'SUB_COMMAND') {
                     option.options?.forEach((x) => {
-                        if (x.value) arguments.push(option.value);
+                        if (x.value) args.push(option.value);
                     });
-                } else if (option.value) arguments.push(option.value);
+                } else if (option.value) args.push(option.value);
             };
 
-            command.execute(client, interaction, arguments);
+            command.execute(client, interaction, getPlayer, getUser, args);
         }
     }
 }

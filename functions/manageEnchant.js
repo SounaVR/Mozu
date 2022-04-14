@@ -1,21 +1,25 @@
+const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js');
 const { nFormatter } = require('../utils/u.js');
-const Discord        = require('discord.js'),
-    Emotes           = require('../utils/emotes.json');
+const Emotes = require('../utils/emotes.json');
 
-
-//todo : buttons
-module.exports = async function manageEnchant(client, con, player, message, category, object, objectName) {
-    const Enchant = require(`../utils/items/enchant.json`);
-    const lang = require(`../utils/text/${player.data.lang}.json`);
+module.exports = async function manageEnchant(client, con, player, interaction, category, object, objectName) {
+    const Enchant = require(`../utils/Items/enchant.json`);
+    const lang = require(`../utils/Text/${player.data.lang}.json`);
     const react = ['780222056007991347', '780222833808506920'];
 
-    if (player.items[object] == "0") return message.channel.send(lang.enchant.levelTooLow);
+    if (player.items[object] == "0") return interaction.reply(lang.enchant.levelTooLow);
 
     const level = Math.floor(player.enchant[objectName])+1;
 
-    const embed = new Discord.MessageEmbed()
-    .setColor(message.member.displayColor);
+    const embed = new MessageEmbed()
+    .setColor(interaction.member.displayColor);
 
+    let validButton = new MessageButton().setStyle('SUCCESS').setEmoji(react[0]).setCustomId('valid');
+    let cancelButton = new MessageButton().setStyle('DANGER').setEmoji(react[1]).setCustomId('cancel');
+
+    let buttonRow = new MessageActionRow()
+        .addComponents([validButton, cancelButton]);
+    
     //const objectRessource = Enchant[category][object][1];
     const getNeededRessource = (player.enchant[objectName] * player.enchant[objectName] * 5)+1;
 
@@ -33,42 +37,44 @@ module.exports = async function manageEnchant(client, con, player, message, cate
     embed.addField(`**${lang.craft.cost}**`, txt.join("\n"));
     embed.addField("**Reward**", `${Emotes.enchant[`rune_${object}`]} ${object} enchant level : ${level - 1} => **${level}**\n${reward.join("\n")}`);
 
-    const msg = await message.channel.send({ embeds: [embed] });
+    const msg = await interaction.reply({ embeds: [embed], components: [buttonRow], fetchReply: true });
 
     if (player.ress[`rune_${object}`] < getNeededRessource) return;
 
-    await msg.react(react[0]);
-    await msg.react(react[1]);
+    const filter = (interact) => interact.user.id === interaction.user.id;
+    const collector = msg.createMessageComponentCollector({ filter, time: 30000 });
 
-    const filter = (reaction, user) => react.includes(reaction.emoji.id) && user.id === message.author.id;
+    collector.on('collect', button => {
+        validButton.setDisabled(true);
+        cancelButton.setDisabled(true);
 
-    msg.awaitReactions({ filter, max: 1, time: 30000, errors: ['time'] })
-    .then(async collected => {
-        let reaction = collected.first();
-
-        switch(reaction.emoji.id) {
-            case react[0]:
+        switch (button.customId) {
+            case 'valid':
                 let need = [];
                 let resssql = [];
 
                 if (player.ress[`rune_${object}`] < getNeededRessource) need.push(`sorry bro`);
                 resssql.push(`rune_${object} = rune_${object} - ${getNeededRessource}`);
 
-                if (need.length >= 1) return message.reply(`${lang.enchant.notEnoughRess}`);
+                if (need.length >= 1) return interaction.reply(`${lang.enchant.notEnoughRess}`);
 
-                con.query(`UPDATE ress SET ${resssql.join(',')} WHERE userid = ${message.author.id}`);
-                con.query(`UPDATE data SET ATK = ${player.data.ATK + Number(Enchant[category][object][0].ATK)}, DEF = ${player.data.DEF + Number(Enchant[category][object][0].DEF)} WHERE userid = ${message.author.id}`);
+                con.query(`UPDATE ress SET ${resssql.join(',')} WHERE userid = ${interaction.user.id}`);
+                con.query(`UPDATE data SET ATK = ${player.data.ATK + Number(Enchant[category][object][0].ATK)}, DEF = ${player.data.DEF + Number(Enchant[category][object][0].DEF)} WHERE userid = ${interaction.user.id}`);
                 if (object === "pickaxe") con.query(`UPDATE data SET power = ${player.data.power + Number(Enchant.tools.pickaxe[0].power)}`)
-                con.query(`UPDATE enchant SET ${objectName} = ${level} WHERE userid = ${message.author.id}`);
+                con.query(`UPDATE enchant SET ${objectName} = ${level} WHERE userid = ${interaction.user.id}`);
 
-                message.channel.send(`${lang.enchant.enchantSuccess.replace("%s", `**${level}**`)}`);
-                msg.reactions.removeAll();
-
-            case react[1]:
-                msg.reactions.removeAll();
-                return message.channel.send(`${lang.enchant.canceled}`);
+                interaction.channel.send(`${lang.enchant.enchantSuccess.replace("%s", `**${level}**`)}`);
+                collector.stop();
+                break;
+        
+            case 'cancel':
+                collector.stop();
+                interaction.channel.send(`${lang.enchant.canceled}`);
+                break;
         }
-    }).catch(() => {
-        msg.reactions.removeAll();
+    });
+
+    collector.on('end', () => {
+        msg.edit({ components: [], embeds: [embed] })
     });
 }

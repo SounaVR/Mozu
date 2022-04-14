@@ -1,20 +1,20 @@
-const { nFormatter } = require('../utils/u.js');
-const Discord        = require('discord.js'),
-    Default          = require('../utils/default.json'),
+const { MessageEmbed } = require('discord.js');
+const { nFormatter, translate } = require('../utils/u.js');
+const Default        = require('../utils/default.json'),
     Emotes           = require('../utils/emotes.json');
 
-module.exports = function manageChest(client, con, player, message, args, objectName, rarityName, min, max) {
-    const lang = require(`../utils/text/${player.data.lang}.json`);
-    const userid = message.author.id;
+module.exports = function manageChest(client, con, player, interaction, number, objectName, rarityName, min, max) {
+    const lang = require(`../utils/Text/${player.data.lang}.json`);
+    const userid = interaction.user.id;
 
-    if (player.items.dungeon_amulet == "0") return message.reply(`${lang.chest.dontHaveAmulet.replace("%s", client.config.prefix)}`);
-    if (player.ress[objectName] < args[2]) return message.reply(`${lang.chest.notEnoughChests.replace("%s", client.config.prefix)}`);
+    if (player.items.dungeon_amulet == "0") return interaction.reply(`${lang.chest.dontHaveAmulet}`);
+    if (player.ress[objectName] < number) return interaction.reply(`${lang.chest.notEnoughChests}`);
 
-    const embed = new Discord.MessageEmbed()
-    .setTitle(`${Emotes.chest} ${lang.chest.openingOf.replace("%m", args[2]).replace("%r", rarityName)}`);
+    const embed = new MessageEmbed()
+    .setTitle(`${Emotes.chest} ${translate(player.data.lang, "lang.chest.openingOf", rarityName)}`);
 
     Danny = {};
-    Danny.random = () => min + Math.ceil(Math.random() * (max - min) * args[2]);
+    Danny.random = () => min + Math.ceil(Math.random() * (max - min) * number);
 
     var txt = [],
         txt2 = [],
@@ -43,8 +43,8 @@ module.exports = function manageChest(client, con, player, message, args, object
         }
     }
 
-    con.query(`UPDATE ress SET ${sql.join(",")}, ${objectName} = ${player.ress[objectName] - args[2]} WHERE userid = ${userid}`);
+    con.query(`UPDATE ress SET ${sql.join(",")}, ${objectName} = ${player.ress[objectName] - number} WHERE userid = ${userid}`);
     embed.addField(`**Gain**`, `${txt.join("\n")}\n${txt2.join("\n")}`);
 
-    return message.channel.send(embed);
+    return interaction.reply({ embeds: [embed] });
 }

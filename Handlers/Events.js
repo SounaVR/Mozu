@@ -7,7 +7,7 @@ const Ascii = require('ascii-table');
 module.exports = async (client) => {
     const Table = new Ascii("Events Loaded");
 
-    (await PG(`${process.cwd()}/Events/*/*.js`)).map(async (file) => {
+    (await PG(`../Events/*/*.js`)).map(async (file) => {
         const event = require(file);
 
         if (!Events.includes(event.name) || !event.name) {
