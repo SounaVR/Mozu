@@ -32,19 +32,20 @@ module.exports = async (client) => {
 
     // PERMISSIONS CHECK //
     client.on("ready", async() => {
-        const MainGuild = client.guilds.cache.get("905267400201601034");
+        const MainGuild = client.guilds.cache.get("975839288795234385");
 
-        MainGuild.commands.set(CommandsArray).then(async (command) => {
-            const roles = (commandName) => {
-                const cmdPerms = CommandsArray.find((c) => c.name === commandName).permission;
-                if (!cmdPerms) return new Collection();
+        MainGuild.commands.set(CommandsArray)
+        // .then(async (command) => {
+            // const roles = (commandName) => {
+            //     const cmdPerms = CommandsArray.find((c) => c.name === commandName).permission;
+            //     if (!cmdPerms) return new Collection();
 
-                return MainGuild.roles.cache.filter((r) => r.permissions.has(cmdPerms) && !r.managed);
-            }
+            //     return MainGuild.roles.cache.filter((r) => r.permissions.has(cmdPerms) && !r.managed);
+            // }
 
-            const perms = command.map((r) => roles(r.name).size === 0 ? false : { id: r.id, permissions: roles(r.name).map(({ id }) => ({ id: id, type: "ROLE", permission: true })) }).filter(e => Boolean(e));
+            // const perms = command.map((r) => roles(r.name).size === 0 ? false : { id: r.id, permissions: roles(r.name).map(({ id }) => ({ id: id, type: "ROLE", permission: true })) }).filter(e => Boolean(e));
 
-            await MainGuild.commands.permissions.set({ fullPermissions: perms });
-        });
+            // await MainGuild.commands.permissions.set({ fullPermissions: perms });
+        // });
     });
 }

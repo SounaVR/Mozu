@@ -1,4 +1,4 @@
-const { Client, CommandInteraction, MessageEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { getUser, getPlayer } = require("../../utils/u");
 
 module.exports = {

@@ -1,46 +1,49 @@
+const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js');
 const { nFormatter } = require('../utils/u.js');
-const Discord        = require('discord.js'),
-    Emotes           = require('../utils/emotes.json'),
+const Emotes         = require('../utils/emotes.json'),
     moment           = require('moment');
 
-module.exports = async function manageCraft(con, player, args, message, category, objectName, emote) {
-    const Craft = require(`../utils/items/${player.data.lang}.json`);
-    const lang = require(`../utils/text/${player.data.lang}.json`);
+module.exports = async function manageCraft(con, player, interaction, category, objectName, emote) {
+    const Craft = require(`../utils/Items/${player.data.lang}.json`);
+    const lang = require(`../utils/Text/${player.data.lang}.json`);
     const react = ["780222056007991347", "780222833808506920"];
 
     const level = Math.floor(player.items[objectName])+1;
     const levelTitle = Math.floor(player.items[objectName]);
 
-    const embed = new Discord.MessageEmbed()
-    .setColor(message.member.displayColor);
+    const embed = new MessageEmbed()
+    .setColor(interaction.member.displayColor);
 
-    let validButton = new Discord.MessageButton().setStyle("SUCCESS").setEmoji(react[0]).setCustomId("valid");
-    let cancelButton = new Discord.MessageButton().setStyle("DANGER").setEmoji(react[1]).setCustomId("cancel");
+    let validButton = new MessageButton().setStyle("SUCCESS").setEmoji(react[0]).setCustomId("valid");
+    let cancelButton = new MessageButton().setStyle("DANGER").setEmoji(react[1]).setCustomId("cancel");
 
-    var currentObject = [];
-    var currentObjectTitle = [];
+    let buttonRow = new MessageActionRow()
+        .addComponents([validButton, cancelButton]);
+
+    let currentObject = [];
+    let currentObjectTitle = [];
     let txt = [];
     let reward = [];
     let sql = [];
-    var amount;
+    let amount;
     
-    if (objectName === "torch") {
-        currentObject = Craft[category][objectName][0];
-        if (!args[1] || args[1] == 1) {
-            amount = 1;
-        } else if (args[1] >= 2) {
-            amount = args[1];
-        } else {
-            return message.reply(`${lang.craft.invalidNumber}`);
-        }
-        embed.setTitle(`${lang.craft.craft} ${amount} "${currentObject.name}" ?`);
+    // if (objectName === "torch") {
+    //     currentObject = Craft[category][objectName][0];
+    //     if (!args[1] || args[1] == 1) {
+    //         amount = 1;
+    //     } else if (args[1] >= 2) {
+    //         amount = args[1];
+    //    } else {
+    //         return interaction.reply(`${lang.craft.invalidNumber}`);
+    //     }
+    //     embed.setTitle(`${lang.craft.craft} ${amount} "${currentObject.name}" ?`);
 
-        for (const ressource in currentObject.ressource) {
-            if (player.ress[ressource.toLowerCase()] < currentObject.ressource[ressource] * amount) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource] * amount)} (${Emotes.cancel} - Missing ${nFormatter(Math.floor((currentObject.ressource[ressource] * amount)-player.ress[ressource.toLowerCase()]))})`);
-            if (player.ress[ressource.toLowerCase()] >= currentObject.ressource[ressource] * amount) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource] * amount)} (${Emotes.checked})`);
-        }
-    } else {
-        if (!Craft[category][objectName][level]) return message.reply(`${lang.craft.maxLevel}`);
+    //     for (const ressource in currentObject.ressource) {
+    //         if (player.ress[ressource.toLowerCase()] < currentObject.ressource[ressource] * amount) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource] * amount)} (${Emotes.cancel} - Missing ${nFormatter(Math.floor((currentObject.ressource[ressource] * amount)-player.ress[ressource.toLowerCase()]))})`);
+    //         if (player.ress[ressource.toLowerCase()] >= currentObject.ressource[ressource] * amount) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource] * amount)} (${Emotes.checked})`);
+    //     }
+    // } else {
+        if (!Craft[category][objectName][level]) return interaction.reply(`${lang.craft.maxLevel}`);
 
         currentObject = Craft[category][objectName][level];
         currentObjectTitle = Craft[category][objectName][levelTitle];
@@ -52,7 +55,7 @@ module.exports = async function manageCraft(con, player, args, message, category
             if (player.ress[ressource.toLowerCase()] < currentObject.ressource[ressource]) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource])} (${Emotes.cancel} - Missing ${nFormatter(Math.floor(currentObject.ressource[ressource]-player.ress[ressource.toLowerCase()]))})`);
             if (player.ress[ressource.toLowerCase()] >= currentObject.ressource[ressource]) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource])} (${Emotes.checked})`);
         }
-    }
+    // }
 
     if (objectName !== "torch") {
         embed.setTitle(`${lang.craft.upgrade.replace("%a", `"${currentObjectTitle.name}"`).replace("%n", `"${currentObject.name}"`)}`);
@@ -68,77 +71,75 @@ module.exports = async function manageCraft(con, player, args, message, category
     if (rewardLength) embed.addField(`**Reward**`, `${emote} ${currentObject.name}\n${reward.join("\n")}`);
     else embed.addField(`**Reward**`, `${emote} ${currentObject.name}`);
 
-    for (var ressource in currentObject.ressource) {
-        let ress;
-        if (objectName === "torch") ress = currentObject.ressource[ressource] * amount;
-        else ress = currentObject.ressource[ressource];
+    for (let ressource in currentObject.ressource) {
+        let ress = currentObject.ressource[ressource];
+        // if (objectName === "torch") ress = currentObject.ressource[ressource] * amount;
+        // else ress = currentObject.ressource[ressource];
 
         if (player.ress[ressource.toLowerCase()] < ress) {
             validButton.setDisabled(true);
             cancelButton.setDisabled(true);
+
+            return interaction.reply({ embeds: [embed], components: [buttonRow] });
         }
         sql.push(`${ressource} = ${ressource} - ${currentObject.ressource[ressource]}`);
     }
 
-    let buttonRow = new Discord.MessageActionRow()
-        .addComponents([validButton, cancelButton]);
+    const msg = await interaction.reply({ embeds: [embed], components: [buttonRow], fetchReply: true });
 
-    const msg = await message.channel.send({embeds: [embed], components: [buttonRow]});
-
-    const filter = (button) => button.user.id === message.author.id;
-    const collector = msg.createMessageComponentCollector({ filter,time: 30000 });
+    const filter = (interact) => interact.user.id === interaction.user.id;
+    const collector = msg.createMessageComponentCollector({ filter, time: 30000 });
 
     collector.on('collect', button => {
         validButton.setDisabled(true);
         cancelButton.setDisabled(true);
         switch(button.customId) {
             case "valid":
-                con.query(`UPDATE data SET ATK = ${player.data.ATK + Number(currentObject.ATK)}, DEF = ${player.data.DEF + Number(currentObject.DEF)}, power = ${currentObject.power > 0 ? player.data.power + Number(currentObject.power) : player.data.power} WHERE userid = ${message.author.id}`);
-                con.query(`UPDATE ress SET ${sql.join(',')} WHERE userid = ${message.author.id}`);
+                con.query(`UPDATE data SET ATK = ${player.data.ATK + Number(currentObject.ATK)}, DEF = ${player.data.DEF + Number(currentObject.DEF)}, power = ${currentObject.power > 0 ? player.data.power + Number(currentObject.power) : player.data.power} WHERE userid = ${interaction.user.id}`);
+                con.query(`UPDATE ress SET ${sql.join(',')} WHERE userid = ${interaction.user.id}`);
                 switch (objectName) {
-                    case "torch":
-                        con.query(`UPDATE ress SET torch = ${player.ress.torch + Number(amount)} WHERE userid = ${message.author.id}`);
+                    case "torch":                                       //+ Number(amount)
+                        con.query(`UPDATE ress SET torch = ${player.ress.torch} WHERE userid = ${interaction.user.id}`);
                         break;
 
                     case "ring":
-                        con.query(`UPDATE data SET energyCooldown = ${currentObject.cooldown} WHERE userid = ${message.author.id}`);
-                        con.query(`UPDATE items SET ${objectName} = ${level} WHERE userid = ${message.author.id}`);
+                        con.query(`UPDATE data SET energyCooldown = ${currentObject.cooldown} WHERE userid = ${interaction.user.id}`);
+                        con.query(`UPDATE items SET ${objectName} = ${level} WHERE userid = ${interaction.user.id}`);
                         break;
                 
                     default:
-                        con.query(`UPDATE items SET ${objectName} = ${level} WHERE userid = ${message.author.id}`);
+                        con.query(`UPDATE items SET ${objectName} = ${level} WHERE userid = ${interaction.user.id}`);
                         break;
                 }
                 if (category === "armors") {
                     switch (level) {
                         case 1:
-                            con.query(`UPDATE slots SET slot_a_${objectName} = 0 WHERE userid = ${message.author.id}`);
+                            con.query(`UPDATE slots SET slot_a_${objectName} = 0 WHERE userid = ${interaction.user.id}`);
                             break;
                         case 2:
-                            con.query(`UPDATE slots SET slot_b_${objectName} = 0 WHERE userid = ${message.author.id}`);
+                            con.query(`UPDATE slots SET slot_b_${objectName} = 0 WHERE userid = ${interaction.user.id}`);
                             break;
                         case 3:
-                            con.query(`UPDATE slots SET slot_c_${objectName} = 0 WHERE userid = ${message.author.id}`);
+                            con.query(`UPDATE slots SET slot_c_${objectName} = 0 WHERE userid = ${interaction.user.id}`);
                             break;
                     }
                 }
                 const torch = objectName ? objectName === "torch" : true;
                 if (torch) {
-                    collector.stop();
-                    return message.channel.send(`${lang.craft.done.replace("%s", `${amount} **${currentObject.name}**`)}.`)
+                    collector.stop();                                       //${amount} 
+                    return interaction.channel.send(`${lang.craft.done.replace("%s", `**${currentObject.name}**`)}.`)
                 } else {
                     collector.stop();
-                    return message.channel.send(`${lang.craft.done.replace("%s", `**${currentObject.name}**`)}.`);
+                    return interaction.channel.send(`${lang.craft.done.replace("%s", `**${currentObject.name}**`)}.`);
                 }
 
             case "cancel":
                 collector.stop();
-                return message.channel.send(`${lang.craft.canceled}`);
+                return interaction.channel.send(`${lang.craft.canceled}`);
         }
-    })
+    });
 
     collector.on('end', () => {
-        msg.edit({ components: [], embeds: [embed]})
-    })
-
+        msg.edit({ components: [], embeds: [embed] })
+    });
 }

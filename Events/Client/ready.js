@@ -40,7 +40,7 @@ module.exports = {
             });
         });
 
-        const channel = client.channels.cache.find(ch => ch.id === "930481568840040448");
+        const channel = client.channels.cache.find(ch => ch.id === "975840921147031652");
         
         client.user.setActivity("sa résurrection", { type: "WATCHING" });
 
