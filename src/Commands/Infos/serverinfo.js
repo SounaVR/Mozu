@@ -1,8 +1,9 @@
-const { MessageEmbed } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ChannelType } = require('discord.js');
 
 module.exports = {
-    name: "serverinfo",
-    description: "Affiche les informations actuelles du serveur",
+    data: new SlashCommandBuilder()
+		.setName('serverinfo')
+		.setDescription('Affiche les informations actuelles du serveur'),
     async execute(client, interaction) {
         //variables
         const guild = interaction.guild;
@@ -17,48 +18,44 @@ module.exports = {
         const idle = presenceCache.filter((presence) => presence.status === "idle").size;
         const dnd = presenceCache.filter((presence) => presence.status === "dnd").size;
         const offline = totalMembers - (online + idle + dnd);
-        let presenceString = `🟢 En ligne : ${online}\n🌙 Absents : ${idle}\n⛔ Ne pas déranger : ${dnd}\n⭕ Hors ligne : ${offline}`
+        let presenceString = `🟢 Online : ${online}\n🌙 Idle : ${idle}\n⛔ Do not disturb : ${dnd}\n⭕ Invisible : ${offline}`
 
         // verification levels for "guild.verificationLevel" field
         const verifLevels = {
-            "NONE": "Aucun",
-            "LOW": "Faible",
-            "MEDIUM": "Moyen",
-            "HIGH": "(╯°□°）╯︵  ┻━┻",
-            "VERY_HIGH": "┻━┻ミヽ(ಠ益ಠ)ノ彡┻━┻"
+            "0": "None",
+            "1": "Low",
+            "2": "Medium",
+            "3": "(╯°□°）╯︵  ┻━┻",
+            "4": "┻━┻ミヽ(ಠ益ಠ)ノ彡┻━┻"
         };
 
-        const premiumTier = {
-            "NONE": "0",
-            "TIER_1": "1",
-            "TIER_2": "2",
-            "TIER_3": "3"
-        };
-
-        const embed = new MessageEmbed()
-            .setColor("GREEN")
+        const embed = new EmbedBuilder()
+            .setColor("Green")
             .setThumbnail(guild.iconURL({ dynamic: true }))
-            .addField("📝 Nom", guild.name)
+            .addFields(
+                { name: "📝 Name", value: guild.name, inline: true },
+                { name: "🔢 Guild ID", value: guild.id, inline: true },
 
-            .addField("👑 Preaupryaitères", `${guildOwner}`)
+                { name: "👑 Owner", value: `${guildOwner}` },
 
-            .addField("🚀 Boosts", `**Niveau** : ${premiumTier[guild.premiumTier]} | ${guild.premiumSubscriptionCount} boosts`, true)
-            .addField("✅ Niveau de vérification", verifLevels[guild.verificationLevel], true)
-            .addField("🕒 Date de création", `<t:${parseInt(guild.createdTimestamp / 1000)}:R>`, true)
+                { name: "🚀 Boosts", value: `${guild.premiumSubscriptionCount} boosts`, inline: true },
+                { name: "✅ Verification Level", value: `${verifLevels[guild.verificationLevel]}`, inline: true },
+                { name: "🕒 Creation Date", value: `<t:${parseInt(guild.createdTimestamp / 1000)}:R>`, inline: true },
 
-            .addField("👥 Status de membre", `${presenceString}`)
+                { name: "👥 Members status", value: `${presenceString}` },
 
-            .addField("🤖", `**Bots** : ${guild.members.cache.filter((member) => member.user.bot === true).size.toString()}`, true)
-            .addField("📜", `**Rôles** : ${guild.roles.cache.filter((role) => role.name != "@everyone").size.toString()}`, true)
-            .addField("☺", `**Nombre d'emojis** : ${guild.emojis.cache.size.toString()}`, true)
+                { name: "🤖", value: `**Bots** : ${guild.members.cache.filter((bot) => bot.user.bot).size}`, inline: true },
+                { name: "📜", value: `**Roles** : ${guild.roles.cache.filter((role) => role.name != "@everyone").size}`, inline: true },
+                { name: "☺", value: `**Emotes number** : ${guild.emojis.cache.size}`, inline: true },
 
-            .addField("📂", `**Catégories** : ${channelCache.filter((channel) => channel.type === "GUILD_CATEGORY").size.toString()}`, true)
-            .addField("💬", `**Salons textuels** : ${channelCache.filter((channel) => channel.type === "GUILD_TEXT").size.toString()}`, true)
-            .addField("📣", `**Salons vocaux** : ${channelCache.filter((channel) => channel.type === "GUILD_VOICE").size.toString()}`, true)
-            
-            .setFooter({ text: `${client.user.username}`, iconURL: client.user.avatarURL({ dynamic: true }) })
+                { name: "📂", value: `**Category** : ${channelCache.filter((channel) => channel.type === ChannelType.GuildCategory).size}`, inline: true },
+                { name: "💬", value: `**Text channels** : ${channelCache.filter((channel) => channel.type === ChannelType.GuildText).size}`, inline: true },
+                { name: "📣", value: `**Voice channels** : ${channelCache.filter((channel) => channel.type === ChannelType.GuildVoice).size}`, inline: true }
+            )
+
+            .setFooter({ text: client.user.username, iconURL: client.user.avatarURL() })
             .setTimestamp()
 
-        interaction.reply({ embeds: [embed] });
+        await interaction.reply({ embeds: [embed] });
     }
 }
