@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS data (
 
 	lang text,
 	ban bigint,
+	badges longtext,
 
 	money bigint,
 	manaCooldown bigint,
