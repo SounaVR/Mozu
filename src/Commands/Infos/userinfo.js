@@ -2,15 +2,27 @@ const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-		.setName('userinfo')
-		.setDescription('Affiche des informations sur un utilisateur.')
+        .setName("userinfo")
+        .setDescription("Displays information about a user.")
+		.setNameLocalizations({
+            fr: "utilisateurinfo",
+            "en-US": "userinfo"
+        })
+		.setDescriptionLocalizations({
+            fr: "Affiche des informations sur un utilisateur.",
+            "en-US": "Displays information about a user."
+        })
         .addUserOption(option =>
             option
-                .setName("membre")
-                .setDescription("Sélectionnez un utilisateur")
+                .setName("member")
+                .setDescription("Select a member.")
+                .setDescriptionLocalizations({
+                    fr: "Sélectionnez un membre.",
+                    "en-US": "Select a member."
+                })
         ),
     async execute(client, interaction) {
-        let target = interaction.options.getUser("membre");
+        let target = interaction.options.getUser("member");
 
         if (!target) target = interaction.user;
         const targetMember = await interaction.guild.members.fetch(target.id);

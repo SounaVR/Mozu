@@ -2,8 +2,16 @@ const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('ping')
-		.setDescription('Replies with Pong!'),
+		.setName("ping")
+		.setDescription("Replies with the websocket latency.")
+		.setNameLocalizations({
+			fr: "ping",
+			"en-US": "ping"
+		})
+		.setDescriptionLocalizations({
+			fr: "Affiche la latence des websockets.",
+			"en-US": "Replies with the websocket latency."
+		}),
 	async execute(client, interaction) {
 		await interaction.deferReply('Ping ?');
         await interaction.editReply(`
