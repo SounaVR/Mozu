@@ -12,18 +12,17 @@ module.exports = async (client) => {
                 let command = require(`../${dir}${dirs}/${file}`);
                 if ("data" in command && "execute" in command) {
                     client.commands.set(command.data.name, command);
+                    commandsArray.push(command.data.toJSON());
                 } else {
-                    console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`)
+                    console.log(`[WARNING] The commandd ${file} is missing a required "data" or "execute" property.`)
                 }
-
-                commandsArray.push(command.data.toJSON());
             });
         });
     }
     load();
 
     const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
-
+    
     const data = await rest.put(
         Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
         { body: commandsArray },
