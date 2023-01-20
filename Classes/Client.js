@@ -8,9 +8,10 @@ module.exports = class Mozu extends Client {
             allowedMentions: { parse: ["users", "roles"], repliedUser: true },
             restTimeOffset: 250
         });
+        
+        this.commands = new Collection();
         require("../Handlers/Events")(this);
         require("../Handlers/Commands")(this);
-        this.commands = new Collection();
 
         this.getPlayer = getPlayer;
     }
