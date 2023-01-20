@@ -1,0 +1,14 @@
+# npm package
+/node_modules
+/package-lock.json
+
+# ignore data and assets
+/data/db.db
+/assets
+
+# extends data
+desktop.ini
+.vscode
+.env
+
+/utils/config.js

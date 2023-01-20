@@ -1,0 +1,18 @@
+{
+  "weapon" : {
+    "default" : "null",
+    "un" : "Épée"
+  },
+  "shield" : {
+    "default" : "null",
+    "un" : "Bouclier"
+  },
+  "stick" : {
+    "default" : "null",
+    "un" : "Bâton"
+  },
+  "bow" : {
+    "default" : "null",
+    "un" : "Arc"
+  }
+}

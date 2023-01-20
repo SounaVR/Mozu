@@ -1,0 +1,10 @@
+{
+    "craft" : {
+        "success1" : "Vous avez fabriqué ",
+        "success2" : " avec succès !",
+        "errorEnergy" : ":x: Vous n'avez pas assez d'énergie.",
+        "errorRessources" : ":x: Vous n'avez pas les ressources nécessaires.",
+        "errorPick" : ":x: Vous possédez déjà cette pioche.",
+        "errorCraft" : ":x: Vous possédez déjà mieux."
+    }
+}
