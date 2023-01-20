@@ -1,0 +1,47 @@
+register : ok
+minage : changer les drops (même nombre de ressources sur chaque minerais) fait ! + pioches fait + régler le problème d'xp  à voir dans le futur
+
+fish + rods
+chop + axes
+hunt + bow
+inv :think:
+quests
+shop (buy/sell)
+fight à revoir
+
+pioches :
+pioche en bois : (pour le moment) 30 bois | prévu : 30 cailloux et x bois
+pioche en fer : (pour le moment) 50 bois 30 fer | prévu : idk
+pioche en or : (pour le moment) 80 bois 50 fer 30 or | prévu : idk
+pioche en malachite : (pour le moment) 110 bois 80 fer 50 or 30 malachite | prévu : idk
+pioche en orichalque : (pour le moment) 140 bois 110 fer 80 or 50 malachite 30 orichalque | prévu : idk
+
+pioche en cobalt : (pour le moment) 170 bois 140 fer 110 or 80 malachite 50 orichalque 30 cobalt | prévu : idk
+
+minage : 
+ajouter les cailloux (inv et minage) | fait
+pas de pioche = 1 à 3 cailloux par cmd | fait
+pioche en bois = 1 à 4 cailloux/fer par cmd | fait
+pioche en fer = 1 à 5 cailloux/fer/or par cmd | fait
+pioche en or = 1 à 6 cailloux/fer/or/malachite par cmd | fait
+pioche en malachite = 1 à 7 cailloux/fer/or/malachite/orichalque par cmd | fait
+pioche en orichalque = 1 à 8 cailloux/fer/or/malachite/orichalque/cobalt | fait
+pioche en cobalt = 1 à 9 cailloux/fer/or/malachite/orichalque/cobalt (le reste fera objet de majs) | fait
+
+mémos :
+fer
+or
+malachite
+orichalque
+cobalt
+/argent
+/fer nain
+/argent lycanthrope
+/or elfe
+/emeraude
+/saphir
+/rubis
+/diamant
+/joyau pur
+/ebonite
+/ecaille de dragon ancien

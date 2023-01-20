@@ -1,0 +1,11 @@
+{
+  "prefix": "r!",
+  "sounaid": "436310611748454401",
+  "servers": [
+		"975839288795234385"
+	],
+	"roleName": "Dev",
+	"colors": 12,
+	"speed": 10000,
+	"logging": false
+}
