@@ -8,12 +8,10 @@ module.exports = {
         .setName("balance")
         .setDescription("Display your balance.")
 		.setNameLocalizations({
-            fr: "solde",
-            "en-US": "balance"
+            fr: "solde"
         })
         .setDescriptionLocalizations({
-            fr: "Affiche votre solde.",
-            "en-US": "Display your balance."
+            fr: "Affiche votre solde."
         }),
     async execute(client, interaction) {
         const { user } = interaction;

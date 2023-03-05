@@ -14,12 +14,10 @@ module.exports = {
         .setName("profile")
         .setDescription("Display your profile.")
 		.setNameLocalizations({
-            fr: "profil",
-            "en-US": "profile"
+            fr: "profil"
         })
         .setDescriptionLocalizations({
-            fr: "Affiche votre profil.",
-            "en-US": "Display your profile."
+            fr: "Affiche votre profil."
         }),
     async execute(client, interaction) {
         const databaselogs = client.channels.cache.find(ch => ch.id === '1065830709652103168');

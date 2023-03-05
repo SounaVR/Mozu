@@ -5,12 +5,10 @@ module.exports = {
         .setName("serverinfo")
         .setDescription("Displays the current server information.")
 		.setNameLocalizations({
-            fr: "serveurinfo",
-            "en-US": "serverinfo"
+            fr: "serveurinfo"
         })
 		.setDescriptionLocalizations({
-            fr: "Affiche les informations actuelles du serveur.",
-            "en-US": "Displays the current server information."
+            fr: "Affiche les informations actuelles du serveur."
         }),
     async execute(client, interaction) {
         //variables

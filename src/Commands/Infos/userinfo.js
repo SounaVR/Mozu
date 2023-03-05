@@ -5,20 +5,17 @@ module.exports = {
         .setName("userinfo")
         .setDescription("Displays information about a user.")
 		.setNameLocalizations({
-            fr: "utilisateurinfo",
-            "en-US": "userinfo"
+            fr: "utilisateurinfo"
         })
 		.setDescriptionLocalizations({
-            fr: "Affiche des informations sur un utilisateur.",
-            "en-US": "Displays information about a user."
+            fr: "Affiche des informations sur un utilisateur."
         })
         .addUserOption(option =>
             option
                 .setName("member")
                 .setDescription("Select a member.")
                 .setDescriptionLocalizations({
-                    fr: "Sélectionnez un membre.",
-                    "en-US": "Select a member."
+                    fr: "Sélectionnez un membre."
                 })
         ),
     async execute(client, interaction) {

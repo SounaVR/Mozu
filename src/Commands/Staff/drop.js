@@ -4,22 +4,16 @@ const Default = require('../../../utils/default.json');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('drop')
-        .setDescription('Delete a player from the database.')
-        .setNameLocalizations({
-            fr: "drop",
-            "en-US": "drop"
-        })
+        .setDescription('Delete a player from the database')
         .setDescriptionLocalizations({
-            fr: "Supprime un joueur de la base de données.",
-            "en-US": "Delete a player from the database."
+            fr: "Supprime un joueur de la base de données"
         })
         .addUserOption(option =>
             option
                 .setName("user")
-                .setDescription("Select an user.")
+                .setDescription("Select an user")
                 .setDescriptionLocalizations({
-                    fr: "Sélectionnez un utilisateur.",
-                    "en-US": "Select an user."
+                    fr: "Sélectionnez un utilisateur"
                 })
                 .setRequired(true)
         ),

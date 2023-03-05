@@ -6,13 +6,8 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("botinfo")
         .setDescription("Displays information about the bot.")
-        .setNameLocalizations({
-            fr: "botinfo",
-            "en-US": "botinfo"
-        })
         .setDescriptionLocalizations({
-            fr: "Affiche les informations à propos du bot.",
-            "en-US": "Displays information about the bot."
+            fr: "Affiche des informations à propos du bot."
         }),
     async execute(client, interaction) {
         const uptime = moment.duration(client.uptime).format("DD [days], HH [hrs], mm [mins], ss [secs]");
