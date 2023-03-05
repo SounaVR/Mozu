@@ -2,30 +2,30 @@
     "availableLanguages" : "Langues disponibles : `EN/FR`",
     "confirmLanguage": "La langue a bien été définie sur %s.",
     "rep": {
-        "notNow": "votre point de réputation n'est pas encore disponible ! Revenez à %s pour récompenser une bonne personne !",
-        "now" : "votre point de réputation est disponible !",
-        "argsRequired": "veuillez mentionner un utilisateur valide.",
-        "giveToSelf": "vous ne pouvez pas vous donner un point de réputation !",
-        "giveToOtherBots": "ce bot n'a pas besoin d'être connu.",
-        "unknownUser": "je ne parviens pas à trouver cet utilisateur dans ma base de données.",
-        "done": "votre point de réputation a été donné avec succès à %s."
+        "notNow": "Votre point de réputation n'est pas encore disponible ! Revenez à %s pour récompenser une bonne personne !",
+        "now" : "Votre point de réputation est disponible !",
+        "argsRequired": "Veuillez mentionner un utilisateur valide.",
+        "giveToSelf": "Vous ne pouvez pas vous donner un point de réputation !",
+        "giveToOtherBots": "Ce bot n'a pas besoin d'être connu.",
+        "unknownUser": "Je ne parviens pas à trouver cet utilisateur dans ma base de données.",
+        "done": "Votre point de réputation a été donné avec succès à %s."
     },
     "hr": {
-        "notNow": "vous avez déjà collecté votre hourly, veuillez attendre encore %s",
-        "done": "vous avez récupéré **30** <:cash:776115188498956329> et %s, à dans 1 heure !"
+        "notNow": "Vous avez déjà collecté votre hourly, veuillez attendre encore %s",
+        "done": "Vous avez récupéré **30** <:cash:1065891559708565544> et %s, à dans 1 heure !"
     },
     "daily": {
-        "notNow": "vous avez déjà collecté votre daily, veuillez attendre jusqu'à %s.",
-        "done": "vous avez récupéré **%s** , à demain !"
+        "notNow": "Vous avez déjà collecté votre daily, veuillez attendre jusqu'à %s.",
+        "done": "Vous avez récupéré **%s** , à demain !"
     },
     "bal": {
         "actualBal": "Vous avez actuellement %s en votre possession."
     },
     "gift": {
-        "giveToOtherBots": "vous ne pouvez pas donner de l'argent à un bot.",
-        "giveToSelf": "vous ne pouvez pas vous donner de l'argent !",
+        "giveToOtherBots": "Vous ne pouvez pas donner de l'argent à un bot.",
+        "giveToSelf": "Vous ne pouvez pas vous donner de l'argent !",
         "invalidAmount": "Ce montant est invalide.",
-        "notEnoughMoney": "vous n'avez pas assez d'argent. Il vous manque %s !",
+        "notEnoughMoney": "Vous n'avez pas assez d'argent. Il vous manque %s !",
         "canceled": "**[Transfert]**\nStatut : **Annulé** :x:",
         "unknownUser": "Cet utilisateur est introuvable dans mes données.",
         "transfer": "**[Transfert]**",
@@ -44,7 +44,7 @@
     "mine": {
         "title": "Ressources minées",
         "level": "Niveau",
-        "notEnoughEnergy": "vous n'avez pas assez d'énergie.",
+        "notEnoughEnergy": "Vous n'avez pas assez d'énergie.",
         "infos": "Informations",
         "usedEnergy": "Énergie utilisée : %s",
         "remainingEnergy": "Énergie restante : %s",
@@ -89,21 +89,21 @@
 
     },
     "give": {
-        "wantGive": "voulez-vous donner %s à %s ?",
+        "wantGive": "Voulez-vous donner %s à %s ?",
         "notEnoughRess": "Vous n'avez pas assez de ressources à donner.",
         "giveSuccess": "Donation effectuée ! Vous avez donné %s à %s !",
         "canceled": "Donation annulée.",
-        "giveToSelf": "vous ne pouvez pas vous donner des objets !",
-        "giveToOtherBots": "vous ne pouvez pas donner des objets à un bot.",
-        "specifyUser": "vous devez spécifier un joueur inscrit.",
+        "giveToSelf": "Vous ne pouvez pas vous donner des objets !",
+        "giveToOtherBots": "Vous ne pouvez pas donner des objets à un bot.",
+        "specifyUser": "Vous devez spécifier un joueur inscrit.",
         "specifyAmount": "Vous devez spécifier un montant d'objet à donner supérieur à 0.",
-        "specifyItem": "vous devez spécifier un objet à donner."
+        "specifyItem": "Vous devez spécifier un objet à donner."
     },
     "top": {
        
     },
     "trade": {
-        "wantTrade": "voulez-vous échanger %s à %s",
+        "wantTrade": "Voulez-vous échanger %s à %s",
         "notEnoughRess": ":x: Vous n'avez pas assez de ressources à échanger.",
         "userDontHaveEnoughRessToTrade": ":x: L'utilisateur mentionné n'as pas assez de ressources à échanger.",
         "tradeSuccess": ":white_check_mark: Échange effectué ! Vous avez échangé",
@@ -134,7 +134,7 @@
         "alreadyInZone": "Vous êtes déjà dans la zone **%s**."
     },
     "chest": {
-        "dontHaveAmulet": "vous n'avez pas l'Amulette de Donjon, pour y remédier, tapez `/craft dungeon_amulet` !",
+        "dontHaveAmulet": "Vous n'avez pas l'Amulette de Donjon, pour y remédier, tapez `/craft dungeon_amulet` !",
         "openingOf": "Ouverture de %s coffre(s) | Rareté : %s",
         "rarity_d": "Médiocre (D)",
         "rarity_c": "Commun (C)",
@@ -144,9 +144,9 @@
         "notEnoughChests": "vous avez pas assez de coffres. (Essayez `/explore` pour en avoir plus)"
     },
     "craft": {
-        "invalidNumber": "veuillez entrer une valeur valide.",
-        "notEnoughRess": "vous n'avez pas assez de ressources pour faire ce craft.",
-        "maxLevel": "vous avez déjà le niveau maximum de cet objet.",
+        "invalidNumber": "Veuillez entrer une valeur valide.",
+        "notEnoughRess": "Vous n'avez pas assez de ressources pour faire ce craft.",
+        "maxLevel": "Vous avez déjà le niveau maximum de cet objet.",
         "done": "Fabrication réussie ! Vous venez d'obtenir : %s",
         "canceled": "Craft annulé.",
         "description": "Améliorez votre matériel.",
@@ -159,7 +159,7 @@
         "description" : "Enchantez votre matériel.\n:warning: L'objet que vous voulez enchanter doit-être de niveau 1 minimum. :warning:",
         "doc" : "Ajoutez comme argument le nom de l'élément que vous souhaitez enchanter, les éléments disponibles sont les suivants:\n",
         "maxLevel" : "vous avez déjà l'enchantement maximum de cet objet.",
-        "notEnoughRess" : "vous n'avez pas assez de ressources pour faire cet enchantement.",
+        "notEnoughRess" : "Vous n'avez pas assez de ressources pour faire cet enchantement.",
         "enchantSuccess" : "Enchantement réussi au niveau : %s !",
         "canceled" : "Enchantement annulé.",
         "levelTooLow" : "L'objet que vous souhaitez enchanter est de niveau 0. Améliorez-le d'abord avant de l'enchanter (`/craft`)."
