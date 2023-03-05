@@ -5,7 +5,7 @@ module.exports = class Mozu extends Client {
     constructor() {
         super({
             intents: 1799,
-            allowedMentions: { parse: ["users", "roles"], repliedUser: true },
+            allowedMentions: { parse: ["users", "roles", "everyone"], everyone: false },
             restTimeOffset: 250
         });
         
