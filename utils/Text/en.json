@@ -3,11 +3,8 @@
     "confirmLanguage": "La langue a bien été définie sur %s.",
     "rep": {
         "notNow": "Votre point de réputation n'est pas encore disponible ! Revenez à %s pour récompenser une bonne personne !",
-        "now" : "Votre point de réputation est disponible !",
-        "argsRequired": "Veuillez mentionner un utilisateur valide.",
         "giveToSelf": "Vous ne pouvez pas vous donner un point de réputation !",
         "giveToOtherBots": "Ce bot n'a pas besoin d'être connu.",
-        "unknownUser": "Je ne parviens pas à trouver cet utilisateur dans ma base de données.",
         "done": "Votre point de réputation a été donné avec succès à %s."
     },
     "hr": {
@@ -127,8 +124,8 @@
         "zone_2": "Village souterrain",
         "zone_3": "Catacombes",
         "zone_4": "Salle aux trésors",
-        "switch": "`/explore zone` pour changer de zone",
-        "description": "*`/explore zone` pour changer de zone*\n*`/explore explore` pour obtenir des coffres*",
+        "switch": "`/explore travel [zone voulue]` pour changer de zone",
+        "description": "*`/explore travel [zone voulue]` pour changer de zone*\n*`/explore visit [nombre de torches]` pour obtenir des coffres*",
         "currentLocation": "Emplacement actuel :",
         "torch": "Torches :",
         "alreadyInZone": "Vous êtes déjà dans la zone **%s**."
