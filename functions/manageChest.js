@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const { nFormatter, translate } = require('../utils/u.js');
 const Default        = require('../utils/default.json'),
     Emotes           = require('../utils/emotes.json');
@@ -10,12 +10,12 @@ module.exports = function manageChest(client, con, player, interaction, number, 
     if (player.items.dungeon_amulet == "0") return interaction.reply(`${lang.chest.dontHaveAmulet}`);
     if (player.ress[objectName] < number) return interaction.reply(`${lang.chest.notEnoughChests}`);
 
-    const embed = new MessageEmbed()
-    .setTitle(`${Emotes.chest} ${translate(player.data.lang, "lang.chest.openingOf", rarityName)}`);
+    const embed = new EmbedBuilder()
+    .setTitle(`${Emotes.chest} ${translate(player.data.lang, "chest.openingOf", number, rarityName)}`);
 
     Danny = {};
     Danny.random = () => min + Math.ceil(Math.random() * (max - min) * number);
-
+   
     var txt = [],
         txt2 = [],
         sql = [];
@@ -42,9 +42,8 @@ module.exports = function manageChest(client, con, player, interaction, number, 
             sql.push(`${rune3} = ${rune3} + ${value}`);
         }
     }
-
     con.query(`UPDATE ress SET ${sql.join(",")}, ${objectName} = ${player.ress[objectName] - number} WHERE userid = ${userid}`);
-    embed.addField(`**Gain**`, `${txt.join("\n")}\n${txt2.join("\n")}`);
+    embed.addFields({ name: `**Gain**`, value: `${txt.join("\n")}\n${txt2.join("\n")}` });
 
     return interaction.reply({ embeds: [embed] });
 }
