@@ -37,7 +37,10 @@ module.exports = {
         tables.forEach(async element => {
             const thing = fs.readFileSync(`./sql/${element}.sql`).toString();
             con.query(thing, function (err) {
-                if (err) throw err;
+                if (err) {
+                    console.error("\nThe database is maybe offline. Please check and try again.\n")
+                    throw err;
+                }
             });
         });
         
