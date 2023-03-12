@@ -138,7 +138,7 @@
         "rarity_b": "Rare (B)",
         "rarity_a": "Épique (A)",
         "rarity_s": "Légendaire (S)",
-        "notEnoughChests": "vous avez pas assez de coffres. (Essayez `/explore` pour en avoir plus)"
+        "notEnoughChests": "Vous avez pas assez de coffres. (Essayez `/explore` pour en avoir plus)"
     },
     "craft": {
         "invalidNumber": "Veuillez entrer une valeur valide.",
