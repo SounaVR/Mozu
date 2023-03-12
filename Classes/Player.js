@@ -4,6 +4,6 @@ module.exports = class Player {
     }
 
     static getGemNumber(gems) {
-        return 7*(gems[0]+7*(gems[1]+7*gems[2]))
+        return gems[0]+7*(gems[1]+7*gems[2])
     }
 }
