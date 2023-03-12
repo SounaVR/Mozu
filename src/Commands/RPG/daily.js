@@ -1,14 +1,14 @@
-const { SlashCommandBuilder } = require("discord.js");
 const Default = require("../../../utils/default.json"),
 Emotes        = require("../../../utils/emotes.json");
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName("daily")
-        .setDescription("Collect money every day at midnight (UTC+1)")
-        .setDescriptionLocalizations({
+    data: {
+        name: "daily",
+        description: "Collect money every day at midnight (UTC+1)",
+        descriptionLocalizations: {
             fr: "Collecte de l\'argent tout les jours à 00h00"
-        }),
+        }
+    },
     async execute(client, interaction) {
         const con = client.connection;
         const player = await client.getPlayer(con, interaction.user.id);

@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const Emotes = require('../../../utils/emotes.json');
 const Default = require('../../../utils/default.json');
 const insert_data = require('../../../functions/insert/insert_data'),
@@ -10,15 +10,16 @@ const insert_data = require('../../../functions/insert/insert_data'),
     insert_stats = require('../../../functions/insert/insert_stats');
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName("profile")
-        .setDescription("Display your profile.")
-		.setNameLocalizations({
+    data: {
+        name: "profile",
+        description: "Display your profile.",
+        nameLocalizations: {
             fr: "profil"
-        })
-        .setDescriptionLocalizations({
+        },
+        descriptionLocalizations: {
             fr: "Affiche votre profil."
-        }),
+        }
+    },
     async execute(client, interaction) {
         const databaselogs = client.channels.cache.find(ch => ch.id === '1065830709652103168');
 

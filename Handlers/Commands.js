@@ -12,9 +12,9 @@ module.exports = async (client) => {
                 let command = require(`../${dir}${dirs}/${file}`);
                 if ("data" in command && "execute" in command) {
                     client.commands.set(command.data.name, command);
-                    commandsArray.push(command.data.toJSON());
+                    commandsArray.push(command.data);
                 } else {
-                    console.log(`[WARNING] The commandd ${file} is missing a required "data" or "execute" property.`)
+                    console.log(`[WARNING] The command ${file} is missing a required "data" or "execute" property.`)
                 }
             });
         });

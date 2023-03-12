@@ -1,14 +1,14 @@
 const { getPremiumDuration } = require("../../../utils/u");
-const { SlashCommandBuilder } = require("discord.js");
 const { EmbedBuilder } = require("@discordjs/builders");
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName("boost")
-        .setDescription("Collect rewards by boosting the server")
-        .setDescriptionLocalizations({
+    data: {
+        name: "boost",
+        description: "Collect rewards by boosting the server",
+        descriptionLocalizations: {
             fr: "Récupèrez des récompenses en boostant le serveur"
-        }),
+        }
+    },
     async execute(client, interaction) {
         const userid = interaction.user.id;
 
@@ -19,7 +19,7 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setTitle("Boost Informations")
-            .setColor([244, 127, 255])
+            .setColor(0xF480FF)
             .setDescription(`Boost depuis : **${text}**`)
         return interaction.reply({ embeds: [embed] });
     }

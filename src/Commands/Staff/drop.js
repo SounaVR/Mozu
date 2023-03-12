@@ -1,25 +1,25 @@
-const { SlashCommandBuilder } = require('discord.js');
-const Default = require('../../../utils/default.json');
+const { ApplicationCommandOptionType } = require('discord.js');
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName('drop')
-        .setDescription('Delete a player from the database')
-        .setDescriptionLocalizations({
+    data: {
+        name: "drop",
+        description: "Delete a player from the database",
+        descriptionLocalizations: {
             fr: "Supprime un joueur de la base de données"
-        })
-        .addUserOption(option =>
-            option
-                .setName("user")
-                .setDescription("Select an user")
-                .setDescriptionLocalizations({
-                    fr: "Sélectionnez un utilisateur"
-                })
-                .setRequired(true)
-        ),
+        },
+        options: [
+            {
+                name: "user",
+                description: "Select an user",
+                descriptionLocalizations: "Sélectionnez un utilisateur",
+                type: ApplicationCommandOptionType.User,
+                required: true
+            }
+        ]
+    },
     async execute(client, interaction) {
         const { user, options } = interaction;
-        if (user.id !== "436310611748454401") return interaction.reply('❌');
+        if (user.id !== "436310611748454401") return interaction.react('❌');
         const target = options.getUser('user');
 
         const con = client.connection;

@@ -1,24 +1,29 @@
-const { SlashCommandBuilder, ApplicationCommandOptionType } = require("discord.js");
+const { ApplicationCommandOptionType } = require("discord.js");
 const Default = require("../../../utils/default.json");
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName("lang")
-        .setDescription("Change your displayed game language")
-        .setDescriptionLocalizations({
+    data: {
+        name: "lang",
+        description: "Change your displayed game language",
+        descriptionLocalizations: {
             fr: "Change votre langue de jeu affichée"
-        })
-        .addStringOption(option =>
-            option.setName("lang")
-                .setDescription("Click on the desired language")
-                .setDescriptionLocalizations({
+        },
+        options: [
+            {
+                name: "lang",
+                description: "Click on the desired language",
+                descriptionLocalizations: {
                     fr: "Cliquez sur la langue désirée"
-                })
-                .setRequired(true)
-                .addChoices(
+                },
+                type: ApplicationCommandOptionType.String,
+                required: true,
+                choices: [
                     { name: 'FR', value: 'fr' },
                     { name: 'EN', value: 'en' }
-                )),
+                ]
+            }
+        ]
+    },
     async execute(client, interaction) {
         const { user, options } = interaction;
         const choice = options.getString('lang');

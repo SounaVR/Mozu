@@ -1,18 +1,18 @@
-const { SlashCommandBuilder } = require('discord.js');
 const { nFormatter, translate } = require('../../../utils/u');
 const Emotes = require("../../../utils/emotes.json");
 const Default = require('../../../utils/default.json');
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName("balance")
-        .setDescription("Display your balance.")
-		.setNameLocalizations({
+    data: {
+        name: "balance",
+        description: "Display your balance.",
+        nameLocalizations: {
             fr: "solde"
-        })
-        .setDescriptionLocalizations({
+        },
+        descriptionLocalizations: {
             fr: "Affiche votre solde."
-        }),
+        }
+    },
     async execute(client, interaction) {
         const { user } = interaction;
 

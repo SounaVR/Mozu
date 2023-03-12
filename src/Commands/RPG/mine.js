@@ -1,23 +1,27 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, ApplicationCommandOptionType } = require('discord.js');
 const { nFormatter } = require('../../../utils/u');
 const Emotes    = require('../../../utils/emotes.json'),
     Default   = require('../../../utils/default.json');
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName("mine")
-        .setDescription("To mine resources")
-        .setDescriptionLocalizations({
-            fr: "Pour miner des ressources"
-        })
-        .addStringOption(option =>
-            option.setName("energyamount")
-                .setDescription("Amount of energy to spent")
-                .setDescriptionLocalizations({
-                    fr: "Montant d'énergie à dépenser"
-                })
-                .setRequired(false)
-            ),
+    data: {
+        name: 'mine',
+        description: 'To mine resources',
+        descriptionLocalizations: {
+            fr: 'Pour miner des ressources'
+        },
+        options: [
+            {
+                name: 'energyamount',
+                description: 'Amount of energy to spent',
+                descriptionLocalizations: {
+                    fr: 'Montant d\'énergie à dépenser'
+                },
+                type: ApplicationCommandOptionType.String,
+                required: false
+            }
+        ]
+    },
     async execute(client, interaction) {
         const { user, member, options } = interaction;
         const amount = options.getString('energyamount');

@@ -1,15 +1,15 @@
-const { SlashCommandBuilder } = require("discord.js");
 const ms      = require("parse-ms"),
     Default   = require("../../../utils/default.json"),
     Emotes    = require("../../../utils/emotes.json");
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName("hr")
-        .setDescription("Collect money every hours")
-        .setDescriptionLocalizations({
-            fr: "Collecte de l\'argent toutes les heures"
-        }),
+    data: {
+        name: "hr",
+        description: "Collect money every hours",
+        descriptionLocalizations: {
+            fr: "Collecte de l'argent toutes les heures"
+        }
+    },
     async execute(client, interaction) {
         const con = client.connection;
         const player = await client.getPlayer(con, interaction.user.id);

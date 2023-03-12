@@ -1,23 +1,21 @@
-const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
+const { EmbedBuilder, ApplicationCommandOptionType } = require('discord.js');
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName("userinfo")
-        .setDescription("Displays information about a user.")
-		.setNameLocalizations({
-            fr: "utilisateurinfo"
-        })
-		.setDescriptionLocalizations({
-            fr: "Affiche des informations sur un utilisateur."
-        })
-        .addUserOption(option =>
-            option
-                .setName("member")
-                .setDescription("Select a member.")
-                .setDescriptionLocalizations({
-                    fr: "Sélectionnez un membre."
-                })
-        ),
+    data: {
+        name: "userinfo",
+        description: "Displays information about a user",
+        descriptionLocalizations: {
+            fr: "Affiche des informations sur un utilisateur"
+        },
+        options: [
+            {
+                name: "member",
+                description: "Select a member",
+                descriptionLocalizations: "Sélectionnez un membre",
+                type: ApplicationCommandOptionType.User
+            }
+        ]
+    },
     async execute(client, interaction) {
         let target = interaction.options.getUser("member");
 

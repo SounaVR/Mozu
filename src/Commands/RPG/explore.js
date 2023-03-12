@@ -1,51 +1,63 @@
-const { EmbedBuilder, SlashCommandBuilder } = require("discord.js"),
+const { EmbedBuilder, ApplicationCommandOptionType } = require("discord.js"),
     { translate } = require("../../../utils/u"),
     Emotes    = require("../../../utils/emotes.json"),
     Default   = require("../../../utils/default.json");
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName("explore")
-        .setDescription("To explore unknown lands")
-        .setDescriptionLocalizations({
+    data: {
+        name: "explore",
+        description: "To explore unknown lands",
+        descriptionLocalizations: {
             fr: "Pour explorer des contrées inconnues"
-        })
-        .addSubcommand(subcommand => 
-            subcommand.setName("visit")
-            .setDescription("To visit the current area")
-            .setDescriptionLocalizations({
-                fr: "Pour visiter la zone actuelle"
-            })
-            .addNumberOption(option => 
-                option.setName("torch")
-                .setDescription("The amount of torches to spend to explore")
-                .setDescriptionLocalizations({
-                    fr: "La quantité de torches à dépenser pour explorer"
-                })
-                .setRequired(true)
-            )
-        )
-        .addSubcommand(subcommand =>
-            subcommand.setName("travel")
-            .setDescription("To travel to another area (Must have the dungeon amulet)")
-            .setDescriptionLocalizations({
-                fr: "Pour se rendre dans une autre zone (il faut avoir l'amulette du donjon)"
-            })
-            .addStringOption(option =>
-                option.setName("area")
-                .setDescription("To change the area to exlore")
-                .setDescriptionLocalizations({
-                    fr: "Pour changer de zone à explorer"
-                })
-                .addChoices(
-                    { name: 'Abandoned Mine', name_localizations: { "fr": "Mine abandonnée" }, value: '0' },
-                    { name: 'Ancient Ruins', name_localizations: { "fr": "Ruines Antiques" }, value: '1' },
-                    { name: 'Underground Village', name_localizations: { "fr": "Village Souterrain" }, value: '2' },
-                    { name: 'Catacombs', name_localizations: { "fr": "Catacombes" }, value: '3' },
-                    { name: 'Treasure room', name_localizations: { "fr": "Salle aux trésors" }, value: '4' }
-                )
-            )
-        ),
+        },
+        options: [
+            {
+                name: "visit",
+                description: "To visit the current area",
+                descriptionLocalizations: {
+                    fr: "Pour visiter la zone actuelle"
+                },
+                type: ApplicationCommandOptionType.Subcommand,
+                options: [
+                    {
+                        name: "torch",
+                        description: "The amount of torches to spend to explore",
+                        descriptionLocalizations: {
+                            fr: "La quantité de torches à dépenser pour explorer"
+                        },
+                        type: ApplicationCommandOptionType.Number,
+                        required: true
+                    }
+                ]
+            },
+            {
+                name: "travel",
+                description: "To travel to another area (Must have the dungeon amulet)",
+                descriptionLocalizations: {
+                    fr: "Pour se rendre dans une autre zone (il faut avoir l'amulette du donjon)"
+                },
+                type: ApplicationCommandOptionType.Subcommand,
+                options: [
+                    {
+                        name: "area",
+                        description: "To change the area to exlore",
+                        descriptionLocalizations: {
+                            fr: "Pour changer de zone à explorer"
+                        },
+                        type: ApplicationCommandOptionType.String,
+                        required: true,
+                        choices: [
+                            { name: "Abandoned Mine", name_localizations: { "fr": "Mine abandonnée" }, value: "0" },
+                            { name: "Ancient Ruins", name_localizations: { "fr": "Ruines Antiques" }, value: "1" },
+                            { name: "Underground Village", name_localizations: { "fr": "Village Souterrain" }, value: "2" },
+                            { name: "Catacombs", name_localizations: { "fr": "Catacombes" }, value: "3" },
+                            { name: "Treasure room", name_localizations: { "fr": "Salle aux trésors" }, value: "4" }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
     async execute(client, interaction) {
         const { options, user } = interaction;
         const zone = options.getString("area");

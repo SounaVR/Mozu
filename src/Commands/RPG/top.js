@@ -1,25 +1,29 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { ApplicationCommandOptionType } = require('discord.js');
 const { getPlayer } = require('../../../utils/u');
 const Default = require("../../../utils/default.json");
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName("top")
-        .setDescription("Displays differents top 10")
-        .setDescriptionLocalizations({
+    data: {
+        name: "top",
+        description: "Displays differents top 10",
+        descriptionLocalizations: {
             fr: "Affiche différents top 10"
-        })
-        .addStringOption(option =>
-            option.setName("top")
-                .setDescription("Choose the leaderboard you want to display")
-                .setDescriptionLocalizations({
+        },
+        options: [
+            {
+                name: "top",
+                description: "Choose the leaderboard you want to display",
+                descriptionLocalizations: {
                     fr: "Choississez le classement que vous désirez afficher"
-                })
-                .setRequired(true)
-                .addChoices(
+                },
+                type: ApplicationCommandOptionType.String,
+                choices: [
                     { name: 'money', value: 'money'}
-                )
-            ),
+                ],
+                required: true
+            }
+        ]
+    },
     async execute(client, interaction) {
         const con = client.connection;
         const player = await getPlayer(con, interaction.user.id);

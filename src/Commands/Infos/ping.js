@@ -1,12 +1,11 @@
-const { SlashCommandBuilder } = require("discord.js");
-
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName("ping")
-		.setDescription("Replies with the websocket latency.")
-		.setDescriptionLocalizations({
-			fr: "Affiche la latence des websockets."
-		}),
+	data: {
+		name: "ping",
+		description: "Replies with the websocket latency",
+		descriptionLocalizations: {
+			fr: "Affiche la latence des websockets"
+		}
+	},
 	async execute(client, interaction) {
 		await interaction.deferReply('Ping ?');
         await interaction.editReply(`

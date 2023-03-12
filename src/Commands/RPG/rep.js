@@ -1,22 +1,24 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { ApplicationCommandOptionType } = require("discord.js");
 const Default = require('../../../utils/default.json');
 const { translate } = require('../../../utils/u');
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName("rep")
-        .setDescription("Gives a reputation point to a player")
-        .setDescriptionLocalizations({
+    data: {
+        name: "rep",
+        description: "Gives a reputation point to a player",
+        descriptionLocalizations: {
             fr: "Donne un point de réputation à un joueur"
-        })
-        .addUserOption(option =>
-            option.setName("member")
-                .setDescription("Select a user")
-                .setDescriptionLocalizations({
-                    fr: "Sélectionnez un utilisateur"
-                })
-                .setRequired(true)
-            ),
+        },
+        options: [
+            {
+                name: "member",
+                description: "Select a user",
+                descriptionLocalizations: "Sélectionnez un utilisateur",
+                type: ApplicationCommandOptionType.User,
+                required: true
+            }
+        ]
+    },
     async execute (client, interaction) {
         const { options } = interaction;
         const target = options.getMember('member');

@@ -1,37 +1,43 @@
-const { EmbedBuilder, SlashCommandBuilder } = require('discord.js'),
+const { EmbedBuilder, ApplicationCommandOptionType } = require('discord.js'),
     Default          = require('../../../utils/default.json'),
     Emotes           = require('../../../utils/emotes.json'),
     manageEnchant    = require('../../../functions/manageEnchant');
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName("enchant")
-        .setDescription("To enchant your stuff")
-        .setDescriptionLocalizations({
+    data: {
+        name: "enchant",
+        description: "To enchant your stuff",
+        descriptionLocalizations: {
             fr: "Pour enchanter votre équipement"
-        })
-        .addStringOption(option => 
-            option.setName("gear")
-            .setDescription("Choose what you want to enchant")
-            .setDescriptionLocalizations({
-                fr: "Choisissez ce que vous voulez enchanter"
-            })
-            .addChoices(
-                { name: 'Info', value: 'info' },
-                { name: 'Pioche', value: 'pickaxe' },
-                { name: 'Épée', value: 'sword' },
-                { name: 'Bouclier', value: 'shield' },
-                { name: 'Tête', value: 'head' },
-                { name: 'Épaules', value: 'shoulders' },
-                { name: 'Torse', value: 'chest' },
-                { name: 'Poignets', value: 'wrists' },
-                { name: 'Mains', value: 'hands' },
-                { name: 'Ceinture', value: 'waist' },
-                { name: 'Jambes', value: 'legs' },
-                { name: 'Pieds', value: 'feet' }
-            )
-            .setRequired(true)
-        ),
+        },
+        options: [
+            {
+                name: "gear",
+                description: "Choose what you want to enchant",
+                descriptionLocalizations: {
+                    fr: "Choisissez ce que vous voulez enchanter"
+                },
+                type: ApplicationCommandOptionType.String,
+                choices: [
+                    { name: 'Info', value: 'info' },
+                    { name: 'Pioche', value: 'pickaxe' },
+                    { name: 'Info', value: 'info' },
+                    { name: 'Pioche', value: 'pickaxe' },
+                    { name: 'Épée', value: 'sword' },
+                    { name: 'Bouclier', value: 'shield' },
+                    { name: 'Tête', value: 'head' },
+                    { name: 'Épaules', value: 'shoulders' },
+                    { name: 'Torse', value: 'chest' },
+                    { name: 'Poignets', value: 'wrists' },
+                    { name: 'Mains', value: 'hands' },
+                    { name: 'Ceinture', value: 'waist' },
+                    { name: 'Jambes', value: 'legs' },
+                    { name: 'Pieds', value: 'feet' }
+                ],
+                required: true
+            }
+        ]
+    },
     async execute(client, interaction) {
         const { user, member, options } = interaction;
         const value = options.getString('gear');

@@ -1,15 +1,13 @@
-const { SlashCommandBuilder, EmbedBuilder, ChannelType } = require('discord.js');
+const { EmbedBuilder, ChannelType } = require('discord.js');
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName("serverinfo")
-        .setDescription("Displays the current server information.")
-		.setNameLocalizations({
-            fr: "serveurinfo"
-        })
-		.setDescriptionLocalizations({
-            fr: "Affiche les informations actuelles du serveur."
-        }),
+    data: {
+        name: "serverinfo",
+        description: "Displays the current server information",
+        descriptionLocalizations: {
+            fr: "Affiche les informations actuelles du serveur"
+        }
+    },
     async execute(client, interaction) {
         //variables
         const guild = interaction.guild;

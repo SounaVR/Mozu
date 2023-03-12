@@ -1,14 +1,15 @@
 require('moment-duration-format');
-const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const moment = require('moment');
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName("botinfo")
-        .setDescription("Displays information about the bot.")
-        .setDescriptionLocalizations({
-            fr: "Affiche des informations à propos du bot."
-        }),
+    data: {
+        name: "botinfo",
+        description: "Displays information about the bot",
+        descriptionLocalizations: {
+            fr: "Affiche des informations à propos du bot"
+        }
+    },
     async execute(client, interaction) {
         const uptime = moment.duration(client.uptime).format("DD [days], HH [hrs], mm [mins], ss [secs]");
         const developer = client.users.cache.find(user => user.id === "436310611748454401");
