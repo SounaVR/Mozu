@@ -1,13 +1,11 @@
 const { EmbedBuilder } = require('discord.js');
-const Emotes = require('../../../utils/emotes.json');
-const Default = require('../../../utils/default.json');
-const insert_data = require('../../../functions/insert/insert_data'),
-    insert_enchant = require('../../../functions/insert/insert_enchant'),
-    insert_items = require('../../../functions/insert/insert_items'),
-    insert_prospect = require('../../../functions/insert/insert_prospect'),
-    insert_ress = require('../../../functions/insert/insert_ress'),
-    insert_slots = require('../../../functions/insert/insert_slots'),
-    insert_stats = require('../../../functions/insert/insert_stats');
+const insert_data = require('../../functions/insert/insert_data'),
+    insert_enchant = require('../../functions/insert/insert_enchant'),
+    insert_items = require('../../functions/insert/insert_items'),
+    insert_prospect = require('../../functions/insert/insert_prospect'),
+    insert_ress = require('../../functions/insert/insert_ress'),
+    insert_slots = require('../../functions/insert/insert_slots'),
+    insert_stats = require('../../functions/insert/insert_stats');
 
 module.exports = {
     data: {
@@ -20,10 +18,14 @@ module.exports = {
             fr: "Affiche votre profil."
         }
     },
+    /**
+     * @param {import('discord.js').Client} client
+     * @param {import('discord.js').CommandInteraction} interaction
+     */
     async execute(client, interaction) {
-        const databaselogs = client.channels.cache.find(ch => ch.id === '1065830709652103168');
-
         const { user } = interaction;
+        const databaselogs = client.channels.cache.find(ch => ch.id === '1065830709652103168');
+        
         const userid = user.id;
         const con = client.connection;
         const player = await client.getPlayer(con, userid);
@@ -43,14 +45,14 @@ module.exports = {
             const badgesArray = [];
             if (badges) {
                 badges.forEach(badge => {
-                    badgesArray.push(Default.badges[badge])
+                    badgesArray.push(client.Default.badges[badge])
                 });
             }
 
             const embed = new EmbedBuilder()
                 .setAuthor({ name: user.tag, value: user.displayAvatarURL() })
                 .addFields(
-                    { name: "Informations", value: `:notepad_spiral: Title : null\n${Emotes.trophy}Achievement Point : X`, inline: true },
+                    { name: "Informations", value: `:notepad_spiral: Title : null\n${client.applicationEmotes.trophy}Achievement Point : X`, inline: true },
                     { name: `Badges (${badges.length || 0})`, value: `${badgesArray.join("") || " "}` , inline: true },
                     { name: "Other stats", value: `Claimed Daily: ${player.stats.daily}\nClaimed Hourly: ${player.stats.HR}\nExecuted Commands: ${player.stats.cmd}`, inline: true },
                     { name: "Ornement", value: "X" }

@@ -1,5 +1,4 @@
 const { ApplicationCommandOptionType } = require("discord.js");
-const Default = require("../../../utils/default.json");
 
 module.exports = {
     data: {
@@ -24,17 +23,17 @@ module.exports = {
             }
         ]
     },
+    /**
+     * @param {import('discord.js').Client} client
+     * @param {import('discord.js').CommandInteraction} interaction
+     */
     async execute(client, interaction) {
-        const { user, options } = interaction;
-        const choice = options.getString('lang');
+        const choice = interaction.options.getString('lang');
+        var player = await client.getPlayer(client.connection, interaction.user.id);
 
-        const con = client.connection;
-        var player = await client.getPlayer(con, user.id);
-        if (!player) return interaction.reply(Default.notRegistered);
-
-        con.query(`UPDATE data SET lang = "${choice}" WHERE userid = ${user.id}`);
-        var player = await client.getPlayer(con, user.id);
-        const lang = require(`../../../utils/Text/${player.data.lang}.json`);
-        return interaction.reply(lang.confirmLanguage.replace("%s", `\`${choice}\``));
+        client.connection.query(`UPDATE data SET lang = "${choice}" WHERE userid = ${interaction.user.id}`);
+        var player = await client.getPlayer(client.connection, interaction.user.id);
+        const lang = require(`../../utils/Text/${player.data.lang}.json`);
+        return interaction.reply(client.translate(player.data.lang, 'confirmLanguage', `\`${choice}\``));
     }
 }

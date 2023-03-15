@@ -1,6 +1,5 @@
 const { ApplicationCommandOptionType } = require('discord.js');
-const manageChest = require('../../../functions/manageChest');
-const Default     = require('../../../utils/default.json');
+const manageChest = require('../../functions/manageChest');
 
 module.exports = {
     data: {
@@ -37,6 +36,10 @@ module.exports = {
             }
         ]
     },
+    /**
+     * @param {import('discord.js').Client} client
+     * @param {import('discord.js').CommandInteraction} interaction
+     */
     async execute(client, interaction) {
         const rarity = interaction.options.getString('rarity');
         const number = interaction.options.getNumber('quantity');
@@ -48,12 +51,9 @@ module.exports = {
             c: [76, 200],
             d: [1, 75]
         }
+        const player = await client.getPlayer(client.connection, interaction.user.id);
+        const lang = require(`../../utils/Text/${player.data.lang}.json`);
 
-        const con = client.connection
-        const player = await client.getPlayer(con, interaction.user.id);
-        if (!player) return interaction.reply(Default.notRegistered);
-        const lang = require(`../../../utils/Text/${player.data.lang}.json`);
-
-        manageChest(client, con, player, interaction, number, `chest_${rarity}`, `${lang.chest[`rarity_${rarity}`]}`, ...chests[rarity]);
+        manageChest(client, client.connection, player, interaction, number, `chest_${rarity}`, `${lang.chest[`rarity_${rarity}`]}`, ...chests[rarity]);
     }
 }

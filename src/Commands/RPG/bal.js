@@ -1,7 +1,3 @@
-const { nFormatter, translate } = require('../../../utils/u');
-const Emotes = require("../../../utils/emotes.json");
-const Default = require('../../../utils/default.json');
-
 module.exports = {
     data: {
         name: "balance",
@@ -13,13 +9,13 @@ module.exports = {
             fr: "Affiche votre solde."
         }
     },
+    /**
+     * @param {import('discord.js').Client} client
+     * @param {import('discord.js').CommandInteraction} interaction
+     */
     async execute(client, interaction) {
-        const { user } = interaction;
+        const player = await client.getPlayer(client.connection, interaction.user.id);
 
-        const con = client.connection;
-        const player = await client.getPlayer(con, user.id);
-        if (!player) return interaction.reply(Default.notRegistered);
-
-        interaction.reply(`💳 ► ${translate(player.data.lang, 'bal.actualBal', `**${nFormatter(player.data.money)}**${Emotes.cash}`)}`);
+        interaction.reply(`💳 ► ${client.translate(player.data.lang, 'bal.actualBal', `**${client.nFormatter(player.data.money)}**${client.Emotes.cash}`)}`);
     }
 }

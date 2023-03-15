@@ -1,7 +1,5 @@
 const { EmbedBuilder, ApplicationCommandOptionType } = require('discord.js');
-const manageProspecting = require('../../../functions/manageProspecting');
-const Emotes = require('../../../utils/emotes.json'),
-Default = require('../../../utils/default.json');
+const manageProspecting = require('../../functions/manageProspecting');
 
 module.exports = {
     data: {
@@ -45,15 +43,14 @@ module.exports = {
 
         const con = client.connection;
         const player = await client.getPlayer(con, user.id);
-        if (!player) return interaction.reply(Default.notRegistered);
-        const lang = require(`../../../utils/Text/${player.data.lang}.json`);
+        const lang = require(`../../utils/Text/${player.data.lang}.json`);
 
         const prospectEmbed = new EmbedBuilder()
             .setColor(member.displayColor)
             .setTitle(`${lang.prospect.title}`)
             .addFields(
                 { name: "Description", value: `${lang.prospect.description.replace("%s", '/')}` },
-                { name: "Documentation", value: `${lang.prospect.doc}150k ${Emotes.ressource} = 1 ${Emotes.gem}\n\n${Emotes.stone} => ${Emotes.sapphire} +1 Power\n${Emotes.coal} => ${Emotes.amber} -1 sec on energy cooldown\n${Emotes.copper} => ${Emotes.citrine} +1 Mana Max\n${Emotes.iron} => ${Emotes.ruby} +1 HP Max\n${Emotes.gold} => ${Emotes.jade} +1 ATK\n${Emotes.malachite} => ${Emotes.amethyst} +1 DEF` }    
+                { name: "Documentation", value: `${lang.prospect.doc}150k ${client.Emotes.ressource} = 1 ${client.Emotes.gem}\n\n${client.Emotes.stone} => ${client.Emotes.sapphire} +1 Power\n${client.Emotes.coal} => ${client.Emotes.amber} -1 sec on energy cooldown\n${client.Emotes.copper} => ${client.Emotes.citrine} +1 Mana Max\n${client.Emotes.iron} => ${client.Emotes.ruby} +1 HP Max\n${client.Emotes.gold} => ${client.Emotes.jade} +1 ATK\n${client.Emotes.malachite} => ${client.Emotes.amethyst} +1 DEF` }    
             )
             .setTimestamp()
             .setFooter({ text: `${client.user.username}`, iconURL: client.user.avatarURL() });

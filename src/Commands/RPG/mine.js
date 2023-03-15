@@ -1,7 +1,4 @@
 const { EmbedBuilder, ApplicationCommandOptionType } = require('discord.js');
-const { nFormatter } = require('../../../utils/u');
-const Emotes    = require('../../../utils/emotes.json'),
-    Default   = require('../../../utils/default.json');
 
 module.exports = {
     data: {
@@ -22,15 +19,17 @@ module.exports = {
             }
         ]
     },
+    /**
+     * @param {import('discord.js').Client} client
+     * @param {import('discord.js').CommandInteraction} interaction
+     */
     async execute(client, interaction) {
-        const { user, member, options } = interaction;
-        const amount = options.getString('energyamount');
+        const amount = interaction.options.getString('energyamount');
 
         const con = client.connection;
-        const player = await client.getPlayer(con, user.id);
-        if (!player) return interaction.reply(Default.notRegistered);
-        const Items = require(`../../../utils/Items/${player.data.lang}.json`);
-        const lang = require(`../../../utils/Text/${player.data.lang}.json`);
+        const player = await client.getPlayer(con, interaction.user.id);
+        const Items = require(`../../utils/Items/${player.data.lang}.json`);
+        const lang = require(`../../utils/Text/${player.data.lang}.json`);
         const maxEnergy = Items.objects.ring[player.items.ring].energy;
         const power = player.data.power;
 
@@ -55,26 +54,26 @@ module.exports = {
         }
 
         let ressLoot = [];
-        if (Stone)      ressLoot.push(`+ ${nFormatter(Stone)} ${Emotes.stone}`);
-        if (Coal)       ressLoot.push(`+ ${nFormatter(Coal)} ${Emotes.coal}`);
-        if (Copper)     ressLoot.push(`+ ${nFormatter(Copper)} ${Emotes.copper}`);
-        if (Iron)       ressLoot.push(`+ ${nFormatter(Iron)} ${Emotes.iron}`);
-        if (Gold)       ressLoot.push(`+ ${nFormatter(Gold)} ${Emotes.gold}`);
-        if (Malachite)  ressLoot.push(`+ ${nFormatter(Malachite)} ${Emotes.malachite}`);
+        if (Stone)      ressLoot.push(`+ ${client.nFormatter(Stone)} ${client.Emotes.stone}`);
+        if (Coal)       ressLoot.push(`+ ${client.nFormatter(Coal)} ${client.Emotes.coal}`);
+        if (Copper)     ressLoot.push(`+ ${client.nFormatter(Copper)} ${client.Emotes.copper}`);
+        if (Iron)       ressLoot.push(`+ ${client.nFormatter(Iron)} ${client.Emotes.iron}`);
+        if (Gold)       ressLoot.push(`+ ${client.nFormatter(Gold)} ${client.Emotes.gold}`);
+        if (Malachite)  ressLoot.push(`+ ${client.nFormatter(Malachite)} ${client.Emotes.malachite}`);
 
         let pickaxe = Items.tools.pickaxe[player.items.pickaxe];
 
         const embed = new EmbedBuilder()
-            .setAuthor({ name: `${user.tag}`, iconURL: user.displayAvatarURL() })
-            .setColor(member.displayColor)
+            .setAuthor({ name: `${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL() })
+            .setColor(interaction.member.displayColor)
             .setThumbnail("https://equity.guru/wp-content/uploads/2018/01/blockchain2.gif")
             .addFields(
                 { name: lang.mine.title, value: ressLoot.join("\n") }, //⚡ ${lang.mine.usedEnergy.replace("%s", manaAmount)}\n
-                { name: lang.mine.infos, value: `⚡ ${lang.mine.remainingEnergy.replace("%s", player.ress.energy-manaAmount + "/" + maxEnergy)}\n${Emotes.chests.Tools.rune_pickaxe} ${pickaxe.name}\n💪 ${lang.mine.power.replace("%s", player.data.power)}` }
+                { name: lang.mine.infos, value: `⚡ ${client.translate(player.data.lang, 'mine.remainingEnergy', player.ress.energy-manaAmount + "/" + maxEnergy)}\n${client.Emotes.chests.Tools.rune_pickaxe} ${pickaxe.name}\n💪 ${client.translate(player.data.lang, 'mine.power', player.data.power)}` }
             );//\n${lang.inventory.level}: ${player.items.pickaxe}\n${lang.inventory.enchant}: ${player.enchant.ench_pickaxe}`)
 
         interaction.reply({ embeds: [embed] });
 
-        con.query(`UPDATE ress SET energy = energy - ${manaAmount}, stone = stone + ${Stone}, coal = coal + ${Coal}, copper = copper + ${Copper}, iron = iron + ${Iron}, gold = gold + ${Gold}, malachite = malachite + ${Malachite} WHERE userid = ${user.id}`);
+        con.query(`UPDATE ress SET energy = energy - ${manaAmount}, stone = stone + ${Stone}, coal = coal + ${Coal}, copper = copper + ${Copper}, iron = iron + ${Iron}, gold = gold + ${Gold}, malachite = malachite + ${Malachite} WHERE userid = ${interaction.user.id}`);
     }
 }

@@ -1,7 +1,7 @@
 const { EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, ComponentType } = require('discord.js'),
-Default       = require('../../../utils/default.json'),
-Emotes        = require('../../../utils/emotes.json'),
-manageBind    = require('../../../functions/manageBind');
+Default       = require('../../utils/default.json'),
+Emotes        = require('../../utils/emotes.json'),
+manageBind    = require('../../functions/manageBind');
 
 module.exports = {
     data: {
@@ -21,8 +21,7 @@ module.exports = {
         const emptySocket = "https://cdn.discordapp.com/emojis/1084492365168922714.webp";
         const con = client.connection;
         const player = await client.getPlayer(con, user.id);
-        if (!player) return interaction.reply(`${Default.notRegistered}`);
-        const lang = require(`../../../utils/Text/${player.data.lang}.json`);
+        const lang = require(`../../utils/Text/${player.data.lang}.json`);
 
         const gearEmbed = new EmbedBuilder()
             .setColor(member.displayColor)
@@ -104,9 +103,7 @@ module.exports = {
             .addComponents(sockets);
 
         const bind = await interaction.reply({ components: [gearRow1, gearRow2], embeds: [gearEmbed], fetchReply: true });
-
-        const filter = (button) => button.user.id === interaction.user.id; //todo
-        const collector = bind.createMessageComponentCollector({ componentType: ComponentType.Button, filter, time: 60000 }); //collector for 60 seconds
+        const collector = bind.createMessageComponentCollector({ componentType: ComponentType.Button, time: 60000 });
 
         let gem;
         let part;
@@ -115,6 +112,7 @@ module.exports = {
 
         collector.on('collect', button => {
             if (!button.isButton()) return;
+            if (button.user.id !== interaction.user.id) return button.reply({ content: lang.notTheAuthorOfTheInteraction, ephemeral: true });
             if (gearArray.includes(button.customId)) {
                 part = button.customId;
                 button.update({ components: [gemRow1, gemRow2], embeds: [gemEmbed] });

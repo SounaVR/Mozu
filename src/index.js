@@ -1,5 +1,5 @@
 require('dotenv').config();
-const Mozu = require('../Classes/Client');
+const Mozu = require('./Classes/Client');
 
 const client = new Mozu();
 

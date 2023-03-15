@@ -1,6 +1,4 @@
 const { ApplicationCommandOptionType } = require('discord.js');
-const { getPlayer } = require('../../../utils/u');
-const Default = require("../../../utils/default.json");
 
 module.exports = {
     data: {
@@ -25,11 +23,9 @@ module.exports = {
         ]
     },
     async execute(client, interaction) {
-        const con = client.connection;
-        const player = await getPlayer(con, interaction.user.id);
-        if (!player) return interaction.reply(Default.notRegistered);
-        const lang = require(`../../../utils/Text/${player.data.lang}.json`);
         const choice = interaction.options.getString('top');
+        
+        const con = client.connection;
         
         switch (choice) {
             case 'money':

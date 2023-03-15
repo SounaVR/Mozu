@@ -1,7 +1,4 @@
-const { EmbedBuilder, ApplicationCommandOptionType } = require("discord.js"),
-    { translate } = require("../../../utils/u"),
-    Emotes    = require("../../../utils/emotes.json"),
-    Default   = require("../../../utils/default.json");
+const { EmbedBuilder, ApplicationCommandOptionType } = require("discord.js");
 
 module.exports = {
     data: {
@@ -58,15 +55,17 @@ module.exports = {
             }
         ]
     },
+    /**
+     * @param {import('discord.js').Client} client
+     * @param {import('discord.js').CommandInteraction} interaction
+     */
     async execute(client, interaction) {
-        const { options, user } = interaction;
-        const zone = options.getString("area");
-        const torchQuantity = options.getNumber("torch");
+        const zone = interaction.options.getString("area");
+        const torchQuantity = interaction.options.getNumber("torch");
 
         const con = client.connection;
-        const player = await client.getPlayer(con, user.id);
-        if (!player) return interaction.reply(Default.notRegistered);
-        const lang = require(`../../../utils/Text/${player.data.lang}.json`);
+        const player = await client.getPlayer(con, interaction.user.id);
+        const lang = require(`../../utils/Text/${player.data.lang}.json`);
 
         const chest = ["chest_d", "chest_c", "chest_b", "chest_a", "chest_s"];
         const array = [`${lang.explore.zone_0}`, `${lang.explore.zone_1}`, `${lang.explore.zone_2}`, `${lang.explore.zone_3}`, `${lang.explore.zone_4}`]
@@ -74,19 +73,19 @@ module.exports = {
         const reactZones = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣'];
         
         if (zone) {
-            if (zone == player.ress.zone) return interaction.reply(`${translate(player.data.lang, "explore.alreadyInZone", array[player.ress.zone])}`);
+            if (zone == player.ress.zone) return interaction.reply(`${client.translate(player.data.lang, "explore.alreadyInZone", array[player.ress.zone])}`);
             if (player.items.dungeon_amulet <= (zone - 1)) return interaction.reply(`${lang.explore.switchError}`);
 
-            con.query(`UPDATE ress SET zone = ${zone} WHERE userid = ${user.id}`);
+            con.query(`UPDATE ress SET zone = ${zone} WHERE userid = ${interaction.user.id}`);
 
             return interaction.reply({ content: `Vous entrez dans ► **${array[zone]}**.` });
         } else if (torchQuantity) {
             if (player.ress.torch < torchQuantity) return interaction.reply(`${lang.explore.notEnoughDungeonStone} (${player.ress.torch}/${torchQuantity} ${Emotes.torch})`);
             if (torchQuantity > 0) {
-                if (player.items.dungeon_amulet <= 0) return interaction.reply({ content: `${translate(player.data.lang, "explore.switchError")}`});
-                con.query(`UPDATE ress SET ${chest[player.ress.zone]} = ${player.ress[chest[player.ress.zone]] + Number(torchQuantity)}, torch = ${player.ress.torch - (torchQuantity)} WHERE userid = ${user.id}`)
+                if (player.items.dungeon_amulet <= 0) return interaction.reply({ content: `${client.translate(player.data.lang, "explore.switchError")}`});
+                con.query(`UPDATE ress SET ${chest[player.ress.zone]} = ${player.ress[chest[player.ress.zone]] + Number(torchQuantity)}, torch = ${player.ress.torch - (torchQuantity)} WHERE userid = ${interaction.user.id}`)
         
-                return interaction.reply(`${Emotes.torch_explore} ${translate(player.data.lang, "explore.explored", `**${array[player.ress.zone]}**`, `**${torchQuantity}**`, `**${rarity[player.ress.zone]}**`)}\n*${lang.explore.switch}*.`)
+                return interaction.reply(`${client.Emotes.torch_explore} ${client.translate(player.data.lang, "explore.explored", `**${array[player.ress.zone]}**`, `**${torchQuantity}**`, `**${rarity[player.ress.zone]}**`)}\n*${lang.explore.switch}*.`)
             }
         } else {
             const embed = new EmbedBuilder()
@@ -95,7 +94,7 @@ module.exports = {
                 .setDescription(`${lang.explore.description}`)
                 .addFields(
                     { name: `${lang.explore.currentLocation}`, value: `${array[player.ress.zone]}/${reactZones[player.ress.zone]}`},
-                    { name: `${lang.explore.torch}`, value: `${Emotes.torch} ${player.ress.torch}` }
+                    { name: `${lang.explore.torch}`, value: `${client.Emotes.torch} ${player.ress.torch}` }
                 )
                 .setTimestamp()
                 .setFooter({ text: `${client.user.username}`, iconURL: client.user.avatarURL()});
