@@ -16,26 +16,26 @@ module.exports = function manageChest(client, con, player, interaction, number, 
     var txt = [],
         txt2 = [],
         sql = [];
-    for (const runes in Default.runes.Weapons) {
+    for (const runes in client.Default.runes.Weapons) {
         const value = Danny.random(min, max);
         txt.push(`${client.Emotes.chests.Weapons[runes]} ${runes} : ${client.nFormatter(value)}`);
         sql.push(`${runes} = ${runes} + ${value}`);
     }
 
-    for (const rune in Default.runes.Tools) {
+    for (const rune in client.Default.runes.Tools) {
         var value = Danny.random(min, max);
         txt2.push(`${client.Emotes.chests.Tools[rune]} ${rune} : ${client.nFormatter(value)}`);
         sql.push(`${rune} = ${rune} + ${value}`);
 
-        for (const rune2 in Default.runes.Gear.P1) {
+        for (const rune2 in client.Default.runes.Gear.P1) {
             var value = Danny.random(min, max);
             txt2.push(`${client.Emotes.chests.Gear.P1[rune2]} ${rune2} : ${client.nFormatter(value)}`);
             sql.push(`${rune2} = ${rune2} + ${value}`);
         }
 
-        for (const rune3 in Default.runes.Gear.P2) {
+        for (const rune3 in client.Default.runes.Gear.P2) {
             var value = Danny.random(min, max);
-            txt2.push(`${Emotes.chests.Gear.P2[rune3]} ${rune3} : ${client.nFormatter(value)}`);
+            txt2.push(`${client.Emotes.chests.Gear.P2[rune3]} ${rune3} : ${client.nFormatter(value)}`);
             sql.push(`${rune3} = ${rune3} + ${value}`);
         }
     }

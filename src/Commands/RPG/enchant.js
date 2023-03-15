@@ -19,8 +19,6 @@ module.exports = {
                 choices: [
                     { name: 'Info', value: 'info' },
                     { name: 'Pioche', value: 'pickaxe' },
-                    { name: 'Info', value: 'info' },
-                    { name: 'Pioche', value: 'pickaxe' },
                     { name: 'Épée', value: 'sword' },
                     { name: 'Bouclier', value: 'shield' },
                     { name: 'Tête', value: 'head' },

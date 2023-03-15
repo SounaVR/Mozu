@@ -12,8 +12,8 @@ module.exports = async function manageProspecting(client, con, player, interacti
     embed.setTitle(`Do you want to prospect that ?`);
     let txt = [];
 
-    if (player.ress[ore] < getNeededRessource) txt.push(`${Emotes[ore]} ${ore} : ${client.nFormatter(getNeededRessource)} (${client.Emotes.cancel} - Missing ${client.nFormatter(Math.floor(getNeededRessource-player.ress[ore]))})`);
-    if (player.ress[ore] >= getNeededRessource) txt.push(`${Emotes[ore]} ${ore} : ${client.nFormatter(getNeededRessource)} (${client.Emotes.checked})`);
+    if (player.ress[ore] < getNeededRessource) txt.push(`${client.Emotes[ore]} ${ore} : ${client.nFormatter(getNeededRessource)} (${client.Emotes.cancel} - Missing ${client.nFormatter(Math.floor(getNeededRessource-player.ress[ore]))})`);
+    if (player.ress[ore] >= getNeededRessource) txt.push(`${client.Emotes[ore]} ${ore} : ${client.nFormatter(getNeededRessource)} (${client.Emotes.checked})`);
 
     embed.addFields(
         { name: `**${lang.craft.cost}**`, value: `${txt}` },

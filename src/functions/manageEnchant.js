@@ -25,8 +25,8 @@ module.exports = async function manageEnchant(client, con, player, interaction, 
     let txt = [];
     let reward = [];
 
-    if (player.ress[`rune_${object}`] < getNeededRessource) txt.push(`${client.Emotes.enchant[`rune_${object}`]} rune_${object} : ${nFormatter(getNeededRessource)} (${client.Emotes.cancel} - Missing ${nFormatter(Math.floor(getNeededRessource-player.ress[`rune_${object}`]))})`);
-    if (player.ress[`rune_${object}`] >= getNeededRessource) txt.push(`${client.Emotes.enchant[`rune_${object}`]} rune_${object} : ${nFormatter(getNeededRessource)} (${client.Emotes.checked})`);
+    if (player.ress[`rune_${object}`] < getNeededRessource) txt.push(`${client.Emotes.enchant[`rune_${object}`]} rune_${object} : ${client.nFormatter(getNeededRessource)} (${client.Emotes.cancel} - Missing ${nFormatter(Math.floor(getNeededRessource-player.ress[`rune_${object}`]))})`);
+    if (player.ress[`rune_${object}`] >= getNeededRessource) txt.push(`${client.Emotes.enchant[`rune_${object}`]} rune_${object} : ${client.nFormatter(getNeededRessource)} (${client.Emotes.checked})`);
 
     if (Enchant[category][object][0].ATK >= 1) reward.push(`${client.Emotes.ATK} ATK : ${player.data.ATK} => **${player.data.ATK + Enchant[category][object][0].ATK}**`);
     if (Enchant[category][object][0].DEF >= 1) reward.push(`${client.Emotes.DEF} DEF : ${player.data.DEF} => **${player.data.DEF + Enchant[category][object][0].DEF}**`);
@@ -64,7 +64,7 @@ module.exports = async function manageEnchant(client, con, player, interaction, 
                 if (object === "pickaxe") con.query(`UPDATE data SET power = ${player.data.power + Number(Enchant.tools.pickaxe[0].power)}`)
                 con.query(`UPDATE enchant SET ${objectName} = ${level} WHERE userid = ${interaction.user.id}`);
 
-                interaction.followUp(`${lang.enchant.enchantSuccess.replace("%s", `**${level}**`)}`);
+                button.reply(`${lang.enchant.enchantSuccess.replace("%s", `**${level}**`)}`);
                 collector.stop();
                 break;
         
