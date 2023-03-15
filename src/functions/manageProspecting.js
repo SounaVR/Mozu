@@ -1,6 +1,4 @@
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, ComponentType } = require('discord.js');
-const { nFormatter } = require('../utils/u');
-const Emotes = require('../utils/emotes.json');
 
 module.exports = async function manageProspecting(client, con, player, interaction, ore, quantity, gem, stat) {
     const lang = require(`../utils/Text/${player.data.lang}.json`);
@@ -14,12 +12,12 @@ module.exports = async function manageProspecting(client, con, player, interacti
     embed.setTitle(`Do you want to prospect that ?`);
     let txt = [];
 
-    if (player.ress[ore] < getNeededRessource) txt.push(`${Emotes[ore]} ${ore} : ${nFormatter(getNeededRessource)} (${Emotes.cancel} - Missing ${nFormatter(Math.floor(getNeededRessource-player.ress[ore]))})`);
-    if (player.ress[ore] >= getNeededRessource) txt.push(`${Emotes[ore]} ${ore} : ${nFormatter(getNeededRessource)} (${Emotes.checked})`);
+    if (player.ress[ore] < getNeededRessource) txt.push(`${Emotes[ore]} ${ore} : ${client.nFormatter(getNeededRessource)} (${client.Emotes.cancel} - Missing ${client.nFormatter(Math.floor(getNeededRessource-player.ress[ore]))})`);
+    if (player.ress[ore] >= getNeededRessource) txt.push(`${Emotes[ore]} ${ore} : ${client.nFormatter(getNeededRessource)} (${client.Emotes.checked})`);
 
     embed.addFields(
         { name: `**${lang.craft.cost}**`, value: `${txt}` },
-        { name: "**Reward**", value: `${Emotes[gem]} ${gem} x${quantity}\n*${stat}*` }
+        { name: "**Reward**", value: `${client.Emotes[gem]} ${gem} x${quantity}\n*${stat}*` }
     )
 
     let validButton = new ButtonBuilder().setStyle(ButtonStyle.Success).setEmoji(react[0]).setCustomId('valid');
@@ -29,11 +27,11 @@ module.exports = async function manageProspecting(client, con, player, interacti
         .addComponents([validButton, cancelButton]);
 
     const msg = await interaction.reply({ embeds: [embed], components: [buttonRow], fetchReply: true });
-
-    const filter = (interact) => interact.user.id === interaction.user.id;
-    const collector = msg.createMessageComponentCollector({ ComponentType: ComponentType.Button, filter, time: 30000 });
+    const collector = msg.createMessageComponentCollector({ ComponentType: ComponentType.Button, time: 30000 });
 
     collector.on('collect', button => {
+        if (button.user.id !== interaction.user.id) return button.reply({ content: lang.notTheAuthorOfTheInteraction, ephemeral: true });
+
         switch(button.customId) {
             case 'valid':
                 let need = [];
@@ -45,7 +43,7 @@ module.exports = async function manageProspecting(client, con, player, interacti
                 if (need.length >= 1) {
                     collector.stop();
                     msg.edit({ embeds: [embed], components: [] });
-                    return interaction.followUp(`${lang.prospect.notEnoughRess}`);
+                    return button.reply(`${lang.prospect.notEnoughRess}`);
                 }
 
                 con.query(`UPDATE ress SET ${resssql.join(',')} WHERE userid = ${interaction.user.id}`);
@@ -53,11 +51,11 @@ module.exports = async function manageProspecting(client, con, player, interacti
 
                 collector.stop();
                 msg.edit({ embeds: [embed], components: [] });
-                return interaction.followUp(`${lang.prospect.success.replace("%s", `${Emotes[gem]} **${gem}** x${quantity}`)}`);
+                return button.reply(`${client.translate(player.data.lang, 'lang.prospect.success', `${client.Emotes[gem]} **${gem}** x${quantity}`)}`);
 
             case 'cancel':
                 msg.edit({ embeds: [embed], components: [] });
-                return interaction.followUp(`${lang.prospect.canceled}`);
+                return button.reply(`${lang.prospect.canceled}`);
         }
     });
 }

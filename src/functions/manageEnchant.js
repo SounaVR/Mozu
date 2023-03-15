@@ -1,6 +1,4 @@
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, ComponentType } = require('discord.js');
-const { nFormatter } = require('../utils/u.js');
-const Emotes = require('../utils/emotes.json');
 
 module.exports = async function manageEnchant(client, con, player, interaction, category, object, objectName) {
     const Enchant = require(`../utils/Items/enchant.json`);
@@ -12,7 +10,7 @@ module.exports = async function manageEnchant(client, con, player, interaction, 
     const level = Math.floor(player.enchant[objectName])+1;
 
     const embed = new EmbedBuilder()
-    .setColor(interaction.member.displayColor);
+        .setColor(interaction.member.displayColor);
 
     let validButton = new ButtonBuilder().setStyle(ButtonStyle.Success).setEmoji(react[0]).setCustomId('valid');
     let cancelButton = new ButtonBuilder().setStyle(ButtonStyle.Danger).setEmoji(react[1]).setCustomId('cancel');
@@ -27,26 +25,27 @@ module.exports = async function manageEnchant(client, con, player, interaction, 
     let txt = [];
     let reward = [];
 
-    if (player.ress[`rune_${object}`] < getNeededRessource) txt.push(`${Emotes.enchant[`rune_${object}`]} rune_${object} : ${nFormatter(getNeededRessource)} (${Emotes.cancel} - Missing ${nFormatter(Math.floor(getNeededRessource-player.ress[`rune_${object}`]))})`);
-    if (player.ress[`rune_${object}`] >= getNeededRessource) txt.push(`${Emotes.enchant[`rune_${object}`]} rune_${object} : ${nFormatter(getNeededRessource)} (${Emotes.checked})`);
+    if (player.ress[`rune_${object}`] < getNeededRessource) txt.push(`${client.Emotes.enchant[`rune_${object}`]} rune_${object} : ${nFormatter(getNeededRessource)} (${client.Emotes.cancel} - Missing ${nFormatter(Math.floor(getNeededRessource-player.ress[`rune_${object}`]))})`);
+    if (player.ress[`rune_${object}`] >= getNeededRessource) txt.push(`${client.Emotes.enchant[`rune_${object}`]} rune_${object} : ${nFormatter(getNeededRessource)} (${client.Emotes.checked})`);
 
-    if (Enchant[category][object][0].ATK >= 1) reward.push(`${Emotes.ATK} ATK : ${player.data.ATK} => **${player.data.ATK + Enchant[category][object][0].ATK}**`);
-    if (Enchant[category][object][0].DEF >= 1) reward.push(`${Emotes.DEF} DEF : ${player.data.DEF} => **${player.data.DEF + Enchant[category][object][0].DEF}**`);
+    if (Enchant[category][object][0].ATK >= 1) reward.push(`${client.Emotes.ATK} ATK : ${player.data.ATK} => **${player.data.ATK + Enchant[category][object][0].ATK}**`);
+    if (Enchant[category][object][0].DEF >= 1) reward.push(`${client.Emotes.DEF} DEF : ${player.data.DEF} => **${player.data.DEF + Enchant[category][object][0].DEF}**`);
     if (object === "pickaxe") reward.push(`💪 Power : ${player.data.power} => **${player.data.power + Enchant.tools.pickaxe[0].power}**`);
 
     embed.addFields(
         { name: `**${lang.craft.cost}**`, value: txt.join("\n") },
-        { name: "**Reward**", value: `${Emotes.enchant[`rune_${object}`]} ${object} enchant level : ${level - 1} => **${level}**\n${reward.join("\n")}` }
+        { name: "**Reward**", value: `${client.Emotes.enchant[`rune_${object}`]} ${object} enchant level : ${level - 1} => **${level}**\n${reward.join("\n")}` }
     );
 
     const msg = await interaction.reply({ embeds: [embed], components: [buttonRow], fetchReply: true });
 
     if (player.ress[`rune_${object}`] < getNeededRessource) return;
-
-    const filter = (interact) => interact.user.id === interaction.user.id;
-    const collector = msg.createMessageComponentCollector({ ComponentType: ComponentType.Button, filter, time: 30000 });
+    const collector = msg.createMessageComponentCollector({ ComponentType: ComponentType.Button, time: 30000 });
 
     collector.on('collect', button => {
+        if (!button.isButton()) return;
+        if (button.user.id !== interaction.user.id) return button.reply({ content: lang.notTheAuthorOfTheInteraction, ephemeral: true });
+        
         validButton.setDisabled(true);
         cancelButton.setDisabled(true);
 

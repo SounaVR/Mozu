@@ -30,6 +30,8 @@ module.exports = {
 					con.query(`UPDATE ress SET energy = ${player.ress.energy} WHERE userid = ${interaction.user.id}`);
 					con.query(`UPDATE data SET lastActivity = ${Date.now()} WHERE userid = ${interaction.user.id}`);
 				}
+			} else if (!player && !interaction.commandName === "profile") {
+				return interaction.reply(client.Default.notRegistered);
 			}
 
 			await command.execute(client, interaction);		

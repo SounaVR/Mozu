@@ -1,6 +1,5 @@
 const { DB_HOST, DB_USER, DB_NAME, DB_PASS, MONGO_URL } = process.env;
 const { Events, ActivityType } = require('discord.js');
-const CommandsHandler = require('../Handlers/Commands');
 const moment  = require("moment"),
     // mongoose  = require('mongoose'),
     mysql     = require('mysql'),
@@ -35,7 +34,7 @@ module.exports = {
         // Initialize the SQL tables
         const tables = ["data", "enchant", "items", "prospect", "ress", "slots", "stats"];
         tables.forEach(async element => {
-            const thing = fs.readFileSync(`./sql/${element}.sql`).toString();
+            const thing = fs.readFileSync(`./src/sql/${element}.sql`).toString();
             con.query(thing, function (err) {
                 if (err) {
                     console.error("\nThe database is maybe offline. Please check and try again.\n")

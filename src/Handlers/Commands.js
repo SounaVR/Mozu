@@ -9,7 +9,7 @@ module.exports = async (client) => {
             const commands = fs.readdirSync(`${dir}${dirs}`).filter(f => f.endsWith(".js"));
 
             commands.forEach(file => {
-                let command = require(`../${dir}${dirs}/${file}`);
+                let command = require(`../Commands/${dirs}/${file}`);
                 if ("data" in command && "execute" in command) {
                     client.commands.set(command.data.name, command);
                     commandsArray.push(command.data);

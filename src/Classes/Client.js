@@ -1,5 +1,7 @@
 const { Client, Collection } = require("discord.js");
-const { getPlayer } = require("../utils/u");
+const { getPlayer, nFormatter, translate } = require("../utils/u");
+const Default = require("../utils/default.json");
+const Emotes = require("../utils/emotes.json");
 
 module.exports = class Mozu extends Client {
     constructor() {
@@ -14,5 +16,9 @@ module.exports = class Mozu extends Client {
         require("../Handlers/Commands")(this);
 
         this.getPlayer = getPlayer;
+        this.nFormatter = nFormatter;
+        this.translate = translate;
+        this.Default = Default;
+        this.Emotes = Emotes;
     }
 }
