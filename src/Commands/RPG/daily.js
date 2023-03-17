@@ -11,7 +11,8 @@ module.exports = {
      * @param {import('discord.js').CommandInteraction} interaction
      */
     async execute(client, interaction) {
-        const player = await client.getPlayer(client.connection, interaction.user.id);
+        const con = client.connection;
+        const player = await client.getPlayer(con, interaction.user.id);
         const lang = require(`../../utils/Text/${player.data.lang}.json`);
 
         if (player.data.lastDaily == 0) {

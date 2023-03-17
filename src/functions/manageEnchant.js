@@ -25,7 +25,7 @@ module.exports = async function manageEnchant(client, con, player, interaction, 
     let txt = [];
     let reward = [];
 
-    if (player.ress[`rune_${object}`] < getNeededRessource) txt.push(`${client.Emotes.enchant[`rune_${object}`]} rune_${object} : ${client.nFormatter(getNeededRessource)} (${client.Emotes.cancel} - Missing ${nFormatter(Math.floor(getNeededRessource-player.ress[`rune_${object}`]))})`);
+    if (player.ress[`rune_${object}`] < getNeededRessource) txt.push(`${client.Emotes.enchant[`rune_${object}`]} rune_${object} : ${client.nFormatter(getNeededRessource)} (${client.Emotes.cancel} - Missing ${client.nFormatter(Math.floor(getNeededRessource-player.ress[`rune_${object}`]))})`);
     if (player.ress[`rune_${object}`] >= getNeededRessource) txt.push(`${client.Emotes.enchant[`rune_${object}`]} rune_${object} : ${client.nFormatter(getNeededRessource)} (${client.Emotes.checked})`);
 
     if (Enchant[category][object][0].ATK >= 1) reward.push(`${client.Emotes.ATK} ATK : ${player.data.ATK} => **${player.data.ATK + Enchant[category][object][0].ATK}**`);

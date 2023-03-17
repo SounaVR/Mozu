@@ -123,7 +123,7 @@ module.exports = {
             let part = Items.armors[element][player.items[element]];
             let enchantmentLevel = player.enchant[`ench_${element}`] > 0 ? player.enchant[`ench_${element}`] + Number(0) : player.enchant[`ench_${element}`]
      
-            if (enchantmentLevel) embed4.addFields({ name: `${Emotes.enchant[`rune_${element}`]} ${lang.inventory[element]}:`, value: `${slot1 + "" + slot2 + "" + slot3}\n${part.name}\n${lang.inventory.level}: ${player.items[element]}\n[${lang.inventory.enchant} ${player.enchant[`ench_${element}`]}]`, inline: true })
+            if (enchantmentLevel) embed4.addFields({ name: `${client.Emotes.enchant[`rune_${element}`]} ${lang.inventory[element]}:`, value: `${slot1 + "" + slot2 + "" + slot3}\n${part.name}\n${lang.inventory.level}: ${player.items[element]}\n[${lang.inventory.enchant} ${player.enchant[`ench_${element}`]}]`, inline: true })
             else embed4.addFields({ name: `${client.Emotes.enchant[`rune_${element}`]} ${lang.inventory[element]}:`, value: `${slot1 + "" + slot2 + "" + slot3}\n${part.name}\n${lang.inventory.level}: ${player.items[element]}`, inline: true })
         });
 

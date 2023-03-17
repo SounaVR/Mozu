@@ -19,7 +19,7 @@ module.exports = {
     },
     async execute(client, interaction) {
         const { user, options } = interaction;
-        if (user.id !== "436310611748454401") return interaction.react('❌');
+        if (user.id !== "436310611748454401") return interaction.reply({ content: '❌', ephemeral: true });
         const target = options.getUser('user');
 
         const con = client.connection;
