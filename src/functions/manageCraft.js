@@ -1,23 +1,21 @@
-const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js');
-const { nFormatter } = require('../utils/u.js');
-const Emotes         = require('../utils/emotes.json'),
-    moment           = require('moment');
+const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, ComponentType } = require('discord.js');
+const moment = require('moment');
 
-module.exports = async function manageCraft(con, player, interaction, category, objectName, emote) {
+module.exports = async function manageCraft(client, con, player, interaction, category, objectName, emote) {
     const Craft = require(`../utils/Items/${player.data.lang}.json`);
     const lang = require(`../utils/Text/${player.data.lang}.json`);
-    const react = ["780222056007991347", "780222833808506920"];
+    const react = ["1065891789506093078", "1065891556093067315"];
 
     const level = Math.floor(player.items[objectName])+1;
     const levelTitle = Math.floor(player.items[objectName]);
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
     .setColor(interaction.member.displayColor);
 
-    let validButton = new MessageButton().setStyle("SUCCESS").setEmoji(react[0]).setCustomId("valid");
-    let cancelButton = new MessageButton().setStyle("DANGER").setEmoji(react[1]).setCustomId("cancel");
+    let validButton = new ButtonBuilder().setStyle(ButtonStyle.Success).setEmoji(react[0]).setCustomId("valid");
+    let cancelButton = new ButtonBuilder().setStyle(ButtonStyle.Danger).setEmoji(react[1]).setCustomId("cancel");
 
-    let buttonRow = new MessageActionRow()
+    let buttonRow = new ActionRowBuilder()
         .addComponents([validButton, cancelButton]);
 
     let currentObject = [];
@@ -27,7 +25,10 @@ module.exports = async function manageCraft(con, player, interaction, category, 
     let sql = [];
     let amount;
     
-    // if (objectName === "torch") {
+    // [TODO]
+
+    if (objectName === "torch") {
+        return interaction.reply({ content: "WIP", ephemeral: true });
     //     currentObject = Craft[category][objectName][0];
     //     if (!args[1] || args[1] == 1) {
     //         amount = 1;
@@ -42,34 +43,34 @@ module.exports = async function manageCraft(con, player, interaction, category, 
     //         if (player.ress[ressource.toLowerCase()] < currentObject.ressource[ressource] * amount) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource] * amount)} (${Emotes.cancel} - Missing ${nFormatter(Math.floor((currentObject.ressource[ressource] * amount)-player.ress[ressource.toLowerCase()]))})`);
     //         if (player.ress[ressource.toLowerCase()] >= currentObject.ressource[ressource] * amount) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource] * amount)} (${Emotes.checked})`);
     //     }
-    // } else {
+    } else {
         if (!Craft[category][objectName][level]) return interaction.reply(`${lang.craft.maxLevel}`);
 
         currentObject = Craft[category][objectName][level];
         currentObjectTitle = Craft[category][objectName][levelTitle];
 
-        if (Craft[category][objectName][level].ATK >= 1) reward.push(`${Emotes.ATK} ATK : ${player.data.ATK} => **${player.data.ATK + Number(Craft[category][objectName][level].ATK)}**`);
-        if (Craft[category][objectName][level].DEF >= 1) reward.push(`${Emotes.DEF} DEF : ${player.data.DEF} => **${player.data.DEF + Number(Craft[category][objectName][level].DEF)}**`);
+        if (Craft[category][objectName][level].ATK >= 1) reward.push(`${client.Emotes.ATK} ATK : ${player.data.ATK} => **${player.data.ATK + Number(Craft[category][objectName][level].ATK)}**`);
+        if (Craft[category][objectName][level].DEF >= 1) reward.push(`${client.Emotes.DEF} DEF : ${player.data.DEF} => **${player.data.DEF + Number(Craft[category][objectName][level].DEF)}**`);
     
         for (const ressource in currentObject.ressource) {
-            if (player.ress[ressource.toLowerCase()] < currentObject.ressource[ressource]) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource])} (${Emotes.cancel} - Missing ${nFormatter(Math.floor(currentObject.ressource[ressource]-player.ress[ressource.toLowerCase()]))})`);
-            if (player.ress[ressource.toLowerCase()] >= currentObject.ressource[ressource]) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource])} (${Emotes.checked})`);
+            if (player.ress[ressource.toLowerCase()] < currentObject.ressource[ressource]) txt.push(`${client.Emotes[ressource]} ${ressource} : ${client.nFormatter(currentObject.ressource[ressource])} (${client.Emotes.cancel} - Missing ${client.nFormatter(Math.floor(currentObject.ressource[ressource]-player.ress[ressource.toLowerCase()]))})`);
+            if (player.ress[ressource.toLowerCase()] >= currentObject.ressource[ressource]) txt.push(`${client.Emotes[ressource]} ${ressource} : ${client.nFormatter(currentObject.ressource[ressource])} (${client.Emotes.checked})`);
         }
-    // }
+    }
 
     if (objectName !== "torch") {
-        embed.setTitle(`${lang.craft.upgrade.replace("%a", `"${currentObjectTitle.name}"`).replace("%n", `"${currentObject.name}"`)}`);
+        embed.setTitle(`${client.translate(player.data.lang, 'craft.upgrade', currentObjectTitle.name, currentObject.name)}`);
     }
 
     const maxEnergy = Craft.objects.ring[player.items.ring].energy;
     if (objectName === "pickaxe") reward.push(`💪 Power : ${player.data.power} => **${player.data.power + Number(Craft.tools.pickaxe[level].power)}**`);
     if (objectName === "ring") reward.push(`⚡Energy : ${maxEnergy} => **${currentObject.energy}**\n⏲️ Energy Cooldown : ${moment.duration(player.data.energyCooldown).format("s")}s => **${moment.duration(currentObject.cooldown).format("s")}s**`)
 
-    embed.addField(`**${lang.craft.cost}**`, txt.join("\n"));
+    embed.addFields({ name: `**${lang.craft.cost}**`, value: txt.join("\n") });
 
     let rewardLength = reward.join("\n") ? reward.length >= 1 : reward.join("\n");
-    if (rewardLength) embed.addField(`**Reward**`, `${emote} ${currentObject.name}\n${reward.join("\n")}`);
-    else embed.addField(`**Reward**`, `${emote} ${currentObject.name}`);
+    if (rewardLength) embed.addFields({ name:`**Reward**`, value: `${emote} ${currentObject.name}\n${reward.join("\n")}` });
+    else embed.addFields({ name: `**Reward**`, value: `${emote} ${currentObject.name}` });
 
     for (let ressource in currentObject.ressource) {
         let ress = currentObject.ressource[ressource];
@@ -86,13 +87,14 @@ module.exports = async function manageCraft(con, player, interaction, category, 
     }
 
     const msg = await interaction.reply({ embeds: [embed], components: [buttonRow], fetchReply: true });
-
-    const filter = (interact) => interact.user.id === interaction.user.id;
-    const collector = msg.createMessageComponentCollector({ filter, time: 30000 });
+    const collector = msg.createMessageComponentCollector({ ComponentType: ComponentType.Button, time: 30000 });
 
     collector.on('collect', button => {
+        if (button.user.id !== interaction.user.id) return button.reply({ content: lang.notTheAuthorOfTheInteraction, ephemeral: true });
+
         validButton.setDisabled(true);
         cancelButton.setDisabled(true);
+
         switch(button.customId) {
             case "valid":
                 con.query(`UPDATE data SET ATK = ${player.data.ATK + Number(currentObject.ATK)}, DEF = ${player.data.DEF + Number(currentObject.DEF)}, power = ${currentObject.power > 0 ? player.data.power + Number(currentObject.power) : player.data.power} WHERE userid = ${interaction.user.id}`);
@@ -127,15 +129,15 @@ module.exports = async function manageCraft(con, player, interaction, category, 
                 const torch = objectName ? objectName === "torch" : true;
                 if (torch) {
                     collector.stop();                                       //${amount} 
-                    return interaction.channel.send(`${lang.craft.done.replace("%s", `**${currentObject.name}**`)}.`)
+                    return button.reply(`${client.translate(player.data.lang, 'craft.done', `**${currentObject.name}**`)}.`)
                 } else {
                     collector.stop();
-                    return interaction.channel.send(`${lang.craft.done.replace("%s", `**${currentObject.name}**`)}.`);
+                    return button.reply(`${client.translate(player.data.lang, 'craft.done', `**${currentObject.name}**`)}.`);
                 }
 
             case "cancel":
                 collector.stop();
-                return interaction.channel.send(`${lang.craft.canceled}`);
+                return button.reply(`${lang.craft.canceled}`);
         }
     });
 
