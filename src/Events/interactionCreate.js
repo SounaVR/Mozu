@@ -18,19 +18,24 @@ module.exports = {
 			if (player) {
 				const Items = require(`../utils/Items/${player.data.lang}.json`);
 				const maxEnergy = Items.objects.ring[player.items.ring].energy;
+				const maxHP = 50;
 				const energyCooldown = player.data.energyCooldown;
+				const hpCooldown = player.data.hpCooldown;
 				con.query(`UPDATE stats SET cmd = ${player.stats.cmd + Number(1)} WHERE userid = ${interaction.user.id}`);
 	
-				if ((Date.now() - player.data.lastActivity) - energyCooldown > 0) {
+				if ((Date.now() - player.data.lastActivity) - energyCooldown > 0 && (Date.now() - player.data.lastActivity) - hpCooldown > 0) {
 					const timeObj = Date.now() - player.data.lastActivity;
-					const gagnees = Math.floor(timeObj / energyCooldown);
+					const energy = Math.floor(timeObj / energyCooldown);
+					const hp = Math.floor(timeObj / hpCooldown);
 			
-					player.ress.energy = (player.ress.energy || 0) + gagnees;
+					player.ress.energy = (player.ress.energy || 0) + energy;
+					player.data.HP = (player.data.HP || 0) + hp;
 					if (player.ress.energy > maxEnergy) player.ress.energy = maxEnergy;
+					if (player.data.HP > maxHP) player.data.HP = maxHP;
 					con.query(`UPDATE ress SET energy = ${player.ress.energy} WHERE userid = ${interaction.user.id}`);
-					con.query(`UPDATE data SET lastActivity = ${Date.now()} WHERE userid = ${interaction.user.id}`);
+					con.query(`UPDATE data SET lastActivity = ${Date.now()}, HP = ${player.data.HP} WHERE userid = ${interaction.user.id}`);
 				}
-			} else if (!player && !interaction.commandName === "profile") {
+			} else if (!player && interaction.commandName !== "profile") {
 				return interaction.reply(client.Default.notRegistered);
 			}
 

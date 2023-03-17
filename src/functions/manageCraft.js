@@ -51,6 +51,7 @@ module.exports = async function manageCraft(client, con, player, interaction, ca
 
         if (Craft[category][objectName][level].ATK >= 1) reward.push(`${client.Emotes.ATK} ATK : ${player.data.ATK} => **${player.data.ATK + Number(Craft[category][objectName][level].ATK)}**`);
         if (Craft[category][objectName][level].DEF >= 1) reward.push(`${client.Emotes.DEF} DEF : ${player.data.DEF} => **${player.data.DEF + Number(Craft[category][objectName][level].DEF)}**`);
+        if (Craft[category][objectName][level].HP >= 1) reward.push(`♥ HP : ${player.data.HP} => **${player.data.HP + Number(Craft[category][objectName][level].HP)}**`);
     
         for (const ressource in currentObject.ressource) {
             if (player.ress[ressource.toLowerCase()] < currentObject.ressource[ressource]) txt.push(`${client.Emotes[ressource]} ${ressource} : ${client.nFormatter(currentObject.ressource[ressource])} (${client.Emotes.cancel} - Missing ${client.nFormatter(Math.floor(currentObject.ressource[ressource]-player.ress[ressource.toLowerCase()]))})`);
@@ -97,7 +98,7 @@ module.exports = async function manageCraft(client, con, player, interaction, ca
 
         switch(button.customId) {
             case "valid":
-                con.query(`UPDATE data SET ATK = ${player.data.ATK + Number(currentObject.ATK)}, DEF = ${player.data.DEF + Number(currentObject.DEF)}, power = ${currentObject.power > 0 ? player.data.power + Number(currentObject.power) : player.data.power} WHERE userid = ${interaction.user.id}`);
+                con.query(`UPDATE data SET ATK = ${player.data.ATK + Number(currentObject.ATK)}, DEF = ${player.data.DEF + Number(currentObject.DEF)}, power = ${currentObject.power > 0 ? player.data.power + Number(currentObject.power) : player.data.power}, HP = ${currentObject.HP > 0 ? player.data.HP + Number(currentObject.HP) : player.data.HP} WHERE userid = ${interaction.user.id}`);
                 con.query(`UPDATE ress SET ${sql.join(',')} WHERE userid = ${interaction.user.id}`);
                 switch (objectName) {
                     case "torch":                                       //+ Number(amount)
@@ -112,19 +113,6 @@ module.exports = async function manageCraft(client, con, player, interaction, ca
                     default:
                         con.query(`UPDATE items SET ${objectName} = ${level} WHERE userid = ${interaction.user.id}`);
                         break;
-                }
-                if (category === "armors") {
-                    switch (level) {
-                        case 1:
-                            con.query(`UPDATE slots SET slot_a_${objectName} = 0 WHERE userid = ${interaction.user.id}`);
-                            break;
-                        case 2:
-                            con.query(`UPDATE slots SET slot_b_${objectName} = 0 WHERE userid = ${interaction.user.id}`);
-                            break;
-                        case 3:
-                            con.query(`UPDATE slots SET slot_c_${objectName} = 0 WHERE userid = ${interaction.user.id}`);
-                            break;
-                    }
                 }
                 const torch = objectName ? objectName === "torch" : true;
                 if (torch) {
