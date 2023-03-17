@@ -1,4 +1,3 @@
-const { getPremiumDuration } = require("../../utils/u");
 const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
@@ -15,7 +14,7 @@ module.exports = {
      */
     async execute(client, interaction) {
         const booster = interaction.guild.members.cache.get(interaction.user.id);
-        const b = getPremiumDuration(booster);
+        const b = client.getPremiumDuration(booster);
         
         let text = booster.premiumSinceTimestamp ? `${b.years}y ${b.months}m ${b.days}j ${b.hours}h ${b.minutes}m ${b.seconds}s` : "None"
 

@@ -25,9 +25,7 @@ module.exports = {
      */
     async execute(client, interaction) {
         const amount = interaction.options.getString('energyamount');
-
-        const con = client.connection;
-        const player = await client.getPlayer(con, interaction.user.id);
+        const player = await client.getPlayer(interaction.user.id);
         const Items = require(`../../utils/Items/${player.data.lang}.json`);
         const lang = require(`../../utils/Text/${player.data.lang}.json`);
         const maxEnergy = Items.objects.ring[player.items.ring].energy;
@@ -74,6 +72,6 @@ module.exports = {
 
         interaction.reply({ embeds: [embed] });
 
-        con.query(`UPDATE ress SET energy = energy - ${manaAmount}, stone = stone + ${Stone}, coal = coal + ${Coal}, copper = copper + ${Copper}, iron = iron + ${Iron}, gold = gold + ${Gold}, malachite = malachite + ${Malachite} WHERE userid = ${interaction.user.id}`);
+        client.query(`UPDATE ress SET energy = energy - ${manaAmount}, stone = stone + ${Stone}, coal = coal + ${Coal}, copper = copper + ${Copper}, iron = iron + ${Iron}, gold = gold + ${Gold}, malachite = malachite + ${Malachite} WHERE userid = ${interaction.user.id}`);
     }
 }

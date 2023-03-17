@@ -1,7 +1,7 @@
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, ComponentType } = require('discord.js');
 const moment = require('moment');
 
-module.exports = async function manageCraft(client, con, player, interaction, category, objectName, emote) {
+module.exports = async function manageCraft(client, player, interaction, category, objectName, emote) {
     const Craft = require(`../utils/Items/${player.data.lang}.json`);
     const lang = require(`../utils/Text/${player.data.lang}.json`);
     const react = ["1065891789506093078", "1065891556093067315"];
@@ -90,7 +90,7 @@ module.exports = async function manageCraft(client, con, player, interaction, ca
     const msg = await interaction.reply({ embeds: [embed], components: [buttonRow], fetchReply: true });
     const collector = msg.createMessageComponentCollector({ ComponentType: ComponentType.Button, time: 30000 });
 
-    collector.on('collect', button => {
+    collector.on('collect', async button => {
         if (button.user.id !== interaction.user.id) return button.reply({ content: lang.notTheAuthorOfTheInteraction, ephemeral: true });
 
         validButton.setDisabled(true);
@@ -98,20 +98,20 @@ module.exports = async function manageCraft(client, con, player, interaction, ca
 
         switch(button.customId) {
             case "valid":
-                con.query(`UPDATE data SET ATK = ${player.data.ATK + Number(currentObject.ATK)}, DEF = ${player.data.DEF + Number(currentObject.DEF)}, power = ${currentObject.power > 0 ? player.data.power + Number(currentObject.power) : player.data.power}, HP = ${currentObject.HP > 0 ? player.data.HP + Number(currentObject.HP) : player.data.HP} WHERE userid = ${interaction.user.id}`);
-                con.query(`UPDATE ress SET ${sql.join(',')} WHERE userid = ${interaction.user.id}`);
+                await client.query(`UPDATE data SET ATK = ${player.data.ATK + Number(currentObject.ATK)}, DEF = ${player.data.DEF + Number(currentObject.DEF)}, power = ${currentObject.power > 0 ? player.data.power + Number(currentObject.power) : player.data.power}, HP = ${currentObject.HP > 0 ? player.data.HP + Number(currentObject.HP) : player.data.HP} WHERE userid = ${interaction.user.id}`);
+                await client.query(`UPDATE ress SET ${sql.join(',')} WHERE userid = ${interaction.user.id}`);
                 switch (objectName) {
                     case "torch":                                       //+ Number(amount)
-                        con.query(`UPDATE ress SET torch = ${player.ress.torch} WHERE userid = ${interaction.user.id}`);
+                        await client.query(`UPDATE ress SET torch = ${player.ress.torch} WHERE userid = ${interaction.user.id}`);
                         break;
 
                     case "ring":
-                        con.query(`UPDATE data SET energyCooldown = ${currentObject.cooldown} WHERE userid = ${interaction.user.id}`);
-                        con.query(`UPDATE items SET ${objectName} = ${level} WHERE userid = ${interaction.user.id}`);
+                        await client.query(`UPDATE data SET energyCooldown = ${currentObject.cooldown} WHERE userid = ${interaction.user.id}`);
+                        await client.query(`UPDATE items SET ${objectName} = ${level} WHERE userid = ${interaction.user.id}`);
                         break;
                 
                     default:
-                        con.query(`UPDATE items SET ${objectName} = ${level} WHERE userid = ${interaction.user.id}`);
+                        await client.query(`UPDATE items SET ${objectName} = ${level} WHERE userid = ${interaction.user.id}`);
                         break;
                 }
                 const torch = objectName ? objectName === "torch" : true;

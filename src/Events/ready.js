@@ -7,16 +7,6 @@ const moment  = require("moment"),
     fs        = require('fs');
 moment.locale("fr");
 
-const con = mysql.createConnection({
-    multipleStatements: true,
-    encoding: 'utf8',
-    charset: 'utf8mb4',
-    host: DB_HOST,
-    user: DB_USER,
-    password: DB_PASS,
-    database: DB_NAME
-});
-
 module.exports = {
     name: Events.ClientReady,
     once: true,
@@ -29,13 +19,12 @@ module.exports = {
         // }).catch((err) => {
         //     console.log(err);
         // });
-        client.connection = con;
 
         // Initialize the SQL tables
         const tables = ["data", "enchant", "items", "prospect", "ress", "slots", "stats"];
         tables.forEach(async element => {
             const thing = fs.readFileSync(`./src/sql/${element}.sql`).toString();
-            con.query(thing, function (err) {
+            client.query(thing, function (err) {
                 if (err) {
                     console.error("\nThe database is maybe offline. Please check and try again.\n")
                     throw err;

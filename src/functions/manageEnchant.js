@@ -1,6 +1,6 @@
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, ComponentType } = require('discord.js');
 
-module.exports = async function manageEnchant(client, con, player, interaction, category, object, objectName) {
+module.exports = async function manageEnchant(client, player, interaction, category, object, objectName) {
     const Enchant = require(`../utils/Items/enchant.json`);
     const lang = require(`../utils/Text/${player.data.lang}.json`);
     const react = ['1065891789506093078', '1065891556093067315'];
@@ -42,7 +42,7 @@ module.exports = async function manageEnchant(client, con, player, interaction, 
     if (player.ress[`rune_${object}`] < getNeededRessource) return;
     const collector = msg.createMessageComponentCollector({ ComponentType: ComponentType.Button, time: 30000 });
 
-    collector.on('collect', button => {
+    collector.on('collect', async button => {
         if (!button.isButton()) return;
         if (button.user.id !== interaction.user.id) return button.reply({ content: lang.notTheAuthorOfTheInteraction, ephemeral: true });
         
@@ -59,10 +59,10 @@ module.exports = async function manageEnchant(client, con, player, interaction, 
 
                 if (need.length >= 1) return interaction.reply(`${lang.enchant.notEnoughRess}`);
 
-                con.query(`UPDATE ress SET ${resssql.join(',')} WHERE userid = ${interaction.user.id}`);
-                con.query(`UPDATE data SET ATK = ${player.data.ATK + Number(Enchant[category][object][0].ATK)}, DEF = ${player.data.DEF + Number(Enchant[category][object][0].DEF)} WHERE userid = ${interaction.user.id}`);
-                if (object === "pickaxe") con.query(`UPDATE data SET power = ${player.data.power + Number(Enchant.tools.pickaxe[0].power)}`)
-                con.query(`UPDATE enchant SET ${objectName} = ${level} WHERE userid = ${interaction.user.id}`);
+                await client.query(`UPDATE ress SET ${resssql.join(',')} WHERE userid = ${interaction.user.id}`);
+                await client.query(`UPDATE data SET ATK = ${player.data.ATK + Number(Enchant[category][object][0].ATK)}, DEF = ${player.data.DEF + Number(Enchant[category][object][0].DEF)} WHERE userid = ${interaction.user.id}`);
+                if (object === "pickaxe") await client.query(`UPDATE data SET power = ${player.data.power + Number(Enchant.tools.pickaxe[0].power)}`)
+                await client.query(`UPDATE enchant SET ${objectName} = ${level} WHERE userid = ${interaction.user.id}`);
 
                 button.reply(`${lang.enchant.enchantSuccess.replace("%s", `**${level}**`)}`);
                 collector.stop();

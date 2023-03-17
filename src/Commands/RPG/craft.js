@@ -43,9 +43,8 @@ module.exports = {
      */
     async execute(client, interaction) {
         const value = interaction.options.getString('équipement');
-
-        const con = client.connection;
-        const player = await client.getPlayer(con, interaction.user.id);
+        
+        const player = await client.getPlayer(interaction.user.id);
         const lang = require(`../../utils/Text/${player.data.lang}.json`);
 
         const craftEmbed = new EmbedBuilder()
@@ -61,33 +60,33 @@ module.exports = {
 
         switch (value) {
             case "pickaxe":
-                return manageCraft(client, con, player, interaction, "tools", "pickaxe", client.Emotes.chests.Tools.rune_pickaxe);
+                return manageCraft(client, player, interaction, "tools", "pickaxe", client.Emotes.chests.Tools.rune_pickaxe);
             case "sword":
-                return manageCraft(client, con, player, interaction, "tools", "sword", client.Emotes.chests.Weapons.rune_sword);
+                return manageCraft(client, player, interaction, "tools", "sword", client.Emotes.chests.Weapons.rune_sword);
             case "shield":
-                return manageCraft(client, con, player, interaction, "tools", "shield", client.Emotes.chests.Weapons.rune_shield);
+                return manageCraft(client, player, interaction, "tools", "shield", client.Emotes.chests.Weapons.rune_shield);
             case "head":
-                return manageCraft(client, con, player, interaction, "armors", "head", client.Emotes.chests.Gear.P1.rune_head);
+                return manageCraft(client, player, interaction, "armors", "head", client.Emotes.chests.Gear.P1.rune_head);
             case "shoulders":
-                return manageCraft(client, con, player, interaction, "armors", "shoulders", client.Emotes.chests.Gear.P1.rune_shoulders);
+                return manageCraft(client, player, interaction, "armors", "shoulders", client.Emotes.chests.Gear.P1.rune_shoulders);
             case "chest":
-                return manageCraft(client, con, player, interaction, "armors", "chest", client.Emotes.chests.Gear.P1.rune_chest);
+                return manageCraft(client, player, interaction, "armors", "chest", client.Emotes.chests.Gear.P1.rune_chest);
             case "wrists":
-                return manageCraft(client, con, player, interaction, "armors", "wrists", client.Emotes.chests.Gear.P1.rune_wrists);
+                return manageCraft(client, player, interaction, "armors", "wrists", client.Emotes.chests.Gear.P1.rune_wrists);
             case "hands":
-                return manageCraft(client, con, player, interaction, "armors", "hands", client.Emotes.chests.Gear.P2.rune_hands);
+                return manageCraft(client, player, interaction, "armors", "hands", client.Emotes.chests.Gear.P2.rune_hands);
             case "waist":
-                return manageCraft(client, con, player, interaction, "armors", "waist", client.Emotes.chests.Gear.P2.rune_waist);
+                return manageCraft(client, player, interaction, "armors", "waist", client.Emotes.chests.Gear.P2.rune_waist);
             case "legs":
-                return manageCraft(client, con, player, interaction, "armors", "legs", client.Emotes.chests.Gear.P2.rune_legs);
+                return manageCraft(client, player, interaction, "armors", "legs", client.Emotes.chests.Gear.P2.rune_legs);
             case "feet":
-                return manageCraft(client, con, player, interaction, "armors", "feet", client.Emotes.chests.Gear.P2.rune_feet);
+                return manageCraft(client, player, interaction, "armors", "feet", client.Emotes.chests.Gear.P2.rune_feet);
             case "dungeon_amulet":
-                return manageCraft(client, con, player, interaction, "objects", "dungeon_amulet", client.Emotes.dungeon_amulet);
+                return manageCraft(client, player, interaction, "objects", "dungeon_amulet", client.Emotes.dungeon_amulet);
             case "ring":
-                return manageCraft(client, con, player, interaction, "objects", "ring", client.Emotes.ring);
+                return manageCraft(client, player, interaction, "objects", "ring", client.Emotes.ring);
             case "torch":
-                return manageCraft(client, con, player, interaction, "objects", "torch", client.Emotes.torch);
+                return manageCraft(client, player, interaction, "objects", "torch", client.Emotes.torch);
             case "info":
                 return interaction.reply({ embeds: [craftEmbed] });
         }

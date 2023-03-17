@@ -4,6 +4,9 @@ const manageDungeon = require('../../functions/manageDungeon.js');
 module.exports = {
     data: {
         name: 'dungeon',
+        nameLocalizations: {
+            fr: 'donjon'
+        },
         description: 'omagad is it DONJONS ?',
         descriptionLocalizations: {
             fr: 'omagad is it DONJONS ?'
@@ -14,8 +17,7 @@ module.exports = {
      * @param {import('discord.js').CommandInteraction} interaction
      */
     async execute(client, interaction) {
-        const con = client.connection;
-        const player = await client.getPlayer(con, interaction.user.id);
+        const player = await client.getPlayer(interaction.user.id);
         const react = ["1065891789506093078", "1065891556093067315"];
         
         let validButton = new ButtonBuilder().setStyle(ButtonStyle.Success).setEmoji(react[0]).setCustomId('valid');

@@ -22,15 +22,13 @@ module.exports = {
         if (user.id !== "436310611748454401") return interaction.reply({ content: '❌', ephemeral: true });
         const target = options.getUser('user');
 
-        const con = client.connection;
-
-        await con.query(`DELETE FROM data WHERE userid = ${target.id}`);
-        await con.query(`DELETE FROM enchant WHERE userid = ${target.id}`);
-        await con.query(`DELETE FROM items WHERE userid = ${target.id}`);
-        await con.query(`DELETE FROM prospect WHERE userid = ${target.id}`);
-        await con.query(`DELETE FROM ress WHERE userid = ${target.id}`);
-        await con.query(`DELETE FROM slots WHERE userid = ${target.id}`);
-        await con.query(`DELETE FROM stats WHERE userid = ${target.id}`);
+        await client.query(`DELETE FROM data WHERE userid = ${target.id}`);
+        await client.query(`DELETE FROM enchant WHERE userid = ${target.id}`);
+        await client.query(`DELETE FROM items WHERE userid = ${target.id}`);
+        await client.query(`DELETE FROM prospect WHERE userid = ${target.id}`);
+        await client.query(`DELETE FROM ress WHERE userid = ${target.id}`);
+        await client.query(`DELETE FROM slots WHERE userid = ${target.id}`);
+        await client.query(`DELETE FROM stats WHERE userid = ${target.id}`);
 
         await interaction.reply(`${target}/${target.id} has been DESTROYED :boom:.`);
     }

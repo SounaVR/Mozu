@@ -63,8 +63,7 @@ module.exports = {
         const zone = interaction.options.getString("area");
         const torchQuantity = interaction.options.getNumber("torch");
 
-        const con = client.connection;
-        const player = await client.getPlayer(con, interaction.user.id);
+        const player = await client.getPlayer(interaction.user.id);
         const lang = require(`../../utils/Text/${player.data.lang}.json`);
 
         const chest = ["chest_d", "chest_c", "chest_b", "chest_a", "chest_s"];
@@ -76,14 +75,14 @@ module.exports = {
             if (zone == player.ress.zone) return interaction.reply(`${client.translate(player.data.lang, "explore.alreadyInZone", array[player.ress.zone])}`);
             if (player.items.dungeon_amulet <= (zone - 1)) return interaction.reply(`${lang.explore.switchError}`);
 
-            con.query(`UPDATE ress SET zone = ${zone} WHERE userid = ${interaction.user.id}`);
+            await client.query(`UPDATE ress SET zone = ${zone} WHERE userid = ${interaction.user.id}`);
 
             return interaction.reply({ content: `Vous entrez dans ► **${array[zone]}**.` });
         } else if (torchQuantity) {
             if (player.ress.torch < torchQuantity) return interaction.reply(`${lang.explore.notEnoughDungeonStone} (${player.ress.torch}/${torchQuantity} ${Emotes.torch})`);
             if (torchQuantity > 0) {
                 if (player.items.dungeon_amulet <= 0) return interaction.reply({ content: `${client.translate(player.data.lang, "explore.switchError")}`});
-                con.query(`UPDATE ress SET ${chest[player.ress.zone]} = ${player.ress[chest[player.ress.zone]] + Number(torchQuantity)}, torch = ${player.ress.torch - (torchQuantity)} WHERE userid = ${interaction.user.id}`)
+                await client.query(`UPDATE ress SET ${chest[player.ress.zone]} = ${player.ress[chest[player.ress.zone]] + Number(torchQuantity)}, torch = ${player.ress.torch - (torchQuantity)} WHERE userid = ${interaction.user.id}`)
         
                 return interaction.reply(`${client.Emotes.torch_explore} ${client.translate(player.data.lang, "explore.explored", `**${array[player.ress.zone]}**`, `**${torchQuantity}**`, `**${rarity[player.ress.zone]}**`)}\n*${lang.explore.switch}*.`)
             }

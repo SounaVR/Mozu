@@ -19,8 +19,7 @@ module.exports = {
         const { user, member } = interaction;
 
         const emptySocket = "https://cdn.discordapp.com/emojis/1084492365168922714.webp";
-        const con = client.connection;
-        const player = await client.getPlayer(con, user.id);
+        const player = await client.getPlayer(user.id);
         const lang = require(`../../utils/Text/${player.data.lang}.json`);
 
         const gearEmbed = new EmbedBuilder()
@@ -124,7 +123,7 @@ module.exports = {
                 button.update({ components: [socketRow], embeds: [socketEmbed] });
             } else {
                 const slot = +(button.customId.at(-1));
-                manageBind(con, player, interaction, gem, part, stat, bind, number, slot);
+                manageBind(client.connection, player, interaction, gem, part, stat, bind, number, slot);
                 collector.stop();
             }
         });

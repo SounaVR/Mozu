@@ -40,9 +40,8 @@ module.exports = {
      */
     async execute(client, interaction) {
         const value = interaction.options.getString('gear');
-
-        const con = client.connection;
-        const player = await client.getPlayer(con, interaction.user.id);
+        
+        const player = await client.getPlayer(interaction.user.id);
         const lang = require(`../../utils/Text/${player.data.lang}.json`);
 
         const enchantEmbed = new EmbedBuilder()
@@ -58,27 +57,27 @@ module.exports = {
 
         switch (value) {
             case "pickaxe":
-                return manageEnchant(client, con, player, interaction, "tools", "pickaxe", "ench_pickaxe");
+                return manageEnchant(client, player, interaction, "tools", "pickaxe", "ench_pickaxe");
             case "sword":
-                return manageEnchant(client, con, player, interaction, "tools", "sword", "ench_sword");
+                return manageEnchant(client, player, interaction, "tools", "sword", "ench_sword");
             case "shield":
-                return manageEnchant(client, con, player, interaction, "tools", "shield", "ench_shield");
+                return manageEnchant(client, player, interaction, "tools", "shield", "ench_shield");
             case "head":
-                return manageEnchant(client, con, player, interaction, "armors", "head", "ench_head");
+                return manageEnchant(client, player, interaction, "armors", "head", "ench_head");
             case "shoulders":
-                return manageEnchant(client, con, player, interaction, "armors", "shoulders", "ench_shoulders");
+                return manageEnchant(client, player, interaction, "armors", "shoulders", "ench_shoulders");
             case "chest":
-                return manageEnchant(client, con, player, interaction, "armors", "chest", "ench_chest");
+                return manageEnchant(client, player, interaction, "armors", "chest", "ench_chest");
             case "wrists":
-                return manageEnchant(client, con, player, interaction, "armors", "wrists", "ench_wrists");
+                return manageEnchant(client, player, interaction, "armors", "wrists", "ench_wrists");
             case "hands":
-                return manageEnchant(client, con, player, interaction, "armors", "hands", "ench_hands");
+                return manageEnchant(client, player, interaction, "armors", "hands", "ench_hands");
             case "waist":
-                return manageEnchant(client, con, player, interaction, "armors", "waist", "ench_waist");
+                return manageEnchant(client, player, interaction, "armors", "waist", "ench_waist");
             case "legs":
-                return manageEnchant(client, con, player, interaction, "armors", "legs", "ench_legs");
+                return manageEnchant(client, player, interaction, "armors", "legs", "ench_legs");
             case "feet":
-                return manageEnchant(client, con, player, interaction, "armors", "feet", "ench_feet");
+                return manageEnchant(client, player, interaction, "armors", "feet", "ench_feet");
             case "info":
                 return interaction.reply({ embeds: [enchantEmbed] });
         }

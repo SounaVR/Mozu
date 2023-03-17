@@ -1,6 +1,6 @@
 const { EmbedBuilder } = require('discord.js');
 
-module.exports = function manageChest(client, con, player, interaction, number, objectName, rarityName, min, max) {
+module.exports = function manageChest(client, player, interaction, number, objectName, rarityName, min, max) {
     const lang = require(`../utils/Text/${player.data.lang}.json`);
     const userid = interaction.user.id;
 
@@ -39,7 +39,7 @@ module.exports = function manageChest(client, con, player, interaction, number, 
             sql.push(`${rune3} = ${rune3} + ${value}`);
         }
     }
-    con.query(`UPDATE ress SET ${sql.join(",")}, ${objectName} = ${player.ress[objectName] - number} WHERE userid = ${userid}`);
+    client.query(`UPDATE ress SET ${sql.join(",")}, ${objectName} = ${player.ress[objectName] - number} WHERE userid = ${userid}`);
     embed.addFields({ name: `**Gain**`, value: `${txt.join("\n")}\n${txt2.join("\n")}` });
 
     return interaction.reply({ embeds: [embed] });

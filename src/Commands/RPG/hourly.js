@@ -13,7 +13,7 @@ module.exports = {
      * @param {import('discord.js').CommandInteraction} interaction
      */
     async execute(client, interaction) {
-        const player = await client.getPlayer(client.connection, interaction.user.id);
+        const player = await client.getPlayer(interaction.user.id);
         const lang = require(`../../utils/Text/${player.data.lang}.json`);
         let cooldown = 3600000;
         const energy = Math.ceil(Math.random() * 15)+5;
@@ -23,11 +23,11 @@ module.exports = {
         
             return interaction.reply(`${lang.hr.notNow.replace("%s", `**${timeObj.minutes}m${timeObj.seconds}sec**`)} !`);
         } else {
-            client.connection.query(`UPDATE data SET lastHR = ${Date.now()}, money = ${player.data.money + Number(30)} WHERE userid = ${interaction.user.id}`);
-            client.connection.query(`UPDATE ress SET energy = ${player.ress.energy + Number(energy)} WHERE userid = ${interaction.user.id}`);
-            client.connection.query(`UPDATE stats SET HR = ${player.stats.HR + Number(1)} WHERE userid = ${interaction.user.id}`);
+            client.query(`UPDATE data SET lastHR = ${Date.now()}, money = ${player.data.money + Number(30)} WHERE userid = ${interaction.user.id}`);
+            client.query(`UPDATE ress SET energy = ${player.ress.energy + Number(energy)} WHERE userid = ${interaction.user.id}`);
+            client.query(`UPDATE stats SET HR = ${player.stats.HR + Number(1)} WHERE userid = ${interaction.user.id}`);
 
-            return interaction.reply(`${client.translate(player.data.lang, 'lang.hr.done', `${energy} ${client.Emotes.energy}`)}`);
+            return interaction.reply(`${client.translate(player.data.lang, 'hr.done', `${energy} ${client.Emotes.energy}`)}`);
         }
     }
 }

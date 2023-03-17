@@ -1,6 +1,5 @@
 require("moment-duration-format");
 const { EmbedBuilder } = require('discord.js');
-const { buttonPages } = require('../../utils/u.js');
 const Player = require('../../Classes/Player');
 const moment         = require('moment');
 
@@ -14,7 +13,7 @@ module.exports = {
 
     },
     async execute(client, interaction) {
-        let player = await client.getPlayer(client.connection, interaction.user.id);
+        let player = await client.getPlayer(interaction.user.id);
         const Items = require(`../../utils/Items/${player.data.lang}.json`);
         const lang = require(`../../utils/Text/${player.data.lang}.json`);
 
@@ -147,6 +146,6 @@ module.exports = {
             embed5
         ];
 
-        buttonPages(interaction, pages);
+        client.buttonPages(interaction, pages);
     }
 }

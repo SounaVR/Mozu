@@ -28,7 +28,7 @@ module.exports = {
         
         const userid = user.id;
         const con = client.connection;
-        const player = await client.getPlayer(con, userid);
+        const player = await client.getPlayer(userid);
         
         if (!player) {
             insert_data(client, con, player, interaction, databaselogs, userid);

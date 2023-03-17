@@ -51,9 +51,9 @@ module.exports = {
             c: [76, 200],
             d: [1, 75]
         }
-        const player = await client.getPlayer(client.connection, interaction.user.id);
+        const player = await client.getPlayer(interaction.user.id);
         const lang = require(`../../utils/Text/${player.data.lang}.json`);
 
-        manageChest(client, client.connection, player, interaction, number, `chest_${rarity}`, `${lang.chest[`rarity_${rarity}`]}`, ...chests[rarity]);
+        manageChest(client, player, interaction, number, `chest_${rarity}`, `${lang.chest[`rarity_${rarity}`]}`, ...chests[rarity]);
     }
 }

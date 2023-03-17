@@ -41,8 +41,7 @@ module.exports = {
         const ore = options.getString('ore');
         let amount = options.getNumber('quantity');
 
-        const con = client.connection;
-        const player = await client.getPlayer(con, user.id);
+        const player = await client.getPlayer(user.id);
         const lang = require(`../../utils/Text/${player.data.lang}.json`);
 
         const prospectEmbed = new EmbedBuilder()
@@ -60,17 +59,17 @@ module.exports = {
 
         switch (ore) {
             case "stone":
-                return manageProspecting(client, con, player, interaction, "stone", amount, "sapphire", "+Power");
+                return manageProspecting(client, player, interaction, "stone", amount, "sapphire", "+Power");
             case "coal":
-                return manageProspecting(client, con, player, interaction, "coal", amount, "amber", "-energy cooldown");
+                return manageProspecting(client, player, interaction, "coal", amount, "amber", "-energy cooldown");
             case "copper":
-                return manageProspecting(client, con, player, interaction, "copper", amount, "citrine", "+Mana Max");
+                return manageProspecting(client, player, interaction, "copper", amount, "citrine", "+Mana Max");
             case "iron":
-                return manageProspecting(client, con, player, interaction, "iron", amount, "ruby", "+HP Max");
+                return manageProspecting(client, player, interaction, "iron", amount, "ruby", "+HP Max");
             case "gold":
-                return manageProspecting(client, con, player, interaction, "gold", amount, "jade", "+ATK");
+                return manageProspecting(client, player, interaction, "gold", amount, "jade", "+ATK");
             case "malachite":
-                return manageProspecting(client, con, player, interaction, "malachite", amount, "amethyst", "+DEF");
+                return manageProspecting(client, player, interaction, "malachite", amount, "amethyst", "+DEF");
         }
     }
 }

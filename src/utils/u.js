@@ -1,40 +1,26 @@
-const { format } = require("util");
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType } = require("discord.js");
+const { format } = require("util");
 
-module.exports = {
+module.exports = (client) => ({
+    query: client.connection.query.bind(client.connection),
+   
     /**
-     * @param {client.connection} con 
      * @param {userid} player
      * @example
      * const player = getPlayer(con, interaction.user.id);
      * console.log(player.data.userid);
      * @returns {Promise<object>} Returns the whole desired column from anywhere in the code
      */
-    getPlayer: async function(con, player) {
-        return new Promise(function(resolve, reject) {
-            con.query(`SELECT * FROM data WHERE userid = ${player}`, function(err, data) {
-            if (!data[0]) return resolve(false)
-                con.query(`SELECT * FROM ress WHERE userid = ${player}`, function(err, ress) {
-                if (!ress[0]) return resolve(false)
-                    con.query(`SELECT * FROM items WHERE userid = ${player}`, function(err, items) {
-                    if (!items[0]) return resolve(false)
-                        con.query(`SELECT * FROM enchant WHERE userid = ${player}`, function(err, enchant) {
-                        if (!enchant[0]) return resolve(false)
-                            con.query(`SELECT * FROM prospect WHERE userid = ${player}`, function(err, prospect) {
-                            if (!prospect[0]) return resolve(false)
-                                con.query(`SELECT * FROM slots WHERE userid = ${player}`, function(err, slots) {
-                                if (!slots[0]) return resolve(false)
-                                    con.query(`SELECT * FROM stats WHERE userid = ${player}`, function(err, stats) {
-                                    if (!stats[0]) return resolve(false)
-                                    resolve({data:data[0],ress:ress[0],items:items[0],enchant:enchant[0],prospect:prospect[0],slots:slots[0],stats:stats[0]})
-                                    })
-                                })
-                            })
-                        })
-                    })
-                })
-            })
-        });
+    getPlayer: async function(player) {
+        const result = {};
+        result.data = await client.connection.query(`SELECT * FROM data WHERE userid = ${player}`);
+        result.ress = await client.connection.query(`SELECT * FROM ress WHERE userid = ${player}`);
+        result.items = await client.connection.query(`SELECT * FROM items WHERE userid = ${player}`);
+        result.enchant = await client.connection.query(`SELECT * FROM enchant WHERE userid = ${player}`);
+        result.prospect = await client.connection.query(`SELECT * FROM prospect WHERE userid = ${player}`);
+        result.slots = await client.connection.query(`SELECT * FROM slots WHERE userid = ${player}`);
+        result.stats = await client.connection.query(`SELECT * FROM stats WHERE userid = ${player}`);
+        return result;
     },
 
     /**
@@ -224,4 +210,4 @@ module.exports = {
         });
         return currentPage;
     }
-}
+})

@@ -1,6 +1,6 @@
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, ComponentType } = require('discord.js');
 
-module.exports = async function manageProspecting(client, con, player, interaction, ore, quantity, gem, stat) {
+module.exports = async function manageProspecting(client, player, interaction, ore, quantity, gem, stat) {
     const lang = require(`../utils/Text/${player.data.lang}.json`);
     const react = ['1065891789506093078', '1065891556093067315'];
 
@@ -29,7 +29,7 @@ module.exports = async function manageProspecting(client, con, player, interacti
     const msg = await interaction.reply({ embeds: [embed], components: [buttonRow], fetchReply: true });
     const collector = msg.createMessageComponentCollector({ ComponentType: ComponentType.Button, time: 30000 });
 
-    collector.on('collect', button => {
+    collector.on('collect', async button => {
         if (button.user.id !== interaction.user.id) return button.reply({ content: lang.notTheAuthorOfTheInteraction, ephemeral: true });
 
         switch(button.customId) {
@@ -46,8 +46,8 @@ module.exports = async function manageProspecting(client, con, player, interacti
                     return button.reply(`${lang.prospect.notEnoughRess}`);
                 }
 
-                con.query(`UPDATE ress SET ${resssql.join(',')} WHERE userid = ${interaction.user.id}`);
-                con.query(`UPDATE prospect SET ${gem} = ${player.prospect[gem] + Number(quantity)} WHERE userid = ${interaction.user.id}`);
+                await client.query(`UPDATE ress SET ${resssql.join(',')} WHERE userid = ${interaction.user.id}`);
+                await client.query(`UPDATE prospect SET ${gem} = ${player.prospect[gem] + Number(quantity)} WHERE userid = ${interaction.user.id}`);
 
                 collector.stop();
                 msg.edit({ embeds: [embed], components: [] });

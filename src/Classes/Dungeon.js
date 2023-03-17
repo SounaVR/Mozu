@@ -5,7 +5,7 @@ module.exports = class Dungeon {
         this.player = player;
     }
 
-    playerTurn(con, interaction, ATKbutton, DEFbutton, buttonRow, action) {
+    playerTurn(interaction, ATKbutton, DEFbutton, buttonRow, action) {
         ATKbutton.setDisabled(true);
         DEFbutton.setDisabled(true);
     
