@@ -15,10 +15,10 @@ module.exports = async function insert_items(client, con, player, interaction, d
         )`, async function(err) {
             if (err) return databaselogs.send(`🔴 table **items** > An error occurred :\n**${err}**`);
             databaselogs.send(`🟢 table **items** : **${userid}** aka **${interaction.user.tag}**.`);
-            con.query(`SELECT COUNT(*) AS usersCount FROM items`, function (err, rows, fields) {
+            await con.query(`SELECT COUNT(*) AS usersCount FROM items`, async function (err, rows, fields) {
                 if (err) throw err;
 
-                con.query(`UPDATE items SET uuid = ${rows[0].usersCount} WHERE userid = ${userid}`);
+                await con.query(`UPDATE items SET uuid = ${rows[0].usersCount} WHERE userid = ${userid}`);
             });
         }); //end query items
     }

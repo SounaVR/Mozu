@@ -20,7 +20,9 @@ module.exports = (client) => ({
         result.prospect = await client.connection.query(`SELECT * FROM prospect WHERE userid = ${player}`);
         result.slots = await client.connection.query(`SELECT * FROM slots WHERE userid = ${player}`);
         result.stats = await client.connection.query(`SELECT * FROM stats WHERE userid = ${player}`);
-        return result;
+
+        if (result.data == null) return false;
+        else return result;
     },
 
     /**

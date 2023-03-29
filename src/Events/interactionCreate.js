@@ -1,4 +1,5 @@
 const { Events } = require('discord.js');
+const Player = require('../Classes/Player');
 
 module.exports = {
 	name: Events.InteractionCreate,
@@ -17,7 +18,7 @@ module.exports = {
 			if (player) {
 				const Items = require(`../utils/Items/${player.data.lang}.json`);
 				const maxEnergy = Items.objects.ring[player.items.ring].energy;
-				const maxHP = 50;
+				const maxHP = Player.getMaxHP(player);
 				const energyCooldown = player.data.energyCooldown;
 				const hpCooldown = player.data.hpCooldown;
 				await client.query(`UPDATE stats SET cmd = ${player.stats.cmd + Number(1)} WHERE userid = ${interaction.user.id}`);

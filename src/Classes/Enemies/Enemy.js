@@ -12,7 +12,8 @@ module.exports = class Enemy {
     }
 
     attack(target) {
-        target.damage(this.ATK);
+        const damage = Math.floor(Math.random() * this.ATK);
+        target.damage(damage);
     }
 
     defend(target, DEF) {

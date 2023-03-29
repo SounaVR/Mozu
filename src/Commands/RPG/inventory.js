@@ -16,9 +16,8 @@ module.exports = {
         let player = await client.getPlayer(interaction.user.id);
         const Items = require(`../../utils/Items/${player.data.lang}.json`);
         const lang = require(`../../utils/Text/${player.data.lang}.json`);
-
+        
         const maxEnergy = Items.objects.ring[player.items.ring].energy;
-        const maxHP = 50;
         const energyCooldown = player.data.energyCooldown;
         const hpCooldown = player.data.hpCooldown;
 
@@ -28,7 +27,7 @@ module.exports = {
             .setFooter({ text: `Page 1/5` })
             .addFields(
                 { name: `⭐ Mana`, value: `${player.data.MANA}/50`, inline: true },
-                { name: `❤️ HP [+1/${moment.duration(hpCooldown).format("s")}s]`, value: `${player.data.HP}/${maxHP}`, inline: true },
+                { name: `❤️ HP [+1/${moment.duration(hpCooldown).format("s")}s]`, value: `${player.data.HP}/${Player.getMaxHP(player)}`, inline: true },
                 { name: `⚡ ${lang.inventory.energy.replace("%s", `[+1/${moment.duration(energyCooldown).format("s")}s]`)}`, value: `${player.ress.energy || 0}/${maxEnergy}`, inline: true },
                 { name: `📊 ${lang.inventory.stats}:`, value: `${client.Emotes.ATK} ATK: ${player.data.ATK}\n${client.Emotes.DEF} DEF: ${player.data.DEF}\n${client.Emotes.chests.Tools.rune_pickaxe} Power : ${player.data.power}`, inline: true },
                 { name: `Autres:`, value: `${client.Emotes.cash} Balance: ${client.nFormatter(player.data.money)}\n${client.Emotes.rep} Reputations : ${player.stats.rep}`, inline: true }

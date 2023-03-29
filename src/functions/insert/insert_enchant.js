@@ -15,10 +15,10 @@ module.exports = async function insert_enchant(client, con, player, interaction,
         )`, async function(err) {
             if (err) return databaselogs.send(`🔴 table **enchant** > An error occurred :\n**${err}**`);
             databaselogs.send(`🟢 table **enchant** : **${userid}** aka **${interaction.user.tag}**.`);
-            con.query(`SELECT COUNT(*) AS usersCount FROM enchant`, function (err, rows, fields) {
+            await con.query(`SELECT COUNT(*) AS usersCount FROM enchant`, async function (err, rows, fields) {
                 if (err) throw err;
 
-                con.query(`UPDATE enchant SET uuid = ${rows[0].usersCount} WHERE userid = ${userid}`);
+                await con.query(`UPDATE enchant SET uuid = ${rows[0].usersCount} WHERE userid = ${userid}`);
             });
         }); //end query enchant
     }

@@ -9,10 +9,10 @@ module.exports = async function insert_stats(client, con, player, interaction, d
         )`, async function(err) {
             if (err) return databaselogs.send(`🔴 table **stats** > An error occurred :\n**${err}**`);
             databaselogs.send(`🟢 table **stats** : **${userid}** aka **${interaction.user.tag}**.`);
-            con.query(`SELECT COUNT(*) AS usersCount FROM stats`, function (err, rows, fields) {
+            await con.query(`SELECT COUNT(*) AS usersCount FROM stats`, async function (err, rows, fields) {
                 if (err) throw err;
 
-                con.query(`UPDATE stats SET uuid = ${rows[0].usersCount} WHERE userid = ${userid}`);
+                await con.query(`UPDATE stats SET uuid = ${rows[0].usersCount} WHERE userid = ${userid}`);
             });
         }); //end query stats
     }

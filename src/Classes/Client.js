@@ -1,5 +1,4 @@
 const { Client, Collection } = require("discord.js");
-
 const Default = require("../utils/default.json");
 const Emotes = require("../utils/emotes.json");
 const Connection = require('./Database')

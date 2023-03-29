@@ -1,4 +1,5 @@
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, ComponentType } = require('discord.js');
+const Player = require('../Classes/Player');
 const moment = require('moment');
 
 module.exports = async function manageCraft(client, player, interaction, category, objectName, emote) {
@@ -51,7 +52,7 @@ module.exports = async function manageCraft(client, player, interaction, categor
 
         if (Craft[category][objectName][level].ATK >= 1) reward.push(`${client.Emotes.ATK} ATK : ${player.data.ATK} => **${player.data.ATK + Number(Craft[category][objectName][level].ATK)}**`);
         if (Craft[category][objectName][level].DEF >= 1) reward.push(`${client.Emotes.DEF} DEF : ${player.data.DEF} => **${player.data.DEF + Number(Craft[category][objectName][level].DEF)}**`);
-        if (Craft[category][objectName][level].HP >= 1) reward.push(`♥ HP : ${player.data.HP} => **${player.data.HP + Number(Craft[category][objectName][level].HP)}**`);
+        if (Craft[category][objectName][level].HP >= 1) reward.push(`♥ HP : ${Player.getMaxHP(player)} => **${Player.getMaxHP(player) + Number(Craft[category][objectName][level].HP)}**`);
     
         for (const ressource in currentObject.ressource) {
             if (player.ress[ressource.toLowerCase()] < currentObject.ressource[ressource]) txt.push(`${client.Emotes[ressource]} ${ressource} : ${client.nFormatter(currentObject.ressource[ressource])} (${client.Emotes.cancel} - Missing ${client.nFormatter(Math.floor(currentObject.ressource[ressource]-player.ress[ressource.toLowerCase()]))})`);
