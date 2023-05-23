@@ -24,7 +24,7 @@ module.exports = {
      */
     async execute(client, interaction) {
         const { user } = interaction;
-        const databaselogs = client.channels.cache.find(ch => ch.id === '1065830709652103168');
+        const databaselogs = client.channels.cache.find(ch => ch.id === '1106251984580911124');
         
         const userid = user.id;
         const con = client.connection;
