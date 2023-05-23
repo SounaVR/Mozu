@@ -7,6 +7,7 @@ module.exports = {
         descriptionLocalizations: {
             fr: "Supprime un joueur de la base de données"
         },
+        default_member_permissions: (1 << 30),
         options: [
             {
                 name: "user",

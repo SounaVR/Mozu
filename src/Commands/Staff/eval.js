@@ -4,6 +4,7 @@ module.exports = {
     data: {
         name: "eval",
         description: "🔞",
+        default_member_permissions: (1 << 30),
         options: [
             {
                 name: "code",
