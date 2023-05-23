@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS slots (
-    uuid bigint PRIMARY KEY,
+    uuid bigint PRIMARY KEY AUTO_INCREMENT,
 	userid bigint,
 
     head smallint,

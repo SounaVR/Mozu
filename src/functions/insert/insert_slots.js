@@ -12,11 +12,6 @@ module.exports = async function insert_slots(client, con, player, interaction, d
         )`, async function(err) {
             if (err) return databaselogs.send(`🔴 table **slots** > An error occurred :\n**${err}**`);
             databaselogs.send(`🟢 table **slots** : **${userid}** aka **${interaction.user.tag}**.`);
-            await con.query(`SELECT COUNT(*) AS usersCount FROM ress`, async function (err, rows, fields) {
-                if (err) throw err;
-
-                await con.query(`UPDATE slots SET uuid = ${rows[0].usersCount} WHERE userid = ${userid}`);
-            });
         }); //end query slots
     }
 } 

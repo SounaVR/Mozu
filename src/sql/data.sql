@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS data (
-    uuid bigint PRIMARY KEY,
+    uuid bigint PRIMARY KEY AUTO_INCREMENT,
 	username text,
 	userid bigint,
 

@@ -15,11 +15,6 @@ module.exports = async function insert_enchant(client, con, player, interaction,
         )`, async function(err) {
             if (err) return databaselogs.send(`🔴 table **enchant** > An error occurred :\n**${err}**`);
             databaselogs.send(`🟢 table **enchant** : **${userid}** aka **${interaction.user.tag}**.`);
-            await con.query(`SELECT COUNT(*) AS usersCount FROM enchant`, async function (err, rows, fields) {
-                if (err) throw err;
-
-                await con.query(`UPDATE enchant SET uuid = ${rows[0].usersCount} WHERE userid = ${userid}`);
-            });
         }); //end query enchant
     }
 } 

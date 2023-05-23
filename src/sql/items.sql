@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS items (
-    uuid bigint PRIMARY KEY,
+    uuid bigint PRIMARY KEY AUTO_INCREMENT,
 	userid bigint,
 
     ring bigint,

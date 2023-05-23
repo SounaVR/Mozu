@@ -16,12 +16,6 @@ module.exports = async function insert_ress(client, con, player, interaction, da
         )`, async function(err) {
             if (err) return databaselogs.send(`🔴 table **ress** > An error occurred :\n**${err}**`);
             databaselogs.send(`🟢 table **ress** : **${userid}** aka **${interaction.user.tag}**.`);
-            await con.query(`SELECT COUNT(*) AS usersCount FROM ress`, async function (err, rows, fields) {
-                if (err) throw err;
-
-                await con.query(`UPDATE ress SET uuid = ${rows[0].usersCount} WHERE userid = ${userid}`);
-                await con.query(`UPDATE data SET uuid = ${rows[0].usersCount} WHERE userid = ${userid}`);
-            });
         }); //end query ress
     }
 } 

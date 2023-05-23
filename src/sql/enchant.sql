@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS enchant (
-    uuid bigint PRIMARY KEY,
+    uuid bigint PRIMARY KEY AUTO_INCREMENT,
 	userid bigint,
 
     ench_pickaxe bigint,
