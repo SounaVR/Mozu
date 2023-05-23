@@ -1,15 +1,15 @@
-const { MessageButton, MessageActionRow } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const Emotes = require('../utils/emotes.json');
 
 module.exports = async function manageGive(con, player, target, targetDB, interaction, objectName, amount) {
     const lang = require(`../utils/Text/${player.data.lang}.json`);
-    const react = ["780222056007991347", "780222833808506920"];
+    const react = ["1065891789506093078", "1065891556093067315"];
     const userid = interaction.user.id;
 
-    let validButton = new MessageButton().setStyle('SUCCESS').setEmoji(react[0]).setCustomId('valid');
-    let cancelButton = new MessageButton().setStyle('DANGER').setEmoji(react[1]).setCustomId('cancel');
+    let validButton = new ButtonBuilder().setStyle(ButtonStyle.Success).setEmoji(react[0]).setCustomId('valid');
+    let cancelButton = new ButtonBuilder().setStyle(ButtonStyle.Danger).setEmoji(react[1]).setCustomId('cancel');
 
-    let buttonRow = new MessageActionRow()
+    let buttonRow = new ActionRowBuilder()
         .addComponents([validButton, cancelButton]);
 
     const msg = await interaction.reply({ components: [buttonRow], content: `${lang.give.wantGive.replace("%s", `**${amount} ${lang.inventory[objectName]}**${Emotes[objectName]}`).replace("%s", target)}`, fetchReply: true })
