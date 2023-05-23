@@ -4,7 +4,7 @@ const fs = require('fs');
 module.exports = async (client) => {
     let commandsArray = [];
     
-    const load = (dir = "src/Commands/") => {
+    const load = (dir = "../src/Commands/") => {
         fs.readdirSync(dir).forEach(dirs => {
             const commands = fs.readdirSync(`${dir}${dirs}`).filter(f => f.endsWith(".js"));
 
