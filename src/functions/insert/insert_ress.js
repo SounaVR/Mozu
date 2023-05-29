@@ -1,6 +1,6 @@
 const Default = require('../../utils/default.json');
 
-module.exports = async function insert_ress(client, con, player, interaction, databaselogs, userid) {
+module.exports = async function insert_ress(con, player, interaction, databaselogs, userid) {
     if (!player) {
         await con.query(`INSERT INTO ress (
             uuid, userid, energy, zone, torch, stone, coal, copper, iron, gold, malachite,

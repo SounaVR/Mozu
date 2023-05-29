@@ -1,6 +1,6 @@
 const Default = require('../../utils/default.json');
 
-module.exports = async function insert_prospect(client, con, player, interaction, databaselogs, userid) {
+module.exports = async function insert_prospect(con, player, interaction, databaselogs, userid) {
     if (!player) {
         await con.query(`INSERT INTO prospect (
             uuid, userid, sapphire, amber,

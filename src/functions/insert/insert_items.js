@@ -1,6 +1,6 @@
 const Default = require('../../utils/default.json');
 
-module.exports = async function insert_items(client, con, player, interaction, databaselogs, userid) {
+module.exports = async function insert_items(con, player, interaction, databaselogs, userid) {
     if (!player) {
         await con.query(`INSERT INTO items (
             uuid, userid, ring, dungeon_amulet,

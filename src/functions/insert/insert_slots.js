@@ -1,6 +1,6 @@
 const Default = require('../../utils/default.json');
 
-module.exports = async function insert_slots(client, con, player, interaction, databaselogs, userid) {
+module.exports = async function insert_slots(con, player, interaction, databaselogs, userid) {
     if (!player) {
         await con.query(`INSERT INTO slots (
             uuid, userid,

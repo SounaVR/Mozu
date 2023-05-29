@@ -1,6 +1,7 @@
 const { EmbedBuilder } = require('discord.js');
 const insert_data = require('../../functions/insert/insert_data'),
     insert_enchant = require('../../functions/insert/insert_enchant'),
+    insert_idle = require('../../functions/insert/insert_idle'),
     insert_items = require('../../functions/insert/insert_items'),
     insert_prospect = require('../../functions/insert/insert_prospect'),
     insert_ress = require('../../functions/insert/insert_ress'),
@@ -31,13 +32,14 @@ module.exports = {
         const player = await client.getPlayer(userid);
         
         if (!player) {
-            insert_data(client, con, player, interaction, databaselogs, userid);
-            insert_enchant(client, con, player, interaction, databaselogs, userid);
-            insert_items(client, con, player, interaction, databaselogs, userid);
-            insert_prospect(client, con, player, interaction, databaselogs, userid);
-            insert_ress(client, con, player, interaction, databaselogs, userid);
-            insert_slots(client, con, player, interaction, databaselogs, userid);
-            insert_stats(client, con, player, interaction, databaselogs, userid);
+            insert_data(con, player, interaction, databaselogs, userid);
+            insert_enchant(con, player, interaction, databaselogs, userid);
+            insert_idle(con, player, interaction, databaselogs, userid);
+            insert_items(con, player, interaction, databaselogs, userid);
+            insert_prospect(con, player, interaction, databaselogs, userid);
+            insert_ress(con, player, interaction, databaselogs, userid);
+            insert_slots(con, player, interaction, databaselogs, userid);
+            insert_stats(con, player, interaction, databaselogs, userid);
             
             interaction.reply("You are now registered. Enjoy !\nYou can change your language with `/lang`.")
         } else {
