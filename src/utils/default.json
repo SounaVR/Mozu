@@ -99,7 +99,12 @@
         "ench_legs" : "0",
         "ench_feet" : "0",
 
-        "cmd" : "0"
+        "cmd" : "0",
+        "idle": {
+            "factory" : "0",
+            "husbandry" : "0",
+            "builder" : "0"
+        }
     },
     "pickaxe" : {
         "R1" : {

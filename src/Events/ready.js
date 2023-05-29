@@ -21,7 +21,7 @@ module.exports = {
         // });
 
         // Initialize the SQL tables
-        const tables = ["data", "enchant", "items", "prospect", "ress", "slots", "stats"];
+        const tables = ["data", "enchant", "idle", "items", "prospect", "ress", "slots", "stats"];
         tables.forEach(async element => {
             const thing = fs.readFileSync(`sql/${element}.sql`).toString();
             client.query(thing, function (err) {

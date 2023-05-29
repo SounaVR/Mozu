@@ -1,6 +1,6 @@
 const { ApplicationCommandOptionType } = require("discord.js");
 const Default = require("../../utils/default.json");
-const tables = ['data', 'ress', 'items', 'enchant', 'prospect', 'slots', 'stats'];
+const tables = ['data', 'enchant', 'idle', 'items', 'prospect', 'ress', 'slots', 'stats'];
 
 module.exports = {
     data: {
