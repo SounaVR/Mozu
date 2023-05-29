@@ -10,30 +10,59 @@ module.exports = {
         },
         options: [
             {
-                name: 'équipement',
+                name: 'stuff',
                 description: 'Choose what you want to craft',
                 descriptionLocalizations: {
                     fr: 'Choisissez ce que vous voulez crafter'
                 },
-                type: ApplicationCommandOptionType.String,
-                choices: [
-                    { name: 'Info', value: 'info' },
-                    { name: 'Pioche', value: 'pickaxe' },
-                    { name: 'Épée', value: 'sword' },
-                    { name: 'Bouclier', value: 'shield' },
-                    { name: 'Tête', value: 'head' },
-                    { name: 'Épaules', value: 'shoulders' },
-                    { name: 'Torse', value: 'chest' },
-                    { name: 'Poignets', value: 'wrists' },
-                    { name: 'Mains', value: 'hands' },
-                    { name: 'Ceinture', value: 'waist' },
-                    { name: 'Jambes', value: 'legs' },
-                    { name: 'Pieds', value: 'feet' },
-                    { name: 'Amulette de donjon', value: 'dungeon_amulet' },
-                    { name: 'Anneau', value: 'ring' },
-                    { name: 'Torche', value: 'torch' }
-                ],
-                required: true
+                type: ApplicationCommandOptionType.Subcommand,
+                options: [
+                    {
+                        name: 'stuff',
+                        description: 'Choose what you want to craft',
+                        descriptionLocalizations: {
+                            fr: 'Choisissez ce que vous voulez crafter'
+                        },
+                        type: ApplicationCommandOptionType.String,
+                        choices: [
+                            { name: 'Info', value: 'info' },
+                            { name: 'Pioche', value: 'pickaxe' },
+                            { name: 'Épée', value: 'sword' },
+                            { name: 'Bouclier', value: 'shield' },
+                            { name: 'Tête', value: 'head' },
+                            { name: 'Épaules', value: 'shoulders' },
+                            { name: 'Torse', value: 'chest' },
+                            { name: 'Poignets', value: 'wrists' },
+                            { name: 'Mains', value: 'hands' },
+                            { name: 'Ceinture', value: 'waist' },
+                            { name: 'Jambes', value: 'legs' },
+                            { name: 'Pieds', value: 'feet' },
+                            { name: 'Amulette de donjon', value: 'dungeon_amulet' },
+                            { name: 'Anneau', value: 'ring' },
+                            { name: 'Torche', value: 'torch' }
+                        ],
+                        required: true
+                    }
+                ]
+            },
+            {
+                name: 'torch',
+                description: 'To craft some torches',
+                descriptionLocalizations: {
+                    fr: 'Pour crafter quelques torches'
+                },
+                type: ApplicationCommandOptionType.Subcommand,
+                options: [
+                    {
+                        name: 'torch',
+                        description: 'To craft some torches',
+                        descriptionLocalizations: {
+                            fr: 'Pour crafter quelques torches'
+                        },
+                        type: ApplicationCommandOptionType.Number,
+                        required: true
+                    }
+                ]
             }
         ]
     },
@@ -42,7 +71,8 @@ module.exports = {
      * @param {import('discord.js').CommandInteraction} interaction
      */
     async execute(client, interaction) {
-        const value = interaction.options.getString('équipement');
+        const value = interaction.options.getString('stuff');
+        const torchAmount = interaction.options.getNumber('torch');
         
         const player = await client.getPlayer(interaction.user.id);
         const lang = require(`../../utils/Text/${player.data.lang}.json`);
@@ -57,6 +87,8 @@ module.exports = {
             )
             .setTimestamp()
             .setFooter({ text: client.user.username, iconURL: client.user.avatarURL() });
+
+        if (torchAmount) return manageCraft(client, player, interaction, "objects", "torch", client.Emotes.torch, torchAmount);
 
         switch (value) {
             case "pickaxe":
@@ -85,8 +117,6 @@ module.exports = {
                 return manageCraft(client, player, interaction, "objects", "dungeon_amulet", client.Emotes.dungeon_amulet);
             case "ring":
                 return manageCraft(client, player, interaction, "objects", "ring", client.Emotes.ring);
-            case "torch":
-                return manageCraft(client, player, interaction, "objects", "torch", client.Emotes.torch);
             case "info":
                 return interaction.reply({ embeds: [craftEmbed] });
         }
