@@ -43,11 +43,11 @@ module.exports = {
         Malachite = 0;
         // Ressources drop
         for (let i = 0; i < manaAmount; i++) {
-            Stone     += (Math.ceil(Math.random() * 70)) + power;                               // Pioche level 0 (mains nues)
-            Coal      += (Math.ceil(Math.random() * 50)) + power;                               // Pioche level 0 (mains nues)
-            Copper    += player.items.pickaxe > 0 ? (Math.ceil(Math.random() * 45)) + power : 0 // Pioche level 1 (pioche en pierre)
-            Iron      += player.items.pickaxe > 1 ? (Math.ceil(Math.random() * 30)) + power : 0 // Pioche level 2 (pioche en cuivre)
-            Gold      += player.items.pickaxe > 2 ? (Math.ceil(Math.random() * 15)) + power : 0 // Pioche level 3 (pioche en fer)
+            Stone     += (Math.ceil(Math.random() * 30)) + power;                               // Pioche level 0 (mains nues)
+            Coal      += (Math.ceil(Math.random() * 15)) + power;                               // Pioche level 0 (mains nues)
+            Copper    += player.items.pickaxe > 0 ? (Math.ceil(Math.random() * 20)) + power : 0 // Pioche level 1 (pioche en pierre)
+            Iron      += player.items.pickaxe > 1 ? (Math.ceil(Math.random() * 18)) + power : 0 // Pioche level 2 (pioche en cuivre)
+            Gold      += player.items.pickaxe > 2 ? (Math.ceil(Math.random() * 12)) + power : 0 // Pioche level 3 (pioche en fer)
             Malachite += player.items.pickaxe > 3 ? (Math.ceil(Math.random() * 5)) + power : 0  // Pioche level 4 (pioche en or)
         }
 
