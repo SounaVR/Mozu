@@ -9,13 +9,31 @@ module.exports = {
         },
         options: [
             {
-                name: 'energyamount',
+                name: 'amount',
                 description: 'Amount of energy to spent',
                 descriptionLocalizations: {
                     fr: 'Montant d\'énergie à dépenser'
                 },
-                type: ApplicationCommandOptionType.String,
-                required: false
+                type: ApplicationCommandOptionType.Subcommand,
+                options: [
+                    {
+                        name: 'amount',
+                        description: 'Amount of energy to spent',
+                        descriptionLocalizations: {
+                            fr: 'Montant d\'énergie à dépenser'
+                        },
+                        type: ApplicationCommandOptionType.Number,
+                        required: true
+                    }
+                ]
+            },
+            {
+                name: 'all',
+                description: 'Spend all of your remaining energy',
+                descriptionLocalizations: {
+                    fr: 'Dépensez toute votre énergie restante'
+                },
+                type: ApplicationCommandOptionType.Subcommand
             }
         ]
     },
@@ -24,16 +42,18 @@ module.exports = {
      * @param {import('discord.js').CommandInteraction} interaction
      */
     async execute(client, interaction) {
-        const amount = interaction.options.getString('energyamount');
+        let manaAmount = interaction.options.getNumber('amount');
+        const all = interaction.options.getSubcommand('all');
+
         const player = await client.getPlayer(interaction.user.id);
         const Items = require(`../../utils/Items/${player.data.lang}.json`);
         const lang = require(`../../utils/Text/${player.data.lang}.json`);
         const maxEnergy = Items.objects.ring[player.items.ring].energy;
         const power = player.data.power;
 
-        // all/a | [numbers] | nothing = 1 energy per command
-        let manaAmount = 'all'.startsWith(amount) ? player.ress.energy : (!isNaN(amount) && amount > 0 ? amount : 1);
-        if (manaAmount > player.ress.energy) return interaction.reply(`${lang.mine.notEnoughEnergy}`);
+        if (all !== "amount") manaAmount = player.ress.energy;
+        if (manaAmount > player.ress.energy) return interaction.reply({ content: `${lang.mine.notEnoughEnergy}`, ephemeral: true });
+        if (!manaAmount) return interaction.reply({ content: `${lang.craft.invalidNumber}`, ephemeral: true });
 
         let Stone  = 0,
         Coal      = 0,
@@ -41,6 +61,7 @@ module.exports = {
         Iron      = 0,
         Gold      = 0,
         Malachite = 0;
+
         // Ressources drop
         for (let i = 0; i < manaAmount; i++) {
             Stone     += (Math.ceil(Math.random() * 30)) + power;                               // Pioche level 0 (mains nues)
