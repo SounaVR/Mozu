@@ -24,7 +24,6 @@
         "http": "^0.0.1-security",
         "moment": "^2.29.4",
         "moment-duration-format": "^2.3.2",
-        "mongoose": "^6.8.3",
         "mysql": "^2.18.1",
         "parse-ms": "^2.1.0"
     }
