@@ -1,7 +1,7 @@
 require("moment-duration-format");
 const { EmbedBuilder } = require('discord.js');
 const Player = require('../../Classes/Player');
-const moment         = require('moment');
+const moment = require('moment');
 
 module.exports = {
     data: {
@@ -16,7 +16,7 @@ module.exports = {
         let player = await client.getPlayer(interaction.user.id);
         const Items = require(`../../utils/Items/${player.data.lang}.json`);
         const lang = require(`../../utils/Text/${player.data.lang}.json`);
-        
+
         const maxEnergy = Items.objects.ring[player.items.ring].energy;
         const energyCooldown = player.data.energyCooldown;
         const hpCooldown = player.data.hpCooldown;
@@ -82,21 +82,21 @@ module.exports = {
                 { name: `${client.Emotes.bag} ${lang.inventory.yourObjects}`, value: `${client.Emotes.torch} ${player.ress.torch}` },
                 { name: `${client.Emotes.open_chest} ${lang.inventory.chests}`, value: txt7.join(" ") }
             )
-     
+
         const gear = ["head", "shoulders", "chest", "wrists", "hands", "waist", "legs", "feet"];
         const weapons = ["sword", "shield"];
-    
+
         let pickaxe = Items.tools.pickaxe[player.items.pickaxe];
 
         const embed4 = new EmbedBuilder()
             .setAuthor({ name: `${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL() })
             .setColor(interaction.member.displayColor)
             .setFooter({ text: `Page 4/5` }) 
-       
+
         weapons.forEach(element => {
             let part = Items.tools[element][player.items[element]];
             let enchantmentLevel = player.enchant[`ench_${element}`] > 0 ? player.enchant[`ench_${element}`] + Number(0) : player.enchant[`ench_${element}`]
-    
+
             if (enchantmentLevel) embed4.addFields({ name: `${client.Emotes.chests.Weapons[`rune_${element}`]} ${lang.inventory[element]}:`, value: `${part.name}\n${lang.inventory.level}: ${player.items[element]}\n[${lang.inventory.enchant} ${player.enchant[`rune_${element}`]}]`, inline: true })
             else embed4.addFields({ name: `${client.Emotes.chests.Weapons[`rune_${element}`]} ${lang.inventory[element]}:`, value: `${part.name}\n${lang.inventory.level}: ${player.items[element]}`, inline: true })
         });
@@ -104,23 +104,23 @@ module.exports = {
         let enchantmentLevel = player.enchant.ench_pickaxe > 0 ? player.enchant.ench_pickaxe + Number(0) : player.enchant.ench_pickaxe
         if (enchantmentLevel) embed4.addFields({ name: `${client.Emotes.chests.Tools.rune_pickaxe} ${lang.inventory.pickaxe}:`, value: `${pickaxe.name}\n${lang.inventory.level}: ${player.items.pickaxe}\n[${lang.inventory.enchant} ${player.enchant.ench_pickaxe}]`, inline: true })
         else embed4.addFields({ name: `${client.Emotes.chests.Tools.rune_pickaxe} ${lang.inventory.pickaxe}:`, value: `${pickaxe.name}\n${lang.inventory.level}: ${player.items.pickaxe}`, inline: true })
-        
+
         gear.forEach(element => {
             let slot1;
             let slot2;
             let slot3;
             const [slot_a, slot_b, slot_c] = Player.getGems(player.slots[element]);
-    
+
             if (slot_a <= 0) slot1 = `${client.Emotes.emptySocket}`;
             else slot1 = `${client.Emotes.gems[slot_a-1]}`;
             if (slot_b <= 0) slot2 = `${client.Emotes.emptySocket}`;
             else slot2 = `${client.Emotes.gems[slot_b-1]}`;
             if (slot_c <= 0) slot3 = `${client.Emotes.emptySocket}`;
             else slot3 = `${client.Emotes.gems[slot_c-1]}`;
-    
+
             let part = Items.armors[element][player.items[element]];
             let enchantmentLevel = player.enchant[`ench_${element}`] > 0 ? player.enchant[`ench_${element}`] + Number(0) : player.enchant[`ench_${element}`]
-     
+
             if (enchantmentLevel) embed4.addFields({ name: `${client.Emotes.enchant[`rune_${element}`]} ${lang.inventory[element]}:`, value: `${slot1 + "" + slot2 + "" + slot3}\n${part.name}\n${lang.inventory.level}: ${player.items[element]}\n[${lang.inventory.enchant} ${player.enchant[`ench_${element}`]}]`, inline: true })
             else embed4.addFields({ name: `${client.Emotes.enchant[`rune_${element}`]} ${lang.inventory[element]}:`, value: `${slot1 + "" + slot2 + "" + slot3}\n${part.name}\n${lang.inventory.level}: ${player.items[element]}`, inline: true })
         });

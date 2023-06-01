@@ -10,7 +10,7 @@ module.exports = async function manageProspecting(client, player, interaction, o
     const getNeededRessource = quantity * 150000;
 
     embed.setTitle(`Do you want to prospect that ?`);
-    let txt = [];
+    const txt = [];
 
     if (player.ress[ore] < getNeededRessource) txt.push(`${client.Emotes[ore]} ${ore} : ${client.nFormatter(getNeededRessource)} (${client.Emotes.cancel} - Missing ${client.nFormatter(Math.floor(getNeededRessource-player.ress[ore]))})`);
     if (player.ress[ore] >= getNeededRessource) txt.push(`${client.Emotes[ore]} ${ore} : ${client.nFormatter(getNeededRessource)} (${client.Emotes.checked})`);
@@ -20,10 +20,10 @@ module.exports = async function manageProspecting(client, player, interaction, o
         { name: "**Reward**", value: `${client.Emotes[gem]} ${gem} x${quantity}\n*${stat}*` }
     )
 
-    let validButton = new ButtonBuilder().setStyle(ButtonStyle.Success).setEmoji(react[0]).setCustomId('valid');
-    let cancelButton = new ButtonBuilder().setStyle(ButtonStyle.Danger).setEmoji(react[1]).setCustomId('cancel');
+    const validButton = new ButtonBuilder().setStyle(ButtonStyle.Success).setEmoji(react[0]).setCustomId('valid');
+    const cancelButton = new ButtonBuilder().setStyle(ButtonStyle.Danger).setEmoji(react[1]).setCustomId('cancel');
 
-    let buttonRow = new ActionRowBuilder()
+    const buttonRow = new ActionRowBuilder()
         .addComponents([validButton, cancelButton]);
 
     const msg = await interaction.reply({ embeds: [embed], components: [buttonRow], fetchReply: true });
@@ -34,8 +34,8 @@ module.exports = async function manageProspecting(client, player, interaction, o
 
         switch(button.customId) {
             case 'valid':
-                let need = [];
-                let resssql = [];
+                const need = [];
+                const resssql = [];
 
                 if (player.ress[ore] < getNeededRessource) need.push(`sorry bro`);
                 resssql.push(`${ore} = ${ore} - ${getNeededRessource}`);

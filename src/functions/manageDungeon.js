@@ -8,25 +8,25 @@ module.exports = async function(client, interaction) {
     const con = client.connection;
     const playerDB = await client.getPlayer(interaction.user.id);
 
-    let ATKbutton = new ButtonBuilder().setStyle(ButtonStyle.Danger).setEmoji("1065891721717751910").setCustomId("atk");
-    let DEFbutton = new ButtonBuilder().setStyle(ButtonStyle.Danger).setEmoji("1065891718383292426").setCustomId("def");
+    const ATKbutton = new ButtonBuilder().setStyle(ButtonStyle.Danger).setEmoji("1065891721717751910").setCustomId("atk");
+    const DEFbutton = new ButtonBuilder().setStyle(ButtonStyle.Danger).setEmoji("1065891718383292426").setCustomId("def");
 
-    let buttonRow = new ActionRowBuilder()
+    const buttonRow = new ActionRowBuilder()
         .addComponents([ATKbutton, DEFbutton]);
 
-    let creature = new Wolf();
+    const creature = new Wolf();
 
     const combat = await interaction.editReply({ content: `Vous engagez le combat contre :\n__${creature.name}__\nHP : ${creature.maxHP}\nATK : ${creature.ATK}\nDEF : ${creature.DEF}`, components: [buttonRow], fetchReply: true });
-    
+
     const collector = combat.createMessageComponentCollector({ ComponentType: ComponentType.Button, time: 60000 });
 
-    let player = new PlayerDungeon(playerDB.data.HP, playerDB.data.ATK, playerDB.data.DEF);
-    let dungeon = new Dungeon(collector, creature, player);
+    const player = new PlayerDungeon(playerDB.data.HP, playerDB.data.ATK, playerDB.data.DEF);
+    const dungeon = new Dungeon(collector, creature, player);
 
     collector.on('collect', async button => {
         if (button.user.id !== interaction.user.id) return button.reply({ content: lang.notTheAuthorOfTheInteraction, ephemeral: true });
         button.deferUpdate();
-        
+
         switch (button.customId) {
             case "atk":
                 collector.resetTimer({ time: 60000 });

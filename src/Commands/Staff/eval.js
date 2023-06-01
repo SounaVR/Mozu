@@ -19,13 +19,13 @@ module.exports = {
         const code = interaction.options.getString("code");
         const clean = text => 
             typeof (text) === "string" ? text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203)) : text;
-        
+
         try {
             let evaled = await eval(code);
 
             if (typeof evaled !== "string")
                 evaled = require("util").inspect(evaled);
-            
+
             const embed = new EmbedBuilder()
                 .setDescription(codeBlock('xl', clean(evaled).slice(0, 4086)))
 

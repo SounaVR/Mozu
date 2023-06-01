@@ -24,7 +24,7 @@ module.exports = {
         const { guild, options } = interaction;
         const rawEmoji = options.getString('emoji');
         const name = options.getString('name');
-        
+
         const parsedEmoji = parseEmoji(rawEmoji);
 
         if (parsedEmoji.id) {

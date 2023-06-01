@@ -32,10 +32,9 @@ module.exports = {
                 { name: "📎 My link", value: "[Clique pas](https://media.discordapp.net/attachments/706350683766390854/845538726162989076/3237789807_1_3_brmovBmI.png)", inline: true },
                 { name: "🗓 Creation Date", value: `<t:${parseInt(client.user.createdTimestamp / 1000)}:R>`, inline: true }
             )
-                
             .setFooter({ text: client.user.username, iconURL: client.user.avatarURL() })
             .setTimestamp()
-    
+
         await interaction.reply({ embeds: [embed] })
     }
 }

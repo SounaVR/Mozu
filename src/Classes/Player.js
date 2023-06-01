@@ -10,7 +10,7 @@ module.exports = class Player {
             let HP = Items.armors[element][player.items[element]].HP;
             if (HP >= 0) armorHP += HP;
         });
-        
+
         let maxHP = baseHP + armorHP;
 
         return maxHP;
@@ -21,6 +21,6 @@ module.exports = class Player {
     }
 
     static getGemNumber(gems) {
-        return gems[0]+7*(gems[1]+7*gems[2])
+        return gems[0] + 7 * (gems[1] + 7 * gems[2]);
     }
 }

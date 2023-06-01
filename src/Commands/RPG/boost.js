@@ -15,8 +15,8 @@ module.exports = {
     async execute(client, interaction) {
         const booster = interaction.guild.members.cache.get(interaction.user.id);
         const b = client.getPremiumDuration(booster);
-        
-        let text = booster.premiumSinceTimestamp ? `${b.years}y ${b.months}m ${b.days}j ${b.hours}h ${b.minutes}m ${b.seconds}s` : "None"
+
+        let text = booster.premiumSinceTimestamp ? `${b.years}y ${b.months}m ${b.days}j ${b.hours}h ${b.minutes}m ${b.seconds}s` : "None";
 
         const embed = new EmbedBuilder()
             .setTitle("Boost Informations")
