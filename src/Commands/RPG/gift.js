@@ -38,7 +38,6 @@ module.exports = {
         const con = client.connection;
         const player = await client.getPlayer(user.id);
         const targetDB = await client.getPlayer(target.id);
-        if (!player) return interaction.reply(Default.notRegistered);
         if (!targetDB) return interaction.reply(`${Default.targetNotRegistered}`);
         const lang = require(`../../utils/Text/${player.data.lang}.json`);
         const react = ["1065891789506093078", "1065891556093067315"];
@@ -55,10 +54,10 @@ module.exports = {
                     { name: `${lang.gift.amount}`, value: `**${Math.floor(amount)}**${Emotes.cash}`, inline: true }
                 )
 
-            let validButton = new ButtonBuilder().setStyle(ButtonStyle.Success).setEmoji(react[0]).setCustomId('valid');
-            let cancelButton = new ButtonBuilder().setStyle(ButtonStyle.Danger).setEmoji(react[1]).setCustomId('cancel');
+            const validButton = new ButtonBuilder().setStyle(ButtonStyle.Success).setEmoji(react[0]).setCustomId('valid');
+            const cancelButton = new ButtonBuilder().setStyle(ButtonStyle.Danger).setEmoji(react[1]).setCustomId('cancel');
 
-            let buttonRow = new ActionRowBuilder()
+            const buttonRow = new ActionRowBuilder()
                 .addComponents([validButton, cancelButton]);
 
             const msg = await interaction.reply({ embeds: [embed], components: [buttonRow], fetchReply: true });
@@ -91,7 +90,7 @@ module.exports = {
 
                         msg.edit({ components: [], embeds: [embedProcessing] });
                         break;
-                
+
                     case 'cancel':
                         collector.stop();
                         const embedCanceled = new ButtonBuilder()

@@ -12,7 +12,7 @@ module.exports = class Mozu extends Client {
         });
 
         this.connection = new Connection();
-        
+
         this.commands = new Collection();
         require("../Handlers/Events")(this);
         require("../Handlers/Commands")(this);

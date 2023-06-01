@@ -53,7 +53,7 @@ module.exports = async function manageCraft(client, player, interaction, categor
         if (Craft[category][objectName][level].ATK >= 1) reward.push(`${client.Emotes.ATK} ATK : ${player.data.ATK} => **${player.data.ATK + Number(Craft[category][objectName][level].ATK)}**`);
         if (Craft[category][objectName][level].DEF >= 1) reward.push(`${client.Emotes.DEF} DEF : ${player.data.DEF} => **${player.data.DEF + Number(Craft[category][objectName][level].DEF)}**`);
         if (Craft[category][objectName][level].HP >= 1) reward.push(`♥ HP : ${Player.getMaxHP(player)} => **${Player.getMaxHP(player) + Number(Craft[category][objectName][level].HP)}**`);
-    
+
         for (const ressource in currentObject.ressource) {
             if (player.ress[ressource.toLowerCase()] < currentObject.ressource[ressource]) txt.push(`${client.Emotes[ressource]} ${ressource} : ${client.nFormatter(currentObject.ressource[ressource])} (${client.Emotes.cancel} - Missing ${client.nFormatter(Math.floor(currentObject.ressource[ressource]-player.ress[ressource.toLowerCase()]))})`);
             if (player.ress[ressource.toLowerCase()] >= currentObject.ressource[ressource]) txt.push(`${client.Emotes[ressource]} ${ressource} : ${client.nFormatter(currentObject.ressource[ressource])} (${client.Emotes.checked})`);
@@ -110,7 +110,7 @@ module.exports = async function manageCraft(client, player, interaction, categor
                         await client.query(`UPDATE data SET energyCooldown = ${currentObject.cooldown} WHERE userid = ${interaction.user.id}`);
                         await client.query(`UPDATE items SET ${objectName} = ${level} WHERE userid = ${interaction.user.id}`);
                         break;
-                
+
                     default:
                         await client.query(`UPDATE items SET ${objectName} = ${level} WHERE userid = ${interaction.user.id}`);
                         break;

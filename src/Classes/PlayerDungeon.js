@@ -9,7 +9,7 @@ module.exports = class PlayerDungeon {
     damage(damage) {
         this.HP -= damage;
     }
-    
+
     attack(target) {
         const damage = Math.floor(Math.random() * this.ATK);
         target.damage(damage);

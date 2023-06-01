@@ -6,21 +6,21 @@ module.exports = async function manageGive(con, player, target, targetDB, intera
     const react = ["1065891789506093078", "1065891556093067315"];
     const userid = interaction.user.id;
 
-    let validButton = new ButtonBuilder().setStyle(ButtonStyle.Success).setEmoji(react[0]).setCustomId('valid');
-    let cancelButton = new ButtonBuilder().setStyle(ButtonStyle.Danger).setEmoji(react[1]).setCustomId('cancel');
+    const validButton = new ButtonBuilder().setStyle(ButtonStyle.Success).setEmoji(react[0]).setCustomId('valid');
+    const cancelButton = new ButtonBuilder().setStyle(ButtonStyle.Danger).setEmoji(react[1]).setCustomId('cancel');
 
-    let buttonRow = new ActionRowBuilder()
+    const buttonRow = new ActionRowBuilder()
         .addComponents([validButton, cancelButton]);
 
     const msg = await interaction.reply({ components: [buttonRow], content: `${lang.give.wantGive.replace("%s", `**${amount} ${lang.inventory[objectName]}**${Emotes[objectName]}`).replace("%s", target)}`, fetchReply: true })
-    
+
     const filter = (interact) => interact.user.id === userid;
     const collector = msg.createMessageComponentCollector({ filter, time: 30000 });
 
     collector.on('collect', button => {
         validButton.setDisabled(true);
         cancelButton.setDisabled(true);
-        
+
         switch (button.customId) {
             case 'valid':
                 if (player.ress[objectName] < amount) {
@@ -32,7 +32,7 @@ module.exports = async function manageGive(con, player, target, targetDB, intera
                 msg.edit({ components: [], content: `${Emotes.checked} ${lang.give.giveSuccess.replace("%s", `**${amount} ${lang.inventory[objectName]}**${Emotes[objectName]}`).replace("%s", `**${target}**`)}` });
                 collector.stop();
                 break;
-        
+
             case 'cancel':
                 collector.stop();
                 msg.edit({ components: [], content: `${Emotes.cancel} ${lang.give.canceled}` });

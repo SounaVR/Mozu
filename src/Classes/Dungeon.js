@@ -8,7 +8,7 @@ module.exports = class Dungeon {
     playerTurn(interaction, ATKbutton, DEFbutton, buttonRow, action) {
         ATKbutton.setDisabled(true);
         DEFbutton.setDisabled(true);
-    
+
         if (action === "atk") {
             this.player.attack(this.creature);
             if (this.creature.isDead()) {
@@ -20,7 +20,7 @@ module.exports = class Dungeon {
         } else if (action === "def") {
             interaction.editReply({ content: `❤(${this.player.displayHP()})${interaction.user.username} a décidé de se défendre contre ${this.creature.name} ❤(${this.creature.displayHP()})\nC'est au tour de la créature d'attaquer !`, components: [buttonRow] });
         }
-        
+
     }
 
     NPCturn(con, interaction, ATKbutton, DEFbutton, buttonRow, action) {

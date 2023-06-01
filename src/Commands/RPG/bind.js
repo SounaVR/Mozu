@@ -54,9 +54,6 @@ module.exports = {
             .setTimestamp()
             .setFooter({ text: user.tag, iconURL: user.displayAvatarURL() });
 
-        // timeout button
-        let disabledButton = new ButtonBuilder().setLabel("Timeout").setStyle(ButtonStyle.Secondary).setCustomId("disabled").setDisabled();
-
         // sockets buttons
         const sockets = [...Array(3)].map((_,i) => new ButtonBuilder().setLabel(`n°${i+1}`).setStyle(ButtonStyle.Primary).setCustomId(`socket${i}`));
         const gearArray = ["head", "shoulders", "chest", "wrists", "hands", "waist", "legs", "feet"];
@@ -127,27 +124,9 @@ module.exports = {
                 collector.stop();
             }
         });
-    
+
         collector.on('end', () => {
             interaction.editReply({ components: [], embeds: [gearEmbed] });
         });
     }
 }
-
-// 1065891637395472384 head
-// 1065891720132304977 shoulders
-// 1065891595246915634 chest
-// 1065891757973327892 wrists
-// 1065891602490466375 hands
-// 1065891754408157194 waist
-// 1065891642084708372 legs
-// 1065891600477196339 feet
-
-// sapphire +1 power 1065873196068380762
-// amber -1sec energy cooldown 1065891547897417759
-// citrine +1 mana 1065891598073864312
-// ruby +1 hp 1065873181019209749
-// jade +1 atk 1065892045719343166
-// amethyst +1 def 1065891549872918581
-
-// socket 1084492365168922714

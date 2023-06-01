@@ -74,7 +74,6 @@ module.exports = {
         const con = client.connection;
         const player = await client.getPlayer(user.id);
         const targetDB = await client.getPlayer(target.id);
-        if (!player) return interaction.reply(Default.notRegistered);
         if (!targetDB) return interaction.reply(Default.targetNotRegistered);
         const lang = require(`../../utils/Text/${player.data.lang}.json`);
 

@@ -25,20 +25,21 @@ module.exports = {
     async execute(client, interaction) {
         const { user } = interaction;
         const databaselogs = client.channels.cache.find(ch => ch.id === '1106251984580911124');
-        
+
         const userid = user.id;
         const con = client.connection;
         const player = await client.getPlayer(userid);
-        
+
         if (!player) {
-            insert_data(client, con, player, interaction, databaselogs, userid);
-            insert_enchant(client, con, player, interaction, databaselogs, userid);
-            insert_items(client, con, player, interaction, databaselogs, userid);
-            insert_prospect(client, con, player, interaction, databaselogs, userid);
-            insert_ress(client, con, player, interaction, databaselogs, userid);
-            insert_slots(client, con, player, interaction, databaselogs, userid);
-            insert_stats(client, con, player, interaction, databaselogs, userid);
-            
+            insert_data(con, player, interaction, databaselogs, userid);
+            insert_enchant(con, player, interaction, databaselogs, userid);
+            insert_idle(con, player, interaction, databaselogs, userid);
+            insert_items(con, player, interaction, databaselogs, userid);
+            insert_prospect(con, player, interaction, databaselogs, userid);
+            insert_ress(con, player, interaction, databaselogs, userid);
+            insert_slots(con, player, interaction, databaselogs, userid);
+            insert_stats(con, player, interaction, databaselogs, userid);
+
             interaction.reply("You are now registered. Enjoy !\nYou can change your language with `/lang`.")
         } else {
             const badges = JSON.parse(player.data.badges).badges;
