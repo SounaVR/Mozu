@@ -1,4 +1,5 @@
 const { ApplicationCommandOptionType } = require("discord.js");
+const Default = require('../../utils/default.json');
 
 module.exports = {
     data: {
@@ -25,16 +26,7 @@ module.exports = {
         const user = await client.getPlayer(target.id);
         if (!user) return interaction.reply(Default.targetNotRegistered);
 
-        switch (target.id) {
-            case interaction.user.id:
-                interaction.reply(client.translate(player.data.lang, 'rep.giveToSelf'));
-                break;
-
-            case client.user.id:
-            case target.bot:
-                interaction.reply(client.translate(player.data.lang, 'rep.giveToOtherBots'));
-                break;
-        }
+        if (target.id === interaction.user.id) return interaction.reply(client.translate(player.data.lang, 'rep.giveToSelf'));
 
         switch (player.data.lastRep) {
             case 0:
