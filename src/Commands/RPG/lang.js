@@ -29,11 +29,10 @@ module.exports = {
      */
     async execute(client, interaction) {
         const choice = interaction.options.getString('lang');
-        var player = await client.getPlayer(interaction.user.id);
+        let player = await client.getPlayer(interaction.user.id);
 
         client.query(`UPDATE data SET lang = "${choice}" WHERE userid = ${interaction.user.id}`);
-        var player = await client.getPlayer(interaction.user.id);
-        const lang = require(`../../utils/Text/${player.data.lang}.json`);
+        player = await client.getPlayer(interaction.user.id);
         return interaction.reply(client.translate(player.data.lang, 'confirmLanguage', `\`${choice}\``));
     }
 }

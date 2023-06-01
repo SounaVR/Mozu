@@ -17,8 +17,7 @@ module.exports = async function manageEnchant(client, player, interaction, categ
 
     let buttonRow = new ActionRowBuilder()
         .addComponents([validButton, cancelButton]);
-    
-    //const objectRessource = Enchant[category][object][1];
+
     const getNeededRessource = (player.enchant[objectName] * player.enchant[objectName] * 5)+1;
 
     embed.setTitle(`Enchant your item ?`)
@@ -45,7 +44,7 @@ module.exports = async function manageEnchant(client, player, interaction, categ
     collector.on('collect', async button => {
         if (!button.isButton()) return;
         if (button.user.id !== interaction.user.id) return button.reply({ content: lang.notTheAuthorOfTheInteraction, ephemeral: true });
-        
+
         validButton.setDisabled(true);
         cancelButton.setDisabled(true);
 
@@ -67,7 +66,7 @@ module.exports = async function manageEnchant(client, player, interaction, categ
                 button.reply(`${lang.enchant.enchantSuccess.replace("%s", `**${level}**`)}`);
                 collector.stop();
                 break;
-        
+
             case 'cancel':
                 collector.stop();
                 interaction.channel.send(`${lang.enchant.canceled}`);

@@ -79,7 +79,7 @@ module.exports = {
         const array = [`${lang.explore.zone_0}`, `${lang.explore.zone_1}`, `${lang.explore.zone_2}`, `${lang.explore.zone_3}`, `${lang.explore.zone_4}`]
         const rarity = [`${lang.chest.rarity_d}`, `${lang.chest.rarity_c}`, `${lang.chest.rarity_b}`, `${lang.chest.rarity_a}`, `${lang.chest.rarity_s}`]
         const reactZones = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣'];
-        
+
         if (zone) {
             if (zone == player.ress.zone) return interaction.reply(`${client.translate(player.data.lang, "explore.alreadyInZone", array[player.ress.zone])}`);
             if (player.items.dungeon_amulet <= (zone - 1)) return interaction.reply(`${lang.explore.switchError}`);
@@ -92,7 +92,7 @@ module.exports = {
             if (torchQuantity > 0) {
                 if (player.items.dungeon_amulet <= 0) return interaction.reply({ content: `${client.translate(player.data.lang, "explore.switchError")}`});
                 await client.query(`UPDATE ress SET ${chest[player.ress.zone]} = ${player.ress[chest[player.ress.zone]] + Number(torchQuantity)}, torch = ${player.ress.torch - (torchQuantity)} WHERE userid = ${interaction.user.id}`)
-        
+
                 return interaction.reply(`${client.Emotes.torch_explore} ${client.translate(player.data.lang, "explore.explored", `**${array[player.ress.zone]}**`, `**${torchQuantity}**`, `**${rarity[player.ress.zone]}**`)}\n*${lang.explore.switch}*.`)
             }
         } else if (info) {

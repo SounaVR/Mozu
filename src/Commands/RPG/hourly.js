@@ -1,4 +1,4 @@
-const ms      = require("parse-ms");
+const ms = require("parse-ms");
 
 module.exports = {
     data: {
@@ -15,19 +15,19 @@ module.exports = {
     async execute(client, interaction) {
         const player = await client.getPlayer(interaction.user.id);
         const lang = require(`../../utils/Text/${player.data.lang}.json`);
-        let cooldown = 3600000;
+        const cooldown = 3600000;
         const energy = Math.ceil(Math.random() * 15)+5;
 
         if (player.data.lastHR !== null && cooldown - (Date.now() - player.data.lastHR) > 0) {
-            let timeObj = ms(cooldown - (Date.now() -  player.data.lastHR));
-        
-            return interaction.reply(`${lang.hr.notNow.replace("%s", `**${timeObj.minutes}m${timeObj.seconds}sec**`)} !`);
-        } else {
-            client.query(`UPDATE data SET lastHR = ${Date.now()}, money = ${player.data.money + Number(30)} WHERE userid = ${interaction.user.id}`);
-            client.query(`UPDATE ress SET energy = ${player.ress.energy + Number(energy)} WHERE userid = ${interaction.user.id}`);
-            client.query(`UPDATE stats SET HR = ${player.stats.HR + Number(1)} WHERE userid = ${interaction.user.id}`);
+            const timeObj = ms(cooldown - (Date.now() -  player.data.lastHR));
 
-            return interaction.reply(`${client.translate(player.data.lang, 'hr.done', `${energy} ${client.Emotes.energy}`)}`);
+            return interaction.reply(`${lang.hr.notNow.replace("%s", `**${timeObj.minutes}m${timeObj.seconds}sec**`)} !`);
         }
+
+        client.query(`UPDATE data SET lastHR = ${Date.now()}, money = ${player.data.money + Number(30)} WHERE userid = ${interaction.user.id}`);
+        client.query(`UPDATE ress SET energy = ${player.ress.energy + Number(energy)} WHERE userid = ${interaction.user.id}`);
+        client.query(`UPDATE stats SET HR = ${player.stats.HR + Number(1)} WHERE userid = ${interaction.user.id}`);
+
+        return interaction.reply(`${client.translate(player.data.lang, 'hr.done', `${energy} ${client.Emotes.energy}`)}`);
     }
 }

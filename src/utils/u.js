@@ -3,9 +3,9 @@ const { format } = require("util");
 
 module.exports = (client) => ({
     query: client.connection.query.bind(client.connection),
-   
+
     /**
-     * @param {userid} player
+     * @param {string} player
      * @example
      * const player = getPlayer(con, interaction.user.id);
      * console.log(player.data.userid);
@@ -21,14 +21,13 @@ module.exports = (client) => ({
         result.slots = await client.connection.query(`SELECT * FROM slots WHERE userid = ${player}`);
         result.stats = await client.connection.query(`SELECT * FROM stats WHERE userid = ${player}`);
 
-        if (result.data == null) return false;
-        else return result;
+        return result.data == null ? false : result;
     },
 
     /**
      * @param {number} num The wanted number to be crunched
      * @example nFormatter(40000) > '40k'
-     * @returns A formatted typology of a number
+     * @returns {string} A formatted typology of a number
      */
      nFormatter: function(num) {
         const format = [
@@ -41,23 +40,24 @@ module.exports = (client) => ({
             { value: 1, symbol: '' },
         ];
         const formatIndex = format.findIndex((data) => num >= data.value);
-        return (num / format[formatIndex === -1? 6: formatIndex].value).toFixed() + format[formatIndex === -1?6: formatIndex].symbol;
+        return (num / format[formatIndex === -1 ? 6 : formatIndex].value).toFixed() + format[formatIndex === -1 ? 6 : formatIndex].symbol;
     },
 
     /**
-     * @param {timestamp} date The timestamp to convert
+     * @param {Date} date The timestamp to convert
      * @example checkDays(1589788800) > '1 day ago'
-     * @returns The number of day based on a Timestamp
+     * @returns {string} The number of day based on a Timestamp
      */
     checkDays: function(date) {
-        let now = new Date();
-        let diff = now.getTime() - date.getTime();
-        let days = Math.floor(diff / 86400000);
+        date = new Date();
+        const now = new Date();
+        const diff = now.getTime() - date.getTime();
+        const days = Math.floor(diff / 86400000);
         return days + (days == 1 ? " day" : " days") + " ago";
     },
 
     /**
-     * @param {member} member Reminder : "member" is an user from a guild, not the user outside the server
+     * @param {string} member Reminder : "member" is an user from a guild, not the user outside the server
      * @returns complete date since member boosting
      * @example
      * const booster = interaction.guild.members.cache.get(interaction.user.id);
@@ -65,14 +65,14 @@ module.exports = (client) => ({
      * boostDate.years, boostDate.months etc..
      */
     getPremiumDuration: function (member) {
-        const duration = Date.now() - member.premiumSinceTimestamp
-      
-        const seconds = Math.floor(duration / 1000)
-        const minutes = Math.floor(seconds / 60)
-        const hours = Math.floor(minutes / 60)
-        const days = Math.floor(hours / 24)
-        const months = Math.floor(days / 30)
-        const years = Math.floor(months / 12)
+        const duration = Date.now() - member.premiumSinceTimestamp;
+
+        const seconds = Math.floor(duration / 1000);
+        const minutes = Math.floor(seconds / 60);
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+        const months = Math.floor(days / 30);
+        const years = Math.floor(months / 12);
 
         return {
             years,
@@ -89,14 +89,19 @@ module.exports = (client) => ({
      * @param {string} path to the JSON string
      * @param {string} args to replace in the string
      * @example translate(player.data.lang, 'bal.actualBal', `**${nFormatter(player.data.money)}**💰`)
-     * @returns the translated string
+     * @returns {string} the translated string
      */
     translate: function(lang, path, ...args) {
-        const langFile = require('../utils/Text/' + lang + '.json');
+        const langFile = require(`../utils/Text/${lang}.json`);
         path = path.split('.').reduce((o,i) => o[i], langFile);
         return format(path, ...args);
     },
 
+    /**
+     * @param {number} ms Number of milliseconds 
+     * @example await sleep(1000)
+     * @returns {Promise<void>} The end of the timeout
+     */
     sleep: function(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     },
@@ -104,6 +109,7 @@ module.exports = (client) => ({
     /**
      * @param {interaction} interaction The discord interaction message
      * @param {array} pages The array who contains the embeds
+     * @param {number} time Time required before the button no longer takes effect
      * @returns The embed which contain the paginator (or without any components if there's only one page)
      */
     buttonPages: async function(interaction, pages, time = 60000) {
@@ -136,13 +142,13 @@ module.exports = (client) => ({
             .setEmoji("⬅")
             .setStyle(ButtonStyle.Primary)
             .setDisabled(true);
-        
+
         const home = new ButtonBuilder()
             .setCustomId("home")
             .setEmoji("🏠")
             .setStyle(ButtonStyle.Danger)
             .setDisabled(true);
-        
+
         const next = new ButtonBuilder()
             .setCustomId("next")
             .setEmoji("➡")
@@ -176,24 +182,21 @@ module.exports = (client) => ({
                 case "prev":
                     if (index > 0) index--;
                     break;
-            
+
                 case "home":
                     index = 0;
                     break;
-                
+
                 case "next":
                     if (index < pages.length - 1) index++;
                     break;
             }
 
-            if (index === 0) prev.setDisabled(true);
-            else prev.setDisabled(false);
+            index === 0 ? prev.setDisabled(true) : prev.setDisabled(false);
 
-            if (index === 0) home.setDisabled(true);
-            else home.setDisabled(false);
+            index === 0 ? home.setDisabled(true) : home.setDisabled(false);
 
-            if (index === pages.length - 1) next.setDisabled(true);
-            else next.setDisabled(false);
+            index === pages.length - 1 ? next.setDisabled(true) : next.setDisabled(false);
 
             await currentPage.edit({
                 embeds: [pages[index]],
@@ -204,7 +207,7 @@ module.exports = (client) => ({
         });
 
         // ending the collector
-        collector.on("end", async (i) => {
+        collector.on("end", async () => {
             await currentPage.edit({
                 embeds: [pages[index]],
                 components: []

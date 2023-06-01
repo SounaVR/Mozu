@@ -22,12 +22,12 @@ module.exports = {
 				const energyCooldown = player.data.energyCooldown;
 				const hpCooldown = player.data.hpCooldown;
 				await client.query(`UPDATE stats SET cmd = ${player.stats.cmd + Number(1)} WHERE userid = ${interaction.user.id}`);
-	
+
 				if ((Date.now() - player.data.lastActivity) - energyCooldown > 0 && (Date.now() - player.data.lastActivity) - hpCooldown > 0) {
 					const timeObj = Date.now() - player.data.lastActivity;
 					const energy = Math.floor(timeObj / energyCooldown);
 					const hp = Math.floor(timeObj / hpCooldown);
-			
+
 					player.ress.energy = (player.ress.energy || 0) + energy;
 					player.data.HP = (player.data.HP || 0) + hp;
 					if (player.ress.energy > maxEnergy) player.ress.energy = maxEnergy;

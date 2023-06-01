@@ -3,7 +3,7 @@ const fs = require('fs');
 
 module.exports = async (client) => {
     let commandsArray = [];
-    
+
     const load = (dir = "../src/Commands/") => {
         fs.readdirSync(dir).forEach(dirs => {
             const commands = fs.readdirSync(`${dir}${dirs}`).filter(f => f.endsWith(".js"));
@@ -22,7 +22,7 @@ module.exports = async (client) => {
     load();
 
     const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
-    
+
     const data = await rest.put(
         Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
         { body: commandsArray },

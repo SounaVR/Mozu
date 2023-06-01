@@ -19,7 +19,7 @@ module.exports = {
     async execute(client, interaction) {
         const player = await client.getPlayer(interaction.user.id);
         const react = ["1065891789506093078", "1065891556093067315"];
-        
+
         let validButton = new ButtonBuilder().setStyle(ButtonStyle.Success).setEmoji(react[0]).setCustomId('valid');
         let cancelButton = new ButtonBuilder().setStyle(ButtonStyle.Danger).setEmoji(react[1]).setCustomId('cancel');
 
@@ -27,7 +27,7 @@ module.exports = {
             .addComponents([validButton, cancelButton]);
 
         if (player.data.HP == 0) return interaction.reply("Vous n'avez pas assez de points de vie pour lancer un donjon.");
-        
+
         const msg = await interaction.reply({ content: "Désirez-vous entrer dans le donjon ?", components: [buttonRow], fetchReply: true });
 
         const collector = msg.createMessageComponentCollector({ ComponentType: ComponentType.Button, time: 30000 });
@@ -41,7 +41,7 @@ module.exports = {
                     manageDungeon(client, interaction);
                     collector.stop();
                     break;
-            
+
                 case 'cancel':
                     interaction.editReply({ content: "Vous n'êtes finalement pas entré dans le donjon.", components: [] })
                     collector.stop();
