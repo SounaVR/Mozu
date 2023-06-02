@@ -1,7 +1,10 @@
 const { Events, ActivityType } = require('discord.js');
-const moment = require("moment");
+const dayjs = require('dayjs');
+const duration = require('dayjs/plugin/duration');
 const fs = require('fs');
-moment.locale("fr");
+dayjs.extend(duration);
+
+dayjs.locale("fr");
 
 module.exports = {
     name: Events.ClientReady,

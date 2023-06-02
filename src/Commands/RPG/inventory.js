@@ -1,7 +1,6 @@
-require("moment-duration-format");
 const { EmbedBuilder } = require('discord.js');
 const Player = require('../../Classes/Player');
-const moment = require('moment');
+const dayjs = require('dayjs');
 
 module.exports = {
     data: {
@@ -27,8 +26,8 @@ module.exports = {
             .setFooter({ text: `Page 1/5` })
             .addFields(
                 { name: `⭐ Mana`, value: `${player.data.MANA}/50`, inline: true },
-                { name: `❤️ HP [+1/${moment.duration(hpCooldown).format("s")}s]`, value: `${player.data.HP}/${Player.getMaxHP(player)}`, inline: true },
-                { name: `⚡ ${lang.inventory.energy.replace("%s", `[+1/${moment.duration(energyCooldown).format("s")}s]`)}`, value: `${player.ress.energy || 0}/${maxEnergy}`, inline: true },
+                { name: `❤️ HP [+1/${dayjs.duration(hpCooldown).format("s")}s]`, value: `${player.data.HP}/${Player.getMaxHP(player)}`, inline: true },
+                { name: `⚡ ${lang.inventory.energy.replace("%s", `[+1/${dayjs.duration(energyCooldown).format("s")}s]`)}`, value: `${player.ress.energy || 0}/${maxEnergy}`, inline: true },
                 { name: `📊 ${lang.inventory.stats}:`, value: `${client.Emotes.ATK} ATK: ${player.data.ATK}\n${client.Emotes.DEF} DEF: ${player.data.DEF}\n${client.Emotes.chests.Tools.rune_pickaxe} Power : ${player.data.power}`, inline: true },
                 { name: `Autres:`, value: `${client.Emotes.cash} Balance: ${client.nFormatter(player.data.money)}\n${client.Emotes.rep} Reputations : ${player.stats.rep}`, inline: true }
             )
