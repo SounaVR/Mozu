@@ -28,30 +28,12 @@ module.exports = {
                 type: ApplicationCommandOptionType.String,
                 required: true,
                 choices: [
-                    {
-                        name: 'Stone',
-                        value: 'stone'
-                    },
-                    {
-                        name: 'Coal',
-                        value: 'coal'
-                    },
-                    {
-                        name: 'Copper',
-                        value: 'copper'
-                    },
-                    {
-                        name: 'Iron',
-                        value: 'iron'
-                    },
-                    {
-                        name: 'Gold',
-                        value: 'gold'
-                    },
-                    {
-                        name: 'Malachite',
-                        value: 'malachite'
-                    }
+                    { name: 'Stone', value: 'stone' },
+                    { name: 'Coal', nameLocalizations: { fr: 'Charbon' }, value: 'coal' },
+                    { name: 'Copper', nameLocalizations: { fr: 'Cuivre' }, value: 'copper' },
+                    { name: 'Iron', nameLocalizations: { fr: 'Fer' }, value: 'iron' },
+                    { name: 'Gold', nameLocalizations: { fr: 'Or' }, value: 'gold' },
+                    { name: 'Malachite', value: 'malachite' }
                 ]
             },
             {

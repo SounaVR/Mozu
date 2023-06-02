@@ -18,17 +18,17 @@ module.exports = {
                 type: ApplicationCommandOptionType.String,
                 choices: [
                     { name: 'Info', value: 'info' },
-                    { name: 'Pioche', value: 'pickaxe' },
-                    { name: 'Épée', value: 'sword' },
-                    { name: 'Bouclier', value: 'shield' },
-                    { name: 'Tête', value: 'head' },
-                    { name: 'Épaules', value: 'shoulders' },
-                    { name: 'Torse', value: 'chest' },
-                    { name: 'Poignets', value: 'wrists' },
-                    { name: 'Mains', value: 'hands' },
-                    { name: 'Ceinture', value: 'waist' },
-                    { name: 'Jambes', value: 'legs' },
-                    { name: 'Pieds', value: 'feet' }
+                    { name: 'Pickaxe', nameLocalizations: { fr: 'Pioche' }, value: 'pickaxe' },
+                    { name: 'Sword', nameLocalizations: { fr: 'Épée' }, value: 'sword' },
+                    { name: 'Shield', nameLocalizations: { fr: 'Bouclier' }, value: 'shield' },
+                    { name: 'Head', nameLocalizations: { fr: 'Tête' }, value: 'head' },
+                    { name: 'Shoulders', nameLocalizations: { fr: 'Épaules' }, value: 'shoulders' },
+                    { name: 'Chest', nameLocalizations: { fr: 'Torse' }, value: 'chest' },
+                    { name: 'Wrists', nameLocalizations: { fr: 'Poignets' }, value: 'wrists' },
+                    { name: 'Hands', nameLocalizations: { fr: 'Mains' }, value: 'hands' },
+                    { name: 'Waist', nameLocalizations: { fr: 'Ceinture' }, value: 'waist' },
+                    { name: 'Legs', nameLocalizations: { fr: 'Jambes' }, value: 'legs' },
+                    { name: 'Feet', nameLocalizations: { fr: 'Pieds' }, value: 'feet' }
                 ],
                 required: true
             }
