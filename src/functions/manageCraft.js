@@ -1,6 +1,6 @@
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, ComponentType } = require('discord.js');
 const Player = require('../Classes/Player');
-const moment = require('moment');
+const dayjs = require('dayjs');
 
 module.exports = async function manageCraft(client, player, interaction, category, objectName, emote) {
     const Craft = require(`../utils/Items/${player.data.lang}.json`);
@@ -66,7 +66,7 @@ module.exports = async function manageCraft(client, player, interaction, categor
 
     const maxEnergy = Craft.objects.ring[player.items.ring].energy;
     if (objectName === "pickaxe") reward.push(`💪 Power : ${player.data.power} => **${player.data.power + Number(Craft.tools.pickaxe[level].power)}**`);
-    if (objectName === "ring") reward.push(`⚡Energy : ${maxEnergy} => **${currentObject.energy}**\n⏲️ Energy Cooldown : ${moment.duration(player.data.energyCooldown).format("s")}s => **${moment.duration(currentObject.cooldown).format("s")}s**`)
+    if (objectName === "ring") reward.push(`⚡Energy : ${maxEnergy} => **${currentObject.energy}**\n⏲️ Energy Cooldown : ${dayjs.duration(player.data.energyCooldown).format("s")}s => **${dayjs.duration(currentObject.cooldown).format("s")}s**`);
 
     embed.addFields({ name: `**${lang.craft.cost}**`, value: txt.join("\n") });
 
