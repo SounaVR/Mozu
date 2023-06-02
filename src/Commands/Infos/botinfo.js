@@ -1,6 +1,5 @@
-require('moment-duration-format');
 const { EmbedBuilder } = require('discord.js');
-const moment = require('moment');
+const dayjs = require('dayjs');
 
 module.exports = {
     data: {
@@ -11,7 +10,7 @@ module.exports = {
         }
     },
     async execute(client, interaction) {
-        const uptime = moment.duration(client.uptime).format("DD [days], HH [hrs], mm [mins], ss [secs]");
+        const uptime = dayjs.duration(client.uptime).format("DD [days], HH [hrs], mm [mins], ss [secs]");
         const developer = client.users.cache.find(user => user.id === "436310611748454401");
         const boticon = client.user.avatarURL();
         const embed = new EmbedBuilder()
