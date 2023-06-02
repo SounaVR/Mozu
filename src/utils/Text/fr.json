@@ -98,7 +98,7 @@
         "specifyItem": "Vous devez spécifier un objet à donner."
     },
     "top": {
-       
+        "money": "Classement des plus riches"
     },
     "trade": {
         "wantTrade": "Voulez-vous échanger %s à %s",
