@@ -93,6 +93,46 @@ module.exports = {
      * @param {import('discord.js').CommandInteraction} interaction
      */
     async execute(client, interaction) {
-        return interaction.reply({ content: "WIP 🐒", ephemeral: true });
+        const { options, user } = interaction;
+        const subCommandGroup = options.getSubcommandGroup();
+        const subCommand = options.getSubcommand();
+
+        switch (subCommandGroup) {
+            case 'factory':
+                switch (subCommand) {
+                    case 'info':
+                        interaction.reply({ content: "WIP 🐒", ephemeral: true });
+                        break;
+                
+                    case 'upgrade':
+                        interaction.reply({ content: "WIP 🐒", ephemeral: true });
+                        break;
+                }
+                break;
+
+            case 'husbandry':
+                switch (subCommand) {
+                    case 'info':
+                        interaction.reply({ content: "WIP 🐒", ephemeral: true });
+                        break;
+                
+                    case 'upgrade':
+                        interaction.reply({ content: "WIP 🐒", ephemeral: true });
+                        break;
+                }
+                break;
+
+            case 'builder':
+                switch (subCommand) {
+                    case 'info':
+                        interaction.reply({ content: "WIP 🐒", ephemeral: true });
+                        break;
+                
+                    case 'upgrade':
+                        interaction.reply({ content: "WIP 🐒", ephemeral: true });
+                        break;
+                }
+                break;
+        }
     }
 }
