@@ -8,7 +8,7 @@ module.exports = async function insert_stats(con, player, interaction, databasel
             '${Default.player.uuid}', '${userid}', '${Default.player.cmd}', '${Default.player.HR}', '${Default.player.daily}', '${Default.player.rep}'
         )`, async function(err) {
             if (err) return databaselogs.send(`🔴 table **stats** > An error occurred :\n**${err}**`);
-            databaselogs.send(`🟢 table **stats** : **${userid}** aka **${interaction.user.tag}**.`);
+            databaselogs.send(`🟢 table **stats** : **${userid}** aka **${interaction.user.username}**.`);
         }); //end query stats
     }
 } 

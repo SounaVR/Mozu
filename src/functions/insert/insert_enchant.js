@@ -14,7 +14,7 @@ module.exports = async function insert_enchant(con, player, interaction, databas
             '${Default.player.ench_hands}', '${Default.player.ench_waist}', '${Default.player.ench_legs}', '${Default.player.ench_feet}'
         )`, async function(err) {
             if (err) return databaselogs.send(`🔴 table **enchant** > An error occurred :\n**${err}**`);
-            databaselogs.send(`🟢 table **enchant** : **${userid}** aka **${interaction.user.tag}**.`);
+            databaselogs.send(`🟢 table **enchant** : **${userid}** aka **${interaction.user.username}**.`);
         }); //end query enchant
     }
 } 

@@ -8,7 +8,7 @@ module.exports = async function insert_idle(con, player, interaction, databaselo
             '${Default.player.uuid}', '${userid}', '${Default.player.idle.factory}', '${Default.player.idle.husbandry}', '${Default.player.idle.builder}'
         )`, async function(err) {
             if (err) return databaselogs.send(`🔴 table **idle** > An error occurred :\n**${err}**`);
-            databaselogs.send(`🟢 table **idle** : **${userid}** aka **${interaction.user.tag}**.`);
+            databaselogs.send(`🟢 table **idle** : **${userid}** aka **${interaction.user.username}**.`);
         }); //end query idle
     }
 } 

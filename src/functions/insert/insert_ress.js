@@ -15,7 +15,7 @@ module.exports = async function insert_ress(con, player, interaction, databaselo
             '${Default.player.rune_hands}', '${Default.player.rune_waist}', '${Default.player.rune_legs}', '${Default.player.rune_feet}'
         )`, async function(err) {
             if (err) return databaselogs.send(`🔴 table **ress** > An error occurred :\n**${err}**`);
-            databaselogs.send(`🟢 table **ress** : **${userid}** aka **${interaction.user.tag}**.`);
+            databaselogs.send(`🟢 table **ress** : **${userid}** aka **${interaction.user.username}**.`);
         }); //end query ress
     }
 } 

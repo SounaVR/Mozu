@@ -24,7 +24,7 @@ module.exports = {
 
         const response = new EmbedBuilder()
             .setColor("Random")
-            .setAuthor({ name: target.tag, iconURL: target.displayAvatarURL({ dynamic: true, size: 512 }) })
+            .setAuthor({ name: target.username, iconURL: target.displayAvatarURL({ dynamic: true, size: 512 }) })
             .setThumbnail(target.displayAvatarURL({ dynamic: true, size: 512 }))
             .addFields(
                 { name: "ID", value: `${target.id}`, inline: true },

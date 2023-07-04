@@ -52,7 +52,7 @@ module.exports = {
             }
 
             const embed = new EmbedBuilder()
-                .setAuthor({ name: user.tag, value: user.displayAvatarURL() })
+                .setAuthor({ name: user.username, value: user.displayAvatarURL() })
                 .addFields(
                     { name: "Informations", value: `:notepad_spiral: Title : null\n${client.Emotes.trophy}Achievement Point : X`, inline: true },
                     { name: `Badges (${badges.length || 0})`, value: `${badgesArray.join("") || " "}` , inline: true },

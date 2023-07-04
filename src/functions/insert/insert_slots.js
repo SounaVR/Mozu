@@ -11,7 +11,7 @@ module.exports = async function insert_slots(con, player, interaction, databasel
             '${Default.player.slots}', '${Default.player.slots}', '${Default.player.slots}', '${Default.player.slots}'
         )`, async function(err) {
             if (err) return databaselogs.send(`🔴 table **slots** > An error occurred :\n**${err}**`);
-            databaselogs.send(`🟢 table **slots** : **${userid}** aka **${interaction.user.tag}**.`);
+            databaselogs.send(`🟢 table **slots** : **${userid}** aka **${interaction.user.username}**.`);
         }); //end query slots
     }
 } 

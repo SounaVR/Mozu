@@ -32,7 +32,7 @@ module.exports = async function manageBind(con, player, interaction, gem, part, 
         .setThumbnail("https://cdn.discordapp.com/emojis/1084492365168922714.webp")
         .addFields({ name: lang.bind.success, value: lang.bind.successfullyBinded.replace("%s", `${Emotes[gem]} **${gem}**`).replace("%s", `${Emotes.enchant[`rune_${part}`]} **${part}**`) })
         .setTimestamp()
-        .setFooter({ text: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() });
+        .setFooter({ text: interaction.user.username, iconURL: interaction.user.displayAvatarURL() });
 
     bind.edit({ embeds: [successEmbed] });
 };

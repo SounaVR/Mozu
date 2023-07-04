@@ -10,7 +10,7 @@ module.exports = async function insert_prospect(con, player, interaction, databa
             '${Default.player.citrine}', '${Default.player.ruby}', '${Default.player.jade}', '${Default.player.amethyst}'
         )`, async function(err) {
             if (err) return databaselogs.send(`🔴 table **prospect** > An error occurred :\n**${err}**`);
-            databaselogs.send(`🟢 table **prospect** : **${userid}** aka **${interaction.user.tag}**.`);
+            databaselogs.send(`🟢 table **prospect** : **${userid}** aka **${interaction.user.username}**.`);
         }); //end query prospect
     }
 } 

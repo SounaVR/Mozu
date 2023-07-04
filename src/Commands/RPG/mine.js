@@ -83,7 +83,7 @@ module.exports = {
         let pickaxe = Items.tools.pickaxe[player.items.pickaxe];
 
         const embed = new EmbedBuilder()
-            .setAuthor({ name: `${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL() })
+            .setAuthor({ name: `${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL() })
             .setColor(interaction.member.displayColor)
             .setThumbnail("https://equity.guru/wp-content/uploads/2018/01/blockchain2.gif")
             .addFields(

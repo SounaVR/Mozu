@@ -14,7 +14,7 @@ module.exports = async function insert_items(con, player, interaction, databasel
             '${Default.player.hands}', '${Default.player.waist}', '${Default.player.legs}', '${Default.player.feet}'
         )`, async function(err) {
             if (err) return databaselogs.send(`🔴 table **items** > An error occurred :\n**${err}**`);
-            databaselogs.send(`🟢 table **items** : **${userid}** aka **${interaction.user.tag}**.`);
+            databaselogs.send(`🟢 table **items** : **${userid}** aka **${interaction.user.username}**.`);
         }); //end query items
     }
 } 

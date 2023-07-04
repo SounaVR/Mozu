@@ -32,7 +32,7 @@ module.exports = {
                 { name: lang.bind.gearField, value: lang.bind.gearInfo }
             )
             .setTimestamp()
-            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL() });
+            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() });
 
         const gemEmbed = new EmbedBuilder()
             .setColor(member.displayColor)
@@ -44,7 +44,7 @@ module.exports = {
                 { name: "Stock", value: `${Emotes.sapphire} Sapphire : ${player.prospect.sapphire}\n${Emotes.amber} Amber : ${player.prospect.amber}\n${Emotes.citrine} Citrine : ${player.prospect.citrine}\n${Emotes.ruby} Ruby : ${player.prospect.ruby}\n${Emotes.jade} Jade : ${player.prospect.jade}\n${Emotes.amethyst} Amethyst : ${player.prospect.amethyst}` }
             )
             .setTimestamp()
-            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL() });
+            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() });
 
         const socketEmbed = new EmbedBuilder()
             .setColor(member.displayColor)
@@ -52,7 +52,7 @@ module.exports = {
             .setThumbnail(emptySocket)
             .addFields({ name: "Documentation", value: lang.bind.socketDoc })
             .setTimestamp()
-            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL() });
+            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() });
 
         // sockets buttons
         const sockets = [...Array(3)].map((_,i) => new ButtonBuilder().setLabel(`n°${i+1}`).setStyle(ButtonStyle.Primary).setCustomId(`socket${i}`));
