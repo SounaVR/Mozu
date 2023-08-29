@@ -22,7 +22,7 @@ module.exports = {
         const idle = presenceCache.filter((presence) => presence.status === "idle").size;
         const dnd = presenceCache.filter((presence) => presence.status === "dnd").size;
         const offline = totalMembers - (online + idle + dnd);
-        let presenceString = `🟢 Online : ${online}\n🌙 Idle : ${idle}\n⛔ Do not disturb : ${dnd}\n⭕ Invisible : ${offline}`
+        let presenceString = `🟢 Online : ${online}\n🌙 Idle : ${idle}\n⛔ Do not disturb : ${dnd}\n⭕ Offline : ${offline}`
 
         // verification levels for "guild.verificationLevel" field
         const verifLevels = {
@@ -50,7 +50,7 @@ module.exports = {
 
                 { name: "🤖", value: `**Bots** : ${guild.members.cache.filter((bot) => bot.user.bot).size}`, inline: true },
                 { name: "📜", value: `**Roles** : ${guild.roles.cache.filter((role) => role.name != "@everyone").size}`, inline: true },
-                { name: "☺", value: `**Emotes number** : ${guild.emojis.cache.size}`, inline: true },
+                { name: "😄", value: `**Emotes number** : ${guild.emojis.cache.size}`, inline: true },
 
                 { name: "📂", value: `**Category** : ${channelCache.filter((channel) => channel.type === ChannelType.GuildCategory).size}`, inline: true },
                 { name: "💬", value: `**Text channels** : ${channelCache.filter((channel) => channel.type === ChannelType.GuildText).size}`, inline: true },

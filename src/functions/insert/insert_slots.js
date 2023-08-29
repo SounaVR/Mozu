@@ -1,6 +1,6 @@
 const Default = require('../../utils/default.json');
 
-module.exports = async function insert_slots(client, con, player, interaction, databaselogs, userid) {
+module.exports = async function insert_slots(con, player, interaction, databaselogs, userid) {
     if (!player) {
         await con.query(`INSERT INTO slots (
             uuid, userid,
@@ -11,7 +11,7 @@ module.exports = async function insert_slots(client, con, player, interaction, d
             '${Default.player.slots}', '${Default.player.slots}', '${Default.player.slots}', '${Default.player.slots}'
         )`, async function(err) {
             if (err) return databaselogs.send(`🔴 table **slots** > An error occurred :\n**${err}**`);
-            databaselogs.send(`🟢 table **slots** : **${userid}** aka **${interaction.user.tag}**.`);
+            databaselogs.send(`🟢 table **slots** : **${userid}** aka **${interaction.user.username}**.`);
         }); //end query slots
     }
 } 

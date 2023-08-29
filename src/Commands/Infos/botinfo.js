@@ -18,7 +18,7 @@ module.exports = {
             .setColor("Green")
             .setThumbnail(boticon)
             .addFields(
-                { name: "⚒ Developer", value: developer.tag },
+                { name: "⚒ Developer", value: developer.username },
 
                 { name: "🕒 Uptime", value: uptime, inline: true },
                 { name: "💻 JS Runtime", value: "Node.js", inline: true },

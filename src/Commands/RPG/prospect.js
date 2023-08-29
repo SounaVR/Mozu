@@ -19,9 +19,9 @@ module.exports = {
                 choices: [
                     { name: 'Info', value: 'info' },
                     { name: 'Stone', value: 'stone' },
-                    { name: 'Copper', value: 'copper' },
-                    { name: 'Iron', value: 'iron' },
-                    { name: 'Gold', value: 'gold' },
+                    { name: 'Copper', nameLocalizations: { fr: 'Cuivre' }, value: 'copper' },
+                    { name: 'Iron', nameLocalizations: { fr: 'Fer' }, value: 'iron' },
+                    { name: 'Gold', nameLocalizations: { fr: 'Or' }, value: 'gold' },
                     { name: 'Malachite', value: 'malachite' }
                 ],
                 required: true

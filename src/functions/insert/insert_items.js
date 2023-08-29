@@ -1,6 +1,6 @@
 const Default = require('../../utils/default.json');
 
-module.exports = async function insert_items(client, con, player, interaction, databaselogs, userid) {
+module.exports = async function insert_items(con, player, interaction, databaselogs, userid) {
     if (!player) {
         await con.query(`INSERT INTO items (
             uuid, userid, ring, dungeon_amulet,
@@ -14,7 +14,7 @@ module.exports = async function insert_items(client, con, player, interaction, d
             '${Default.player.hands}', '${Default.player.waist}', '${Default.player.legs}', '${Default.player.feet}'
         )`, async function(err) {
             if (err) return databaselogs.send(`🔴 table **items** > An error occurred :\n**${err}**`);
-            databaselogs.send(`🟢 table **items** : **${userid}** aka **${interaction.user.tag}**.`);
+            databaselogs.send(`🟢 table **items** : **${userid}** aka **${interaction.user.username}**.`);
         }); //end query items
     }
 } 

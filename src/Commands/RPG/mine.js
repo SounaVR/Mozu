@@ -9,13 +9,31 @@ module.exports = {
         },
         options: [
             {
-                name: 'energyamount',
+                name: 'amount',
                 description: 'Amount of energy to spent',
                 descriptionLocalizations: {
                     fr: 'Montant d\'énergie à dépenser'
                 },
-                type: ApplicationCommandOptionType.String,
-                required: false
+                type: ApplicationCommandOptionType.Subcommand,
+                options: [
+                    {
+                        name: 'amount',
+                        description: 'Amount of energy to spent',
+                        descriptionLocalizations: {
+                            fr: 'Montant d\'énergie à dépenser'
+                        },
+                        type: ApplicationCommandOptionType.Number,
+                        required: true
+                    }
+                ]
+            },
+            {
+                name: 'all',
+                description: 'Spend all of your remaining energy',
+                descriptionLocalizations: {
+                    fr: 'Dépensez toute votre énergie restante'
+                },
+                type: ApplicationCommandOptionType.Subcommand
             }
         ]
     },
@@ -24,16 +42,18 @@ module.exports = {
      * @param {import('discord.js').CommandInteraction} interaction
      */
     async execute(client, interaction) {
-        const amount = interaction.options.getString('energyamount');
+        let manaAmount = interaction.options.getNumber('amount');
+        const all = interaction.options.getSubcommand('all');
+
         const player = await client.getPlayer(interaction.user.id);
         const Items = require(`../../utils/Items/${player.data.lang}.json`);
         const lang = require(`../../utils/Text/${player.data.lang}.json`);
         const maxEnergy = Items.objects.ring[player.items.ring].energy;
         const power = player.data.power;
 
-        // all/a | [numbers] | nothing = 1 energy per command
-        let manaAmount = 'all'.startsWith(amount) ? player.ress.energy : (!isNaN(amount) && amount > 0 ? amount : 1);
-        if (manaAmount > player.ress.energy) return interaction.reply(`${lang.mine.notEnoughEnergy}`);
+        if (all !== "amount") manaAmount = player.ress.energy;
+        if (manaAmount > player.ress.energy) return interaction.reply({ content: `${lang.mine.notEnoughEnergy}`, ephemeral: true });
+        if (!manaAmount) return interaction.reply({ content: `${lang.craft.invalidNumber}`, ephemeral: true });
 
         let Stone  = 0,
         Coal      = 0,
@@ -41,13 +61,14 @@ module.exports = {
         Iron      = 0,
         Gold      = 0,
         Malachite = 0;
+
         // Ressources drop
         for (let i = 0; i < manaAmount; i++) {
-            Stone     += (Math.ceil(Math.random() * 70)) + power;                               // Pioche level 0 (mains nues)
-            Coal      += (Math.ceil(Math.random() * 50)) + power;                               // Pioche level 0 (mains nues)
-            Copper    += player.items.pickaxe > 0 ? (Math.ceil(Math.random() * 45)) + power : 0 // Pioche level 1 (pioche en pierre)
-            Iron      += player.items.pickaxe > 1 ? (Math.ceil(Math.random() * 30)) + power : 0 // Pioche level 2 (pioche en cuivre)
-            Gold      += player.items.pickaxe > 2 ? (Math.ceil(Math.random() * 15)) + power : 0 // Pioche level 3 (pioche en fer)
+            Stone     += (Math.ceil(Math.random() * 30)) + power;                               // Pioche level 0 (mains nues)
+            Coal      += (Math.ceil(Math.random() * 15)) + power;                               // Pioche level 0 (mains nues)
+            Copper    += player.items.pickaxe > 0 ? (Math.ceil(Math.random() * 20)) + power : 0 // Pioche level 1 (pioche en pierre)
+            Iron      += player.items.pickaxe > 1 ? (Math.ceil(Math.random() * 18)) + power : 0 // Pioche level 2 (pioche en cuivre)
+            Gold      += player.items.pickaxe > 2 ? (Math.ceil(Math.random() * 12)) + power : 0 // Pioche level 3 (pioche en fer)
             Malachite += player.items.pickaxe > 3 ? (Math.ceil(Math.random() * 5)) + power : 0  // Pioche level 4 (pioche en or)
         }
 
@@ -62,7 +83,7 @@ module.exports = {
         let pickaxe = Items.tools.pickaxe[player.items.pickaxe];
 
         const embed = new EmbedBuilder()
-            .setAuthor({ name: `${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL() })
+            .setAuthor({ name: `${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL() })
             .setColor(interaction.member.displayColor)
             .setThumbnail("https://equity.guru/wp-content/uploads/2018/01/blockchain2.gif")
             .addFields(

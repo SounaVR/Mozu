@@ -12,16 +12,19 @@ module.exports = class Enemy {
     }
 
     attack(target) {
-        const damage = Math.floor(Math.random() * this.ATK);
+        const damage = Math.floor(Math.random() * this.ATK) + 1;
         target.damage(damage);
+        return damage;
     }
 
     defend(target, DEF) {
-        target.damage(this.ATK - DEF)
+        const DEFamount = Math.floor(Math.random() * (this.ATK - DEF)) + 1;
+        target.damage(DEFamount);
+        return DEFamount;
     }
 
     getStatus() {
-        return `${this.name} HP: ${this.HP} ATK: ${this.ATK} DEF: ${this.DEF}`;
+        return `__${this.name}__\nHP: ${this.HP}\nATK: ${this.ATK}\nDEF: ${this.DEF}`;
     }
 
     displayHP() {

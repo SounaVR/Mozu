@@ -1,6 +1,6 @@
 const Default = require('../../utils/default.json');
 
-module.exports = async function insert_enchant(client, con, player, interaction, databaselogs, userid) {
+module.exports = async function insert_enchant(con, player, interaction, databaselogs, userid) {
     if (!player) {
         await con.query(`INSERT INTO enchant (
             uuid, userid,
@@ -14,7 +14,7 @@ module.exports = async function insert_enchant(client, con, player, interaction,
             '${Default.player.ench_hands}', '${Default.player.ench_waist}', '${Default.player.ench_legs}', '${Default.player.ench_feet}'
         )`, async function(err) {
             if (err) return databaselogs.send(`🔴 table **enchant** > An error occurred :\n**${err}**`);
-            databaselogs.send(`🟢 table **enchant** : **${userid}** aka **${interaction.user.tag}**.`);
+            databaselogs.send(`🟢 table **enchant** : **${userid}** aka **${interaction.user.username}**.`);
         }); //end query enchant
     }
 } 

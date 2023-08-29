@@ -9,16 +9,20 @@ module.exports = class Dungeon {
         ATKbutton.setDisabled(true);
         DEFbutton.setDisabled(true);
 
-        if (action === "atk") {
-            this.player.attack(this.creature);
-            if (this.creature.isDead()) {
-                interaction.editReply({ content: `**${this.creature.name}** a été battu par : **${interaction.user.username}** !`, components: [] });
-                return this.collector.stop();
-            } else {
-                interaction.editReply({ content: `❤(${this.player.displayHP()})${interaction.user.username} a infligé ${this.player.ATK} PV à ${this.creature.name} ❤(${this.creature.displayHP()})\nC'est au tour de la créature d'attaquer !`, components: [buttonRow] });
-            }
-        } else if (action === "def") {
-            interaction.editReply({ content: `❤(${this.player.displayHP()})${interaction.user.username} a décidé de se défendre contre ${this.creature.name} ❤(${this.creature.displayHP()})\nC'est au tour de la créature d'attaquer !`, components: [buttonRow] });
+        switch (action) {
+            case "atk":
+                const ATK = this.player.attack(this.creature);
+                if (this.creature.isDead()) {
+                    interaction.editReply({ content: `**${this.creature.name}** a été battu par : **${interaction.user.username}** !`, components: [] });
+                    return this.collector.stop();
+                } else {
+                    interaction.editReply({ content: `:heart:(${this.player.displayHP()})${interaction.user.username} a infligé ${ATK} PV à ${this.creature.name} :heart:(${this.creature.displayHP()})\nC'est au tour de la créature d'attaquer !`, components: [buttonRow] });
+                }
+                break;
+        
+            case "def":
+                interaction.editReply({ content: `:heart:(${this.player.displayHP()})${interaction.user.username} a décidé de se défendre contre ${this.creature.name} :heart:(${this.creature.displayHP()})\nC'est au tour de la créature d'attaquer !`, components: [buttonRow] });
+                break;
         }
 
     }
@@ -27,22 +31,26 @@ module.exports = class Dungeon {
         ATKbutton.setDisabled(false);
         DEFbutton.setDisabled(false);
 
-        if (action === "def") {
-            this.creature.defend(this.player, this.player.DEF);
-            if (this.player.isDead()) {
-                this.player.die(con, interaction, this.collector, this.creature.name);
-            } else {
-                interaction.editReply({ content: `❤(${this.player.displayHP()})${interaction.user.username} a perdu ${this.creature.ATK} (-${this.player.DEF} 🛡️) PV à cause de ${this.creature.name} ❤(${this.creature.displayHP()})\nC'est à votre tour d'attaquer !`, components: [buttonRow] });
-                con.query(`UPDATE data SET HP = ${this.player.defend(this.creature.ATK)} WHERE userid = ${interaction.user.id}`);
-            }
-        } else if (action === "atk") {
-            this.creature.attack(this.player);
-            if (this.player.isDead()) {
-                this.player.die(con, interaction, this.collector, this.creature.name);
-            } else {
-                interaction.editReply({ content: `❤(${this.player.displayHP()})${interaction.user.username} a perdu ${this.creature.ATK} PV à cause de ${this.creature.name} ❤(${this.creature.displayHP()})\nC'est à votre tour d'attaquer !`, components: [buttonRow] });
-                con.query(`UPDATE data SET HP = ${this.player.HP} WHERE userid = ${interaction.user.id}`);
-            }
+        switch (action) {
+            case "def":
+                const DEF = this.creature.defend(this.player, this.player.DEF);
+                if (this.player.isDead()) {
+                    this.player.die(con, interaction, this.collector, this.creature.name);
+                } else {
+                    interaction.editReply({ content: `:heart:(${this.player.displayHP()})${interaction.user.username} a perdu ${DEF} PV à cause de ${this.creature.name} :heart:(${this.creature.displayHP()})\nC'est à votre tour d'attaquer !`, components: [buttonRow] });
+                    con.query(`UPDATE data SET HP = ${this.player.HP} WHERE userid = ${interaction.user.id}`);
+                }
+                break;
+        
+            case "atk":
+                const ATK = this.creature.attack(this.player);
+                if (this.player.isDead()) {
+                    this.player.die(con, interaction, this.collector, this.creature.name);
+                } else {
+                    interaction.editReply({ content: `:heart:(${this.player.displayHP()})${interaction.user.username} a perdu ${ATK} PV à cause de ${this.creature.name} :heart:(${this.creature.displayHP()})\nC'est à votre tour d'attaquer !`, components: [buttonRow] });
+                    con.query(`UPDATE data SET HP = ${this.player.HP} WHERE userid = ${interaction.user.id}`);
+                }
+                break;
         }
     }
 }

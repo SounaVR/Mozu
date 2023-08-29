@@ -1,6 +1,6 @@
 const Default = require('../../utils/default.json');
 
-module.exports = async function insert_ress(client, con, player, interaction, databaselogs, userid) {
+module.exports = async function insert_ress(con, player, interaction, databaselogs, userid) {
     if (!player) {
         await con.query(`INSERT INTO ress (
             uuid, userid, energy, zone, torch, stone, coal, copper, iron, gold, malachite,
@@ -15,7 +15,7 @@ module.exports = async function insert_ress(client, con, player, interaction, da
             '${Default.player.rune_hands}', '${Default.player.rune_waist}', '${Default.player.rune_legs}', '${Default.player.rune_feet}'
         )`, async function(err) {
             if (err) return databaselogs.send(`🔴 table **ress** > An error occurred :\n**${err}**`);
-            databaselogs.send(`🟢 table **ress** : **${userid}** aka **${interaction.user.tag}**.`);
+            databaselogs.send(`🟢 table **ress** : **${userid}** aka **${interaction.user.username}**.`);
         }); //end query ress
     }
 } 

@@ -1,6 +1,7 @@
 const { EmbedBuilder } = require('discord.js');
 const insert_data = require('../../functions/insert/insert_data'),
     insert_enchant = require('../../functions/insert/insert_enchant'),
+    insert_idle = require('../../functions/insert/insert_idle'),
     insert_items = require('../../functions/insert/insert_items'),
     insert_prospect = require('../../functions/insert/insert_prospect'),
     insert_ress = require('../../functions/insert/insert_ress'),
@@ -51,7 +52,7 @@ module.exports = {
             }
 
             const embed = new EmbedBuilder()
-                .setAuthor({ name: user.tag, value: user.displayAvatarURL() })
+                .setAuthor({ name: user.username, value: user.displayAvatarURL() })
                 .addFields(
                     { name: "Informations", value: `:notepad_spiral: Title : null\n${client.Emotes.trophy}Achievement Point : X`, inline: true },
                     { name: `Badges (${badges.length || 0})`, value: `${badgesArray.join("") || " "}` , inline: true },

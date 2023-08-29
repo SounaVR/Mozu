@@ -1,8 +1,9 @@
-const { ButtonBuilder, ActionRowBuilder, ButtonStyle, ComponentType } = require("discord.js");
+const { ButtonBuilder, ActionRowBuilder, ButtonStyle, ComponentType } = require('discord.js');
 const Dungeon = require('../Classes/Dungeon');
 const Wolf = require('../Classes/Enemies/Wolf');
-const PlayerDungeon = require("../Classes/PlayerDungeon");
-const Zombie = require("../Classes/Enemies/Zombie");
+const PlayerDungeon = require('../Classes/PlayerDungeon');
+const Player = require('../Classes/Player');
+const Zombie = require('../Classes/Enemies/Zombie');
 
 module.exports = async function(client, interaction) {
     const con = client.connection;
@@ -16,11 +17,12 @@ module.exports = async function(client, interaction) {
 
     const creature = new Wolf();
 
-    const combat = await interaction.editReply({ content: `Vous engagez le combat contre :\n__${creature.name}__\nHP : ${creature.maxHP}\nATK : ${creature.ATK}\nDEF : ${creature.DEF}`, components: [buttonRow], fetchReply: true });
+    const combat = await interaction.editReply({ content: `Vous engagez le combat contre :\n${creature.getStatus()}`, components: [buttonRow], fetchReply: true });
 
     const collector = combat.createMessageComponentCollector({ ComponentType: ComponentType.Button, time: 60000 });
 
-    const player = new PlayerDungeon(playerDB.data.HP, playerDB.data.ATK, playerDB.data.DEF);
+    const player = new PlayerDungeon(playerDB.data.HP, Player.getMaxHP(playerDB), playerDB.data.ATK, playerDB.data.DEF);
+
     const dungeon = new Dungeon(collector, creature, player);
 
     collector.on('collect', async button => {
@@ -43,6 +45,6 @@ module.exports = async function(client, interaction) {
                 await client.sleep(2000);
                 dungeon.NPCturn(con, interaction, ATKbutton, DEFbutton, buttonRow, "def");
                 break;
-        } //end switch button.id
-    }); //end collected.on
+        }
+    });
 }

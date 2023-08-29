@@ -21,7 +21,7 @@ module.exports = {
         const hpCooldown = player.data.hpCooldown;
 
         const embed1 = new EmbedBuilder()
-            .setAuthor({ name: `${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL() })
+            .setAuthor({ name: `${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL() })
             .setColor(interaction.member.displayColor)
             .setFooter({ text: `Page 1/5` })
             .addFields(
@@ -63,7 +63,7 @@ module.exports = {
         }
 
         const embed2 = new EmbedBuilder()
-            .setAuthor({ name: `${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL() })
+            .setAuthor({ name: `${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL() })
             .setColor(interaction.member.displayColor)
             .setFooter({ text: `Page 2/5` })
             .addFields(
@@ -73,7 +73,7 @@ module.exports = {
             )
 
         const embed3 = new EmbedBuilder()
-            .setAuthor({ name: `${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL() })
+            .setAuthor({ name: `${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL() })
             .setColor(interaction.member.displayColor)
             .setFooter({ text: `Page 3/5` })
             .addFields(
@@ -88,7 +88,7 @@ module.exports = {
         let pickaxe = Items.tools.pickaxe[player.items.pickaxe];
 
         const embed4 = new EmbedBuilder()
-            .setAuthor({ name: `${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL() })
+            .setAuthor({ name: `${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL() })
             .setColor(interaction.member.displayColor)
             .setFooter({ text: `Page 4/5` }) 
 
@@ -128,7 +128,7 @@ module.exports = {
         let ring = Items.objects.ring[player.items.ring];
 
         const embed5 = new EmbedBuilder()
-            .setAuthor({ name: `${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL() })
+            .setAuthor({ name: `${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL() })
             .setColor(interaction.member.displayColor)
             .setFooter({ text: `Page 5/5` })
             .addFields(

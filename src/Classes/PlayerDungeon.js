@@ -1,7 +1,7 @@
 module.exports = class PlayerDungeon {
-    constructor(HP, ATK, DEF) {
+    constructor(HP, maxHP, ATK, DEF) {
+        this.maxHP = maxHP;
         this.HP = HP;
-        this.maxHP = HP;
         this.ATK = ATK;
         this.DEF = DEF;
     }
@@ -11,16 +11,15 @@ module.exports = class PlayerDungeon {
     }
 
     attack(target) {
-        const damage = Math.floor(Math.random() * this.ATK);
+        const damage = Math.floor(Math.random() * this.ATK) + 1;
         target.damage(damage);
+        return damage;
     }
 
-    defend(damage) {
-        return damage - this.DEF;
-    }
-
-    getStatus() {
-        return `${this.name} HP: ${this.HP} ATK: ${this.ATK} DEF: ${this.DEF}`;
+    defend(target, DEF) {
+        const DEFamount = Math.floor(Math.random() * (this.ATK - DEF)) + 1;
+        target.damage(DEFamount);
+        return DEFamount;
     }
 
     displayHP() {

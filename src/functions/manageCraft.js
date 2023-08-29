@@ -2,13 +2,14 @@ const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, ComponentTyp
 const Player = require('../Classes/Player');
 const dayjs = require('dayjs');
 
-module.exports = async function manageCraft(client, player, interaction, category, objectName, emote) {
+module.exports = async function manageCraft(client, player, interaction, category, objectName, emote, torchAmount) {
     const Craft = require(`../utils/Items/${player.data.lang}.json`);
     const lang = require(`../utils/Text/${player.data.lang}.json`);
     const react = ["1065891789506093078", "1065891556093067315"];
 
     const level = Math.floor(player.items[objectName])+1;
     const levelTitle = Math.floor(player.items[objectName]);
+    const torch = objectName ? objectName === "torch" : true;
 
     const embed = new EmbedBuilder()
     .setColor(interaction.member.displayColor);
@@ -24,26 +25,15 @@ module.exports = async function manageCraft(client, player, interaction, categor
     let txt = [];
     let reward = [];
     let sql = [];
-    let amount;
-    
-    // [TODO]
 
-    if (objectName === "torch") {
-        return interaction.reply({ content: "WIP", ephemeral: true });
-    //     currentObject = Craft[category][objectName][0];
-    //     if (!args[1] || args[1] == 1) {
-    //         amount = 1;
-    //     } else if (args[1] >= 2) {
-    //         amount = args[1];
-    //    } else {
-    //         return interaction.reply(`${lang.craft.invalidNumber}`);
-    //     }
-    //     embed.setTitle(`${lang.craft.craft} ${amount} "${currentObject.name}" ?`);
+    if (torch) {
+        currentObject = Craft[category][objectName][0];
+        embed.setTitle(`${lang.craft.craft} ${torchAmount} ${currentObject.name} ?`);
 
-    //     for (const ressource in currentObject.ressource) {
-    //         if (player.ress[ressource.toLowerCase()] < currentObject.ressource[ressource] * amount) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource] * amount)} (${Emotes.cancel} - Missing ${nFormatter(Math.floor((currentObject.ressource[ressource] * amount)-player.ress[ressource.toLowerCase()]))})`);
-    //         if (player.ress[ressource.toLowerCase()] >= currentObject.ressource[ressource] * amount) txt.push(`${Emotes[ressource]} ${ressource} : ${nFormatter(currentObject.ressource[ressource] * amount)} (${Emotes.checked})`);
-    //     }
+        for (const ressource in currentObject.ressource) {
+            if (player.ress[ressource.toLowerCase()] < currentObject.ressource[ressource] * torchAmount) txt.push(`${client.Emotes[ressource]} ${ressource} : ${client.nFormatter(currentObject.ressource[ressource] * torchAmount)} (${client.Emotes.cancel} - Missing ${client.nFormatter(Math.floor((currentObject.ressource[ressource] * torchAmount)-player.ress[ressource.toLowerCase()]))})`);
+            if (player.ress[ressource.toLowerCase()] >= currentObject.ressource[ressource] * torchAmount) txt.push(`${client.Emotes[ressource]} ${ressource} : ${client.nFormatter(currentObject.ressource[ressource] * torchAmount)} (${client.Emotes.checked})`);
+        }
     } else {
         if (!Craft[category][objectName][level]) return interaction.reply(`${lang.craft.maxLevel}`);
 
@@ -60,7 +50,7 @@ module.exports = async function manageCraft(client, player, interaction, categor
         }
     }
 
-    if (objectName !== "torch") {
+    if (!torch) {
         embed.setTitle(`${client.translate(player.data.lang, 'craft.upgrade', currentObjectTitle.name, currentObject.name)}`);
     }
 
@@ -72,18 +62,17 @@ module.exports = async function manageCraft(client, player, interaction, categor
 
     let rewardLength = reward.join("\n") ? reward.length >= 1 : reward.join("\n");
     if (rewardLength) embed.addFields({ name:`**Reward**`, value: `${emote} ${currentObject.name}\n${reward.join("\n")}` });
+    else if (torchAmount) embed.addFields({ name: `**Reward**`, value: `${emote} ${currentObject.name} x${torchAmount}` });
     else embed.addFields({ name: `**Reward**`, value: `${emote} ${currentObject.name}` });
 
     for (let ressource in currentObject.ressource) {
         let ress = currentObject.ressource[ressource];
-        // if (objectName === "torch") ress = currentObject.ressource[ressource] * amount;
-        // else ress = currentObject.ressource[ressource];
 
         if (player.ress[ressource.toLowerCase()] < ress) {
             validButton.setDisabled(true);
             cancelButton.setDisabled(true);
 
-            return interaction.reply({ embeds: [embed], components: [buttonRow] });
+            return interaction.reply({ embeds: [embed] });
         }
         sql.push(`${ressource} = ${ressource} - ${currentObject.ressource[ressource]}`);
     }
@@ -102,8 +91,8 @@ module.exports = async function manageCraft(client, player, interaction, categor
                 await client.query(`UPDATE data SET ATK = ${player.data.ATK + Number(currentObject.ATK)}, DEF = ${player.data.DEF + Number(currentObject.DEF)}, power = ${currentObject.power > 0 ? player.data.power + Number(currentObject.power) : player.data.power}, HP = ${currentObject.HP > 0 ? player.data.HP + Number(currentObject.HP) : player.data.HP} WHERE userid = ${interaction.user.id}`);
                 await client.query(`UPDATE ress SET ${sql.join(',')} WHERE userid = ${interaction.user.id}`);
                 switch (objectName) {
-                    case "torch":                                       //+ Number(amount)
-                        await client.query(`UPDATE ress SET torch = ${player.ress.torch} WHERE userid = ${interaction.user.id}`);
+                    case "torch":
+                        await client.query(`UPDATE ress SET torch = ${player.ress.torch + Number(torchAmount)} WHERE userid = ${interaction.user.id}`);
                         break;
 
                     case "ring":
@@ -115,10 +104,10 @@ module.exports = async function manageCraft(client, player, interaction, categor
                         await client.query(`UPDATE items SET ${objectName} = ${level} WHERE userid = ${interaction.user.id}`);
                         break;
                 }
-                const torch = objectName ? objectName === "torch" : true;
+
                 if (torch) {
-                    collector.stop();                                       //${amount} 
-                    return button.reply(`${client.translate(player.data.lang, 'craft.done', `**${currentObject.name}**`)}.`)
+                    collector.stop();
+                    return button.reply(`${client.translate(player.data.lang, 'craft.done', `**${currentObject.name} x${torchAmount}**`)}.`)
                 } else {
                     collector.stop();
                     return button.reply(`${client.translate(player.data.lang, 'craft.done', `**${currentObject.name}**`)}.`);
