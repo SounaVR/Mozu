@@ -5,6 +5,7 @@ const cron = require('cron');
 const fs = require('fs');
 
 dayjs.extend(duration);
+
 dayjs.locale("fr");
 
 module.exports = {
@@ -41,7 +42,6 @@ module.exports = {
         });
 
         dailyReset.start();
-
         console.log("Bot ready ✅");
     }
 }
