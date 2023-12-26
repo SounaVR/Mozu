@@ -17,6 +17,7 @@ module.exports = class Player {
     }
 
     static getGems(gems) {
+        if (gems === -1) return [0, 0, 0];
         return [Math.floor(gems % Math.pow(7, 1) / Math.pow(7, 0)), Math.floor(gems % Math.pow(7, 2) / Math.pow(7, 1)), Math.floor(gems / Math.pow(7, 2))];
     }
 
