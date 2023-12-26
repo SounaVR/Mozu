@@ -51,7 +51,7 @@ module.exports = async function manageProspecting(client, player, interaction, o
 
                 collector.stop();
                 msg.edit({ embeds: [embed], components: [] });
-                return button.reply(`${client.translate(player.data.lang, 'lang.prospect.success', `${client.Emotes[gem]} **${gem}** x${quantity}`)}`);
+                return button.reply(`${client.translate(player.data.lang, 'prospect.success', `${client.Emotes[gem]} **${gem}** x${quantity}`)}`);
 
             case 'cancel':
                 msg.edit({ embeds: [embed], components: [] });
