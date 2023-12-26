@@ -15,7 +15,6 @@ module.exports = {
         ] 
     },
     async execute(client, interaction) {
-        if (interaction.user.id !== "436310611748454401") return interaction.react('❌');
         const code = interaction.options.getString("code");
         const clean = text => 
             typeof (text) === "string" ? text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203)) : text;
