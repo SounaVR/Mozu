@@ -54,6 +54,7 @@ module.exports = {
             .setTimestamp()
             .setFooter({ text: user.username, iconURL: user.displayAvatarURL() });
 
+
         // sockets buttons
         const sockets = [...Array(3)].map((_,i) => new ButtonBuilder().setLabel(`n°${i+1}`).setStyle(ButtonStyle.Primary).setCustomId(`socket${i}`));
         const gearArray = ["head", "shoulders", "chest", "wrists", "hands", "waist", "legs", "feet"];

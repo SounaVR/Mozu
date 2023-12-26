@@ -22,6 +22,7 @@ module.exports = async function(client, interaction) {
     const collector = combat.createMessageComponentCollector({ ComponentType: ComponentType.Button, time: 60000 });
 
     const player = new PlayerDungeon(playerDB.data.HP, Player.getMaxHP(playerDB), playerDB.data.ATK, playerDB.data.DEF);
+
     const dungeon = new Dungeon(collector, creature, player);
 
     collector.on('collect', async button => {

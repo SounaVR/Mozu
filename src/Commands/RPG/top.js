@@ -31,7 +31,6 @@ module.exports = {
 
                 const results = await client.query(top10query);
                 const map1 = results.map((results, position) => `#${position + 1} **${results.username}** : ${results.money}💰`);
-
                 return interaction.reply(`🏆 __**${lang.top.money}**__ 🏆\n\n` + map1.join("\n").replace(/^#1/, "🥇").replace(/^#2/, "🥈").replace(/^#3/, "🥉"));
         }
     }

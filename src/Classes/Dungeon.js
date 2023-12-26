@@ -24,6 +24,7 @@ module.exports = class Dungeon {
                 interaction.editReply({ content: `:heart:(${this.player.displayHP()})${interaction.user.username} a décidé de se défendre contre ${this.creature.name} :heart:(${this.creature.displayHP()})\nC'est au tour de la créature d'attaquer !`, components: [buttonRow] });
                 break;
         }
+
     }
 
     NPCturn(con, interaction, ATKbutton, DEFbutton, buttonRow, action) {
