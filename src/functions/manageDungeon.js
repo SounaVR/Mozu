@@ -46,4 +46,8 @@ module.exports = async function(client, interaction) {
                 break;
         }
     });
+
+    collector.on('end', async () => {
+        player.die(con, interaction, collector, dungeon.creature.name);
+    });
 }
